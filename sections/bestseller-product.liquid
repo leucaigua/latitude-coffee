@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="section-title d-flex align-items-center justify-content-between"> 
+    <div class="section-title-left">
+      <ul class="cat-tab tabs">
+        {%- for block in section.blocks -%}
+            <li class="tab-link {% if forloop.first %}active{% endif %}" data-tab="prodtab-{{block.id}}"><a href="javascript:;">{{ block.settings.cat_name }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <a href="{{ section.settings.btn_url }}" class="link-btn">{{ section.settings.btn }}</a>
+  </div>
+  <div class="tabs-container">
+    {%- for block in section.blocks -%}
+    {%- assign collection = collections[block.settings.collection]  -%}
+      <div class="tab-content {% if forloop.first %}active{% endif %}" id="prodtab-{{block.id}}"> 
+        <div class="bestpro-slider">
+          {% for product in collection.products %}
+            <div class="grid__item card bestpro-itm product-card  card-direction-row">
+              {% render 'card-product', card_product: product, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,show_wish: section.settings.show_wish,show_type: section.settings.show_type, show_variants: section.settings.show_variants %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %} 
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.best_pro",
+  "tag": "div",
+  "class": "bestseller-section tabs-wrapper padding-top",
+  "settings": [
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "t:settings_schema.common.settings.btn_url"
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "t:settings_schema.common.settings.btn"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:settings_schema.common.settings.pro_hvr_img"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_ven"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wish",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_wish"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_var"
+    },
+    {
+      "type": "text",
+      "id": "pro_img_widthheight",
+      "default": "600x600",
+      "label": "t:settings_schema.common.settings.width_height"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "cat_name",
+          "label": "t:settings_schema.common.settings.tab_name"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:settings_schema.common.settings.sec_coll"
+        }
+      ]
+    }
+  ],
+"presets": [
+    {
+      "name": "t:settings_schema.common-section.best_pro"
+    }
+]
+}
+{% endschema %}

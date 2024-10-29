@@ -1,0 +1,27 @@
+{%- paginate blog.articles by 6 -%}
+  <div class="container">
+    <div class="section-title">
+      <div class="subtitle">ALL BLOGS</div>
+      <h1>{{ blog.title | escape }}</h1>
+    </div>
+    <div class="blog-grid-row row padding-bottom">
+      {%- for article in blog.articles -%}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12  blog-itm">
+          {%- render 'article-card', article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, show_excerpt: true  -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+{% schema %}
+{
+  "name": "t:settings_schema.blog.name",
+  "tag": "section",
+  "class": "blog-grid-section padding-top padding-bottom",
+  "settings": [
+  ]
+}
+{% endschema %}

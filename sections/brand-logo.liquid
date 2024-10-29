@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-4 col-12">
+            <div class="partner-left-column">
+                <div class="section-title">
+                    <div class="subtitle">{{ section.settings.subtitle }}</div>
+                    <h3>{{ section.settings.title }}</h3>
+                    <p>Spend $35 or more in our store and shipping is on the house</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-12">
+            <div class="partner-right-column" style="display: none;">
+                <div class="parner-lbl">
+                    {{ section.settings.label }}
+                </div>
+                <div class="partner-slider">
+                    {% for block in section.blocks %}
+                        <div class="partner-itm">
+                            <a href="{{ block.settings.link }}" target="_blank">
+                                <img src="{{ block.settings.img | img_url: 'master' }}" alt="brand">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+"name": "t:settings_schema.common-section.brand",
+"tag": "section",
+"class": "our-partner-section",
+"max_blocks": 10,
+    "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:settings_schema.common.settings.lbl"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_image",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "t:settings_schema.common.settings.img"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:settings_schema.common.settings.img_url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.brand"
+    }
+  ]
+}
+{% endschema %}

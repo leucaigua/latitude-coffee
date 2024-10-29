@@ -1,0 +1,91 @@
+{% comment %} <video src="{{ section.settings.video_url }}" loop="" autoplay="" muted="muted" playsinline="" controlslist="nodownload"></video>  {% endcomment %}
+<img src="{{ section.settings.video_url }}"/>
+<div class="fixed-slider-left">  
+    <div class="slides-numbers" style="display: block;">
+        <span class="active">01</span> / <span class="total"></span>
+    </div> 
+    <div class="line"></div>
+    <div class="slider-inner-text">
+        <h5>{{ section.settings.nav }} </h5>
+    </div>
+</div> 
+<div class="container">
+    <div class="banner-slider">
+        {% for block in section.blocks %}
+            <div>
+                <div class="row align-items-start">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12"></div>
+                    <div class="col-lg-6 col-md-12 col-12 banner-center-content">
+                        <div class="banner-content-inner text-center">
+                            <div class="section-title">
+                                <div class="section-title__subtitle">{{ block.settings.subtitle }}</div>
+                                <h2 class="section-title__title">{{ block.settings.title }}</h2>
+                            </div>
+                            <p>{{ block.settings.desc }}</p>
+                            <br>
+                            <a href="{{ block.settings.btn_url }}" class="link-btn-slider">{{ block.settings.btn }}</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.slider",
+  "tag": "section",
+  "class": "first-video-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "nav",
+      "label": "Navigation Title"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL"
+    }
+  ],
+    "blocks": [
+    {
+      "type": "image",
+      "name": "Slider",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "t:settings_schema.common.settings.subtitle"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.common.settings.title"
+        },
+        {
+          "type": "text",
+          "id": "desc",
+          "label": "t:settings_schema.common.settings.desc"
+        },
+        {
+          "type": "text",
+          "id": "btn",
+          "label": "t:settings_schema.common.settings.btn"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "t:settings_schema.common.settings.btn_url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.slider"
+    }
+  ]
+}
+{% endschema %}

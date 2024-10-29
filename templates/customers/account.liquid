@@ -1,0 +1,114 @@
+<div class="customer account padding-top padding-bottom">
+    <div class="container">
+        <div class="section-title">
+            <h3>{{ 'customer.account.title' | t }}</h3>
+        </div>
+        <div class="row">
+            <div class="main-detail col-lg-4 col-12">
+                <div class="account-details">
+                    <h4>{{ 'customer.account.details' | t }}</h4>
+                    {{ customer.default_address | format_address }}
+                </div>   
+                <div class="d-flex align-items-center acc-order-button">
+                    <a href="{{ routes.account_addresses_url }}" class="btn acc-order-btn">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>                          
+                    <a href="{{ routes.account_logout_url }}" class="d-flex align-items-center btn">
+                      {{ 'customer.log_out' | t }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 13 13" fill="white">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 7.04159C4.40592 7.04159 2.70833 8.73917 2.70833 10.8333V11.9166C2.70833 12.2157 2.46582 12.4583 2.16667 12.4583C1.86751 12.4583 1.625 12.2157 1.625 11.9166V10.8333C1.625 8.14086 3.80761 5.95825 6.5 5.95825C9.19239 5.95825 11.375 8.14086 11.375 10.8333V11.9166C11.375 12.2157 11.1325 12.4583 10.8333 12.4583C10.5342 12.4583 10.2917 12.2157 10.2917 11.9166V10.8333C10.2917 8.73917 8.59408 7.04159 6.5 7.04159Z" fill="white"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 5.95841C7.69662 5.95841 8.66667 4.98837 8.66667 3.79175C8.66667 2.59513 7.69662 1.62508 6.5 1.62508C5.30338 1.62508 4.33333 2.59513 4.33333 3.79175C4.33333 4.98837 5.30338 5.95841 6.5 5.95841ZM6.5 7.04175C8.29493 7.04175 9.75 5.58667 9.75 3.79175C9.75 1.99682 8.29493 0.541748 6.5 0.541748C4.70507 0.541748 3.25 1.99682 3.25 3.79175C3.25 5.58667 4.70507 7.04175 6.5 7.04175Z" fill="white"></path>
+                        </svg>
+                    </a>  
+                </div>  
+            </div>
+            <div class="main-order col-lg-8 col-12">
+                <div class="acc-order-history">
+                    <h4 class="text-left">{{ 'customer.orders.title' | t }}</h4>
+                    {% paginate customer.orders by 20 %}
+                        {%- if customer.orders.size > 0 -%}
+                            <table role="table" class="order-history">
+                                <caption class="visually-hidden">{{ 'customer.orders.title' | t }}</caption>
+                                <thead role="rowgroup">
+                                    <tr role="row">
+                                        <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
+                                        <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+                                        <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
+                                        <th id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                                        <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody role="rowgroup">
+                                    {%- for order in customer.orders -%}
+                                        <tr role="row">
+                                            <td
+                                                id="RowOrder"
+                                                role="cell"
+                                                headers="ColumnOrder"
+                                                data-label="{{ 'customer.orders.order_number' | t }}">
+                                                <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+                                                    {{ order.name }}
+                                                </a>
+                                            </td>
+                                            <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+                                                {{ order.created_at | time_tag: format: 'date' }}
+                                            </td>
+                                            <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">
+                                                {{ order.financial_status_label }}
+                                            </td>
+                                            <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                                                {{ order.item_count }} Items
+                                            </td>
+                                            <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+                                                {{ order.total_price | money_with_currency }}
+                                            </td>
+                                        </tr>
+                                    {%- endfor -%}
+                                </tbody>
+                            </table>
+                        {%- else -%}
+                            <p>{{ 'customer.orders.none' | t }}</p>
+                        {%- endif -%}
+                        {%- if paginate.pages > 1 -%}
+                            {%- if paginate.parts.size > 0 -%}
+                                <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+                                    <ul role="list">
+                                        {%- if paginate.previous -%}
+                                        <li>
+                                            <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+                                                <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        {%- endif -%}
+                                        {%- for part in paginate.parts -%}
+                                        <li>
+                                            {%- if part.is_link -%}
+                                                <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+                                            {%- else -%}
+                                            {%- if part.title == paginate.current_page -%}
+                                                <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+                                            {%- else -%}
+                                                <span>{{ part.title }}</span>
+                                            {%- endif -%}
+                                            {%- endif -%}
+                                        </li>
+                                        {%- endfor -%}
+                                        {%- if paginate.next -%}
+                                        <li>
+                                            <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}" >
+                                                <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        {%- endif -%}
+                                    </ul>
+                                </nav>
+                            {%- endif -%}
+                        {%- endif -%}
+                    {% endpaginate %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

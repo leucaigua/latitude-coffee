@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "description": "Whether you’re a distributor looking to carry our products, a coffee shop interested in our unique blends, or a consumer looking for a memorable coffee experience, Latitude 23.5 Coffee & Tea is your partner in the pursuit of exceptional coffee and tea. Let’s make every cup count!"
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "mobile_title": "Call us",
+        "mobile": "941 556 2600",
+        "address_title": "ADDRESS:",
+        "address": "7245 21st Street East, Sarasota FL 34243",
+        "email_title": "EMAIL:",
+        "email": "Sales@LatitudeCoffee.com",
+        "cntform": "Contact  form",
+        "map_height": "400px",
+        "map_api_key": "AIzaSyDS1A1NkVZlfNpumO5nQlAPEKFjyxcvuWs",
+        "map_type": "ROADMAP",
+        "map_address": "7245 21st Street East, Sarasota FL 34243"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form"
+  ]
+}

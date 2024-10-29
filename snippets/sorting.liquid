@@ -1,0 +1,34 @@
+
+
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  assign total_active_values = 0
+  if results.url
+    assign results_url = results.url
+  else 
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+    {%- unless collapse_on_larger_devices -%}
+        <facet-filters-form>
+            <form id="FacetFiltersForm">
+                {%- if enable_sorting -%}
+                    <div class="facet-filters sorting caption">
+                        <div class="facet-filters__field">
+                            <span class="sort-lbl"><label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label></span>
+                                {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+                                <select name="sort_by" class="nice-select facet-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                                {%- for option in results.sort_options -%}
+                                    <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                                {%- endfor -%}
+                                </select>
+                        </div>
+                        <noscript>
+                            <button type="submit" class="facets__button-no-js button">{{ 'products.facets.sort_button' | t }}</button>
+                        </noscript>
+                    </div>
+                {%- endif -%}
+            </form>
+        </facet-filters-form>
+    {%- endunless -%}

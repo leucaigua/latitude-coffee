@@ -1,0 +1,314 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "common": {
+      "settings": {
+        "title": "Título",
+        "subtitle": "Subtitular",
+        "desc": "Descripción",
+        "img": "Imagen",
+        "btn": "Botón",
+        "btn_url": "URL del botón",
+        "pro_set": "Configuración del producto",
+        "pro_hvr_img": "Mostrar imagen flotante del producto",
+        "sh_ven": "Mostrar proveedor",
+        "sh_var": "Mostrar variantes",
+        "width_height": "formato de ancho y alto de la imagen (ancho x alto)",
+        "thumb_width_height": "formato de ancho y alto de la imagen del pulgar (ancho x alto)",
+        "sel_coll": "Seleccionar colección",
+        "tab_name": "Nombre de la pestaña"
+      }
+    },
+    "common-section": {
+      "cat_pro": "Categoría-Producto",
+      "fea_pro": "Producto destacado",
+      "spe_pro": "Producto especial",
+      "lspe_pro": "Producto especial ligero",
+      "dspe_pro": "Producto especial oscuro",
+      "l_cnt": "Contenido izquierdo",
+      "r_cnt": "Contenido correcto",
+      "sel_spe_pro": "Seleccionar producto especial",
+      "mpro_size": "formato de ancho y alto de la imagen (ancho x alto)",
+      "tpro_size": "formato de ancho y alto de la imagen del pulgar (ancho x alto)",
+      "l_img": "Imagen de fondo izquierda",
+      "r_img": "Imagen de fondo derecha",
+      "tool1": "Producto de información sobre herramientas 1",
+      "tool2": "Producto de información sobre herramientas 2",
+      "pro_tab": "Pestaña de producto",
+      "best_pro": "Producto más vendido",
+      "bpage_bnr": "banner-de-la-pagina-del-blog",
+      "bg_img": "Imagen de fondo",
+      "s_page": "Página de búsqueda",
+      "pro_two_col": "Producto-dos-col"
+    },
+    "header": {
+      "settings": {
+        "logo_cnt": "AJUSTES DEL LOGOTIPO",
+        "logo_img": "Logo",
+        "logo_wd": "Ancho del logotipo"
+      },
+      "blocks": {
+        "simple_link": "enlace sencillo",
+        "title": "Título",
+        "link": "EnlaceLink",
+        "bge_txt": "Texto de la insignia",
+        "bg_bge_clr": "Color de fondo de la insignia",
+        "classname": "Nombre de la clase",
+        "linklist": "EnlaceLink + lista de enlaces",
+        "Ch_linklist": "Choose lista de enlaces",
+        "list_bnr": "3 listas de enlaces + bandera",
+        "link_title1": "lista de enlaces título1",
+        "linklist_1": "lista de enlaces 1",
+        "link_title2": "lista de enlaces título2",
+        "linklist_2": "lista de enlaces 2",
+        "link_title3": "lista de enlaces título3",
+        "linklist_3": "lista de enlaces 3",
+        "banner": "Bandera",
+        "linkbanner": "Enlace de banner"
+      }
+    },
+    "color": {
+      "name": "color",
+      "settings": {
+        "primary_color": "Color primario",
+        "secondary_color": "Color secundario",
+        "primary_font": "Color de fuente principal",
+        "secondary_font": "Color de fuente secundario",
+        "border_color": "Color del borde"
+      }
+    },
+    "Pre-Loader": {
+      "name": "Precargador",
+      "settings": {
+        "display_preloader": "Precargador de pantalla",
+        "pre_loader_img": "Subir imagen del precargador",
+        "preloader_bg": "Color de fondo del precargador"
+      }
+    },
+    "featured-blog": {
+      "name": "Entrada en el blog",
+      "settings": {
+        "blog": "Blog",
+        "blog_limit": "Límite de publicaciones",
+        "show_date": "Mostrar fecha"
+      }
+    },
+    "footer-email": {
+      "name": "Pie de página de correo electrónico",
+      "settings": {
+        "l-img": "Imagen de fondo izquierda",
+        "r-img": "Imagen de fondo derecha"
+      }
+    },
+    "coll-bnr": {
+      "name": "Banner de colección",
+      "settings": {
+        "b1_cnt": "Contenido del cartel 1",
+        "b2_cnt": "Contenido del cartel 2",
+        "b3_cnt": "Contenido del cartel 3",
+        "img": "Bandera",
+        "url": "URL de la pancarta",
+        "tag": "Etiqueta de pancarta",
+        "title": "Banner de título",
+        "subtitle": "Subtítulo de pancarta",
+        "desc": "Descripción de pancarta",
+        "btn": "Botón de pancarta",
+        "btn_url": "Banner Button URL",
+        "s_coll_img": "Show Collection Image",
+        "s_coll_desc": "Show Collection Descripción"
+      }
+    },
+    "video": {
+      "name": "Vídeo CMS",
+      "settings": {
+        "bg_img": "Imagen de fondo",
+        "cvr_img": "Imagen de portada",
+        "b3_cnt": "Contenido del cartel 3",
+        "vid": "título de vídeo",
+        "vid_url": "URL del vídeo"
+      }
+    },
+    "brand-logo": {
+      "name": "Logotipo",
+      "blocks": {
+        "Imagen": "Imagen",
+        "link": "EnlaceLink"
+      }
+    },
+    "testimonial": {
+      "name": "Testimonial",
+      "settings": {
+        "img": "Imagen",
+        "desc": "Descripción",
+        "aut_img": "Imagen del autor",
+        "aut_name": "Nombre del autor",
+        "aut_design": "Designación de la autora",
+        "str_img": "Revisar imagen"
+      }
+    },
+    "faqs": {
+      "name": "preguntas frecuentes",
+      "settings": {
+        "description": "Texto",
+        "title": "Subtítulo"
+      },
+      "blocks": {
+        "name": "Pregunta",
+        "info": "Descripción"
+      }
+    },
+    "social-media": {
+      "name": "Redes sociales",
+      "settings": {
+        "header": {
+          "content": "cuentas sociales"
+        },
+        "social_twitter_link": {
+          "label": "Twitter",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    },
+    "search_input": {
+      "name": "Comportamiento de búsqueda",
+      "settings": {
+        "header": {
+          "content": "Sugerencias de productos"
+        },
+        "predictive_search_enabled": {
+          "label": "Habilitar sugerencias de productos"
+        },
+        "predictive_search_show_vendor": {
+          "label": "Show vendor",
+          "info": "Visible when product suggestions enabled."
+        },
+        "predictive_search_show_price": {
+          "label": "Show price",
+          "info": "Visible when product suggestions enabled."
+        }
+      }
+    },
+    "favicon": {
+      "name": "icono de favoritos",
+      "settings": {
+        "favicon": {
+          "label": "imagen de icono de favoritos",
+          "info": "Se reducirá a 32 x 32px"
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Formato de moneda",
+      "settings": {
+        "content": "Códigos de moneda",
+        "paragraph": "Los precios del carrito y del pago siempre muestran códigos de moneda. Ejemplo: $1.00 USD.",
+        "currency_code_enabled": {
+          "label": "Mostrar códigos de moneda"
+        }
+      }
+    },
+    "contact_form": {
+      "name": "Contacta con nosotros",
+      "m_num": "Número de teléfono móvil",
+      "add": "Dirección",
+      "e_id": "Identificación de correo",
+      "c_title": "Contact Form Título"
+    },
+    "footer": {
+      "name": "pie de página",
+      "f_title": "Título del pie de página",
+      "f_desc": "Descripción del pie de página",
+      "nav": "Navegación"
+    },
+    "about": {
+      "name": "Sobre nosotros",
+      "s_one": "Seccion uno",
+      "desc1": "Descripción 1",
+      "desc2": "Descripción 2",
+      "s_two": "Sección Dos",
+      "m_title": "Main Título",
+      "p_one": "Parte uno",
+      "p_third": "Tercera Parte",
+      "s_title": "Título del servicio",
+      "s_desc": "Descripción del servicio",
+      "add_s": "Agregar servicio"
+    },
+    "artical": {
+      "name": "Página del artículo",
+      "s_artical": "Mostrar artículos recientes",
+      "s_blog": "Mostrar etiquetas de blog"
+    },
+    "blog": {
+      "name": "Cuadrícula de blogs",
+      "s_blog_img": "Mostrar imagen de blog",
+      "s_date": "Mostrar fecha",
+      "s_author": "Mostrar autor"
+    },
+    "cart": {
+      "c_footer": "Pie de página del carrito",
+      "s_cartnote": "Mostrar nota del carrito",
+      "subtotal": "Total parcial",
+      "chackbtn": "Botón de pago",
+      "c_header": "Artículos del carrito"
+    },
+    "coll_page": {
+      "name": "Página de colección",
+      "s_product": "Mostrar producto por página",
+      "f_set": "Ajustes de filtro",
+      "d_filter": "Filtro de visualización",
+      "d_sorting": "Clasificación de visualización",
+      "d_mobile_filter": "Mostrar el menú móvil en el escritorio"
+    },
+    "pro_page": {
+      "name": "Página del producto",
+      "pro_title": "Titulo del producto",
+      "pro_type": "tipo de producto",
+      "pro_detail": "Detalle del producto",
+      "pro_desc": "Descripción del producto",
+      "pro_variant": "Variante del producto",
+      "qty_sel": "Selector de cantidad",
+      "pro_price_btn": "Precio del producto y botón",
+      "hide_variant": "Ocultar variantes",
+      "video_loop": "Habilitar bucle de video"
+    },
+    "pro_two_col": {
+      "f_cnt": "primer contenido",
+      "s_cnt": "Segundo Contenido",
+      "desc1": "Descripción 1",
+      "desc2": "Descripción 2"
+    },
+    "slider": {
+      "name": "Diapositivas",
+      "slide_ptrn": "Patrón deslizante",
+      "s_img_url": "URL de la imagen del control deslizante",
+      "tool_pro1": "Producto de información sobre herramientas 1",
+      "tool_pro2": "Producto de información sobre herramientas 2",
+      "tool_pro3": "Producto de información sobre herramientas 3",
+      "tool_pro4": "Producto de información sobre herramientas 4",
+      "sel_pro": "seleccionar producto",
+      "pos_top": "Posición superior",
+      "pos_left": "Posición izquierda",
+      "sel_mpro": "Seleccionar deslizador Producto"
+    }
+  }
+}

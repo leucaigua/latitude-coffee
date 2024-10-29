@@ -1,0 +1,66 @@
+<div class="collection-list">
+  <div class="container">
+    <div class="section-title">
+      <h3 class="text-center">{{ page_title }}</h3>
+    </div>  
+          {%- liquid
+          case section.settings.sort
+          when 'products_high' or 'products_low'
+          assign collections = collections | sort: 'all_products_count'
+          when 'date' or 'date_reversed'
+          assign collections = collections | sort: 'published_at'
+          endcase
+          if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+          assign collections = collections | reverse
+          endif
+          -%}
+      <div class="row" role="list">
+          {%- for collection in collections -%}
+              <div class="col-md-4 col-sm-4 col-12">
+                  {% render 'card-collection', collection: collection %}
+              </div>
+          {%- endfor -%}
+      </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection List",
+  "class": "section padding-top padding-bottom",
+  "settings": [
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+        {
+          "value": "alphabetical",
+          "label": "Display in Alphabetical Order"
+        },
+        {
+          "value": "alphabetical_reversed",
+          "label": "Display in Alphabetical Reversed Order"
+        },
+        {
+          "value": "date_reversed",
+          "label": "Display in Date Reversed Order"
+        },
+        {
+          "value": "date",
+          "label": "Display in Date Order"
+        },
+        {
+          "value": "products_high",
+          "label": "Display in Product Hightest Order"
+        },
+        {
+          "value": "products_low",
+          "label": "Display in Product Lowest Order"
+        }
+      ],
+      "default": "alphabetical",
+      "label": "Display in Alphabetical Order"
+    }
+  ]
+}
+{% endschema %}

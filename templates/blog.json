@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "description": "Delve into the art of coffee and tea with Latitude 23.5. Our blog offers a rich blend of brewing tips, industry trends, and sustainable practices. Discover stories that inspire and guide your daily coffee rituals. Join us for a journey into the heart of coffee culture—crafted for enthusiasts by enthusiasts."
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "main"
+  ]
+}

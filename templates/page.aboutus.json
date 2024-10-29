@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "description": "At Latitude 23.5 Coffee & Tea, we are driven by a passion for excellence and a commitment to sustainability. Our journey begins at the very source—hand-selecting the finest beans from small farms around the globe. Our mission is to deliver exceptional, hand-roasted coffee that not only delights the senses but also supports the communities we work with."
+      }
+    },
+    "main": {
+      "type": "main-aboutus",
+      "blocks": {
+        "33308ff1-cde0-487e-b237-a505018d7131": {
+          "type": "text",
+          "settings": {
+            "title": "Roasting & Packaging",
+            "desc": "Daily capacity of 5,000 lbs of roasted coffee with a minimum order quantity of 50 lbs for toll roasting"
+          }
+        },
+        "812336c1-da3d-458b-bcf4-c6965552360c": {
+          "type": "text",
+          "settings": {
+            "title": "K-Cup and Nespresso Capsule Packaging",
+            "desc": "Low MOQs and quick turnaround times make our K-Cup and Nespresso options perfect for businesses looking to expand their product lines with minimal upfront investment"
+          }
+        },
+        "text_pJDxKy": {
+          "type": "text",
+          "settings": {
+            "title": "Cold Brew Filter Sachet Packaging",
+            "desc": "Choose our proprietary blend or provide your own to create cold brew coffee that’s simple, delicious, and ready to go"
+          }
+        }
+      },
+      "block_order": [
+        "33308ff1-cde0-487e-b237-a505018d7131",
+        "812336c1-da3d-458b-bcf4-c6965552360c",
+        "text_pJDxKy"
+      ],
+      "custom_css": [
+        ".abt-shp-column-right img {width: 70%;}"
+      ],
+      "settings": {
+        "title": "Latitude 23.5° Coffee & Tea",
+        "desc": "Latitude 23.5 Coffee & Tea started in 2003 in Sarasota, Florida. For more than a decade, we have been hand roasting some of the world's finest coffee for those local to the Sarasota area, as well as coffee enthusiasts everywhere. We continue to strive to deliver a consistently excellent cup.\n<br><br>\nThis may be your first time ordering from us, or perhaps you've experience our coffee through one of the many retail locations where Latitude coffee is available.",
+        "desc1": "As we continue to grow, we would love to hear what you think of your Latitude 23.5 experience. Feel free to give us a call, drop us a line, or stop by to tour our roasting facility.\n<br><br>\nFrom all of us at Latitude 23.5, thank you for your continued interest and support.\n<br><br>\nSincerely,\n<br><br>\nDimitry Erez, Founder",
+        "m_title": "What Sets Us Apart",
+        "title_1": "Sustainable Practices:",
+        "desc_1": "We are proud to operate in a facility that is both Organic and Kosher Certified. Our sustainable practices are at the heart of every decision we make, ensuring that our products are not only good for the soul but also for the planet.\n<br><br>",
+        "desc1_1": "<h3 style=\"color: #c7ab84\">Advanced Roasting Technology</h3>\n<br>\nOur roasting process is perfected with state-of-the-art, computer-controlled profile software across commercial roasters, allowing us to consistently produce coffee that meets our rigorous standards of quality.",
+        "img": "shopify://shop_images/Kosher-Certification_-_Latitude_23.5_Coffee_Tea.png",
+        "title_2": "Expertise in Packaging",
+        "desc_2": "With an on-site Nitrogen generator, we ensure that our coffee, whether in bags, K-Cups, or Nespresso capsules, is packaged with the utmost care to preserve freshness and flavor. Our facility boasts rapid packaging capabilities, from fractional coffee packages to whole bean or ground coffee.\n<br><br>",
+        "desc2_1": "<h3 style=\"color: #c7ab84\">Customization and Innovation</h3>\n<br>\nWe offer custom blend development for both drip coffee and espresso, allowing us to cater to a wide array of tastes and preferences. Whether you prefer a bold espresso or a smooth cold brew, our team is skilled in creating blends that are as unique as our customers.",
+        "img1": "shopify://shop_images/IMG_9106.jpg",
+        "s_title": "Comprehensive Services Include",
+        "s_desc": ""
+      }
+    },
+    "shop_product_Q8wzjA": {
+      "type": "shop-product",
+      "settings": {
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Our Best-Selling Coffees",
+        "btn_url": "shopify://collections/best-sellers",
+        "btn": "Show Products",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": false,
+        "show_type": false,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "best-sellers"
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "main",
+    "shop_product_Q8wzjA"
+  ]
+}

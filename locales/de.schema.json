@@ -1,0 +1,315 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "common": {
+      "settings": {
+        "title": "Titel",
+        "subtitle": "Untertitel",
+        "desc": "Beschreibung",
+        "img": "Bild",
+        "btn": "Taste",
+        "btn_url": "Schaltflächen-URL",
+        "pro_set": "Produkteinstellungen",
+        "pro_hvr_img": "Produkt-Hover-Bild anzeigen",
+        "sh_ven": "Anbieter anzeigen",
+        "sh_var": "Varianten anzeigen",
+        "width_height": "Bildbreite und -höhe (Breite x Höhe) Format",
+        "thumb_width_height": "Daumenbild Breite und Höhe (Breite x Höhe) Format",
+        "sel_coll": "Sammlung auswählen",
+        "tab_name": "Registerkartenname",
+        "sec_coll": "Sammlung auswählen"
+      }
+    },
+    "common-section": {
+      "cat_pro": "Kategorie-Produkt",
+      "fea_pro": "Vorgestelltes Produkt",
+      "spe_pro": "Besonderes Produkt",
+      "lspe_pro": "Leichtes Spezialprodukt",
+      "dspe_pro": "Dunkles Spezialprodukt",
+      "l_cnt": "Linker Inhalt",
+      "r_cnt": "Richtiger Inhalt",
+      "sel_spe_pro": "Wählen Sie Sonderprodukt",
+      "mpro_size": "Bildbreite und -höhe (Breite x Höhe) Format",
+      "tpro_size": "Daumenbild Breite und Höhe (Breite x Höhe) Format",
+      "l_img": "Linkes Hintergrundbild",
+      "r_img": "Rechtes Hintergrundbild",
+      "tool1": "Kurzinfo Produkt 1",
+      "tool2": "Kurzinfo Produkt 2",
+      "pro_tab": "Registerkarte „Produkt“.",
+      "best_pro": "Bestseller-Produkt",
+      "bpage_bnr": "Blog-Seiten-Banner",
+      "bg_img": "Hintergrundbild",
+      "s_page": "Suchseite",
+      "pro_two_col": "Produkt-zweifarbig"
+    },
+    "header": {
+      "settings": {
+        "logo_cnt": "LOGO-EINSTELLUNGEN",
+        "logo_img": "Logo",
+        "logo_wd": "Logobreite"
+      },
+      "blocks": {
+        "simple_link": "Einfache Verlinkung",
+        "title": "Titel",
+        "link": "Verknüpfung",
+        "bge_txt": "Abzeichentext",
+        "bg_bge_clr": "Farbe des Hintergrundabzeichens",
+        "classname": "Klassenname",
+        "linklist": "Link + Linkliste",
+        "Ch_linklist": "Linkliste auswählen",
+        "list_bnr": "3 Linklisten + Banner",
+        "link_title1": "Titel der Linkliste1",
+        "linklist_1": "Linkliste 1",
+        "link_title2": "Titel der Linkliste2",
+        "linklist_2": "Linkliste 2",
+        "link_title3": "Titel der Linkliste3",
+        "linklist_3": "Linkliste 3",
+        "banner": "Banner",
+        "linkbanner": "Banner-Link"
+      }
+    },
+    "color": {
+      "name": "Farbe",
+      "settings": {
+        "primary_color": "Primärfarbe",
+        "secondary_color": "Sekundäre Farbe",
+        "primary_font": "Primäre Schriftfarbe",
+        "secondary_font": "Sekundäre Schriftfarbe",
+        "border_color": "Randfarbe"
+      }
+    },
+    "Pre-Loader": {
+      "name": "Vorlader",
+      "settings": {
+        "display_preloader": "Preloader anzeigen",
+        "pre_loader_img": "Laden Sie das Preloader-Image hoch",
+        "preloader_bg": "Hintergrundfarbe des Preloaders"
+      }
+    },
+    "featured-blog": {
+      "name": "Blogeintrag",
+      "settings": {
+        "blog": "Bloggen",
+        "blog_limit": "Beitragslimit",
+        "show_date": "Datum anzeigen"
+      }
+    },
+    "footer-email": {
+      "name": "Footer-E-Mail",
+      "settings": {
+        "l-img": "Linkes Hintergrundbild",
+        "r-img": "Rechtes Hintergrundbild"
+      }
+    },
+    "coll-bnr": {
+      "name": "Sammlungsbanner",
+      "settings": {
+        "b1_cnt": "Inhalt von Banner 1",
+        "b2_cnt": "Inhalt von Banner 2",
+        "b3_cnt": "Inhalt von Banner 3",
+        "img": "Banner",
+        "url": "Banner-URL",
+        "tag": "Banner-Tag",
+        "title": "Titel des Banners",
+        "subtitle": "Banner-Untertitel",
+        "desc": "Bannerbeschreibung",
+        "btn": "Banner-Schaltfläche",
+        "btn_url": "Banner-Button-URL",
+        "s_coll_img": "Sammlungsbild anzeigen",
+        "s_coll_desc": "Sammlungsbeschreibung anzeigen"
+      }
+    },
+    "video": {
+      "name": "CMS-Video",
+      "settings": {
+        "bg_img": "Hintergrundbild",
+        "cvr_img": "Titelbild",
+        "b3_cnt": "Inhalt von Banner 3",
+        "vid": "Video-Überschrift",
+        "vid_url": "Video-URL"
+      }
+    },
+    "brand-logo": {
+      "name": "Markenlogo",
+      "blocks": {
+        "image": "Bild",
+        "link": "Verknüpfung"
+      }
+    },
+    "testimonial": {
+      "name": "Zeugnis",
+      "settings": {
+        "img": "Bild",
+        "desc": "Beschreibung",
+        "aut_img": "Autorenbild",
+        "aut_name": "Autorenname",
+        "aut_design": "Autor Bezeichnung",
+        "str_img": "Bild überprüfen"
+      }
+    },
+    "faqs": {
+      "name": "Häufig gestellte Fragen",
+      "settings": {
+        "description": "Text",
+        "title": "Unterüberschrift"
+      },
+      "blocks": {
+        "name": "Frage",
+        "info": "Beschreibung"
+      }
+    },
+    "social-media": {
+      "name": "Sozialen Medien",
+      "settings": {
+        "header": {
+          "content": "Soziale Konten"
+        },
+        "social_twitter_link": {
+          "label": "Twitter",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    },
+    "search_input": {
+      "name": "Suchverhalten",
+      "settings": {
+        "header": {
+          "content": "Produktvorschläge"
+        },
+        "predictive_search_enabled": {
+          "label": "Produktvorschläge aktivieren"
+        },
+        "predictive_search_show_vendor": {
+          "label": "Anbieter anzeigen",
+          "info": "Sichtbar, wenn Produktvorschläge aktiviert sind."
+        },
+        "predictive_search_show_price": {
+          "label": "Preis anzeigen",
+          "info": "Sichtbar, wenn Produktvorschläge aktiviert sind."
+        }
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Favicon-Bild",
+          "info": "Wird auf 32 x 32 Pixel verkleinert"
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Währungsformat",
+      "settings": {
+        "content": "Währungscodes",
+        "paragraph": "Warenkorb- und Checkout-Preise zeigen immer Währungscodes an. Beispiel: 1,00 USD.",
+        "currency_code_enabled": {
+          "label": "Währungscodes anzeigen"
+        }
+      }
+    },
+    "contact_form": {
+      "name": "Kontaktiere uns",
+      "m_num": "Handynummer",
+      "add": "Adresse",
+      "e_id": "E-Mail-ID",
+      "c_title": "Titel des Kontaktformulars"
+    },
+    "footer": {
+      "name": "Fusszeile",
+      "f_title": "Titel der Fußzeile",
+      "f_desc": "Beschreibung der Fußzeile",
+      "nav": "Navigation"
+    },
+    "about": {
+      "name": "Über uns",
+      "s_one": "Abschnitt eins",
+      "desc1": "Beschreibung 1",
+      "desc2": "Beschreibung 2",
+      "s_two": "Abschnitt zwei",
+      "m_title": "Überschrift",
+      "p_one": "Teil eins",
+      "p_third": "Dritter Teil",
+      "s_title": "Diensttitel",
+      "s_desc": "Leistungsbeschreibung",
+      "add_s": "Dienst hinzufügen"
+    },
+    "artical": {
+      "name": "Artikelseite",
+      "s_artical": "Neueste Artikel anzeigen",
+      "s_blog": "Blog-Tags anzeigen"
+    },
+    "blog": {
+      "name": "Blog-Raster",
+      "s_blog_img": "Blogbild anzeigen",
+      "s_date": "Datum anzeigen",
+      "s_author": "Autor anzeigen"
+    },
+    "cart": {
+      "c_footer": "Warenkorb Fußzeile",
+      "s_cartnote": "Warenkorbhinweis anzeigen",
+      "subtotal": "Zwischensumme",
+      "chackbtn": "Checkout-Button",
+      "c_header": "Warenkorb Artikel"
+    },
+    "coll_page": {
+      "name": "Sammlungsseite",
+      "s_product": "Produkt pro Seite anzeigen",
+      "f_set": "Filtereinstellungen",
+      "d_filter": "Anzeigefilter",
+      "d_sorting": "Sortierung anzeigen",
+      "d_mobile_filter": "Zeigen Sie das Mobile-Menü auf dem Desktop an"
+    },
+    "pro_page": {
+      "name": "Produktseite",
+      "pro_title": "Produktname",
+      "pro_type": "Produktart",
+      "pro_detail": "Produktdetail",
+      "pro_desc": "Produktbeschreibung",
+      "pro_variant": "Produktvariante",
+      "qty_sel": "Mengenauswahl",
+      "pro_price_btn": "Produktpreis & Schaltfläche",
+      "hide_variant": "Varianten ausblenden",
+      "video_loop": "Videoschleife aktivieren"
+    },
+    "pro_two_col": {
+      "f_cnt": "Erster Inhalt",
+      "s_cnt": "Zweiter Inhalt",
+      "desc1": "Beschreibung 1",
+      "desc2": "Beschreibung 2"
+    },
+    "slider": {
+      "name": "Diashow",
+      "slide_ptrn": "Slider-Muster",
+      "s_img_url": "Slider-Bild-URL",
+      "tool_pro1": "Kurzinfo Produkt 1",
+      "tool_pro2": "Kurzinfo Produkt 2",
+      "tool_pro3": "Kurzinfo Produkt 3",
+      "tool_pro4": "Kurzinfo Produkt 4",
+      "sel_pro": "ausgewähltes Produkt",
+      "pos_top": "Position oben",
+      "pos_left": "Stellung links",
+      "sel_mpro": "Slider-Produkt auswählen"
+    }
+  }
+}

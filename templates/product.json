@@ -1,0 +1,152 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "472b950c-ce5b-4274-8b86-3c6a7ce2cab6": {
+          "type": "backbtn",
+          "settings": {
+          }
+        },
+        "subify_subscriptions_app_app_block_zmKebD": {
+          "type": "shopify://apps/subify-subscriptions-app/blocks/app-block/bc0dba25-cd46-4841-bea4-6bdfe9ac815f",
+          "settings": {
+            "product": "{{product}}",
+            "use_app_block_wording": false,
+            "widget_label": "Purchase options",
+            "one_time_purchase_text": "One-Time Purchase",
+            "subscription_text": "Subscribe and save",
+            "delivery_frequency_text": "Delivery frequency",
+            "prepaid_subscription_text": "Subscription with prepaid",
+            "skin1_priceSuffix": "each",
+            "skin1_save": "Save(skin1)",
+            "skin1_prepaid_payment_title": "prepaid",
+            "skin1_normal_payment_title": "pay as you go",
+            "skin2_discountSuffix": "Save",
+            "skin3_fullPrice": "Full price",
+            "skin3_priceSuffix": "each",
+            "skin3_discountSuffix": "Off",
+            "skin4_justOnce": "Just once",
+            "skin4_discountSuffix": "Off",
+            "skin4_priceSuffix": "each",
+            "skin4_fullPrice": "(Full price)",
+            "skin4_sellingPlansTitle": "Renews every:",
+            "from": "from",
+            "max_discount_badge_title": "UP To",
+            "pay": "Pay",
+            "price_save_up_to": "save up to"
+          }
+        },
+        "judge_me_reviews_preview_badge_9DwWcT": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+          }
+        },
+        "38030268-97bd-4e13-ab0a-8941cd01ece8": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "8ad57d73-1abe-445a-b1bd-b88e139fa3b6": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "72735c6e-2940-4c25-a1fb-c5777bd437e3": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown"
+          }
+        },
+        "4158aa37-1877-4fec-bebd-9025dde91d35": {
+          "type": "quantity_selector",
+          "settings": {
+          }
+        },
+        "af53d701-e076-49e7-931e-5fcdca0e9980": {
+          "type": "pro_btn",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "472b950c-ce5b-4274-8b86-3c6a7ce2cab6",
+        "subify_subscriptions_app_app_block_zmKebD",
+        "judge_me_reviews_preview_badge_9DwWcT",
+        "38030268-97bd-4e13-ab0a-8941cd01ece8",
+        "8ad57d73-1abe-445a-b1bd-b88e139fa3b6",
+        "72735c6e-2940-4c25-a1fb-c5777bd437e3",
+        "4158aa37-1877-4fec-bebd-9025dde91d35",
+        "af53d701-e076-49e7-931e-5fcdca0e9980"
+      ],
+      "custom_css": [
+        ".rc-container-wrapper {display: none;}",
+        ".recentlyview .view-product-sec {display: none;}"
+      ],
+      "settings": {
+        "pro_img_widthheight": "600x600",
+        "pro_thumb_img_widthheight": "600x600",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Coffee Description",
+        "img": "shopify://shop_images/Coffee_Beans_-_Latitude_23.5_Coffee_Tea.png",
+        "sizechart_enable": false,
+        "size_lable": "",
+        "sizechart_info": "",
+        "notify_text": ""
+      }
+    },
+    "1706695662eb1677a8": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_4K66Ct": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_4K66Ct"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 992px) {.jdgm-widget:not(.jdgm-review-widget--small, .jdgm-review-widget--medium) .jdgm-rev-widg__title {margin-bottom: 24px; font-size: 32px; }}",
+        ".jdgm-write-rev-link.jdgm-write-rev-link {border: 0px; background-color: #f7f1e7; border-radius: 20px;}",
+        ".jdgm-widget .jdgm-btn.jdgm-btn {border-radius: 25px; background-color: #f7f1e7; border: 0px;}"
+      ],
+      "settings": {
+      }
+    },
+    "a666d15f-3aaf-4977-ad7f-57631633c6d6": {
+      "type": "product-banner",
+      "settings": {
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/d07af386638640c5be2b435380d446de.mp4",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Extraordinary Coffees",
+        "desc": "Discover the extraordinary flavors and unique profiles of our carefully curated coffee collection, crafted to offer an exceptional experience in every cup.",
+        "btn_url": "shopify://pages/extraordinary-coffees",
+        "btn": "Learn More",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "kenya-direct",
+        "product1": "coco-river-blend"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1706695662eb1677a8",
+    "a666d15f-3aaf-4977-ad7f-57631633c6d6"
+  ]
+}

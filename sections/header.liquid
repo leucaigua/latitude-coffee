@@ -1,0 +1,603 @@
+<link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<div class="main-navigationbar sticky_header" id="header-sticky">
+    <div class="container">
+        <div class="navigationbar-row d-flex align-items-center">
+            <div class="logo-col">
+                <h1>
+                    <a href="{{ routes.root_url }}">
+                        <img src="{{ section.settings.logo | img_url: 'master' }}" alt="logo" class="header__img">
+                    </a>
+                </h1>
+            </div>
+            <div class="menu-items-col">
+                <ul class="main-nav">
+                    {% for block in section.blocks %}
+                        {% assign canonical_url_trim = canonical_url | replace: request.origin %}
+                        {% assign block_url_trim = block.settings.link | replace: request.origin %}
+                        {% if canonical_url_trim == "/" %}{% assign canonical_url_trim = "" %}{% endif %}
+                        {% if block.type == "link-simple" or block.type == "link-linklist" or block.type == "link-4linklists" %}  
+                            <li class="menu-lnk{% case block.type %}{% when 'link-linklist' %} has-item{% when 'link-4linklists' %} has-item{% endcase %}">
+                                <a class="{{ block.settings.diffclassname }}" href="{% if block.settings.link != blank  %}{{ block.settings.link }} {% else %} javascript:; {% endif %}">
+                                    {{ block.settings.title }}
+                                </a>
+
+                                <div class="mega-menu__workaround"></div>
+                                
+                                {% case block.type %}
+                                    {% when 'link-linklist' %}
+                                    {% if block.settings.links.size > 0 %}
+                                    <div class="menu-dropdown second-menu-dropdown">
+                                        {%- assign links_small = block.settings.links -%}
+                                        <ul id="menu_{{ block.id }}">
+                                            {% for link in linklists[links_small].links %}
+                                                {%- assign child_list_handle = link.title | handleize -%}
+                                                {%- assign link_count = 0 -%}
+                                                {% for childlink in linklists[child_list_handle].links %}
+                                                    {%- assign link_count = link_count | plus: 1 -%}
+                                                {% endfor %}
+                                                <li class="{% if link_count > 0 %}with_ul{% endif %}">
+                                                    <a href="{{ link.url }}">{{ link.title }}{% if link_count > 0 %}<i class="level_3__trigger megamainhd" data-submenu="submenu_{{ block.id }}-{{ link_count }}"></i>{% endif %}</a>
+                                                    {% if link_count > 0 %}
+                                                        <ul id="1submenu_{{ block.id }}-{{ link_count }}">
+                                                            {% for childlink in linklists[child_list_handle].links %}
+                                                                {%- assign child_list_2_handle = childlink.title | handleize -%}
+                                                                {%- assign link_count = 0 -%}
+                                                                {% for childlink in linklists[child_list_2_handle].links %}
+                                                                {%- assign link_count = link_count | plus: 1 -%}
+                                                                {% endfor %}                                                                        
+                                                                <li class="{% if link_count > 2 %}with_ul2{% endif %}">
+                                                                    <a href="{{ childlink.url }}">{{ childlink.title }}{% if link_count > 2 %}<i class="level_3__trigger megamainhd" data-submenu="subsubmenu_{{ block.id }}-{{ link_count }}"></i>{% endif %}</a>
+                                                                    {% if link_count > 2 %}
+                                                                        <ul id="2subsubmenu_{{ block.id }}-{{ link_count }}">
+                                                                        {% for childlink in linklists[child_list_2_handle].links %}
+                                                                            <li>
+                                                                            <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                        </ul>
+                                                                    {% endif %}
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                
+                                    {% when 'link-4linklists' %}
+                                    {% if block.settings.links_1.size > 0 or block.settings.links_2.size > 0 or block.settings.links_3.size > 0 or block.settings.links_4.size > 0 %}
+                                        <div class="mega-menu menu-dropdown">
+                                            <div class="mega-menu-container container">
+                                                <ul class="row" id="menu_{{ block.id }}">
+                                                    {% for i in (1..3) %}  
+                                                    {% capture list %}links_{{ i }}{% endcapture %}
+                                                    {%- assign list = block.settings[list] -%}
+                                                    {% capture listtitle %}link_title{{ i }}{% endcapture %}
+                                                    {%- assign listtitle = block.settings[listtitle] -%}
+                                                        <li class="col-md-3 col-12">                                          
+                                                            <ul class="megamenu-list arrow-list" id="menu_{{ block.id }}-{{ i }}">
+                                                                <li class="list-title"><span>{{ listtitle }}</span></li>
+                                                                {% for link in linklists[list].links %}
+                                                                    <li>
+                                                                    {% if link.title contains '[new]' %}
+                                                                    {%- assign link_text = link.title | replace: '[new]', '' -%}
+                                                                    {%- assign link_badge = 'new' -%}
+                                                                    {% elsif link.title contains '[hot]' %} 
+                                                                    {%- assign link_text = link.title | replace: '[hot]', '' -%}
+                                                                    {%- assign link_badge = 'hot' -%}   
+                                                                    {% else %}
+                                                                    {%- assign link_text = link.title -%}
+                                                                    {%- assign link_badge = false -%}   
+                                                                    {% endif %}
+                                                                    <a href="{{ link.url }}">{{ link_text }}{% if link_badge %}<span class="badge badge_{{ link_badge }}">{{ link_badge }}</span>{% endif %}</a>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </li>
+                                                    {% endfor %}
+                                                    {% if block.settings.image != blank %}
+                                                        <li class="col-md-3 col-12">
+                                                            <a href="{{ block.settings.imageblink }}"> 
+                                                                <img loading="lazy" src="{{ block.settings.image | img_url: 'master' }}" alt="menubaner">
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endcase %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <ul class="menu-right d-flex justify-content-end align-items-center"> 
+                    <li class="menu-lnk">
+                        <a href="https://latitudecoffee.com/collections/all">SUBSCRIBE &amp; SAVE</a>
+                    </li>
+                    <li class="search-header">
+                        <a href="javascript:;" class="search-btn header__icon--search header__icon--summary focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}" title="search" id="header-search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 13 13"
+                                fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M9.47487 10.5131C8.48031 11.2863 7.23058 11.7466 5.87332 11.7466C2.62957 11.7466 0 9.11706 0 5.87332C0 2.62957 2.62957 0 5.87332 0C9.11706 0 11.7466 2.62957 11.7466 5.87332C11.7466 7.23058 11.2863 8.48031 10.5131 9.47487L12.785 11.7465C13.0717 12.0332 13.0717 12.4981 12.785 12.7848C12.4983 13.0715 12.0334 13.0715 11.7467 12.7848L9.47487 10.5131ZM10.2783 5.87332C10.2783 8.30612 8.30612 10.2783 5.87332 10.2783C3.44051 10.2783 1.46833 8.30612 1.46833 5.87332C1.46833 3.44051 3.44051 1.46833 5.87332 1.46833C8.30612 1.46833 10.2783 3.44051 10.2783 5.87332Z"
+                                    fill="#c7ab84"></path>
+                            </svg>
+                        </a>
+                    </li>
+                  {%- if shop.customer_accounts_enabled -%}
+                    <li class="profile-header">
+                      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="profile-btn" title="my profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="18" viewBox="0 0 15 18" fill="none">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 9.81818C4.27834 9.81818 1.66667 12.3824 1.66667 15.5455V17.1818C1.66667 17.6337 1.29357 18 0.833333 18C0.373096 18 0 17.6337 0 17.1818V15.5455C0 11.4786 3.35786 8.18182 7.5 8.18182C11.6421 8.18182 15 11.4786 15 15.5455V17.1818C15 17.6337 14.6269 18 14.1667 18C13.7064 18 13.3333 17.6337 13.3333 17.1818V15.5455C13.3333 12.3824 10.7217 9.81818 7.5 9.81818Z" fill="#c7ab84"/>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 8.18182C9.34095 8.18182 10.8333 6.71657 10.8333 4.90909C10.8333 3.10161 9.34095 1.63636 7.5 1.63636C5.65905 1.63636 4.16667 3.10161 4.16667 4.90909C4.16667 6.71657 5.65905 8.18182 7.5 8.18182ZM7.5 9.81818C10.2614 9.81818 12.5 7.62031 12.5 4.90909C12.5 2.19787 10.2614 0 7.5 0C4.73858 0 2.5 2.19787 2.5 4.90909C2.5 7.62031 4.73858 9.81818 7.5 9.81818Z" fill="#c7ab84"/>
+                        </svg>
+                      </a>
+                    </li>
+                    {% endif %}
+                     <noscript>
+                      {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
+                        <div class="localization-form__select">
+                          <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                          <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
+                            {%- for language in localization.available_languages -%}
+                              <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                                {{ language.endonym_name | capitalize }}
+                              </option>
+                            {%- endfor -%}
+                          </select>
+                        </div>
+                        <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+                      {%- endform -%}
+                    </noscript>
+  <!-- 
+                    <localization-form>
+                    {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+                      <div class="no-js-hidden">
+                        <div class="lang-dropdown">
+                          <button type="button" class="disclosure__button localization-form__select localization-selector d-flex nice-select" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M5.5013 9.16602C7.52635 9.16602 9.16797 7.52439 9.16797 5.49935C9.16797 3.4743 7.52635 1.83268 5.5013 1.83268C3.47626 1.83268 1.83464 3.4743 1.83464 5.49935C1.83464 7.52439 3.47626 9.16602 5.5013 9.16602ZM5.5013 10.0827C8.03261 10.0827 10.0846 8.03065 10.0846 5.49935C10.0846 2.96804 8.03261 0.916016 5.5013 0.916016C2.97 0.916016 0.917969 2.96804 0.917969 5.49935C0.917969 8.03065 2.97 10.0827 5.5013 10.0827Z"
+                                    fill="white" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.29926 8.33031C6.63783 7.65316 6.8737 6.65355 6.8737 5.49935C6.8737 4.34515 6.63783 3.34553 6.29926 2.66839C5.93327 1.93641 5.59727 1.83268 5.4987 1.83268C5.40013 1.83268 5.06412 1.93641 4.69814 2.66839C4.35956 3.34553 4.1237 4.34515 4.1237 5.49935C4.1237 6.65355 4.35956 7.65316 4.69814 8.33031C5.06412 9.06228 5.40013 9.16602 5.4987 9.16602C5.59727 9.16602 5.93327 9.06228 6.29926 8.33031ZM5.4987 10.0827C6.76435 10.0827 7.79036 8.03065 7.79036 5.49935C7.79036 2.96804 6.76435 0.916016 5.4987 0.916016C4.23305 0.916016 3.20703 2.96804 3.20703 5.49935C3.20703 8.03065 4.23305 10.0827 5.4987 10.0827Z"
+                                    fill="white" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M10.062 5.95768C10.077 5.80693 10.0846 5.65404 10.0846 5.49935C10.0846 5.34466 10.077 5.19176 10.062 5.04102H0.940599C0.925632 5.19176 0.917969 5.34466 0.917969 5.49935C0.917969 5.65404 0.925632 5.80693 0.940599 5.95768H10.062Z"
+                                    fill="white" />
+                            </svg>
+                          </button>
+                            <div class="disclosure__list-wrapper hide">
+                                <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled">
+                                {%- for language in localization.available_languages -%}
+                                  <li class="disclosure__item" tabindex="-1">
+                                    <a class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
+                                      {{ language.endonym_name | capitalize }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+                      </div>
+                    {%- endform -%}
+                    </localization-form> -->
+                    <!-- <li class="currency">
+                      {% form 'currency' %}
+                      <select name="currency">
+                        {% for currency in shop.enabled_currencies %}
+                        {% if currency == cart.currency %}
+                        <option selected = "true">{{currency.iso_code}}</option>
+                        {% else %}
+                        <option>{{currency.iso_code}} </option>
+                        {% endif %}
+                        {% endfor %}
+                      </select>
+                      {% endform %}
+                    </li> -->
+                    <li class="cart-header">
+                        <a href="javascript:;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.57747 17.321C8.57747 18.7419 7.42554 19.8939 6.00456 19.8939C4.58357 19.8939 3.43164 18.7419 3.43164 17.321C3.43164 15.9 4.58357 14.748 6.00456 14.748C7.42554 14.748 8.57747 15.9 8.57747 17.321ZM6.8622 17.321C6.8622 17.7946 6.47822 18.1786 6.00456 18.1786C5.5309 18.1786 5.14692 17.7946 5.14692 17.321C5.14692 16.8473 5.5309 16.4633 6.00456 16.4633C6.47822 16.4633 6.8622 16.8473 6.8622 17.321Z" fill="#c7ab84"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1539 17.321C17.1539 18.7419 16.0019 19.8939 14.5809 19.8939C13.16 19.8939 12.008 18.7419 12.008 17.321C12.008 15.9 13.16 14.748 14.5809 14.748C16.0019 14.748 17.1539 15.9 17.1539 17.321ZM15.4386 17.321C15.4386 17.7946 15.0546 18.1786 14.5809 18.1786C14.1073 18.1786 13.7233 17.7946 13.7233 17.321C13.7233 16.8473 14.1073 16.4633 14.5809 16.4633C15.0546 16.4633 15.4386 16.8473 15.4386 17.321Z" fill="#c7ab84"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.80557 2.35709C2.0174 1.93344 2.53256 1.76172 2.95622 1.97354L3.81687 2.40387C4.61384 2.80235 5.1479 3.58483 5.22857 4.47221L5.2696 4.92356C5.28968 5.14444 5.47487 5.31356 5.69666 5.31356H17.0114C18.5085 5.31356 19.5447 6.80879 19.019 8.2105L17.5153 12.2204C17.1387 13.2247 16.1787 13.8899 15.1062 13.8899H6.712C5.38128 13.8899 4.27013 12.8752 4.14965 11.55L3.52034 4.62751C3.49345 4.33171 3.31543 4.07089 3.04977 3.93806L2.18912 3.50774C1.76547 3.29591 1.59375 2.78075 1.80557 2.35709ZM5.93056 7.02883C5.6784 7.02883 5.48068 7.24535 5.5035 7.49648L5.85789 11.3947C5.89805 11.8364 6.26843 12.1747 6.712 12.1747H15.1062C15.4637 12.1747 15.7837 11.9529 15.9092 11.6182L17.413 7.60822C17.5181 7.32788 17.3109 7.02883 17.0114 7.02883H5.93056Z" fill="#c7ab84"/>
+                            </svg>
+                            {% comment %} <span class="count">{{ cart.item_count }} Items</span> {% endcomment %}
+                        </a>
+                    </li>
+                </ul>
+                <div class="mobile-menu mobile-only">
+                    <button class="mobile-menu-button">
+                        <div class="one"></div>
+                        <div class="two"></div>
+                        <div class="three"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="search-popup" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+    <button type="button" class="close-search">                    
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+            <path
+               d="M27.7618 25.0008L49.4275 3.33503C50.1903 2.57224 50.1903 1.33552 49.4275 0.572826C48.6647 -0.189868 47.428 -0.189965 46.6653 0.572826L24.9995 22.2386L3.33381 0.572826C2.57102 -0.189965 1.3343 -0.189965 0.571605 0.572826C-0.191089 1.33562 -0.191186 2.57233 0.571605 3.33503L22.2373 25.0007L0.571605 46.6665C-0.191186 47.4293 -0.191186 48.666 0.571605 49.4287C0.952952 49.81 1.45285 50.0007 1.95275 50.0007C2.45266 50.0007 2.95246 49.81 3.3339 49.4287L24.9995 27.763L46.6652 49.4287C47.0465 49.81 47.5464 50.0007 48.0463 50.0007C48.5462 50.0007 49.046 49.81 49.4275 49.4287C50.1903 48.6659 50.1903 47.4292 49.4275 46.6665L27.7618 25.0008Z"
+               fill="white"></path>
+        </svg>
+    </button>
+    <div class="search-form-wrapper" tabindex="-1">
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+      {%- endif -%}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+        <div class="field form-inputs">
+          <input class="search__input field__input form-control" id="Search-In-Modal-1" type="search" name="q" value="" placeholder="{{ 'general.search.search_place' | t }}"
+          {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list"
+          aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%}>
+          <input type="hidden" name="options[prefix]" value="last">
+          <button class="search__button btn" aria-label="{{ 'general.search.search' | t }}" id="btn-submit">                          
+            <svg>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                   d="M0.000169754 6.99457C0.000169754 10.8576 3.13174 13.9891 6.99473 13.9891C8.60967 13.9891 10.0968 13.4418 11.2807 12.5226C11.3253 12.6169 11.3866 12.7053 11.4646 12.7834L17.0603 18.379C17.4245 18.7432 18.015 18.7432 18.3792 18.379C18.7434 18.0148 18.7434 17.4243 18.3792 17.0601L12.7835 11.4645C12.7055 11.3864 12.6171 11.3251 12.5228 11.2805C13.442 10.0966 13.9893 8.60951 13.9893 6.99457C13.9893 3.13157 10.8577 0 6.99473 0C3.13174 0 0.000169754 3.13157 0.000169754 6.99457ZM1.86539 6.99457C1.86539 4.1617 4.16187 1.86522 6.99473 1.86522C9.8276 1.86522 12.1241 4.1617 12.1241 6.99457C12.1241 9.82743 9.8276 12.1239 6.99473 12.1239C4.16187 12.1239 1.86539 9.82743 1.86539 6.99457Z">
+                </path>
+             </svg>
+          </button>
+        </div>
+        {%- if settings.predictive_search_enabled -%}
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search style="display: none;">
+            <div class="predictive-search__loading-state">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </div>
+          <span class="predictive-search-status hidden" role="status" aria-hidden="true"></span>
+        {%- endif -%}
+      </form>
+      {%- if settings.predictive_search_enabled -%}
+        </predictive-search>
+      {%- endif -%}
+    </div>
+</div>
+<div class="mobile-menu-wrapper">
+    <div class="menu-close-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18">
+            <path fill="#24272a"
+                d="M19.95 16.75l-.05-.4-1.2-1-5.2-4.2c-.1-.05-.3-.2-.6-.5l-.7-.55c-.15-.1-.5-.45-1-1.1l-.1-.1c.2-.15.4-.35.6-.55l1.95-1.85 1.1-1c1-1 1.7-1.65 2.1-1.9l.5-.35c.4-.25.65-.45.75-.45.2-.15.45-.35.65-.6s.3-.5.3-.7l-.3-.65c-.55.2-1.2.65-2.05 1.35-.85.75-1.65 1.55-2.5 2.5-.8.9-1.6 1.65-2.4 2.3-.8.65-1.4.95-1.9 1-.15 0-1.5-1.05-4.1-3.2C3.1 2.6 1.45 1.2.7.55L.45.1c-.1.05-.2.15-.3.3C.05.55 0 .7 0 .85l.05.35.05.4 1.2 1 5.2 4.15c.1.05.3.2.6.5l.7.6c.15.1.5.45 1 1.1l.1.1c-.2.15-.4.35-.6.55l-1.95 1.85-1.1 1c-1 1-1.7 1.65-2.1 1.9l-.5.35c-.4.25-.65.45-.75.45-.25.15-.45.35-.65.6-.15.3-.25.55-.25.75l.3.65c.55-.2 1.2-.65 2.05-1.35.85-.75 1.65-1.55 2.5-2.5.8-.9 1.6-1.65 2.4-2.3.8-.65 1.4-.95 1.9-1 .15 0 1.5 1.05 4.1 3.2 2.6 2.15 4.3 3.55 5.05 4.2l.2.45c.1-.05.2-.15.3-.3.1-.15.15-.3.15-.45z">
+            </path>
+        </svg>
+    </div>
+    <div class="mobile-menu-bar"> 
+        <ul>
+            {% for block in section.blocks %}
+            {% assign mob_canonical_url_trim = canonical_url | replace: request.origin %}
+            {% assign mob_block_url_trim = block.settings.link | replace: request.origin %}
+            {% if mob_canonical_url_trim == "/" %}{% assign canonical_url_trim = "" %}{% endif %}
+                {% if block.type == "mob-link-simple" or block.type == "mob-link-linklist" %}  
+                    <li class="mobile-item{% case block.type %}{% when 'mob-link-linklist' %} has-children{% when 'mob-link-4link' %} has-children{% endcase %}">
+                        <a class="acnav-label {{ block.settings.diffclassname }}" href="{% if block.settings.link != blank %}{{ block.settings.link }} {% else %} javascript: {% endif %}">
+                            {{ block.settings.title }}
+                            <svg class="menu-open-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="11" viewBox="0 0 20 11">
+                                <path fill="#24272a" d="M.268 1.076C.373.918.478.813.584.76l.21.474c.79.684 2.527 2.158 5.21 4.368 2.738 2.21 4.159 3.316 4.264 3.316.474-.053 1.158-.369 1.947-1.053.842-.631 1.632-1.42 2.474-2.368.895-.948 1.737-1.842 2.632-2.58.842-.789 1.578-1.262 2.105-1.42l.316.684c0 .21-.106.474-.316.737-.053.21-.263.421-.474.579-.053.052-.316.21-.737.474l-.526.368c-.421.263-1.105.947-2.158 2l-1.105 1.053-2.053 1.947c-1 .947-1.579 1.421-1.842 1.421-.263 0-.684-.263-1.158-.895-.526-.631-.842-1-1.052-1.105l-.737-.579c-.316-.316-.527-.474-.632-.474l-5.42-4.315L.267 2.339l-.105-.421-.053-.369c0-.157.053-.315.158-.473z"></path>
+                            </svg>
+                            <svg class="close-menu-ioc" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18">
+                                <path fill="#24272a" d="M19.95 16.75l-.05-.4-1.2-1-5.2-4.2c-.1-.05-.3-.2-.6-.5l-.7-.55c-.15-.1-.5-.45-1-1.1l-.1-.1c.2-.15.4-.35.6-.55l1.95-1.85 1.1-1c1-1 1.7-1.65 2.1-1.9l.5-.35c.4-.25.65-.45.75-.45.2-.15.45-.35.65-.6s.3-.5.3-.7l-.3-.65c-.55.2-1.2.65-2.05 1.35-.85.75-1.65 1.55-2.5 2.5-.8.9-1.6 1.65-2.4 2.3-.8.65-1.4.95-1.9 1-.15 0-1.5-1.05-4.1-3.2C3.1 2.6 1.45 1.2.7.55L.45.1c-.1.05-.2.15-.3.3C.05.55 0 .7 0 .85l.05.35.05.4 1.2 1 5.2 4.15c.1.05.3.2.6.5l.7.6c.15.1.5.45 1 1.1l.1.1c-.2.15-.4.35-.6.55l-1.95 1.85-1.1 1c-1 1-1.7 1.65-2.1 1.9l-.5.35c-.4.25-.65.45-.75.45-.25.15-.45.35-.65.6-.15.3-.25.55-.25.75l.3.65c.55-.2 1.2-.65 2.05-1.35.85-.75 1.65-1.55 2.5-2.5.8-.9 1.6-1.65 2.4-2.3.8-.65 1.4-.95 1.9-1 .15 0 1.5 1.05 4.1 3.2 2.6 2.15 4.3 3.55 5.05 4.2l.2.45c.1-.05.2-.15.3-.3.1-.15.15-.3.15-.45z"></path>
+                            </svg>  
+                        </a>
+                        {% case block.type %}
+                            {% when 'mob-link-linklist' %}
+                            {% if block.settings.links.size > 0 %}
+                            {%- assign links_small = block.settings.links -%}
+                                <ul id="menu_{{ block.id }}" class ="mobile_menu_inner acnav-list">
+                                    {% for link in linklists[links_small].links %}
+                                    {%- assign child_list_handle = link.title | handleize -%}
+                                    {%- assign link_count = 0 -%}
+                                    {% for childlink in linklists[child_list_handle].links %}
+                                        {%- assign link_count = link_count | plus: 1 -%}
+                                    {% endfor %}
+                                        <li class="menu-h-link {% if link_count > 0 %}menu-h-drop has-children{% endif %}">
+                                            <a class="acnav-label" href="{% if link_count > 0 %}javascript:{% else %}{{ link.url }}{% endif %}">{{ link.title }}
+                                                {% if link_count > 0 %}
+                                                    <svg class="menu-open-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="11" viewBox="0 0 20 11">
+                                                        <path fill="#24272a" d="M.268 1.076C.373.918.478.813.584.76l.21.474c.79.684 2.527 2.158 5.21 4.368 2.738 2.21 4.159 3.316 4.264 3.316.474-.053 1.158-.369 1.947-1.053.842-.631 1.632-1.42 2.474-2.368.895-.948 1.737-1.842 2.632-2.58.842-.789 1.578-1.262 2.105-1.42l.316.684c0 .21-.106.474-.316.737-.053.21-.263.421-.474.579-.053.052-.316.21-.737.474l-.526.368c-.421.263-1.105.947-2.158 2l-1.105 1.053-2.053 1.947c-1 .947-1.579 1.421-1.842 1.421-.263 0-.684-.263-1.158-.895-.526-.631-.842-1-1.052-1.105l-.737-.579c-.316-.316-.527-.474-.632-.474l-5.42-4.315L.267 2.339l-.105-.421-.053-.369c0-.157.053-.315.158-.473z"></path>
+                                                    </svg>
+                                                    <svg class="close-menu-ioc" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18">
+                                                        <path fill="#24272a" d="M19.95 16.75l-.05-.4-1.2-1-5.2-4.2c-.1-.05-.3-.2-.6-.5l-.7-.55c-.15-.1-.5-.45-1-1.1l-.1-.1c.2-.15.4-.35.6-.55l1.95-1.85 1.1-1c1-1 1.7-1.65 2.1-1.9l.5-.35c.4-.25.65-.45.75-.45.2-.15.45-.35.65-.6s.3-.5.3-.7l-.3-.65c-.55.2-1.2.65-2.05 1.35-.85.75-1.65 1.55-2.5 2.5-.8.9-1.6 1.65-2.4 2.3-.8.65-1.4.95-1.9 1-.15 0-1.5-1.05-4.1-3.2C3.1 2.6 1.45 1.2.7.55L.45.1c-.1.05-.2.15-.3.3C.05.55 0 .7 0 .85l.05.35.05.4 1.2 1 5.2 4.15c.1.05.3.2.6.5l.7.6c.15.1.5.45 1 1.1l.1.1c-.2.15-.4.35-.6.55l-1.95 1.85-1.1 1c-1 1-1.7 1.65-2.1 1.9l-.5.35c-.4.25-.65.45-.75.45-.25.15-.45.35-.65.6-.15.3-.25.55-.25.75l.3.65c.55-.2 1.2-.65 2.05-1.35.85-.75 1.65-1.55 2.5-2.5.8-.9 1.6-1.65 2.4-2.3.8-.65 1.4-.95 1.9-1 .15 0 1.5 1.05 4.1 3.2 2.6 2.15 4.3 3.55 5.05 4.2l.2.45c.1-.05.2-.15.3-.3.1-.15.15-.3.15-.45z"></path>
+                                                    </svg>
+                                                {% endif %}
+                                            </a>
+                                            {% if link_count > 0 %}
+                                                <ul id="1submenu_{{ block.id }}-{{ link_count }}" class="acnav-list">
+                                                    {% for childlink in linklists[child_list_handle].links %}
+                                                    {%- assign child_list_2_handle = childlink.title | handleize -%}
+                                                    {%- assign link_count = 0 -%}
+                                                        {% for childlink in linklists[child_list_2_handle].links %}
+                                                            {%- assign link_count = link_count | plus: 1 -%}
+                                                        {% endfor %}                                                                        
+                                                        <li class="{% if link_count > 2 %}menu-h-drop has-children{% endif %}">
+                                                            <a href="{{ childlink.url }}">{{ childlink.title }}
+                                                                {% if link_count > 2 %}
+                                                                    <svg class="menu-open-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="11" viewBox="0 0 20 11">
+                                                                        <path fill="#24272a" d="M.268 1.076C.373.918.478.813.584.76l.21.474c.79.684 2.527 2.158 5.21 4.368 2.738 2.21 4.159 3.316 4.264 3.316.474-.053 1.158-.369 1.947-1.053.842-.631 1.632-1.42 2.474-2.368.895-.948 1.737-1.842 2.632-2.58.842-.789 1.578-1.262 2.105-1.42l.316.684c0 .21-.106.474-.316.737-.053.21-.263.421-.474.579-.053.052-.316.21-.737.474l-.526.368c-.421.263-1.105.947-2.158 2l-1.105 1.053-2.053 1.947c-1 .947-1.579 1.421-1.842 1.421-.263 0-.684-.263-1.158-.895-.526-.631-.842-1-1.052-1.105l-.737-.579c-.316-.316-.527-.474-.632-.474l-5.42-4.315L.267 2.339l-.105-.421-.053-.369c0-.157.053-.315.158-.473z"></path>
+                                                                    </svg>
+                                                                    <svg class="close-menu-ioc" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18">
+                                                                        <path fill="#24272a" d="M19.95 16.75l-.05-.4-1.2-1-5.2-4.2c-.1-.05-.3-.2-.6-.5l-.7-.55c-.15-.1-.5-.45-1-1.1l-.1-.1c.2-.15.4-.35.6-.55l1.95-1.85 1.1-1c1-1 1.7-1.65 2.1-1.9l.5-.35c.4-.25.65-.45.75-.45.2-.15.45-.35.65-.6s.3-.5.3-.7l-.3-.65c-.55.2-1.2.65-2.05 1.35-.85.75-1.65 1.55-2.5 2.5-.8.9-1.6 1.65-2.4 2.3-.8.65-1.4.95-1.9 1-.15 0-1.5-1.05-4.1-3.2C3.1 2.6 1.45 1.2.7.55L.45.1c-.1.05-.2.15-.3.3C.05.55 0 .7 0 .85l.05.35.05.4 1.2 1 5.2 4.15c.1.05.3.2.6.5l.7.6c.15.1.5.45 1 1.1l.1.1c-.2.15-.4.35-.6.55l-1.95 1.85-1.1 1c-1 1-1.7 1.65-2.1 1.9l-.5.35c-.4.25-.65.45-.75.45-.25.15-.45.35-.65.6-.15.3-.25.55-.25.75l.3.65c.55-.2 1.2-.65 2.05-1.35.85-.75 1.65-1.55 2.5-2.5.8-.9 1.6-1.65 2.4-2.3.8-.65 1.4-.95 1.9-1 .15 0 1.5 1.05 4.1 3.2 2.6 2.15 4.3 3.55 5.05 4.2l.2.45c.1-.05.2-.15.3-.3.1-.15.15-.3.15-.45z"></path>
+                                                                    </svg>
+                                                                {% endif %}
+                                                            </a>
+                                                            {% if link_count > 2 %}
+                                                            <ul id="2subsubmenu_{{ block.id }}-{{ link_count }}" class="acnav-list">
+                                                                {% for childlink in linklists[child_list_2_handle].links %}
+                                                                <li>
+                                                                    <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                                                                </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endcase %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>                              
+{% javascript %}
+    class LocalizationForm extends HTMLElement {
+    constructor() {
+      super();
+      this.elements = {
+        input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+        panel: this.querySelector('.disclosure__list-wrapper'),
+      };
+      this.elements.button.addEventListener('click', this.openSelector.bind(this));
+      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+      this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+
+    hidePanel() {
+      this.elements.button.setAttribute('aria-expanded', 'false');
+      this.elements.panel.classList.add('hide');
+    }
+
+    onContainerKeyUp(event) {
+      if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+      this.hidePanel();
+      this.elements.button.focus();
+    }
+
+    onItemClick(event) {
+      event.preventDefault();
+      const form = this.querySelector('form');
+      this.elements.input.value = event.currentTarget.dataset.value;
+      if (form) form.submit();
+    }
+
+    openSelector() {
+      this.elements.button.focus();
+      this.elements.panel.classList.toggle('hide');
+      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+    closeSelector(event) {
+      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+      if (event.relatedTarget === null || shouldClose) {
+        this.hidePanel();
+      }
+    }
+  }
+
+  customElements.define('localization-form', LocalizationForm);
+
+{% endjavascript %}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append: 'x' %}
+      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }}
+    {% endif %}
+  }
+</script>
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:settings_schema.header.settings.name",
+  "tag": "header",
+  "class": "site-header header-style-one style-two",
+  "settings": [
+      {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:settings_schema.header.settings.logo_img"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link-simple",
+      "name": "t:settings_schema.header.blocks.simple_link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.header.blocks.title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:settings_schema.header.blocks.link"
+        },
+        {
+          "type": "text",
+          "id": "diffclassname",
+          "label": "t:settings_schema.header.blocks.classname"
+        }
+      ]
+    },
+    {
+      "type": "link-linklist",
+      "name": "t:settings_schema.header.blocks.linklist",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.header.blocks.title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:settings_schema.header.blocks.link"
+        },
+        {
+          "type": "text",
+          "id": "diffclassname",
+          "label": "t:settings_schema.header.blocks.classname"
+        },
+        {
+          "type": "link_list",
+          "id": "links",
+          "label": "t:settings_schema.header.blocks.Ch_linklist"
+        }
+      ]
+    },
+    {
+      "type": "link-4linklists",
+      "name": "t:settings_schema.header.blocks.list_bnr",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.header.blocks.title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:settings_schema.header.blocks.link"
+        },
+        {
+          "type": "text",
+          "id": "diffclassname",
+          "label": "t:settings_schema.header.blocks.classname"
+        },
+        {
+          "type": "text",
+          "id": "link_title1",
+          "label": "t:settings_schema.header.blocks.link_title1"
+        },
+        {
+          "type": "link_list",
+          "id": "links_1",
+          "label": "t:settings_schema.header.blocks.linklist_1"
+        },
+        {
+          "type": "text",
+          "id": "link_title2",
+          "label": "t:settings_schema.header.blocks.link_title2"
+        },
+        {
+          "type": "link_list",
+          "id": "links_2",
+          "label": "t:settings_schema.header.blocks.linklist_2"
+        },
+        {
+          "type": "text",
+          "id": "link_title3",
+          "label": "t:settings_schema.header.blocks.link_title3"
+        },
+        {
+          "type": "link_list",
+          "id": "links_3",
+          "label": "t:settings_schema.header.blocks.linklist_3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:settings_schema.header.blocks.banner"
+        },
+        {
+          "type": "url",
+          "id": "imageblink",
+          "label": "t:settings_schema.header.blocks.linkbanner"
+        }
+      ]
+    },
+    {
+      "type": "mob-link-simple",
+      "name": "Mobile Simple Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.header.blocks.title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:settings_schema.header.blocks.link"
+        },
+        {
+          "type": "text",
+          "id": "diffclassname",
+          "label": "t:settings_schema.header.blocks.classname"
+        }
+      ]
+    },
+    {
+      "type": "mob-link-linklist",
+      "name": "Mobile Linklist",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.header.blocks.title"
+        },
+        {
+          "type": "text",
+          "id": "diffclassname",
+          "label": "t:settings_schema.header.blocks.classname"
+        },
+        {
+          "type": "link_list",
+          "id": "links",
+          "label": "t:settings_schema.header.blocks.Ch_linklist"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

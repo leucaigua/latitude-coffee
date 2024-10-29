@@ -1,0 +1,28 @@
+<div class="out-of-stock-form" data-section="notify-form" >
+  {%- assign notify-form-wrp = 'notify-form-wrp' -%}
+  {%- assign contact_form = 'contact_form' -%}
+  {% form 'contact', class: notify-form-wrp, id: contact_form %}
+  {% if form.errors %}
+  <div class="err-msg"> 
+    {{ form.errors | default_errors }}
+  </div>
+  {% endif %}
+  {%- if form.posted_successfully? -%}
+  <div class="success_msg notify-me">
+    Thank you
+  </div>
+  {% else %}
+  {%- endif -%}
+  <div id="notify-me-wrapper" class="clearfix">
+    <span class="notify-popup-close">X</span>
+    <h4 class="notify-txt">Notify me when <strong><span>{{ product.title }} - </span><span class="variant-title">{{ product.selected_or_first_available_variant.title }}</span></strong> becomes available.</h4>
+    <div class="notify-send-btn">
+    <input type="hidden" id="hidden_var" name="contact[product]" data-product="{{ product.title }}" value="{{ product.selected_or_first_available_variant.title }}">  
+    <input type="hidden" id="hidden_txt" name="contact[message]" value="{% if notify_text %}{{ notify_text }}{% endif %}">  
+    <input required="required" type="email" name="contact[email]"
+           placeholder="your@email.com" value="" class="styled-input">
+    <button type="submit" class="">Send </button>
+    </div>
+  </div>
+  {% endform %}
+</div>

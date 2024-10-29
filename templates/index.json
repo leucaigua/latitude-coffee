@@ -1,0 +1,344 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "e97547a6-f33b-44d4-90ef-b8b784f07f21": {
+      "type": "homeslider",
+      "blocks": {
+        "image_zjBTma": {
+          "type": "image",
+          "settings": {
+            "subtitle": "Freshly Roasted & Packed",
+            "title": "Discover Our 1LB Coffee Bag!",
+            "desc": "Enjoy your favorite blend with our 1LB bag, offering unbeatable flavor and freshness for your daily coffee moments",
+            "btn": "ORDER YOURS TODAY",
+            "btn_url": "shopify://collections"
+          }
+        },
+        "e02d2dbc-2072-4b54-9a8b-d30dc2376e8a": {
+          "type": "image",
+          "settings": {
+            "subtitle": "Hand-Roasted Coffee",
+            "title": "Latitude 23.5° Coffee & Tea",
+            "desc": "Respected for our dedication to Quality, Integrity, Innovation, and Service<br> <br>We aim to become the center of excellence for coffee and tea. We’re a local roaster with a global perspective.",
+            "btn": "MORE ABOUT US",
+            "btn_url": "shopify://pages/about-us"
+          }
+        },
+        "a4a3aa9d-9a83-4316-95a4-4c140d5f402b": {
+          "type": "image",
+          "settings": {
+            "subtitle": "Latitude 23.5° Coffee & Tea",
+            "title": "10% OFF ON YOUR FIRST ORDER",
+            "desc": "Subscribe to our newsletter and receive an unique discount for your first purchase.",
+            "btn": "GET MY DISCOUNT",
+            "btn_url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "image_zjBTma",
+        "e02d2dbc-2072-4b54-9a8b-d30dc2376e8a",
+        "a4a3aa9d-9a83-4316-95a4-4c140d5f402b"
+      ],
+      "custom_css": [
+        ".align-items-start {color: white;}",
+        ".slides-numbers {display: none;}",
+        "@media (max-width: 767px) {.first-video-section img {object-position: left; /* Focus more on the top part of the image on mobile */ }}"
+      ],
+      "settings": {
+        "nav": "Latitude 23.5° Coffee & Tea",
+        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Banner_Latitude_23.5_Coffee.png?v=1728934236"
+      }
+    },
+    "b32f6c33-7db4-4824-954f-07054ff1c807": {
+      "type": "brand-logo",
+      "settings": {
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "Get Free Shipping!",
+        "label": ""
+      }
+    },
+    "4af06428-932b-4442-ac28-761680c1197f": {
+      "type": "bestseller-product",
+      "blocks": {
+        "447e3188-0dde-4441-b0bb-8ca177d3b07e": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "Best Sellers",
+            "collection": "best-sellers"
+          }
+        },
+        "b345df70-6d93-4d4c-a132-848235b20cd9": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "All Coffees",
+            "collection": "coffee"
+          }
+        },
+        "8d1f9ea4-f915-4b8e-8c32-8aed192b187e": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "Espresso",
+            "collection": "espresso"
+          }
+        },
+        "565ddce5-7c8e-4c33-948b-a34b9659aaea": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "K-Cups",
+            "collection": "exceptional-k-cups"
+          }
+        },
+        "9f12d328-1eb5-4b8e-b975-a929d86b2e4e": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "Signature Blends",
+            "collection": "signature-blends"
+          }
+        },
+        "collection_a3myYP": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "Flavored",
+            "collection": "flavors"
+          }
+        },
+        "collection_rdhVFD": {
+          "type": "collection",
+          "settings": {
+            "cat_name": "Nespresso",
+            "collection": "nespresso"
+          }
+        }
+      },
+      "block_order": [
+        "447e3188-0dde-4441-b0bb-8ca177d3b07e",
+        "b345df70-6d93-4d4c-a132-848235b20cd9",
+        "8d1f9ea4-f915-4b8e-8c32-8aed192b187e",
+        "565ddce5-7c8e-4c33-948b-a34b9659aaea",
+        "9f12d328-1eb5-4b8e-b975-a929d86b2e4e",
+        "collection_a3myYP",
+        "collection_rdhVFD"
+      ],
+      "settings": {
+        "btn_url": "shopify://collections/coffee",
+        "btn": "Show more coffees",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600"
+      }
+    },
+    "cff8a77a-d221-4684-85d0-890713bb77a1": {
+      "type": "product-banner",
+      "settings": {
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/069ddd08fe3245fca658c1a7f8990c39.mp4",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Special Offer!",
+        "desc": "15% Off! Join our monthly subscription service and enjoy the convenience of receiving your coffee regularly. Use the code: LATITUDEX15",
+        "btn_url": "shopify://collections/all",
+        "btn": "Show Products",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "5lbs-90-mile-stretch-espresso-espresso-beans-free-shipping",
+        "product1": "blue-heaven"
+      }
+    },
+    "43576fc0-7509-439c-8db5-631f65d057cf": {
+      "type": "testimonials",
+      "blocks": {
+        "b0df2ac9-1424-43fb-919c-786aed3e7902": {
+          "type": "text",
+          "settings": {
+            "c_name": "Espresso",
+            "proimg_1": "shopify://shop_images/Front_package.png",
+            "subtitle_1": "Monsooned Malabar",
+            "title_1": "Great espresso flavor profile, and lower acidity",
+            "desc_1": "Latitude Coffee hit another home run with Monsooned Malabar! My better half was having occasional stomach issues, and missing her daily cappuccino treat.",
+            "author_1": "Dawson Hovey",
+            "designation_1": "Client",
+            "img_1": "shopify://shop_images/Reviews.png",
+            "review_1": "5",
+            "proimg_2": "shopify://shop_images/Front_package.png",
+            "subtitle_2": "90 Mile Stretch",
+            "title_2": "I'm a huge coffee lover",
+            "desc_2": "Nothing compares to the flavor and freshness of Latitude 23.5 coffee. The natural and organic ingredients translate to unparalleled quality, it's like having a coffee shop in my own home!",
+            "author_2": "Dina Khrapko",
+            "designation_2": "Client",
+            "img_2": "shopify://shop_images/Reviews.png",
+            "review_2": "5",
+            "proimg_3": "shopify://shop_images/Front_package.png",
+            "subtitle_3": "Espresso Bella",
+            "title_3": "I can’t recommend Latitude 23.5 enough!",
+            "desc_3": "I ordered ground coffee over the phone and Holly was so friendly and helpful. They have the best coffee with so many amazing flavors",
+            "author_3": "Samantha Thorn",
+            "designation_3": "Client",
+            "img_3": "shopify://shop_images/Reviews.png",
+            "review_3": "5",
+            "proimg_4": "shopify://shop_images/Front_package.png",
+            "subtitle_4": "Espresso Venezia",
+            "title_4": "Great Service!",
+            "desc_4": "I have been ordering all my coffee from Latitude 23.5 for years. I prefer to buy organic and that what these folks do. If you combine high quality organic coffee (and tea) with personalized attention, you have an unbeatable match. I've been a happy customer for a long time, and you can be too.",
+            "author_4": "Julie Malsin",
+            "designation_4": "Client",
+            "img_4": "shopify://shop_images/Reviews.png",
+            "review_4": "5"
+          }
+        },
+        "448e4586-8ea4-4e52-a6f2-486bea576e7c": {
+          "type": "text",
+          "settings": {
+            "c_name": "Blend",
+            "proimg_1": "shopify://shop_images/Front_package.png",
+            "subtitle_1": "Breakfast Blend",
+            "title_1": "Wonderful coffee roasters!",
+            "desc_1": "Very friendly, helpful, informative staff. Delicious variety of coffee beans. Definitely our 'go to 'shop for coffee beans while in the area. Very reasonable prices too. We will continue to order on line and use their shipping options! So glad we found them.",
+            "author_1": "Candace Fraser",
+            "designation_1": "Client",
+            "img_1": "shopify://shop_images/Reviews.png",
+            "review_1": "5",
+            "proimg_2": "shopify://shop_images/Front_package.png",
+            "subtitle_2": "Estate Blend",
+            "title_2": "Great coffee!",
+            "desc_2": "Relocated from the east coast to Seattle and still order from Latitude. They always make sure we have exactly what we're looking for. For those of us that dont know peaberries from snozzberries; Holly has the expertise to get you the right cup of coffee.",
+            "author_2": "Sarah",
+            "designation_2": "Client",
+            "img_2": "shopify://shop_images/Reviews.png",
+            "review_2": "5",
+            "proimg_3": "shopify://shop_images/Front_package.png",
+            "subtitle_3": "House Blend",
+            "title_3": "Wonderful Experience!",
+            "desc_3": "We have been ordering coffee from Holly and team for years.  Wonderful experience and the absolute best beans.  We use their subscription service so we never run out of coffee",
+            "author_3": "Kellee Kramer",
+            "designation_3": "Client",
+            "img_3": "shopify://shop_images/Reviews.png",
+            "review_3": "5",
+            "proimg_4": "shopify://shop_images/Front_package.png",
+            "subtitle_4": "Roast Master's Reserve",
+            "title_4": "I highly recommend Latitude 23.5!",
+            "desc_4": "I’ve been getting coffee beans from here for the last three years... Outstanding Service, Friendly Staff and most of all they have the perfect bean to fit any palate!",
+            "author_4": "Seth Bolyard",
+            "designation_4": "Client",
+            "img_4": "shopify://shop_images/Reviews.png",
+            "review_4": "5"
+          }
+        }
+      },
+      "block_order": [
+        "b0df2ac9-1424-43fb-919c-786aed3e7902",
+        "448e4586-8ea4-4e52-a6f2-486bea576e7c"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+        "bg_img": "shopify://shop_images/Corporate_pattern.png",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Read Our Reviews",
+        "desc": "See why customers love our hand-roasted coffee and exceptional service.",
+        "btn_url": "shopify://pages/reviews",
+        "btn": "See Our Reviews",
+        "heading": "Top Coffee Recommendations by Our Clients"
+      }
+    },
+    "aa98d079-15fe-428e-b7a2-291819935c1c": {
+      "type": "shop-product",
+      "settings": {
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "Best Blend Coffees",
+        "btn_url": "shopify://collections/all",
+        "btn": "Show more coffees",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "signature-blends"
+      }
+    },
+    "84237d7a-6026-481f-a966-f5a23ccf91b3": {
+      "type": "special-product",
+      "custom_css": [
+        ".coffee-three-col-section {padding-bottom: 80px;}"
+      ],
+      "settings": {
+        "bg_img": "shopify://shop_images/Coffee_maker_-_latitude_coffee.png",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Shop  Best Seller Coffee",
+        "desc": "Coffee is a drink prepared from roasted coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content.",
+        "btn_url": "shopify://collections/all",
+        "btn": "Show Products",
+        "img": "shopify://shop_images/Cup_of_Coffee.H03_1.png",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "5lbs-90-mile-stretch-espresso-espresso-beans-free-shipping"
+      }
+    },
+    "custom_html_HwtKDf": {
+      "type": "custom-html",
+      "settings": {
+        "custom_html": "<div class=\"container\" style=\"padding-top\">\n<div class=\"klaviyo-form-XXCQXk\"></div> \n</div>"
+      }
+    },
+    "1010d81f-47d6-47cf-9a4d-1903b37e6103": {
+      "type": "featured-blog",
+      "custom_css": [
+
+      ],
+      "settings": {
+        "bg_img": "shopify://shop_images/coffee-three-latitude-coffee-and-tea.png",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Explore Our Blog",
+        "desc": "Dive into the world of premium coffee and tea with Latitude 23.5’s official blog. Here, we share our passion for exceptional, hand-roasted brews through insightful articles, expert tips, and the latest trends in the coffee and tea industry",
+        "btn_url": "shopify://blogs/explore",
+        "btn": "Show Blog",
+        "blog": "explore",
+        "post_limit": "4",
+        "blog_show_date": true
+      }
+    },
+    "instagenie_zegsu_GznKnG": {
+      "type": "instagenie-zegsu",
+      "settings": {
+        "heading_font": "helvetica_n4",
+        "heading_size": 20,
+        "heading_alignment": "center",
+        "feed_width": 100,
+        "section_top_padding": 0,
+        "section_bottom_padding": 0,
+        "html_area": ""
+      }
+    }
+  },
+  "order": [
+    "e97547a6-f33b-44d4-90ef-b8b784f07f21",
+    "b32f6c33-7db4-4824-954f-07054ff1c807",
+    "4af06428-932b-4442-ac28-761680c1197f",
+    "cff8a77a-d221-4684-85d0-890713bb77a1",
+    "43576fc0-7509-439c-8db5-631f65d057cf",
+    "aa98d079-15fe-428e-b7a2-291819935c1c",
+    "84237d7a-6026-481f-a966-f5a23ccf91b3",
+    "custom_html_HwtKDf",
+    "1010d81f-47d6-47cf-9a4d-1903b37e6103",
+    "instagenie_zegsu_GznKnG"
+  ]
+}

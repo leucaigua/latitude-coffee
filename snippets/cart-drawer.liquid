@@ -1,0 +1,346 @@
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+<div class="cartDrawer{% if cart == empty %} is-empty{% endif %}">
+    <div class="mini-cart-container">
+        <div class="mini-cart-header">
+            <h4>Your Cart</h4>
+            <a class="closecart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                       d="M20 1.17838L18.8216 0L10 8.82162L1.17838 0L0 1.17838L8.82162 10L0 18.8216L1.17838 20L10 11.1784L18.8216 20L20 18.8216L11.1784 10L20 1.17838Z"
+                       fill="white"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+      <div class="minicart__warnings">
+          <svg width="70" height="70" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50.0652 35.729C54.4502 35.729 58.7682 37.642 62.4562 41.167C63.4292 42.018 63.4972 43.515 62.6062 44.447C61.7102 45.385 60.2152 45.385 59.3252 44.452C56.3152 41.569 53.1532 40.264 50.0652 40.264C46.9812 40.264 43.8252 41.568 40.8152 44.452C40.3812 44.879 39.7882 45.114 39.1782 45.098C37.1472 45.046 36.1992 42.553 37.6902 41.166C41.3722 37.642 45.6852 35.729 50.0652 35.729ZM59.5132 26.78C61.3262 26.78 62.8002 28.257 62.8002 30.071C62.8002 31.886 61.3252 33.356 59.5132 33.356C57.7012 33.356 56.2322 31.886 56.2322 30.071C56.2312 28.256 57.7002 26.78 59.5132 26.78ZM40.6282 26.78C42.4412 26.78 43.9092 28.257 43.9092 30.071C43.9092 31.886 42.4402 33.356 40.6282 33.356C38.8102 33.356 37.3412 31.886 37.3412 30.071C37.3412 28.256 38.8102 26.78 40.6282 26.78ZM10.2372 5.26904C5.81517 5.39404 5.11217 12.064 9.39317 13.227L14.9752 15.198L21.5432 49.443C22.3302 53.541 23.6312 57.25 25.4492 60.441C28.1212 65.14 32.7622 68.608 38.4862 68.608H66.9122C72.0432 68.701 72.0432 60.492 66.9122 60.587H38.4872C34.4402 60.071 32.7622 58.032 31.2782 55.043H68.8002C72.2412 55.043 74.1632 51.987 75.0132 48.452L83.2202 20.532C83.6582 15.942 81.2262 15.036 76.9702 15.036L23.0662 15.077L21.6172 10.649C21.2262 9.33104 20.2262 8.31304 18.9722 7.95904L10.2372 5.26904Z" fill="#a7897b"/>
+          <path d="M40.4248 72.697C37.0658 72.697 34.3408 75.424 34.3408 78.783C34.3408 82.146 37.0658 84.873 40.4248 84.873C43.7838 84.873 46.5028 82.146 46.5028 78.783C46.5028 75.424 43.7838 72.697 40.4248 72.697Z" fill="#a7897b"/>
+          <path d="M64.663 72.697C61.309 72.697 58.585 75.424 58.585 78.783C58.585 82.146 61.31 84.873 64.663 84.873C68.022 84.873 70.747 82.146 70.747 78.783C70.747 75.424 68.022 72.697 64.663 72.697Z" fill="#a7897b"/>
+          </svg>
+          <h5 class="emptyCart text-center">{{ 'sections.cart.empty' | t }}</h5>
+           <a href="{{ routes.all_products_collection_url }}" class="btn" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none">
+              <path d="M0.669553 4.64377C0.688588 4.68986 0.716073 4.73139 0.750639 4.76595L4.25728 8.27259C4.33041 8.34573 4.42661 8.38278 4.52279 8.38278C4.61898 8.38278 4.71517 8.34623 4.78831 8.27259C4.93509 8.12581 4.93509 7.88784 4.78831 7.74107L1.9229 4.87566H10.0332C10.2406 4.87566 10.4089 4.70734 10.4089 4.49995C10.4089 4.29255 10.2406 4.12423 10.0332 4.12423H1.92339L4.7888 1.25883C4.93558 1.11205 4.93558 0.874079 4.7888 0.727301C4.64202 0.580524 4.40405 0.580524 4.25728 0.727301L0.750639 4.23394C0.716073 4.2685 0.688588 4.31003 0.669553 4.35612C0.63148 4.44829 0.63148 4.5516 0.669553 4.64377Z" fill="white"/>
+            </svg>
+            Continue shopping
+          </a>
+      </div>
+      <div id="cart-body" class="mini-cart-has-item">
+          <form action="{{ routes.cart_url }}" class="mini-cart-body common-scrollbar" method="post" id="cart">
+              <div id="webi-main-cart-items" data-id="{{ section.id }}">
+               {% render 'free_shipping' %}
+              {%- if cart != empty -%}
+                  {%- for item in cart.items -%}
+                  <div class="mini-cart-item" id="webiCartItem-{{ item.index | plus: 1 }}">
+                      <div class="mini-cart-image">
+                      {% if item.image %}
+                      {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
+                          <a href="{{ item.url }}">
+                          <img loading="lazy" src="{{ item.image | img_url: 'x125' }}" alt="{{ item.image.alt | escape }}" height="100%" width="100%">
+                          </a>
+                      {% endif %}
+                      </div>
+                      <div class="mini-cart-details">
+                        <div class="mini-cart-title d-flex align-items-center justify-content-between">
+                          <a href="{{ item.url }}" class="mini-cart-pro-title">{{ item.product.title | escape }}</a>
+                          <cart-remove-button class="cart-drawer-remove" id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                              <a class="remove-item" href="{{ item.url_to_remove }}" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}" data-id="{{ item.id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M12.7589 7.24609C12.5002 7.24609 12.2905 7.45577 12.2905 7.71448V16.5669C12.2905 16.8255 12.5002 17.0353 12.7589 17.0353C13.0176 17.0353 13.2273 16.8255 13.2273 16.5669V7.71448C13.2273 7.45577 13.0176 7.24609 12.7589 7.24609Z"
+                                        fill="#61AFB3"></path>
+                                    <path
+                                        d="M7.23157 7.24609C6.97286 7.24609 6.76318 7.45577 6.76318 7.71448V16.5669C6.76318 16.8255 6.97286 17.0353 7.23157 17.0353C7.49028 17.0353 7.69995 16.8255 7.69995 16.5669V7.71448C7.69995 7.45577 7.49028 7.24609 7.23157 7.24609Z"
+                                        fill="#61AFB3"></path>
+                                    <path
+                                        d="M3.20333 5.95419V17.4942C3.20333 18.1762 3.45344 18.8168 3.89035 19.2764C4.32525 19.7373 4.93049 19.9989 5.56391 20H14.4259C15.0594 19.9989 15.6647 19.7373 16.0994 19.2764C16.5363 18.8168 16.7864 18.1762 16.7864 17.4942V5.95419C17.6549 5.72366 18.2177 4.8846 18.1016 3.99339C17.9852 3.10236 17.2261 2.43583 16.3274 2.43565H13.9293V1.85017C13.932 1.35782 13.7374 0.885049 13.3888 0.537238C13.0403 0.18961 12.5668 -0.00396362 12.0744 6.15416e-05H7.91533C7.42298 -0.00396362 6.94948 0.18961 6.60093 0.537238C6.25239 0.885049 6.05772 1.35782 6.06046 1.85017V2.43565H3.66238C2.76367 2.43583 2.00456 3.10236 1.8882 3.99339C1.77202 4.8846 2.33481 5.72366 3.20333 5.95419ZM14.4259 19.0632H5.56391C4.76308 19.0632 4.14009 18.3753 4.14009 17.4942V5.99536H15.8497V17.4942C15.8497 18.3753 15.2267 19.0632 14.4259 19.0632ZM6.99723 1.85017C6.99412 1.60628 7.08999 1.37154 7.26307 1.19938C7.43597 1.02721 7.67126 0.932619 7.91533 0.936827H12.0744C12.3185 0.932619 12.5538 1.02721 12.7267 1.19938C12.8998 1.37136 12.9956 1.60628 12.9925 1.85017V2.43565H6.99723V1.85017ZM3.66238 3.37242H16.3274C16.793 3.37242 17.1705 3.74987 17.1705 4.21551C17.1705 4.68114 16.793 5.05859 16.3274 5.05859H3.66238C3.19674 5.05859 2.81929 4.68114 2.81929 4.21551C2.81929 3.74987 3.19674 3.37242 3.66238 3.37242Z"
+                                        fill="#61AFB3"></path>
+                                    <path
+                                        d="M9.99523 7.24609C9.73653 7.24609 9.52686 7.45577 9.52686 7.71448V16.5669C9.52686 16.8255 9.73653 17.0353 9.99523 17.0353C10.2539 17.0353 10.4636 16.8255 10.4636 16.5669V7.71448C10.4636 7.45577 10.2539 7.24609 9.99523 7.24609Z"
+                                        fill="#61AFB3"></path>
+                                    <defs>
+                                        <clipPath>
+                                            <rect width="20" height="20" fill="white">
+                                            </rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                              </a>
+                          </cart-remove-button>
+                        </div>
+                        <div class="pvarprice d-flex align-items-center">
+                          {%- if item.original_line_price != item.final_line_price -%}
+                              <dl class="cart-item__discounted-prices">
+                              <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
+                              <dd class="price price--end">
+                                  {% if settings.currency_code_enabled %}
+                                  {{ item.final_line_price | money_with_currency }}
+                                  {% else %}
+                                  {{ item.final_line_price | money }}
+                                  {% endif %}
+                              </dd>
+                              <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
+                              <dd><del class="cart-item__old-price price price--end">
+                                  {% if settings.currency_code_enabled %}
+                                  {{ item.original_line_price | money_with_currency }}
+                                  {% else %}
+                                  {{ item.original_line_price | money }}
+                                  {% endif %}
+                              </del></dd>
+                              </dl>
+                          {%- else -%}
+                              <ins class="price price--end">
+                              {% if settings.currency_code_enabled %}
+                                  {{ item.original_line_price | money_with_currency }}
+                              {% else %}
+                                  {{ item.original_line_price | money }}
+                              {% endif %}
+                              </ins>
+                          {%- endif -%}
+
+                          {%- if item.variant.available and item.unit_price_measurement -%}
+                              <div class="unit-price caption">
+                              <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                              {{ item.variant.unit_price | money }}
+                              <span aria-hidden="true">/</span>
+                              <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                              {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
+                                  {{- item.variant.unit_price_measurement.reference_value -}}
+                              {%- endif -%}
+                              {{ item.variant.unit_price_measurement.reference_unit }}
+                              </div>
+                          {%- endif -%}
+                          </div>
+                        {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
+                          <div class="cart-variable">
+                          {%- if item.product.has_only_default_variant == false -%}
+                              {%- for option in item.options_with_values -%}
+                              <p>
+                                  <strong>{{ option.name }}: </strong>
+                                  {{ option.value }}
+                              </p>
+                              {%- endfor -%}
+                          {%- endif -%}
+                          {%- for property in item.properties -%}
+                          {%- assign property_first_char = property.first | slice: 0 -%}
+                              {%- if property.last != blank and property_first_char != '_' -%}
+                              <p>
+                                  <strong>{{ property.first }}: </strong>
+                                  <dd>
+                                  {%- if property.last contains '/uploads/' -%}
+                                      <a href="{{ property.last }}" class="link" target="_blank">{{ property.last | split: '/' | last }}</a>
+                                  {%- else -%}
+                                      {{ property.last }}
+                                  {%- endif -%}
+                                  </dd>
+                              </p>
+                              {%- endif -%}
+                          {%- endfor -%}
+                          </div>
+                          <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                      {%- endif -%}
+                      <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                          {%- for discount in item.discounts -%}
+                          <li class="discounts__discount">                                            
+                              {%- render 'icon-discount' -%}
+                              {{ discount.title }}
+                          </li>
+                          {%- endfor -%}
+                      </ul>
+                        {%- assign gift_wrap = all_products[settings.gift_wrap] -%}
+                        {% unless item.product.id == gift_wrap.id %}
+                        <div class="quantity qty-spinner">
+                          <button class="quantity__button no-js-hidden quantity-decrement " name="minus" type="button">
+                            <svg width="12" height="2" viewBox="0 0 12 2" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M0 0.251343V1.74871H12V0.251343H0Z" fill="#61AFB3"></path>
+                              </svg>
+                          </button>
+                          <input class="quantity__input quantity" type="number" name="updates[]" value="{{ item.quantity }}" min="0"
+                          aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}" id="wbQuantity-{{ item.index | plus: 1 }}"
+                          data-index="{{ item.index | plus: 1 }}" data-qid="{{ item.id }}">
+                          <button class="quantity__button no-js-hidden quantity-increment" name="plus" type="button">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M6.74868 5.25132V0H5.25132V5.25132H0V6.74868H5.25132V12H6.74868V6.74868H12V5.25132H6.74868Z" fill="#61AFB3"></path>
+                              </svg>
+                          </button>
+                        </div>
+                      {% endunless %}  
+                      </div>
+                      </div>
+                  {%- endfor -%}
+                  {%- endif -%}
+              </div>
+          </form>
+          <div class="mini-cart-footer {% if cart == empty %} is-empty{% endif %}" id="webi-main-cart-footer" data-id="{{ section.id }}">
+              <div class="cart-footer-top">
+                  <div class="mini-cart-footer-icons d-flex align-items-center justify-content-between">
+                      <button class="coupan-icon footer-bottom-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                viewBox="0 0 40 40" fill="none">
+                                <path d="M14.0152 19.856L13.6543 19.4951" stroke="black"
+                                    stroke-width="1.53307" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M16.9392 22.7805L16.4883 22.3296" stroke="black"
+                                    stroke-width="1.53307" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M19.3408 25.1818L19.8461 25.687" stroke="black"
+                                    stroke-width="1.53307" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <mask id="mask0_696_41257" style="mask-type:luminance"
+                                    maskUnits="userSpaceOnUse" x="0" y="0" width="40"
+                                    height="40">
+                                    <path d="M0 -5.34058e-05H39.2466V39.2466H0V-5.34058e-05Z"
+                                        fill="white" />
+                                </mask>
+                                <g mask="url(#mask0_696_41257)">
+                                    <path
+                                        d="M34.2102 18.3714L37.668 14.9136C38.7497 13.832 38.7496 12.0784 37.668 10.9967L35.1338 8.4625C33.9362 9.66014 31.9945 9.66014 30.7969 8.4625C29.5993 7.26494 29.5993 5.32323 30.7969 4.12559L28.2488 1.57763C27.1672 0.496047 25.4136 0.496047 24.332 1.57763L11.3628 14.5468L11.3627 17.2046H8.70506L1.57681 24.3328C0.495229 25.4144 0.495229 27.168 1.57681 28.2496L4.12486 30.7976C5.32249 29.6 7.2642 29.6 8.46176 30.7976C9.6594 31.9952 9.6594 33.9369 8.46176 35.1345L10.996 37.6688C12.0777 38.7503 13.8313 38.7504 14.9129 37.6688L22.041 30.5406V27.8828H24.6988L29.3338 23.2478"
+                                        stroke="black" stroke-width="1.53307"
+                                        stroke-miterlimit="10" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M25.7572 19.7556L23.2705 10.8216" stroke="black"
+                                        stroke-width="1.53307" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M30.0697 13.4818C29.4709 12.883 28.5 12.883 27.9013 13.4818C27.3024 14.0806 27.3024 15.0514 27.9013 15.6503C28.5 16.2491 29.4709 16.2491 30.0697 15.6503C30.6685 15.0514 30.6685 14.0806 30.0697 13.4818Z"
+                                        stroke="black" stroke-width="1.53307"
+                                        stroke-miterlimit="10" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M21.1898 13.7513C20.591 13.1525 19.6201 13.1525 19.0214 13.7513C18.4226 14.3501 18.4226 15.321 19.0214 15.9198C19.6201 16.5186 20.591 16.5186 21.1898 15.9198C21.7887 15.321 21.7887 14.3501 21.1898 13.7513Z"
+                                        stroke="black" stroke-width="1.53307"
+                                        stroke-miterlimit="10" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M8.88379 25.592L11.4859 22.9899" stroke="black"
+                                        stroke-width="1.53307" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M11.2705 27.9775L13.8727 25.3754" stroke="black"
+                                        stroke-width="1.53307" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.6543 30.3628L16.2564 27.7606" stroke="black"
+                                        stroke-width="1.53307" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                            </svg>
+                      </button>
+                      <button class="gift-icon footer-bottom-icon" style="display: none;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                              viewBox="0 0 40 40" fill="none">
+                              <mask id="mask0_696_41223" style="mask-type:luminance"
+                                  maskUnits="userSpaceOnUse" x="0" y="0" width="40"
+                                  height="40">
+                                  <path d="M0 0.753365H39.2466V40H0V0.753365Z" fill="white" />
+                              </mask>
+                              <g mask="url(#mask0_696_41223)">
+                                  <path
+                                      d="M16.9814 30.1733V24.5072M16.9814 39.0803V32.8971M22.4712 24.5072V39.0803"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M4.03693 29.8412L23.3671 19.0684C23.909 18.7654 24.1052 18.0765 23.8041 17.535L22.638 15.4441C22.3348 14.9025 21.6457 14.7063 21.1039 15.0095L1.77144 25.7822C1.23179 26.0832 1.03556 26.7719 1.33658 27.3135L2.50279 29.4066C2.80388 29.946 3.49507 30.1421 4.03693 29.8412Z"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M14.533 18.6695L16.7962 22.7285M10.6041 26.179L8.34082 22.12"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M7.11298 22.8065C-3.59453 24.077 0.100246 10.7944 9.22907 17.945"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M13.5699 24.5072H29.9857C30.4361 24.5072 30.8063 24.8772 30.8063 25.3274V28.0691V37.6136C30.8063 38.4206 30.1463 39.0803 29.339 39.0803H10.1136C9.30647 39.0803 8.64648 38.4206 8.64648 37.6136V27.2711"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M8.34045 22.1201L14.5326 18.6696L13.75 17.2676C13.3196 16.4941 12.334 16.2155 11.5625 16.6457L8.17994 18.5314C7.4062 18.9616 7.12741 19.9446 7.55782 20.7158L8.34045 22.1201Z"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M7.3631 19.8064C6.43774 19.4698 5.72639 19.2937 4.48438 19.1578"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M11.3442 11.9178C10.6708 13.0814 10.3162 14.8088 10.5815 17.1916M15.8305 17.9473C20.1943 12.4617 16.1181 8.91763 13.0879 10.2795"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M13.1465 16.6567C13.2111 15.8409 13.608 14.6127 14.1076 13.7924"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M28.4492 10.9905C28.4492 10.9905 29.243 18.3195 26.5762 21.2104"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M32.4033 13.1995C32.4033 13.1995 33.5539 8.13074 38.6713 6.90927"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M23.7332 2.72106L22.848 4.19886C22.7521 4.35937 22.7387 4.41288 22.5403 4.46186L20.7877 4.89656C20.4487 4.98126 20.4309 5.05922 20.6628 5.32229L21.7933 6.68198C21.9137 6.82685 21.9316 6.99626 21.9159 7.2013L21.78 8.88201C21.742 9.22971 21.8156 9.27202 22.1411 9.14056L23.682 8.49859C23.8425 8.43175 24.0945 8.43175 24.2528 8.49859L25.7958 9.14056C26.1214 9.27202 26.1927 9.22971 26.1548 8.88201L26.021 7.2013C26.0055 6.99626 26.021 6.82685 26.1437 6.68198L27.272 5.32229C27.5038 5.05922 27.4883 4.98126 27.1471 4.89656L25.3945 4.46186C25.196 4.41288 25.1848 4.35937 25.0868 4.19886L24.2015 2.72106C24.0231 2.42011 23.9138 2.42011 23.7332 2.72106Z"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M34.979 15.9367L34.0915 17.4145C33.9956 17.575 33.9823 17.6285 33.7861 17.6775L32.0335 18.1122C31.6923 18.1969 31.6745 18.2749 31.9086 18.538L33.0368 19.8976C33.1595 20.0425 33.1751 20.2119 33.1595 20.417L33.0235 22.0954C32.9878 22.4454 33.0592 22.4877 33.3847 22.3562L34.9255 21.7142C35.086 21.6474 35.338 21.6474 35.4986 21.7142L37.0393 22.3562C37.3649 22.4877 37.4363 22.4454 37.4006 22.0954L37.2645 20.417C37.249 20.2119 37.2645 20.0425 37.3872 19.8976L38.5155 18.538C38.7496 18.2749 38.7318 18.1969 38.3906 18.1122L36.638 17.6775C36.4418 17.6285 36.4284 17.575 36.3325 17.4145L35.4473 15.9367C35.2666 15.6358 35.1574 15.6358 34.979 15.9367Z"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                                  <path
+                                      d="M33.1136 6.27173C34.3824 6.27173 35.4149 5.23966 35.4149 3.97365C35.4149 2.70534 34.3824 1.67328 33.1136 1.67328C31.8471 1.67328 30.8125 2.70534 30.8125 3.97365C30.8125 5.23966 31.8471 6.27173 33.1136 6.27173Z"
+                                      stroke="black" stroke-width="1.1498"
+                                      stroke-miterlimit="10" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                              </g>
+                          </svg>
+                      </button>
+                  </div>
+                <div class="mini-cart-footer-total-row d-flex align-items-center justify-content-between">
+                    <div class="mini-total-iteam">
+                        <span class="mini-total-lbl">Total Item</span>
+                        <p>{{ cart.item_count }}</p>
+                    </div>
+                    <div class="mini-Subtotal">
+                        <span class="mini-total-lbl">{{ 'sections.cart.subtotal' | t }}</span>
+                        <p>{{ cart.total_price | money_with_currency }}</p>
+                    </div>
+                </div>
+              </div>  
+              <div>
+              {%- if cart.cart_level_discount_applications.size > 0 -%}
+                <ul class="u-save d-flex justify-end discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                    {%- for discount in cart.cart_level_discount_applications -%}
+                    <li class="discounts__discount discounts__discount--end text-right">                                  
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-percent"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+                        {{ discount.title }}
+                        (-{{ discount.total_allocated_amount | money }})
+                    </li>
+                    {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              </div>
+              <div class="mini-cart-bottom">
+                <div class="minicart-btn-wrapper d-flex">
+                  <a href="{{ routes.cart_url }}" class="view-cart-btn cart-bottom-btn" form="cart">{{ 'sections.cart.viewcart' | t }} </a>
+                  <button type="submit" id="checkout" class="Check-btn cart-bottom-btn" name="checkout" form="cart">Checkout</button>
+                </div>
+            </div>  
+          </div>
+        {% render 'coupan-popup' %}
+        {% render 'gift-wrap' %}
+      </div> 
+  </div>

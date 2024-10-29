@@ -1,0 +1,78 @@
+{% layout none %}
+<div class="compare-wrap" data-handle="{{ product.handle }}" data-section="for_compare">
+  <div class="compare-product compare-pro-detail">
+    <div class="compare-val-prod">
+      <div data-label="Product" class="compare-data-label compare-product">
+      <div class="prod-img">
+        <a href="{{ product.url }}"><img src="{{ product.featured_image | img_url: 'master' }}"></a>
+      </div>
+      </div>
+       <div data-label="Details" class="compare-data-label compare-pro-detail">
+        <div class="pro_detail-inner">
+          <div class="prod-ven compare-pro-detail">{{ product.vendor }}</div>
+          <div class="prod-title">{{ product.title }}</div>
+          <div class="prod-weight compare-pro-detail">
+            {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <label>{{ option.name }}: </label>
+            {%- for value in option.values -%}
+              {{ value }}{% unless forloop.last %},{% endunless %}   
+            {%- endfor -%}
+            {% unless forloop.last %}<br>{% endunless %}
+          {%- endfor -%}
+          {%- endunless -%}
+          </div>
+          <div class="prod-price">{{ product.price | money }}<del>{{ product.compare_at_price | money }}</del></div>
+        </div>
+       </div>
+      <div data-label="Status" class="compare-data-label compare-pro-btn">
+      <product-form class="product-form">
+        <div class="wbquicksuccess hidden" hidden></div>
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13" width="20" height="20">
+                <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+            </svg>
+            <span class="product-form__error-message"></span>
+        </div> 
+        {%- form 'product', product, id: product_form_id, class: 'form cart-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <div class="prod-btn">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+            <button type="submit" name="add" class="btn product-form__submit" aria-label="Add to Cart" {%- unless product.selected_or_first_available_variant.available -%} disabled {% endunless %}>
+              {%- if product.selected_or_first_available_variant.available -%}
+                  {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            <div class="loading-overlay__spinner hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 511.494 511.494" style="enable-background:new 0 0 511.494 511.494;" xml:space="preserve" width="20" height="20">
+              <g>
+                  <path d="M478.291,255.492c-16.133,0.143-29.689,12.161-31.765,28.16c-15.37,105.014-112.961,177.685-217.975,162.315 S50.866,333.006,66.236,227.992S179.197,50.307,284.211,65.677c35.796,5.239,69.386,20.476,96.907,43.959l-24.107,24.107   c-8.33,8.332-8.328,21.84,0.004,30.17c4.015,4.014,9.465,6.262,15.142,6.246h97.835c11.782,0,21.333-9.551,21.333-21.333V50.991   c-0.003-11.782-9.556-21.331-21.338-21.329c-5.655,0.001-11.079,2.248-15.078,6.246l-28.416,28.416   C320.774-29.34,159.141-19.568,65.476,86.152S-18.415,353.505,87.304,447.17s267.353,83.892,361.017-21.828   c32.972-37.216,54.381-83.237,61.607-132.431c2.828-17.612-9.157-34.183-26.769-37.011   C481.549,255.641,479.922,255.505,478.291,255.492z"/>
+              </g>
+              </svg>
+            </div> 
+            </button>
+          </div>
+        {% endform %}
+      </product-form>
+    </div>
+    <div  data-label="Delete" class="compare-data-label compare-pro-remove-btn" >
+      <div class="compare-prod-remove">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12.7589 7.24609C12.5002 7.24609 12.2905 7.45577 12.2905 7.71448V16.5669C12.2905 16.8255 12.5002 17.0353 12.7589 17.0353C13.0176 17.0353 13.2273 16.8255 13.2273 16.5669V7.71448C13.2273 7.45577 13.0176 7.24609 12.7589 7.24609Z" fill="#ff0000"></path>
+            <path d="M7.23157 7.24609C6.97286 7.24609 6.76318 7.45577 6.76318 7.71448V16.5669C6.76318 16.8255 6.97286 17.0353 7.23157 17.0353C7.49028 17.0353 7.69995 16.8255 7.69995 16.5669V7.71448C7.69995 7.45577 7.49028 7.24609 7.23157 7.24609Z" fill="#ff0000"></path>
+            <path d="M3.20333 5.95419V17.4942C3.20333 18.1762 3.45344 18.8168 3.89035 19.2764C4.32525 19.7373 4.93049 19.9989 5.56391 20H14.4259C15.0594 19.9989 15.6647 19.7373 16.0994 19.2764C16.5363 18.8168 16.7864 18.1762 16.7864 17.4942V5.95419C17.6549 5.72366 18.2177 4.8846 18.1016 3.99339C17.9852 3.10236 17.2261 2.43583 16.3274 2.43565H13.9293V1.85017C13.932 1.35782 13.7374 0.885049 13.3888 0.537238C13.0403 0.18961 12.5668 -0.00396362 12.0744 6.15416e-05H7.91533C7.42298 -0.00396362 6.94948 0.18961 6.60093 0.537238C6.25239 0.885049 6.05772 1.35782 6.06046 1.85017V2.43565H3.66238C2.76367 2.43583 2.00456 3.10236 1.8882 3.99339C1.77202 4.8846 2.33481 5.72366 3.20333 5.95419ZM14.4259 19.0632H5.56391C4.76308 19.0632 4.14009 18.3753 4.14009 17.4942V5.99536H15.8497V17.4942C15.8497 18.3753 15.2267 19.0632 14.4259 19.0632ZM6.99723 1.85017C6.99412 1.60628 7.08999 1.37154 7.26307 1.19938C7.43597 1.02721 7.67126 0.932619 7.91533 0.936827H12.0744C12.3185 0.932619 12.5538 1.02721 12.7267 1.19938C12.8998 1.37136 12.9956 1.60628 12.9925 1.85017V2.43565H6.99723V1.85017ZM3.66238 3.37242H16.3274C16.793 3.37242 17.1705 3.74987 17.1705 4.21551C17.1705 4.68114 16.793 5.05859 16.3274 5.05859H3.66238C3.19674 5.05859 2.81929 4.68114 2.81929 4.21551C2.81929 3.74987 3.19674 3.37242 3.66238 3.37242Z" fill="#ff0000"></path>
+            <path d="M9.99523 7.24609C9.73653 7.24609 9.52686 7.45577 9.52686 7.71448V16.5669C9.52686 16.8255 9.73653 17.0353 9.99523 17.0353C10.2539 17.0353 10.4636 16.8255 10.4636 16.5669V7.71448C10.4636 7.45577 10.2539 7.24609 9.99523 7.24609Z" fill="#ff0000"></path>
+            <defs>
+                <clipPath>
+                    <rect width="20" height="20" fill="white"></rect>
+                </clipPath>
+            </defs>
+        </svg>
+      </div>
+    </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,136 @@
+<img src="{{ section.settings.rimg | img_url: 'master' }}" alt="coffee image" class="ftr-right-img">
+<img src="{{ section.settings.limg | img_url: 'master' }}" alt="coffee image" class="ftr-left-img">
+<div class="container">
+    <div class="footer-row">
+        <div class="footer-col footer-subscribe-col">
+            <div class="footer-widget">  
+                <h4>Latitude 23.5 Coffee &amp; Tea</h4>
+                <div class="footer-subscribe">
+                    <img src="{{ section.settings.fimg | img_url: 'master' }}" class="footer-logo" alt="image">
+                    <h3>{{ section.settings.title }}</h3>
+                </div>
+                <p>{{ section.settings.desc }}</p>   
+            </div>
+        </div>
+        {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+                <div class="footer-col footer-link">
+                    <div class="footer-widget">
+                            <h4>{{ block.settings.heading }}:</h4>
+                            {% if linklists[block.settings.menu].links != blank %}
+                            <ul>
+                            {% for link in linklists[block.settings.menu].links %}
+                                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                            </ul>
+                            {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="footer-col footer-link footer-link-3">
+            <div class="footer-widget">
+                <h4> Contact: </h4>
+                <ul class="footer-list-social" role="list">
+                    {% if settings.social_youtube_link != blank %}
+                        <li>
+                            <a href="{{ settings.social_youtube_link }}" target="_blank">
+                                <svg width="8" height="7" viewBox="0 0 8 7" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M1.50015 1.19968C1.99665 1.11278 2.76171 1.03252 3.89246 1.03252C5.02321 1.03252 5.78827 1.11278 6.28476 1.19968C6.62039 1.25842 6.85877 1.58973 6.85877 2.06374V5.00695C6.85877 5.48095 6.62039 5.81226 6.28476 5.871C5.78827 5.9579 5.02321 6.03817 3.89246 6.03817C2.76171 6.03817 1.99665 5.9579 1.50015 5.871C1.16453 5.81226 0.926148 5.48095 0.926148 5.00695V2.06374C0.926148 1.58973 1.16453 1.25842 1.50015 1.19968ZM3.89246 0.198242C2.73147 0.198242 1.92747 0.280581 1.38616 0.37532C0.61158 0.510886 0.18457 1.27374 0.18457 2.06374V5.00695C0.18457 5.79694 0.611581 6.5598 1.38616 6.69536C1.92747 6.7901 2.73147 6.87244 3.89246 6.87244C5.05345 6.87244 5.85745 6.7901 6.39876 6.69536C7.17334 6.5598 7.60035 5.79694 7.60035 5.00695V2.06374C7.60035 1.27374 7.17334 0.510886 6.39876 0.37532C5.85745 0.280581 5.05345 0.198242 3.89246 0.198242ZM3.34671 2.33329C3.46727 2.2607 3.61357 2.26865 3.72735 2.35399L4.83971 3.18826C4.94287 3.26563 5.00482 3.39587 5.00482 3.53534C5.00482 3.67481 4.94287 3.80506 4.83971 3.88242L3.72735 4.7167C3.61357 4.80203 3.46727 4.80999 3.34671 4.7374C3.22615 4.66481 3.15088 4.52346 3.15088 4.36962V2.70107C3.15088 2.54723 3.22615 2.40588 3.34671 2.33329Z">
+                                    </path>
+                                </svg> 
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if settings.social_facebook_link != blank %}
+                        <li>
+                            <a href="{{ settings.social_facebook_link }}" target="_blank">
+                                <svg fill="#000000" width="8px" height="8px" viewBox="0 0 24 24" id="facebook" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><path id="primary" d="M14,7h4V3H14A5,5,0,0,0,9,8v3H6v4H9v6h4V15h3l1-4H13V8A1,1,0,0,1,14,7Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if settings.social_instagram_link != blank %}    
+                        <li>
+                            <a href="{{ settings.social_instagram_link }}" target="_blank">
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M0.746094 3.26117C0.746094 1.90962 1.74214 0.813965 2.97083 0.813965H5.93714C7.16582 0.813965 8.16187 1.90962 8.16187 3.26117V6.52411C8.16187 7.87567 7.16582 8.97132 5.93714 8.97132H2.97083C1.74214 8.97132 0.746094 7.87567 0.746094 6.52411V3.26117ZM2.97083 1.6297C2.1517 1.6297 1.48767 2.36013 1.48767 3.26117V6.52411C1.48767 7.42515 2.1517 8.15558 2.97083 8.15558H5.93714C6.75626 8.15558 7.42029 7.42515 7.42029 6.52411V3.26117C7.42029 2.36013 6.75626 1.6297 5.93714 1.6297H2.97083ZM3.7124 4.89264C3.7124 5.34316 4.04442 5.70838 4.45398 5.70838C4.86354 5.70838 5.19556 5.34316 5.19556 4.89264C5.19556 4.44212 4.86354 4.07691 4.45398 4.07691C4.04442 4.07691 3.7124 4.44212 3.7124 4.89264ZM4.45398 3.26117C3.63486 3.26117 2.97083 3.99161 2.97083 4.89264C2.97083 5.79368 3.63486 6.52411 4.45398 6.52411C5.27311 6.52411 5.93714 5.79368 5.93714 4.89264C5.93714 3.99161 5.27311 3.26117 4.45398 3.26117ZM6.12253 2.44544C5.81536 2.44544 5.56635 2.71935 5.56635 3.05724C5.56635 3.39513 5.81536 3.66904 6.12253 3.66904C6.4297 3.66904 6.67871 3.39513 6.67871 3.05724C6.67871 2.71935 6.4297 2.44544 6.12253 2.44544Z">
+                                    </path>
+                                </svg> 
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if settings.social_twitter_link != blank %} 
+                        <li>
+                            <a href="{{ settings.social_twitter_link }}" target="_blank">
+                                <svg fill="#000000" width="8px" height="8px" viewBox="0 0 24 24" id="tiktok" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><path id="primary" d="M21,7H20a4,4,0,0,1-4-4H12V14.5a2.5,2.5,0,1,1-4-2V8.18a6.5,6.5,0,1,0,8,6.32V9.92A8,8,0,0,0,20,11h1Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul> 
+            </div>
+          
+            <div style="margin-top: 30px;">
+              <p style="margin-bottom: 10px;"><strong>Address:</strong> 7245 21st Street East, Sarasota FL 34243</p>
+              <p style="margin-bottom: 10px;"><strong>Phone:</strong> 941.556.2600</p>
+              <p style="margin-bottom: 10px;"><strong>Address:</strong> customerservice@latitudecoffee.com</p>
+            </div>
+        </div>
+    </div> 
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.footer.name",
+  "tag": "footer",
+  "class": "site-footer",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "limg",
+      "label": "t:settings_schema.common.settings.l_img"
+    },
+    {
+      "type": "image_picker",
+      "id": "rimg",
+      "label": "t:settings_schema.common.settings.r_img"
+    },
+    {
+      "type": "image_picker",
+      "id": "fimg",
+      "label": "footer logo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "t:settings_schema.common.settings.desc"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Navigation",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:settings_schema.common.settings.title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "t:settings_schema.footer.nav"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

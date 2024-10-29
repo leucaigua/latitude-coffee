@@ -1,0 +1,200 @@
+<section class="about-us-page padding-bottom padding-top">
+  <div class="container">
+     <div class="section-title">
+      {% if section.settings.title != blank %}
+        <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
+    <div class="row">
+      {% if section.settings.desc != blank %}
+        <div class="col-md-6 col-12">
+          <div class="about-us-content"><p>{{ section.settings.desc }}</p></div>
+        </div>
+      {% endif %}
+      {% if section.settings.desc1 != blank %}
+        <div class="col-md-6 col-12">
+          <div class="about-us-content"><p>{{ section.settings.desc1 }}</p></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section> 
+<section class="about-our-shop-section padding-bottom">
+    <div class="container">
+        <div class="section-title text-center">
+             {% if section.settings.m_title != blank %}<h2>{{ section.settings.m_title }}</h2>{% endif %}
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-6 col-12">
+                <div class="abt-shp-column-left">
+                    <div class="section-title">
+                        {% if section.settings.title_1 != blank %}<h3>{{ section.settings.title_1 }}</h3>{% endif %}
+                    </div>
+                    {% if section.settings.desc_1 != blank %}<p>{{ section.settings.desc_1 }}</p>{% endif %}
+                    {% if section.settings.desc1_1 != blank %}<p>{{ section.settings.desc1_1 }}</p>{% endif %}
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="abt-shp-column-right">
+                    <img src="{{ section.settings.img | img_url: 'master' }}" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center row-reverse">
+            <div class="col-md-6 col-12">
+                <div class="abt-shp-column-left">
+                    <div class="section-title">
+                        {% if section.settings.title_2 != blank %}<h3>{{ section.settings.title_2 }}</h3>{% endif %}
+                    </div>
+                    {% if section.settings.desc_2 != blank %}<p>{{ section.settings.desc_2 }}</p>{% endif %}
+                    {% if section.settings.desc2_1 != blank %}<p>{{ section.settings.desc2_1 }}</p>{% endif %}
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="abt-shp-column-right">
+                    <img src="{{ section.settings.img1 | img_url: 'master' }}" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="aboutpage-btm-sec about-us-section padding-bottom">
+    <div class="container">
+        <div class="section-title text-center">
+            {% if section.settings.s_title != blank %}<h2>{{ section.settings.s_title }}</h2>{% endif %}
+            {% if section.settings.s_desc != blank %}<p>{{ section.settings.s_desc }}</p>{% endif %}
+        </div>
+        <div class="row">
+          {% for block in section.blocks %}
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="about-us-box"> 
+                {% if block.settings.img != blank %}<img src="{{ block.settings.img | img_url: '24x24' }}" loading="lazy">{% endif %}
+                {% if block.settings.title != blank %}<h4>{{ block.settings.title }}</h4>{% endif %}
+                {% if block.settings.desc != blank %}<p>{{ block.settings.desc }}</p>{% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+</section>
+{% schema %}
+{
+  "name": "t:settings_schema.about.name",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:settings_schema.about.s_one"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "t:settings_schema.about.desc1"
+    },
+    {
+      "type": "textarea",
+      "id": "desc1",
+      "label": "t:settings_schema.about.desc2"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.about.s_two"
+    },
+    {
+      "type": "text",
+      "id": "m_title",
+      "label": "t:settings_schema.about.m_title"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.about.p_one"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_1",
+      "label": "t:settings_schema.about.desc1"
+    },
+    {
+      "type": "textarea",
+      "id": "desc1_1",
+      "label": "t:settings_schema.about.desc2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "t:settings_schema.common.settings.img"
+    },
+    {
+      "type": "header",
+      "content": "Part Two"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "textarea",
+      "id": "desc_2",
+      "label": "t:settings_schema.about.desc1"
+    },
+    {
+      "type": "textarea",
+      "id": "desc2_1",
+      "label": "t:settings_schema.about.desc2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img1",
+      "label": "t:settings_schema.common.settings.img"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.about.p_third"
+    },
+    {
+      "type": "text",
+      "id": "s_title",
+      "label": "t:settings_schema.about.s_title"
+    },
+    {
+      "type": "textarea",
+      "id": "s_desc",
+      "label": "t:settings_schema.about.s_desc"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:settings_schema.about.add_s",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings_schema.common.settings.title"
+        },
+        {
+          "type": "textarea",
+          "id": "desc",
+          "label": "t:settings_schema.common.settings.desc"
+        },
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "t:settings_schema.common.settings.img"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

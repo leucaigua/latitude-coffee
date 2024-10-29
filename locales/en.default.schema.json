@@ -1,0 +1,277 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "common": {
+      "settings": {
+        "title": "title",
+        "subtitle": "Subtitle",
+        "desc": "Description",
+        "lbl": "Label",
+        "img": "Image",
+        "l_img": "Left Image",
+        "r_img": "Right Image",
+        "img_url": "Image URL",
+        "bg_img": "Background Image",
+        "btn": "Button",
+        "add": "Address",
+        "btn_url": "Button URL",
+        "pro_set": "Product Settings",
+        "pro_hvr_img": "Show Product Hover Image",
+        "sh_ven": "Show Vendor",
+        "sh_wish": "Show Wishlist",
+        "sh_type": "Show Type",
+        "sh_var": "Show Variants",
+        "width_height": "image width and height (widthxheight) format",
+        "thumb_width_height": "thumb image width and height (widthxheight) format",
+        "sel_coll": "Select Collection",
+        "tab_name": "Tab Name",
+        "sec_coll": "Select Collection",
+        "sec_pro": "Select Product",
+        "mailchimp_form_action": "MailChimp form action URL"
+      }
+    },
+    "common-section": {
+      "brand": "Brand Logo",
+      "slider": "Home Slider",
+      "cms_footer": "CMS Email",
+      "mpro_size": "image width and height (widthxheight) format",
+      "tpro_size": "thumb image width and height (widthxheight) format",
+      "bpage_bnr": "blog-page-banner",
+      "s_page": "Search Page",
+      "pro_desc": "Product Description",
+      "spe_pro": "Special Product",
+      "pro_bnr": "Product Banner",
+      "sh_pro": "Shop Product",
+      "best_pro": "Bestseller Product",
+      "cat_pro": "Category Product",
+      "all_coffee": "All Coffee"
+    },
+    "header": {
+      "settings": {
+        "name": "Header",
+        "of_head_url": "Offer Headline URL",
+        "of_head": "Offer Headline",
+        "logo_img": "Logo"
+      },
+      "blocks": {
+        "simple_link": "Simple link",
+        "title": "Title",
+        "icon": "Icon",
+        "link": "Link",
+        "bge_txt": "Badge text",
+        "bg_bge_clr": "Background badge color",
+        "classname": "Classname",
+        "linklist": "Link + linklist",
+        "Ch_linklist": "Choose linklist",
+        "list_bnr": "3 linklists + banner",
+        "link_title1": "linklist title1",
+        "linklist_1": "linklist 1",
+        "link_title2": "linklist title2",
+        "linklist_2": "linklist 2",
+        "link_title3": "linklist title3",
+        "linklist_3": "linklist 3",
+        "banner": "Banner",
+        "linkbanner": "Banner link"
+      }
+    },
+    "color": {
+      "name": "color",
+      "settings": {
+        "primary_color": "Primary color",
+        "secondary_color": "Secondary color",
+        "third_color": "Third color",
+        "four_color": "Fourth color",
+        "primary_font": "Primary font color",
+        "secondary_font": "Secondary font color",
+        "third_font": "Third font color",
+        "four_font": "Fourth font color",
+        "border_color": "Border color"
+      }
+    },
+    "Pre-Loader": {
+      "name": "Pre-Loader",
+      "settings": {
+        "display_preloader": "Dispaly Pre-Loader",
+        "pre_loader_img": "Upload Pre-loader image",
+        "preloader_bg": "Pre-loader Background Color"
+      }
+    },
+    "featured-blog": {
+      "name": "Blog Post",
+      "settings": {
+        "blog": "Blog",
+        "blog_limit": "Posts limit",
+        "show_date": "Show date"
+      }
+    },
+    "testimonial": {
+      "name": "Testimonial",
+      "settings": {
+        "heading": "Heading",
+        "c_name": "Country Name",
+        "re_1": "Review 1",
+        "re_2": "Review 2",
+        "re_3": "Review 3",
+        "re_4": "Review 4",
+        "img": "Product Image",
+        "desc": "Description",
+        "review": "Reivew Point",
+        "aut_name": "Author Name",
+        "aut_design": "Author Designation",
+        "str_img": "Review Image",
+        "a_img": "Author Image"
+      }
+    },
+    "faqs": {
+      "name": "FAQs",
+      "settings": {
+        "description": "Text",
+        "title": "Sub heading"
+      },
+      "blocks": {
+        "name": "Question",
+        "info": "Description"
+      }
+    },
+    "social-media": {
+      "name": "Social media",
+      "settings": {
+        "header": {
+          "content": "Social accounts"
+        },
+        "social_twitter_link": {
+          "label": "Twitter",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    },
+    "search_input": {
+      "name": "Search behavior",
+      "settings": {
+        "header": {
+          "content": "Product suggestions"
+        },
+        "predictive_search_enabled": {
+          "label": "Enable product suggestions"
+        },
+        "predictive_search_show_vendor": {
+          "label": "Show vendor",
+          "info": "Visible when product suggestions enabled."
+        },
+        "predictive_search_show_price": {
+          "label": "Show price",
+          "info": "Visible when product suggestions enabled."
+        }
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Favicon image",
+          "info": "Will be scaled down to 32 x 32px"
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Currency format",
+      "settings": {
+        "content": "Currency codes",
+        "paragraph": "Cart and checkout prices always show currency codes. Example: $1.00 USD.",
+        "currency_code_enabled": {
+          "label": "Show currency codes"
+        }
+      }
+    },
+    "contact_form": {
+      "name": "Contact Us",
+      "m_num": "Mobile Number",
+      "add": "Address",
+      "e_id": "Email-id",
+      "c_title": "Contact Form Title"
+    },
+    "footer": {
+      "name": "footer",
+      "n_title": "Newsletter Title",
+      "n_desc": "Newsletter Description",
+      "nav": "Navigation",
+      "url": "URL"
+    },
+    "about": {
+      "name": "About us",
+      "s_one": "Section one",
+      "desc1": "Description 1",
+      "desc2": "Description 2",
+      "s_two": "Section Two",
+      "m_title": "Main Title",
+      "p_one": "Part One",
+      "p_third": "Part Third",
+      "s_title": "Service Title",
+      "s_desc": "Service Description",
+      "add_s": "Add Service"
+    },
+    "artical": {
+      "name": "Artical Page",
+      "s_artical": "Show Recent Articles",
+      "s_blog": "Show Blog Tags"
+    },
+    "blog": {
+      "name": "Blog Grid",
+      "s_blog_img": "Show Blog Image",
+      "s_date": "Show Date",
+      "s_author": "Show Author"
+    },
+    "cart": {
+      "c_footer": "cart Footer",
+      "s_cartnote": "Show cart note",
+      "subtotal": "Subtotal",
+      "chackbtn": "Chackout Button",
+      "c_header": "Cart Items"
+    },
+    "coll_page": {
+      "name": "Collection Page",
+      "s_product": "Show Product Per page",
+      "f_set": "Filter Settings",
+      "d_filter": "Display Filter",
+      "d_sorting": "Display Sorting",
+      "d_mobile_filter": "Display Mobile menu in Desktop"
+    },
+    "pro_page": {
+      "name": "Product page",
+      "back_btn": "Back button",
+      "pro_vnd": "Product Vendor",
+      "pro_rev": "Product Review",
+      "pro_title": "Product Title",
+      "pro_type": "Product Type",
+      "pro_variant": "Product Variant",
+      "qty_sel": "Qyantity Selector",
+      "pro_price": "Product Price",
+      "pro_btn": "Product Button",
+      "pro_wish": "Product Wishlist",
+      "pro_desc": "Product Description",
+      "pro_count": "Product Countdown",
+      "pro_detail": "Product Detail",
+      "pro_share": "Product Share"
+    }
+  }
+}

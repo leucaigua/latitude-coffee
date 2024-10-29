@@ -1,0 +1,230 @@
+{%- liquid
+   if use_variant
+     assign target = card_product.selected_or_first_available_variant
+   else
+     assign target = card_product
+   endif
+ 
+   assign compare_at_price = target.compare_at_price
+   assign price = target.price | default: 1999
+   assign available = target.available | default: false
+   assign money_price = price | money
+   if settings.currency_code_enabled
+     assign money_price = price | money_with_currency
+   endif
+ 
+   if target == card_product and card_product.price_varies
+     assign money_price = 'card_product.product.price.from_price_html' | t: price: money_price
+   endif
+-%}
+<div class="product-card-inner">
+      {%- if card_product.featured_media -%}
+        <div id="pro-{{ section.id }}-{{ card_product.id }}" class="product-img card__media">
+           {%- if card_product.selected_or_first_available_variant.featured_media != null -%}
+           {%- assign media = card_product.selected_or_first_available_variant.featured_media -%}
+              <a href="{{ card_product.url | default: '#' }}" title="{{ card_product.title | escape }}"  class="product__media-item" data-media-id="{{ section.id }}-{{ card_product.id }}-{{ media.id }}" tabindex="0">
+              <img loading="lazy" class="{%- if show_secondary_image -%} default-img{% endif %}" srcset="{{ media.preview_image | img_url: pro_img_widthheight }}" alt="{{ media.preview_image.alt | escape }}">
+              {%- assign money_price = price | money -%}
+                <div class="product-label">
+                 {% if card_product.compare_at_price > card_product.price %}
+                    <span class="offer-lbl">-{{ target.compare_at_price | minus: target.price | times: 100.0 | divided_by: target.compare_at_price | round }}%</span>
+                 {% endif %}
+                {% if card_product.metafields.custom.custom_label != nil %}
+                  <span class="custom_label">{{ card_product.metafields.custom.custom_label }}</span>
+                {% endif %}
+                </div>
+              </a>
+           {%- endif -%}
+           {%- liquid
+           assign media_to_render = card_product.featured_media.id
+           for variant in card_product.variants
+           assign media_to_render = media_to_render | append: variant.featured_media.id | append: ' '
+           endfor -%}
+           {%- for media in card_product.media -%}
+              {%- if media_to_render contains media.id and media.id != card_product.selected_or_first_available_variant.featured_media.id -%}
+                    <a href="{{ card_product.url | default: '#' }}" title="{{ card_product.title | escape }}" class="product__media-item" data-media-id="{{ section.id }}-{{ card_product.id }}-{{ media.id }}" tabindex="0">
+                       <img loading="lazy" class="{%- if show_secondary_image -%} default-img {% endif %}" srcset="{{ media.preview_image | img_url: pro_img_widthheight }}" alt="{{ media.preview_image.alt | escape }}">
+                      {%- assign money_price = price | money -%}
+                      <div class="product-label">
+                       {% if card_product.compare_at_price > card_product.price %}
+                          <span class="offer-lbl">-{{ target.compare_at_price | minus: target.price | times: 100.0 | divided_by: target.compare_at_price | round }}%</span>
+                       {% endif %}
+                      {% if card_product.metafields.custom.custom_label != nil %}
+                        <span class="custom_label">{{ card_product.metafields.custom.custom_label }}</span>
+                      {% endif %}
+                      </div>
+                    </a>
+              {%- endif -%}
+           {%- endfor -%}
+           {%- if card_product.media[1] != nil and show_secondary_image -%}
+              <a href="{{ card_product.url | default: '#' }}" title="{{ card_product.title | escape }}" class="hover-img">
+                    <img loading="lazy" srcset="{{ card_product.media[1] | img_url: pro_img_widthheight }}" alt="{{ card_product.media[1].alt | escape }}">
+                <div class="product-label">
+                    {%- assign money_price = price | money -%}
+                    {% if card_product.compare_at_price > card_product.price %}
+                      <span class="offer-lbl">-{{ target.compare_at_price | minus: target.price | times: 100.0 | divided_by: target.compare_at_price | round }}%</span>
+                    {% endif %}
+                    {% if card_product.metafields.custom.custom_label != nil %}
+                    <span class="custom_label">{{ card_product.metafields.custom.custom_label }}</span>
+                    {% endif %}
+                </div>
+              </a>
+           {%- endif -%}
+          {% if card_product.metafields.custom.countdown != blank %}
+            <div class="flip-countdown simple-countdown">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+                <path d="M9.10353 3.40497L9.65495 2.85363C9.82809 2.68048 9.82809 2.39976 9.65495 2.22662C9.4818 2.05347 9.20108 2.05347 9.02793 2.22662L8.44997 2.80458C7.62974 2.17818 6.60921 1.80173 5.5 1.80173C2.81179 1.80173 0.624695 3.98882 0.624695 6.67704C0.624695 9.36525 2.81179 11.5523 5.5 11.5523C8.18821 11.5523 10.3753 9.36525 10.3753 6.67704C10.3753 5.41714 9.89067 4.2713 9.10353 3.40497ZM5.5 10.6659C3.3005 10.6659 1.51111 8.87654 1.51111 6.67704C1.51111 4.47753 3.3005 2.68815 5.5 2.68815C7.6995 2.68815 9.48889 4.47753 9.48889 6.67704C9.48889 8.87654 7.6995 10.6659 5.5 10.6659ZM6.94779 7.2089C7.14339 7.35605 7.18309 7.63375 7.03594 7.82935C6.94966 7.94518 6.81606 8.00666 6.68074 8.00666C6.58855 8.00666 6.4952 7.97769 6.41542 7.91801L5.23353 7.03159C5.12243 6.94767 5.05621 6.8165 5.05621 6.67704V4.60872C5.05621 4.36407 5.25477 4.16551 5.49942 4.16551C5.74407 4.16551 5.94263 4.36407 5.94263 4.60872V6.45543L6.94779 7.2089ZM3.57943 0.472102C3.57943 0.22745 3.77798 0.0288925 4.02263 0.0288925H6.97737C7.22202 0.0288925 7.42057 0.22745 7.42057 0.472102C7.42057 0.716754 7.22202 0.915312 6.97737 0.915312H4.02263C3.77798 0.915312 3.57943 0.716754 3.57943 0.472102Z" fill="#111111"/>
+              </svg>
+              <div class="countdown-container flip-countdown" data-countdown="{{ card_product.metafields.custom.countdown }}"></div>
+            </div>
+          {% endif %}
+          <div class="wish-lbl-wrp">
+            {% if settings.enable_wishlist %}  
+              <div class="pro-wishlist">
+                  <label>
+                    <span class="wishlist-label" >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.37767 2.11365C6.16662 2.31401 5.83338 2.31401 5.62233 2.11365L5.24466 1.75511C4.8026 1.33544 4.20542 1.0792 3.54545 1.0792C2.18985 1.0792 1.09091 2.16634 1.09091 3.5074C1.09091 4.79307 1.79443 5.85469 2.81005 6.72696C3.82654 7.59997 5.04185 8.17897 5.76799 8.47446C5.91982 8.53625 6.08018 8.53625 6.23201 8.47446C6.95814 8.17897 8.17346 7.59997 9.18995 6.72696C10.2056 5.85469 10.9091 4.79307 10.9091 3.5074C10.9091 2.16634 9.81015 1.0792 8.45455 1.0792C7.79458 1.0792 7.1974 1.33544 6.75535 1.75511L6.37767 2.11365ZM6 0.976447C5.36297 0.371679 4.49809 0 3.54545 0C1.58735 0 0 1.57032 0 3.5074C0 6.94372 3.80201 8.84136 5.35298 9.47252C5.77067 9.6425 6.22933 9.64249 6.64702 9.47252C8.198 8.84136 12 6.94371 12 3.5074C12 1.57032 10.4126 0 8.45455 0C7.50191 0 6.63703 0.371679 6 0.976447Z" fill="white"></path>
+                        </svg>
+                    </span>
+                    <input type="checkbox" id="true" data-value="true" style="display:none;" pro-handle="{{ card_product.handle }}"><span class="checkmark"></span>
+                  </label>  
+              </div>
+            {% endif %}
+            {% if settings.enable_compare %}
+            <div class="pro-compare">
+              <label>
+                <span class="compare-label" >
+                  <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.80006 12.5C9.66163 12.5 9.52632 12.4585 9.41123 12.3809C9.29614 12.3033 9.20644 12.193 9.15347 12.0639C9.1005 11.9349 9.08664 11.7928 9.11364 11.6558C9.14064 11.5188 9.20728 11.393 9.30515 11.2942L11.6103 8.96804H2.79991C2.61426 8.96804 2.4362 8.89361 2.30493 8.76114C2.17365 8.62866 2.0999 8.44899 2.0999 8.26164C2.0999 8.0743 2.17365 7.89462 2.30493 7.76215C2.4362 7.62967 2.61426 7.55525 2.79991 7.55525H13.3001C13.4386 7.55528 13.5739 7.59672 13.689 7.67435C13.8041 7.75197 13.8938 7.86228 13.9467 7.99134C13.9997 8.1204 14.0136 8.2624 13.9866 8.39941C13.9596 8.53642 13.8929 8.66227 13.795 8.76106L10.295 12.293C10.1637 12.4255 9.9857 12.5 9.80006 12.5ZM11.9001 4.72968C11.9001 4.54233 11.8264 4.36266 11.6951 4.23018C11.5638 4.09771 11.3857 4.02328 11.2001 4.02328H2.3897L4.69485 1.69713C4.82236 1.56391 4.89292 1.38547 4.89133 1.20025C4.88973 1.01504 4.81611 0.837869 4.68632 0.706898C4.55654 0.575927 4.38096 0.501636 4.19742 0.500027C4.01388 0.498417 3.83705 0.569618 3.70503 0.698293L0.204955 4.23026C0.107087 4.32905 0.0404406 4.4549 0.0134427 4.59191C-0.0135551 4.72892 0.000307272 4.87092 0.0532774 4.99998C0.106248 5.12904 0.195947 5.23935 0.311036 5.31697C0.426126 5.3946 0.561438 5.43604 0.699866 5.43607H11.2001C11.3857 5.43607 11.5638 5.36165 11.6951 5.22917C11.8264 5.0967 11.9001 4.91703 11.9001 4.72968Z" fill="#4F4632"/>
+                  </svg>
+                </span>
+                <a class="compare-now" href="/pages/compare" style="display:none;">
+                  Compare Now
+               </a>
+                <input type="checkbox" id="true" data-value="true" style="display:none;" pro-handle="{{ card_product.handle }}"><span class="checkmark"></span>
+              </label>  
+            </div>
+          {% endif %}
+          {% if settings.enable_quickview %}
+            <div class="quickview-btn" id="quickview">
+              <a style="text-decoration:none" href="{{ card_product.url }}" data-handle="{{ card_product.handle }}">
+                  <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.99996 3.15912C5.70988 3.15912 4.66016 4.20885 4.66016 5.49892C4.66016 6.789 5.70988 7.83873 6.99996 7.83873C8.29004 7.83873 9.33977 6.789 9.33977 5.49892C9.33977 4.20885 8.29004 3.15912 6.99996 3.15912ZM6.99996 6.8724C6.24254 6.8724 5.62648 6.25635 5.62648 5.49892C5.62648 4.7415 6.24254 4.12545 6.99996 4.12545C7.75738 4.12545 8.37344 4.7415 8.37344 5.49892C8.37344 6.25635 7.75738 6.8724 6.99996 6.8724Z" fill="#4F4632"/>
+                  <path d="M13.4184 4.21786C13.1537 3.8509 12.6889 3.28735 11.9785 2.68715C11.2954 2.10993 10.561 1.64782 9.79562 1.31368C8.87633 0.912544 7.9357 0.709106 7 0.709106C6.0643 0.709106 5.12367 0.912544 4.2041 1.31368C3.43875 1.64754 2.7043 2.10965 2.02125 2.68715C1.31086 3.28762 0.846016 3.8509 0.581328 4.21786C0.195781 4.7527 0 5.18418 0 5.5C0 5.81582 0.195508 6.24731 0.581602 6.78215C0.846289 7.14911 1.31113 7.71266 2.02152 8.31286C2.70457 8.89008 3.43902 9.35219 4.20437 9.68633C5.12367 10.0875 6.06457 10.2909 7.00027 10.2909C7.93598 10.2909 8.8766 10.0875 9.79617 9.68633C10.5615 9.35247 11.296 8.89036 11.979 8.31286C12.6894 7.71239 13.1543 7.14911 13.4189 6.78215C13.8045 6.24731 14 5.81582 14 5.5C14 5.18418 13.8045 4.7527 13.4184 4.21786ZM11.293 7.62653C10.3592 8.40118 8.85637 9.32457 7 9.32457C5.14363 9.32457 3.64109 8.40118 2.70703 7.62653C1.56406 6.67852 1.00816 5.73625 0.967422 5.5C1.00789 5.26375 1.56406 4.32149 2.70703 3.37348C3.64082 2.59883 5.14363 1.67543 7 1.67543C8.85609 1.67543 10.3589 2.59883 11.293 3.37348C12.4359 4.32149 12.9921 5.26375 13.0326 5.5C12.9918 5.73625 12.4359 6.67852 11.293 7.62653Z" fill="#4F4632"/>
+                  </svg>
+              </a>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+     {%- else -%}
+        <div class="card__content product-img">
+           <h2 class="card__text h3">
+              <a href="{{ card_product.url | default: '#' }}">{{ card_product.title }}</a>
+           </h2>
+        </div>
+     {%- endif -%}
+    <div id="ProductInfo-{{ section.id }}-{{ card_product.id }}" class="product-content">
+        {%- assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: card_product.id -%}
+        <div class="product-content-top">
+            {% if show_type %}<p class="product-type">{{ card_product.type }}</p>{% endif %}
+            <!-- {% if show_vendor %}<div class="subtitle">{{ card_product.vendor }}</div>{% endif %} -->
+            <h5><a href="{{ card_product.url | default: '#' }}">{{ card_product.title }}</a></h5> 
+            <div class='jdgm-widget jdgm-preview-badge' data-id='{{ card_product.id }}'> 
+              {{ card_product.metafields.judgeme.badge }} 
+            </div> 
+        </div>
+        <div class="product-content-bottom">
+          {% if show_variants %}
+            {%- assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: card_product.id -%}
+            {%- if picker_type == 'button' -%}
+                {%- unless card_product.has_only_default_variant -%}
+                    <variant-radios class="no-js-hidden select-box variant-webi" data-section="{{ section.id }}"  data-product="{{ card_product.id }}" data-url="{{ card_product.url}}" data-update-url="false" data-layout="card" {{ block.shopify_attributes }}>
+                        {%- for option in card_product.options_with_values -%}
+                        <label>{{ option.name }}:</label>
+                        <fieldset class="js product-form__input">
+                        {%- for value in option.values -%}
+                                <input type="radio" id="{{ section.id }}-{{ card_product.id }}-{{ option.position }}-{{ forloop.index0 }}" name="{{ option.name }}"  value="{{ value | escape }}" form="{{ product_form_id }}" {% if option.selected_value == value %}checked{% endif %} />
+                                <label class="color-swatch {% if option.selected_value == value %} active{% endif %}{% if option.name == "Color" %} varcolor{%- endif -%}" for="{{ section.id }}-{{ card_product.id }}-{{ option.position }}-{{ forloop.index0 }}" data-val="{{value}}" {% if option.name == "Color" %}style="background-color: {{ value }};"{%- endif -%}>{{ value }}</label> 
+                            {%- endfor -%}
+                        </fieldset>
+                        {%- endfor -%}
+                        <script type="application/json">
+                        {{ card_product.variants | json }}
+                        </script>
+                    </variant-radios>
+                {%- endunless -%}
+            {% else %}
+               <variant-selects class="cart-variable select-box no-js-hidden" data-section="{{ section.id }}" data-product="{{ card_product.id }}" data-url="{{ product.url }}" data-update-url="false" data-layout="card">
+                  {%- for option in card_product.options_with_values -%}
+                    <div class="swatch-lbl" {% if option.name == "Whole Bean or Ground" or option.name == "Whole Bean or Espresso Ground" or option.name == "Style"%} style="display: block" {% else %} style="display: none" {% endif %}>
+                      <p>{{ option.name | escape }}</p>
+                    </div>
+                    <select 
+                     {% if option.name == "Whole Bean or Ground" or option.name == "Whole Bean or Espresso Ground" or option.name == "Style"%} style="display: block" {% else %} style="display: none" {% endif %}
+                     id="Option-{{ section.id }}-{{ card_product.id }}-{{ forloop.index0 }}"
+                     class="white-arrow nice-select select__select product-form__input product-form__input--dropdown"
+                     name="options[{{ option.name | escape }}]"
+                     form="{{ product_form_id }}" >
+                           {%- for value in option.values -%}
+                              <option data-val="{{value}}" value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                 {{ value }}
+                              </option>
+                           {%- endfor -%}
+                    </select>
+                  {%- endfor -%}
+                  <script type="application/json">
+                  {{ card_product.variants | json }} 
+                  </script>
+               </variant-selects>
+            {% endif %}
+               <select id="Variants-{{ section.id }}-{{ card_product.id }}" class="nice-select select__select no-js" form="{{ product_form_id }}">
+                  {%- for variant in card_product.variants -%}
+                  <option data-v-title="{{ variant.title }}"  data-price="{{variant.price | money}}" data-cprice="{{variant.compare_at_price | money}}" 
+                  {% if variant == card_product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                  {% if variant.available == false %}disabled{% endif %} value="{{ variant.id }}">
+                  {{ variant.title }}
+                  {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                    - {{ variant.price | money | strip_html }}
+                  </option>
+                  {%- endfor -%}
+               </select>
+            {% endif %}
+            <div class="main-price d-flex align-items-center justify-content-between">
+                <div class="no-js-hidden price" id="price-{{ section.id }}-{{ card_product.id }}" role="status" {{ block.shopify_attributes }}>
+                    {% render 'price', product: card_product,use_variant: true, price_class: '' %}
+                </div>
+                <product-form class="product-form">
+                    <div class="wbquicksuccess hidden" hidden>{{ 'wbcustomlabel.wballtext.quicksuccessmsg' | t }}</div>
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13" width="25" height="25">
+                      <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                      <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                      <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                      <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                      </svg>
+                      <span class="product-form__error-message"></span>
+                    </div> 
+                    {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                       <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}" disabled>
+                       <button type="submit" name="add" class="link-btn product-form__submit cart-btn" aria-label="{{ 'products.product.add_to_cart' | t }}" {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+                             {%- if card_product.selected_or_first_available_variant.available -%}
+                                   + <span>{{ 'products.product.add_to_cart' | t }}</span>
+                             {%- else -%}
+                                   + <span>{{ 'products.product.sold_out' | t }}</span>
+                             {%- endif -%}
+                            <div class="loading-overlay__spinner hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 511.494 511.494" style="enable-background:new 0 0 511.494 511.494;" xml:space="preserve" width="20" height="20">
+                                    <g>
+                                        <path d="M478.291,255.492c-16.133,0.143-29.689,12.161-31.765,28.16c-15.37,105.014-112.961,177.685-217.975,162.315 S50.866,333.006,66.236,227.992S179.197,50.307,284.211,65.677c35.796,5.239,69.386,20.476,96.907,43.959l-24.107,24.107   c-8.33,8.332-8.328,21.84,0.004,30.17c4.015,4.014,9.465,6.262,15.142,6.246h97.835c11.782,0,21.333-9.551,21.333-21.333V50.991   c-0.003-11.782-9.556-21.331-21.338-21.329c-5.655,0.001-11.079,2.248-15.078,6.246l-28.416,28.416   C320.774-29.34,159.141-19.568,65.476,86.152S-18.415,353.505,87.304,447.17s267.353,83.892,361.017-21.828   c32.972-37.216,54.381-83.237,61.607-132.431c2.828-17.612-9.157-34.183-26.769-37.011   C481.549,255.641,479.922,255.505,478.291,255.492z"/>
+                                    </g>
+                                </svg>
+                            </div> 
+                       </button>
+                    {%- endform -%}
+                </product-form>
+            </div>
+        </div>
+    </div>
+</div>

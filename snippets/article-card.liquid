@@ -1,0 +1,32 @@
+{%- if article and article != empty -%}
+  <div class="blog-itm-inner">
+      <div class="blog-img">
+          <a href="{{ article.url }}">
+              {% if article.image %}
+                 <img class="lazyload"src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt | escape }}" loading="lazy" class="default-img">
+              {% else %}
+                 <img src="{{ 'no-image.gif' | img_url: '380x240' }}" loading="lazy"/>
+              {% endif %} 
+              <span class="blg-lbl">ARTICLES</span>
+          </a>
+      </div>
+      <div class="blog-content">
+          <div class="blog-content-top">
+              <span class="blog-itm-cat">{{ blog.handle }}</span>
+              <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+              {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+                  <p>
+                      {%- if article.excerpt.size > 0 -%}
+                      {{ article.excerpt | strip_html | truncatewords: 45 }}
+                      {%- else -%}
+                      {{ article.content | strip_html | truncatewords: 45 }}
+                      {%- endif -%}
+                  </p>
+              {%- endif -%}
+          </div>
+          <div class="blog-contnt-bottom">
+              <a href="{{ article.url }}" class="link-btn">READ MORE</a>
+          </div>
+      </div>
+  </div>
+{%- endif -%}                 

@@ -1,0 +1,55 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{%- if predictive_search.performed -%}
+  <div id="predictive-search-results">
+    {%- if predictive_search.resources.products.size > 0 -%} 
+      <h2 id="predictive-search-products" class="predictive-search__heading text-body">
+        {{ 'templates.search.products' | t }}
+        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </h2>
+    {%- endif -%}
+
+    <ul id="predictive-search-results-list" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
+      {%- for product in predictive_search.resources.products -%}
+        <li id="predictive-search-option-{{ forloop.index }}" class="predictive-search__list-item" role="option" aria-selected="false">
+          <div class="predictive-search-main">
+          <a href="{{ product.url }}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
+            {%- if product.featured_media != blank -%}
+              <img class="predictive-search__image" src="{{ product.featured_media | img_url: 'master' }}" alt="{{ product.featured_media.alt }}">
+            {%- endif -%}
+          </a>
+          <div class="predictive-search__item-content">
+            <h5 class="predictive-search__item-heading"><a href="{{ product.url }}">{{ product.title }}</a></h5> 
+            <div class="predictive-search__item-vendor">{{ product.vendor }}</div>
+             <div class="price">
+            {% render 'price', product: product, use_variant: true, show_badges: false %} 
+             </div>
+          </div>
+           </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="predictive-search-bottom">
+      <span class="btn predictive-search-status" data-predictive-search-live-region-count-value>
+      {%- if search.results_count == 0 -%}
+        {{ 'templates.search.no_results' | t: terms: predictive_search.terms }}
+      {%- else -%}
+        {{ 'templates.search.results_with_count' | t: terms: predictive_search.terms, count: predictive_search.resources.products.size }}
+      {%- endif -%}
+      </span>
+      <div id="predictive-search-option-search-keywords" class="predictive-search__list-item" role="option">
+        <button class="btn predictive-search__item predictive-search__item--term link link--text h5 animate-arrow" tabindex="-1">
+          {{ 'templates.search.search_for' | t: terms: predictive_search.terms }}          
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div> 
+      <div class="predictive-search__loading-state" aria-hidden="true">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

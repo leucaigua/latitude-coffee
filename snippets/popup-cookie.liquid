@@ -1,0 +1,85 @@
+<div class="cookiestatus">
+  <div class="cookie-block {{settings.cookie_style}}">
+    <div id="cookie_message" class="cookie-message-block">
+      <span>{{settings.cookie_desc}} <a target="_blank" href="{% if settings.link_url %}{{settings.link_url}}{% else %}#{% endif %}" class="c_link"><strong> {{settings.link_title}}</strong></a></span>
+      <button class="btn" onclick="closeWdCookie()"><span>{{settings.c_btn_txt}}</span></button>
+    </div>
+  </div>
+</div>
+<script>var cook="site_cookie";function setcookie(){var e=new Date;e.setMonth(e.getMonth()+12),document.cookie=cook+"="+escape("1")+";path=/;"+(null==e?"":"; expires="+e.toGMTString())}function SE_CheckCookies(){1!=$.cookie(cook)&&(document.getElementById("cookie_message").className+=" se-cookies-message-open")}function closeWdCookie(){$("#cookie_message").slideUp(),setcookie()}document.addEventListener("DOMContentLoaded",function(){SE_CheckCookies()});</script>
+<style>
+.cookiestatus .cookie-block #cookie_message {
+  opacity: 0;
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-opacity: 0;
+  visibility: hidden;
+}
+.cookiestatus .cookie-block #cookie_message.se-cookies-message-open {
+  opacity: 1;
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  -webkit-opacity: 1;
+  visibility: visible;
+}
+.cookiestatus .cookie-block.full_bottom {
+  float:left;
+  width:100%;
+}
+.cookiestatus .cookie-block.full_bottom #cookie_message {
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+  float: left;
+  width: 100%;
+}
+.cookiestatus .cookie-block.bottom_fix #cookie_message,.cookiestatus .cookie-block.bottom_to_left #cookie_message, .cookiestatus .cookie-block.bottom_to_right #cookie_message {
+  padding: 30px;
+  position: fixed;
+  float: none;
+  display: inline-block;
+  bottom: 10px;
+  top: auto;
+  width: 400px;
+  left: 10px;
+  right: auto;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  background: var(--black);
+  color: var(--white);
+}
+.cookiestatus .cookie-block.bottom_fix #cookie_message {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+}
+.cookiestatus .cookie-block.bottom_to_right #cookie_message {
+  right: 10px;
+  left: auto;
+}
+.cookiestatus .cookie-block #cookie_message > span{
+  font-size: 16px;
+  line-height: 30px;
+}
+.cookiestatus .cookie-block.bottom_fix .c_link,.cookiestatus .cookie-block.full_bottom .c_link {
+    margin: 0 0 0 10px;
+}
+.cookiestatus .cookie-block.bottom_to_right #cookie_message > span, .cookiestatus .cookie-block.bottom_to_left #cookie_message > span {
+  float: left;
+  width: 100%;
+  margin: 0 0 15px;
+}
+.product-form__error-message-wrapper--hidden {
+  display: none;
+}
+  @media only screen and (max-width: 543px) {
+  .cookiestatus .cookie-block.bottom_fix #cookie_message, .cookiestatus .cookie-block.bottom_to_left #cookie_message, .cookiestatus .cookie-block.bottom_to_right #cookie_message {
+    padding: 15px;
+    width: 280px;
+  }
+}
+</style>

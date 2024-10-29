@@ -1,0 +1,216 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-5 col-12 contact-left-column">
+          <div class="contact-left-inner row">
+              <ul class="col-sm-8 col-12"> 
+                  <li>
+                      <h4>{{ section.settings.mobile_title }}</h4>
+                      <p><a href="tel:{{ section.settings.mobile }}">{{ section.settings.mobile }}</a></p>
+                  </li> 
+                  <li>
+                      <h4>{{ section.settings.email_title }}</h4>
+                      <p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+                  </li> 
+                  <li>
+                      <h4>{{ section.settings.address_title }}</h4>
+                      <p class="address">{{ section.settings.address }}</p>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <div class="col-md-7 col-12 contact-right-column">
+          <div class="contact-right-inner">
+              <div class="section-title">
+                  <h2 style="color: #c7ab84;">{{ section.settings.cntform }}</h2>
+              </div>
+            {%- form 'contact', id: 'ContactForm', class:'contact-form' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="form-status form-message-success" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</div>
+            {%- elsif form.errors -%}
+                <div class="form-status form-message-error" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</div>
+              <ul class="form-status-list caption-large" role="list">
+                <li>
+                  <a href="#ContactForm-email" class="link">
+                    {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                  </a>
+                </li>
+              </ul>
+            {%- endif -%}
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                      <label for="ContactForm-name">{{ 'templates.contact.form.name' | t }}<sup aria-hidden="true">*</sup>:</label>
+                      <input class="form-control" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.contact.form.name' | t }}" required>
+                </div>    
+              </div>  
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                      <label for="ContactForm-name">{{ 'templates.contact.form.lastname' | t }}<sup aria-hidden="true">*</sup>:</label>
+                      <input class="form-control" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.lastname' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.contact.form.lastname' | t }}" required>
+                </div>    
+              </div> 
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="ContactForm-email">{{ 'templates.contact.form.email' | t }}<sup aria-hidden="true">*</sup>:</label>
+                    <input
+                      class="form-control"
+                      autocomplete="email"
+                      type="email"
+                      id="ContactForm-email"
+                      name="contact[email]"
+                      spellcheck="false"
+                      autocapitalize="off"
+                      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                      aria-required="true"
+                      {% if form.errors contains 'email' %}
+                        aria-invalid="true"
+                        aria-describedby="ContactForm-email-error"
+                      {% endif %}
+                      placeholder="{{ 'templates.contact.form.emailid' | t }}"
+                      required
+                    >
+                </div>
+              </div>  
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}<sup aria-hidden="true">*</sup>:</label>
+                  <input class="form-control" type="tel" id="ContactForm-phone" autocomplete="tel" name="contact[{{ 'templates.contact.form.phoneno' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}" required>
+                </div>
+              </div>
+              <div class="col-md-12 col-12">
+                <div class="form-group">
+                  <label for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+                    <textarea class="form-control" rows="10" id="ContactForm-body" name="contact[{{ 'templates.contact.form.comment' | t }}]" placeholder="{{ 'templates.contact.form.commenttext' | t }}" >
+                      {{- form.body -}}
+                    </textarea>
+                </div>
+              </div> 
+            </div>   
+              <div class="row align-items-center">
+                <div class='col-lg-4 col-12'>
+                  <button type="submit" class="btn submit-btn" style="
+    color: #36593c;
+    border-radius: 25px;
+    border: 1px solid #000;
+    background: transparent;
+">
+                    {{ 'templates.contact.form.btn_name' | t }}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="14" viewBox="0 0 35 14" fill="none">
+                      <path d="M25.0749 14L35 7L25.0805 0L29.12 6.06667H0V7.93333H29.12L25.0749 14Z"></path>
+                    </svg>
+                  </button>
+                </div>  
+            </div>
+          {%- endform -%}
+          </div>
+      </div>
+  </div> 
+</div>
+<div class="contact-direction-sec padding-top">
+    <div id="google_map" data-section-id="{{ section.id }}" data-section-type="map-section">
+        <div id="map"></div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.contact_form.name",
+  "tag": "section",
+  "class": "contact-page padding-top",
+  "settings": [
+    {
+      "type": "text",
+      "id": "mobile_title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "mobile",
+      "label": "t:settings_schema.contact_form.m_num"
+    },
+    {
+      "type": "text",
+      "id": "address_title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "t:settings_schema.common.settings.add"
+    },
+    {
+      "type": "text",
+      "id": "email_title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "t:settings_schema.contact_form.e_id"
+    },
+    {
+      "type": "text",
+      "id": "cntform",
+      "label": "t:settings_schema.contact_form.c_title"
+    },
+    {
+      "type":"header",
+      "content":"Google Map"
+    },
+    {
+      "type": "text",
+      "id": "map_height",
+      "default": "400px",
+      "label": "Enter Map Height in (px)"
+    },
+    {
+      "type": "text",
+      "id": "map_api_key",
+      "label": "Enter Your Map API KEY"
+    },
+    {
+      "type": "select",
+      "id": "map_type",
+      "label": "Select Map Type",
+      "default": "ROADMAP",
+      "options": [
+        {
+          "value": "ROADMAP",
+          "label": "ROADMAP"
+        },
+        {
+          "value": "TERRAIN",
+          "label": "TERRAIN"
+        },
+        {
+          "value": "SATELLITE",
+          "label": "SATELLITE"
+        },
+        {
+          "value": "HYBRID",
+          "label": "HYBRID"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "map_address",
+      "label": "Enter Adress",
+      "default": "india"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.contact_form.name"
+    }
+  ]
+}
+{% endschema %}
+<style>#map {height: {{ section.settings.map_height }};width: 100%;}</style>
+<script>function DisplayMapAddress(address){var geocoder=new google.maps.Geocoder();geocoder.geocode({address:address},function(results,status){if(status==google.maps.GeocoderStatus.OK){var location=results[0].geometry.location;var options={zoom:10,center:location,streetViewControl:!0,mapTypeId:google.maps.MapTypeId.{{section.settings.map_type}},scrollwheel:!1,draggable:!0,panControl:!0,zoomControl:!0,
+zoomControlOptions:{style:google.maps.ZoomControlStyle.SMALL}};var mymap=new google.maps.Map(document.getElementById('map'),options);var marker=new google.maps.Marker({map:mymap,flat:!0,icon:'{{ section.settings.map_icon }}',position:results[0].geometry.location});var infowindow=new google.maps.InfoWindow({content:'india'});google.maps.event.addListener(marker,'click',function(){infowindow.open(mymap,marker)})}})}
+jQuery(document).ready(function(){DisplayMapAddress('{{ section.settings.map_address }}')});</script>
+{% if section.settings.map_api_key != nil %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{ section.settings.map_api_key }}"></script>
+{% else %}
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+{% endif %}

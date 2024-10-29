@@ -1,0 +1,130 @@
+<div class="container">
+    <div class="beans-video-wrp">
+        <video src="{{ section.settings.video_url }}" loop="" autoplay="" muted="muted" playsinline="" controlslist="nodownload"></video> 
+        <div class="row">
+            <div class="col-md-4 col-12 pl-5"> 
+                <div class="banner-product-details coffeethree-column-bx">
+                    <div class="section-title">
+                        <div class="subtitle">{{ section.settings.subtitle }}</div>
+                        <h3>{{ section.settings.title }}</h3>
+                    </div>
+                    <p>{{ section.settings.desc }}</p>
+                    <br>
+                    <a href="{{ section.settings.btn_url }}" class="link-btn">{{ section.settings.btn }}</a>
+                </div> 
+            </div> 
+            <div class="col-md-4 col-sm-6 col-12">
+                {%- assign product = section.settings.product -%} 
+                {% if section.settings.product != blank %}
+                    <div class="grid__item product-card card card-direction-row">
+                        {% render 'card-product', card_product: product, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,show_wish: section.settings.show_wish,show_type: section.settings.show_type, show_variants: section.settings.show_variants %}
+                    </div>
+                {% endif %}
+            </div> 
+            <div class="col-md-4 col-sm-6 col-12">
+                {%- assign product = section.settings.product1 -%} 
+                {% if section.settings.product1 != blank %}
+                    <div class="grid__item product-card card card-direction-row">
+                        {% render 'card-product', card_product: product, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,show_wish: section.settings.show_wish,show_type: section.settings.show_type, show_variants: section.settings.show_variants %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.pro_bnr",
+  "tag": "div",
+  "class": "banner-with-products padding-top",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "t:settings_schema.common.settings.desc"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "t:settings_schema.common.settings.btn_url"
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "t:settings_schema.common.settings.btn"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:settings_schema.common.settings.pro_hvr_img"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_ven"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wish",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_wish"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_var"
+    },
+    {
+      "type": "text",
+      "id": "pro_img_widthheight",
+      "default": "600x600",
+      "label": "t:settings_schema.common.settings.width_height"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:settings_schema.common.settings.sec_pro"
+    },
+    {
+      "type": "product",
+      "id": "product1",
+      "label": "t:settings_schema.common.settings.sec_pro"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.pro_bnr"
+    }
+  ]
+}
+{% endschema %}

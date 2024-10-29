@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16644248689a0b4d5f": {
+      "type": "blog-page-banner",
+      "custom_css": [
+        "@media (min-width: 768px) {.col-md-6 {flex: 0 0 auto; width: 75%; }}"
+      ],
+      "settings": {
+        "bgimage": "shopify://shop_images/Coffee_blog_banner_-_Latitude_23.5_Coffee_Tea.webp"
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "show_recent_articles": true
+      }
+    }
+  },
+  "order": [
+    "16644248689a0b4d5f",
+    "main"
+  ]
+}
