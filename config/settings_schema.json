@@ -4,8 +4,8 @@
     "theme_name": "style",
     "theme_version": "6.2.0",
     "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/online-store\/themes",
+    "theme_support_url": "https:\/\/support.shopify.com\/"
   },
   {
     "name": "t:settings_schema.Pre-Loader.name",
@@ -396,7 +396,7 @@
         "type": "text",
         "id": "mailchimp_form_action",
         "label": "t:settings_schema.common.settings.mailchimp_form_action",
-        "info": "[Where do I find my MailChimp form action URL?](https://help.shopify.com/manual/using-themes/change-the-layout/theme-newsletter#add-a-mailchimp-newsletter-form-to-your-store-non-sectioned-themes-specific)"
+        "info": "[Where do I find my MailChimp form action URL?](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/theme-newsletter#add-a-mailchimp-newsletter-form-to-your-store-non-sectioned-themes-specific)"
       }
     ]
   },

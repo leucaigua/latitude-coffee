@@ -4183,7 +4183,7 @@ left: 15px;
   position: relative;
   z-index: 1;
 }
-.beans-video-wrp video {
+.beans-video-wrp img {
   border-radius: 10px;
   position: absolute;
   top: 0;
