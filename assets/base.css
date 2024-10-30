@@ -1353,6 +1353,37 @@ background-repeat: no-repeat;
 .btn-secondary.white-btn:hover svg path {
   fill: var(--white);
 }
+.link-btnf{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center; 
+  position: relative;
+  padding-bottom: 5px;
+  color: #36593C;
+  transition: all ease-in-out 0.5s;
+}
+
+.link-btnf:before {
+  content: '';
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #36593C;
+  transition: all ease-in-out .5s;
+}
+.link-btnf:hover{
+  color: var(--brown);
+}
+
+.link-btnf:hover:before{
+  background: #c7ab84;
+}
+
 .link-btn {
   font-style: normal;
   font-weight: 700;
@@ -4178,6 +4209,33 @@ left: 15px;
 .dark-arrow .slick-arrow{
   background: #e2d9cc80;
 }
+.flavored-coffee-banner p{
+  color: #473014;
+  text-align: justify;
+}
+
+.flavored-coffee-banner .row {
+  position: relative;
+  padding: 0 10px;
+}
+.flavored-coffee-banner {
+  margin: 0 10px 50px 10px;
+  padding: 50px 20px;
+  position: relative;
+  z-index: 1;
+}
+.flavored-coffee-banner img {
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+} 
 .beans-video-wrp {
   padding: 55px 20px;
   position: relative;

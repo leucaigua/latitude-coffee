@@ -398,6 +398,40 @@
         </div>
     </div>
 </div>
+
+{% if product.tags contains 'flavored' or product.tags contains 'Coffee: Flavors' %}
+  <div class="container">
+    <div class="flavored-coffee-banner">
+    <img src="https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Latitude_Coffee_Flavored-Banner-Background.jpg?v=1730303158" alt="Flavored Coffee Banner Background" width="1200px" height="200px"/>
+    <div class="row">
+        <div class="col-12 pl-5"> 
+            <div class="banner-product-details coffeethree-column-bx">
+                <div class="section-title">
+                    <div class="subtitle">
+                        <p><strong>Latitude 23.5 Coffee & Tea</strong></p>
+                    </div>
+                    <h3>Choose Your Perfect Cup! ☕<br>Flavored Coffee Just Got Easier to Customize!</h3>
+                </div>
+                <p>
+                    Looking for your favorite flavored coffee options? Now you can select regular, decaf, organic, and organic decaf, all in one place! 
+                </p>
+                <p><strong>How?</strong></p>
+                <ol>
+                    <li><p>1. On the product page, use the dropdown menu to select your preferred bean type <strong>(Whole Bean or Ground)</strong>.</p></li>
+                    <li><p>2. Next, choose <strong>Regular, Decaf, Organic,</strong> or <strong>Organic Decaf</strong> options from the next dropdown.</p></li>
+                </ol>
+                <br>
+                <div style="text-align: right;">
+                    <a href="#" class="link-btnf">And That’s It, Order Now!</a>
+                </div>
+            </div>
+        </div> 
+    </div> 
+  </div>
+</div>
+
+{%  endif %}
+
 <div class="pdp-descrip-section padding-bottom">
   <div class="container">
     <div class="row align-items-center relative">
