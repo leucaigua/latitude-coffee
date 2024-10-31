@@ -1,9 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "display_preloader": false,
-    "pre_loader_img": "shopify:\/\/shop_images\/Latitude_23.5_Coffee_and_Tea_-_Cup_of_Coffee.webp",
+    "pre_loader_img": "shopify://shop_images/Latitude_23.5_Coffee_and_Tea_-_Cup_of_Coffee.webp",
     "preloader_bg": "#000000",
-    "favicon": "shopify:\/\/shop_images\/Latitude_23.5_Coffee_And_Tea.png",
+    "favicon": "shopify://shop_images/Latitude_23.5_Coffee_And_Tea.png",
     "body_font": "Google+Montserrat",
     "base_font": "Google+Montserrat",
     "primary_color": "#262626",
@@ -15,53 +24,53 @@
     "border_color": "#272727",
     "enable_compare": false,
     "free_price": "35",
-    "free_text": "You’re <b>$$<\/b> away from <b>FREE shipping.<\/b>",
-    "free_shipping_got_msg": "<b>Congrats!<\/b> You are eligible for <b>FREE Shipping<\/b>",
+    "free_text": "You’re <b>$$</b> away from <b>FREE shipping.</b>",
+    "free_shipping_got_msg": "<b>Congrats!</b> You are eligible for <b>FREE Shipping</b>",
     "gift_wrap": "gift-wrapper",
-    "mailchimp_form_action": "https:\/\/us18.list-manage.com\/contact-form?u=28c97e9fc6b2e6214af7bd19c&form_id=1f1f3185abc040a9c4e1626b43a72353",
+    "mailchimp_form_action": "https://us18.list-manage.com/contact-form?u=28c97e9fc6b2e6214af7bd19c&form_id=1f1f3185abc040a9c4e1626b43a72353",
     "popup_newsletter_show": false,
     "newsletter_title": "Sign up our newsletter",
     "popup_newsletter_description": "Subscribe our newsletters now and stay up-to-date with new collections",
     "cookie_style": "bottom_to_right",
     "cookie_desc": "By continuing use this site, you agree to our",
     "link_title": "Privacy Policy",
-    "link_url": "shopify:\/\/policies\/privacy-policy",
+    "link_url": "shopify://policies/privacy-policy",
     "c_btn_txt": "Accept",
-    "social_twitter_link": "https:\/\/www.tiktok.com\/@latitude_23.5",
-    "social_facebook_link": "https:\/\/facebook.com\/LatitudeCoffee",
-    "social_instagram_link": "http:\/\/instagram.com\/latitude_23.5",
+    "social_twitter_link": "https://www.tiktok.com/@latitude_23.5",
+    "social_facebook_link": "https://facebook.com/LatitudeCoffee",
+    "social_instagram_link": "http://instagram.com/latitude_23.5",
     "social_youtube_link": "",
     "predictive_search_enabled": false,
     "currency_code_enabled": false,
-    "checkout_logo_image": "shopify:\/\/shop_images\/CoffeeStore.png",
+    "checkout_logo_image": "shopify://shop_images/CoffeeStore.png",
     "third_font": "Google+Playfair+Display",
-    "s_leftimg": "shopify:\/\/shop_images\/left-leaf.png",
-    "s_rightimg": "shopify:\/\/shop_images\/right-leaf.png",
-    "t_leftimg": "shopify:\/\/shop_images\/leaf-design.png",
-    "t_rightimg": "shopify:\/\/shop_images\/circle-design.png",
-    "c_img": "shopify:\/\/shop_images\/circle-design.png",
-    "c_img1": "shopify:\/\/shop_images\/circle-design.png",
-    "c_img2": "shopify:\/\/shop_images\/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
-    "c_img3": "shopify:\/\/shop_images\/leaf-design.png",
-    "b_img": "shopify:\/\/shop_images\/circle-design.png",
-    "b_img1": "shopify:\/\/shop_images\/leaf-design.png",
-    "b_img2": "shopify:\/\/shop_images\/circle-design.png",
-    "b_img3": "shopify:\/\/shop_images\/leaf-design.png",
-    "b_img4": "shopify:\/\/shop_images\/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
-    "b_img5": "shopify:\/\/shop_images\/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
-    "p_img": "shopify:\/\/shop_images\/circle-design.png",
-    "p_img1": "shopify:\/\/shop_images\/circle-design.png",
-    "p_img2": "shopify:\/\/shop_images\/circle-design.png",
-    "p_img3": "shopify:\/\/shop_images\/circle-design.png",
-    "p_img4": "shopify:\/\/shop_images\/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
-    "p_img5": "shopify:\/\/shop_images\/circle-design.png",
-    "p_img6": "shopify:\/\/shop_images\/leaf-design.png",
-    "p_img7": "shopify:\/\/shop_images\/circle-design.png",
+    "s_leftimg": "shopify://shop_images/left-leaf.png",
+    "s_rightimg": "shopify://shop_images/right-leaf.png",
+    "t_leftimg": "shopify://shop_images/leaf-design.png",
+    "t_rightimg": "shopify://shop_images/circle-design.png",
+    "c_img": "shopify://shop_images/circle-design.png",
+    "c_img1": "shopify://shop_images/circle-design.png",
+    "c_img2": "shopify://shop_images/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
+    "c_img3": "shopify://shop_images/leaf-design.png",
+    "b_img": "shopify://shop_images/circle-design.png",
+    "b_img1": "shopify://shop_images/leaf-design.png",
+    "b_img2": "shopify://shop_images/circle-design.png",
+    "b_img3": "shopify://shop_images/leaf-design.png",
+    "b_img4": "shopify://shop_images/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
+    "b_img5": "shopify://shop_images/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
+    "p_img": "shopify://shop_images/circle-design.png",
+    "p_img1": "shopify://shop_images/circle-design.png",
+    "p_img2": "shopify://shop_images/circle-design.png",
+    "p_img3": "shopify://shop_images/circle-design.png",
+    "p_img4": "shopify://shop_images/leaf2_43e63697-002f-4baf-914d-30f33d0972a4.png",
+    "p_img5": "shopify://shop_images/circle-design.png",
+    "p_img6": "shopify://shop_images/leaf-design.png",
+    "p_img7": "shopify://shop_images/circle-design.png",
     "third_color": "#788c6d",
     "four_color": "#01170d",
     "grey_color": "#b4b4b4",
     "red_color": "#fe4d4d",
-    "back_img": "shopify:\/\/shop_images\/upload.png",
+    "back_img": "shopify://shop_images/upload.png",
     "Four_color": "#01170d",
     "sections": {
       "header": {
@@ -71,7 +80,7 @@
             "type": "link-simple",
             "settings": {
               "title": "HOME",
-              "link": "https:\/\/latitudecoffee.com\/",
+              "link": "https://latitudecoffee.com/",
               "diffclassname": ""
             }
           },
@@ -79,7 +88,7 @@
             "type": "link-4linklists",
             "settings": {
               "title": "COFFEE",
-              "link": "shopify:\/\/collections\/coffee",
+              "link": "shopify://collections/coffee",
               "diffclassname": "",
               "link_title1": "COFFEE",
               "links_1": "coffee-roast",
@@ -87,15 +96,15 @@
               "links_2": "single-serve-k-cup-coffees",
               "link_title3": "EXTRAORDINARY COFFEES",
               "links_3": "extraordinary-coffees",
-              "image": "shopify:\/\/shop_images\/Subscribe_-_Latitude_23.5_coffee_Tea.png",
-              "imageblink": "shopify:\/\/collections\/all"
+              "image": "shopify://shop_images/Subscribe_-_Latitude_23.5_coffee_Tea.png",
+              "imageblink": "shopify://collections/all"
             }
           },
           "link_simple_4wDBPD": {
             "type": "link-simple",
             "settings": {
               "title": "ABOUT",
-              "link": "shopify:\/\/pages\/about-us",
+              "link": "shopify://pages/about-us",
               "diffclassname": ""
             }
           },
@@ -103,7 +112,7 @@
             "type": "link-simple",
             "settings": {
               "title": "WHOLESALE",
-              "link": "shopify:\/\/pages\/wholesale",
+              "link": "shopify://pages/wholesale",
               "diffclassname": ""
             }
           },
@@ -111,7 +120,7 @@
             "type": "link-simple",
             "settings": {
               "title": "CONTACT US",
-              "link": "shopify:\/\/pages\/contact-us",
+              "link": "shopify://pages/contact-us",
               "diffclassname": ""
             }
           },
@@ -130,7 +139,7 @@
             "disabled": true,
             "settings": {
               "title": "Roasted Coffee",
-              "link": "shopify:\/\/collections\/capsulated-coffee",
+              "link": "shopify://collections/capsulated-coffee",
               "diffclassname": ""
             }
           },
@@ -139,7 +148,7 @@
             "disabled": true,
             "settings": {
               "title": "All collections",
-              "link": "shopify:\/\/collections",
+              "link": "shopify://collections",
               "diffclassname": ""
             }
           },
@@ -171,7 +180,7 @@
             "type": "mob-link-simple",
             "settings": {
               "title": "About",
-              "link": "shopify:\/\/pages\/about-us",
+              "link": "shopify://pages/about-us",
               "diffclassname": ""
             }
           },
@@ -179,7 +188,7 @@
             "type": "mob-link-simple",
             "settings": {
               "title": "Wholesale",
-              "link": "shopify:\/\/pages\/wholesale",
+              "link": "shopify://pages/wholesale",
               "diffclassname": ""
             }
           },
@@ -187,7 +196,7 @@
             "type": "mob-link-simple",
             "settings": {
               "title": "Contact Us",
-              "link": "shopify:\/\/pages\/contact-us",
+              "link": "shopify://pages/contact-us",
               "diffclassname": ""
             }
           },
@@ -195,7 +204,7 @@
             "type": "mob-link-simple",
             "settings": {
               "title": "Subscribe & Save",
-              "link": "shopify:\/\/collections\/all",
+              "link": "shopify://collections/all",
               "diffclassname": ""
             }
           }
@@ -221,7 +230,7 @@
           "header-style-one {background: #00000080;}"
         ],
         "settings": {
-          "logo": "shopify:\/\/shop_images\/Latitude_23.5_Coffee_Tea_-_Logo.png"
+          "logo": "shopify://shop_images/Latitude_23.5_Coffee_Tea_-_Logo.png"
         }
       },
       "footer": {
@@ -253,15 +262,15 @@
           ".site-footer {color: white;}"
         ],
         "settings": {
-          "rimg": "shopify:\/\/shop_images\/latitude_coffee_footer.png",
-          "title": "<b> <strong>Where Coffees<br> come from <\/strong><\/b>",
+          "rimg": "shopify://shop_images/latitude_coffee_footer.png",
+          "title": "<b> <strong>Where Coffees<br> come from </strong></b>",
           "desc": "Respected for our dedication to Quality, Integrity, Innovation, and Service"
         }
       },
       "main-password-header": {
         "type": "main-password-header",
         "settings": {
-          "logo": "shopify:\/\/shop_images\/CoffeeStore.png"
+          "logo": "shopify://shop_images/CoffeeStore.png"
         }
       },
       "main-password-footer": {
@@ -319,25 +328,25 @@
     ],
     "blocks": {
       "14060646107696862457": {
-        "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/judgeme_core\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {
         }
       },
       "855628211100114053": {
-        "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {
         }
       },
       "13951170544780599758": {
-        "type": "shopify:\/\/apps\/tapita-seo-speed\/blocks\/app-embed\/cd37ca7a-40ad-4fdc-afd3-768701482209",
+        "type": "shopify://apps/tapita-seo-speed/blocks/app-embed/cd37ca7a-40ad-4fdc-afd3-768701482209",
         "disabled": false,
         "settings": {
         }
       },
       "15683396631634586217": {
-        "type": "shopify:\/\/apps\/inbox\/blocks\/chat\/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
         "settings": {
           "button_color": "#f1eae0",
@@ -351,19 +360,19 @@
         }
       },
       "15588394620387169604": {
-        "type": "shopify:\/\/apps\/subify-subscriptions-app\/blocks\/app-embed-block\/bc0dba25-cd46-4841-bea4-6bdfe9ac815f",
+        "type": "shopify://apps/subify-subscriptions-app/blocks/app-embed-block/bc0dba25-cd46-4841-bea4-6bdfe9ac815f",
         "disabled": false,
         "settings": {
         }
       },
       "11068332061543699368": {
-        "type": "shopify:\/\/apps\/booster-page-speed-optimizer\/blocks\/app-embed\/d920faf3-7c60-423a-9636-22618b5561b5",
+        "type": "shopify://apps/booster-page-speed-optimizer/blocks/app-embed/d920faf3-7c60-423a-9636-22618b5561b5",
         "disabled": true,
         "settings": {
         }
       },
       "1793219247286972479": {
-        "type": "shopify:\/\/apps\/searchpie-seo-speed\/blocks\/sb-snippets\/29f6c508-9bb9-4e93-9f98-b637b62f3552",
+        "type": "shopify://apps/searchpie-seo-speed/blocks/sb-snippets/29f6c508-9bb9-4e93-9f98-b637b62f3552",
         "disabled": true,
         "settings": {
           "review_app": "spr"
