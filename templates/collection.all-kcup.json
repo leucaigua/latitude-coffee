@@ -1,0 +1,173 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "product-grid-banner",
+      "custom_css": [
+
+      ],
+      "settings": {
+      }
+    },
+    "all-coffee": {
+      "type": "all-coffee",
+      "custom_css": [
+        ".section-title p {color: #473014;}"
+      ],
+      "settings": {
+        "subtitle": "´",
+        "title": "Signature Blends",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "signature-blends",
+        "products_per_page": 12,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_ag4PPt": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Espresso Blends",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "espresso",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_BqMqgX": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Origins",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "origins",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_DGyDCq": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Organics",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "organic",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_qbn4z3": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Decaf",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "decaffeinated",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_bp88yk": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Flavored",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "flavors",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "shop_product_LEdyVp": {
+      "type": "shop-product",
+      "custom_css": [
+        "p {color: #473014;}"
+      ],
+      "settings": {
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "Get Free Shipping! <p>Spend $35 or more in our store and shipping is on the house.</p>",
+        "btn_url": "",
+        "btn": "",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": false,
+        "show_type": false,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "best-sellers"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "all-coffee",
+    "all_coffee_ag4PPt",
+    "all_coffee_BqMqgX",
+    "all_coffee_DGyDCq",
+    "all_coffee_qbn4z3",
+    "all_coffee_bp88yk",
+    "shop_product_LEdyVp"
+  ]
+}
