@@ -280,37 +280,6 @@
       },
       "recommendations-product": {
         "type": "recommendations-product",
-        "blocks": {
-          "854c9f44-d80f-4588-9782-987523ac9da2": {
-            "type": "text_block",
-            "settings": {
-              "add_product": "5lbs-90-mile-stretch-espresso-espresso-beans-free-shipping",
-              "product_location": "Saratosa",
-              "product_time": "36 mins Ago"
-            }
-          },
-          "4286313c-58e4-4c1c-a069-e1107f565150": {
-            "type": "text_block",
-            "settings": {
-              "add_product": "organic-french-vanilla-1",
-              "product_location": "Miami",
-              "product_time": "50 mins Ago"
-            }
-          },
-          "8b6b340b-b75f-42ed-8a04-b3d945a81133": {
-            "type": "text_block",
-            "settings": {
-              "add_product": "angel-kiss",
-              "product_location": "Tampa",
-              "product_time": "20 mins Ago"
-            }
-          }
-        },
-        "block_order": [
-          "854c9f44-d80f-4588-9782-987523ac9da2",
-          "4286313c-58e4-4c1c-a069-e1107f565150",
-          "8b6b340b-b75f-42ed-8a04-b3d945a81133"
-        ],
         "settings": {
           "show_notification": false,
           "product_title": "Someone purchased",

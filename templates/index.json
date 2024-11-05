@@ -76,13 +76,6 @@
             "collection": "best-sellers"
           }
         },
-        "b345df70-6d93-4d4c-a132-848235b20cd9": {
-          "type": "collection",
-          "settings": {
-            "cat_name": "All Coffees",
-            "collection": "coffee"
-          }
-        },
         "8d1f9ea4-f915-4b8e-8c32-8aed192b187e": {
           "type": "collection",
           "settings": {
@@ -121,7 +114,6 @@
       },
       "block_order": [
         "447e3188-0dde-4441-b0bb-8ca177d3b07e",
-        "b345df70-6d93-4d4c-a132-848235b20cd9",
         "8d1f9ea4-f915-4b8e-8c32-8aed192b187e",
         "565ddce5-7c8e-4c33-948b-a34b9659aaea",
         "9f12d328-1eb5-4b8e-b975-a929d86b2e4e",
@@ -293,10 +285,13 @@
         "product": "5lbs-90-mile-stretch-espresso-espresso-beans-free-shipping"
       }
     },
-    "custom_html_HwtKDf": {
-      "type": "custom-html",
+    "cms_email_Q9kdKP": {
+      "type": "cms-email",
       "settings": {
-        "custom_html": "<div class=\"container\" style=\"padding-top\">\n<div class=\"klaviyo-form-XXCQXk\"></div> \n</div>"
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "STAY CONNECTED",
+        "desc": "Join our newsletter. Get 10% off your first purchase.",
+        "img": "shopify://shop_images/Newsletter_Latitude_23.5_Coffee_Tea.png"
       }
     },
     "1010d81f-47d6-47cf-9a4d-1903b37e6103": {
@@ -315,18 +310,6 @@
         "post_limit": "4",
         "blog_show_date": true
       }
-    },
-    "instagenie_zegsu_GznKnG": {
-      "type": "instagenie-zegsu",
-      "settings": {
-        "heading_font": "helvetica_n4",
-        "heading_size": 20,
-        "heading_alignment": "center",
-        "feed_width": 100,
-        "section_top_padding": 0,
-        "section_bottom_padding": 0,
-        "html_area": ""
-      }
     }
   },
   "order": [
@@ -337,8 +320,7 @@
     "43576fc0-7509-439c-8db5-631f65d057cf",
     "aa98d079-15fe-428e-b7a2-291819935c1c",
     "84237d7a-6026-481f-a966-f5a23ccf91b3",
-    "custom_html_HwtKDf",
-    "1010d81f-47d6-47cf-9a4d-1903b37e6103",
-    "instagenie_zegsu_GznKnG"
+    "cms_email_Q9kdKP",
+    "1010d81f-47d6-47cf-9a4d-1903b37e6103"
   ]
 }
