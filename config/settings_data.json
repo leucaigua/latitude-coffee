@@ -92,7 +92,7 @@
               "diffclassname": "",
               "link_title1": "COFFEE",
               "links_1": "coffee-roast",
-              "link_title2": "K-CUPS & NESPRESSO COFFEES",
+              "link_title2": "K-CUPS & NESPRESSO COMPATIBLE CAPSULES",
               "links_2": "single-serve-k-cup-coffees",
               "link_title3": "EXTRAORDINARY COFFEES",
               "links_3": "extraordinary-coffees",
@@ -275,8 +275,7 @@
       },
       "main-password-footer": {
         "type": "main-password-footer",
-        "settings": {
-        }
+        "settings": {}
       },
       "recommendations-product": {
         "type": "recommendations-product",
@@ -288,31 +287,25 @@
       },
       "quickview": {
         "type": "quickview",
-        "settings": {
-        }
+        "settings": {}
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "13951170544780599758": {
         "type": "shopify://apps/tapita-seo-speed/blocks/app-embed/cd37ca7a-40ad-4fdc-afd3-768701482209",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
@@ -331,8 +324,7 @@
       "15588394620387169604": {
         "type": "shopify://apps/subify-subscriptions-app/blocks/app-embed-block/bc0dba25-cd46-4841-bea4-6bdfe9ac815f",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "1793219247286972479": {
         "type": "shopify://apps/searchpie-seo-speed/blocks/sb-snippets/29f6c508-9bb9-4e93-9f98-b637b62f3552",
