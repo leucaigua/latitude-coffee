@@ -107,7 +107,7 @@
         "collection_rdhVFD": {
           "type": "collection",
           "settings": {
-            "cat_name": "Nespresso",
+            "cat_name": "Nespresso Compatible Capsules",
             "collection": "nespresso"
           }
         }
@@ -234,9 +234,7 @@
         "b0df2ac9-1424-43fb-919c-786aed3e7902",
         "448e4586-8ea4-4e52-a6f2-486bea576e7c"
       ],
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "bg_img": "shopify://shop_images/Corporate_pattern.png",
         "subtitle": "Latitude 23.5 Coffee & Tea",
@@ -296,9 +294,7 @@
     },
     "1010d81f-47d6-47cf-9a4d-1903b37e6103": {
       "type": "featured-blog",
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "bg_img": "shopify://shop_images/coffee-three-latitude-coffee-and-tea.png",
         "subtitle": "Latitude 23.5 Coffee & Tea",
