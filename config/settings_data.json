@@ -162,6 +162,22 @@
               "links": "coffee-roast"
             }
           },
+          "mob_link_linklist_bjntRX": {
+            "type": "mob-link-linklist",
+            "settings": {
+              "title": "Cold Brew",
+              "diffclassname": "",
+              "links": "cold-brew"
+            }
+          },
+          "mob_link_linklist_9CbrQa": {
+            "type": "mob-link-linklist",
+            "settings": {
+              "title": "K-Cups & Nespresso Capsules",
+              "diffclassname": "",
+              "links": "single-serve-k-cup-coffees"
+            }
+          },
           "mob_link_linklist_C8nkWU": {
             "type": "mob-link-linklist",
             "settings": {
@@ -221,6 +237,8 @@
           "38eb011e-e5f4-4b1b-86c3-122726b290ca",
           "569c216d-2a62-469a-9d85-cc50691dae0c",
           "mob_link_linklist_87gCAz",
+          "mob_link_linklist_bjntRX",
+          "mob_link_linklist_9CbrQa",
           "mob_link_linklist_C8nkWU",
           "mob_link_linklist_y693jR",
           "c8fb5cfc-1aa2-487c-817f-0e245294a919",
