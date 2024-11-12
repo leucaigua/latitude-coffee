@@ -92,10 +92,12 @@
               "diffclassname": "",
               "link_title1": "COFFEE",
               "links_1": "coffee-roast",
-              "link_title2": "K-CUPS & NESPRESSO COMPATIBLE CAPSULES",
-              "links_2": "single-serve-k-cup-coffees",
-              "link_title3": "EXTRAORDINARY COFFEES",
-              "links_3": "extraordinary-coffees",
+              "link_title2": "COLD BREW COFFEE",
+              "links_2": "cold-brew",
+              "link_title3": "K-CUPS & NESPRESSO COMPATIBLE CAPSULES",
+              "links_3": "single-serve-k-cup-coffees",
+              "link_title4": "EXTRAORDINARY COFFEES",
+              "links_4": "extraordinary-coffees",
               "image": "shopify://shop_images/Subscribe_-_Latitude_23.5_coffee_Tea.png",
               "imageblink": "shopify://collections/all"
             }
