@@ -162,28 +162,12 @@
               "links": "coffee-roast"
             }
           },
-          "link_simple_UAKUtF": {
-            "type": "link-simple",
-            "settings": {
-              "title": "Cold Brew Coffee",
-              "link": "shopify://collections/cold-brew",
-              "diffclassname": ""
-            }
-          },
           "mob_link_linklist_C8nkWU": {
             "type": "mob-link-linklist",
             "settings": {
-              "title": "K-Cups Capsules",
+              "title": "Single Serve K-Cup Coffee",
               "diffclassname": "",
               "links": "single-serve-k-cup-coffees"
-            }
-          },
-          "link_simple_qQgW97": {
-            "type": "link-simple",
-            "settings": {
-              "title": "Nespresso Compatible Capsules",
-              "link": "shopify://collections/nespresso",
-              "diffclassname": ""
             }
           },
           "mob_link_linklist_y693jR": {
@@ -237,9 +221,7 @@
           "38eb011e-e5f4-4b1b-86c3-122726b290ca",
           "569c216d-2a62-469a-9d85-cc50691dae0c",
           "mob_link_linklist_87gCAz",
-          "link_simple_UAKUtF",
           "mob_link_linklist_C8nkWU",
-          "link_simple_qQgW97",
           "mob_link_linklist_y693jR",
           "c8fb5cfc-1aa2-487c-817f-0e245294a919",
           "13cb596f-fb44-4cf2-827b-7a1fcec6988b",
