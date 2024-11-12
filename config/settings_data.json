@@ -178,6 +178,14 @@
               "links": "single-serve-k-cup-coffees"
             }
           },
+          "link_simple_qQgW97": {
+            "type": "link-simple",
+            "settings": {
+              "title": "Nespresso Compatible Capsules",
+              "link": "shopify://collections/nespresso",
+              "diffclassname": ""
+            }
+          },
           "mob_link_linklist_y693jR": {
             "type": "mob-link-linklist",
             "settings": {
@@ -231,6 +239,7 @@
           "mob_link_linklist_87gCAz",
           "link_simple_UAKUtF",
           "mob_link_linklist_C8nkWU",
+          "link_simple_qQgW97",
           "mob_link_linklist_y693jR",
           "c8fb5cfc-1aa2-487c-817f-0e245294a919",
           "13cb596f-fb44-4cf2-827b-7a1fcec6988b",
