@@ -178,14 +178,6 @@
               "links": "single-serve-k-cup-coffees"
             }
           },
-          "mob_link_linklist_C8nkWU": {
-            "type": "mob-link-linklist",
-            "settings": {
-              "title": "Single Serve K-Cup Coffee",
-              "diffclassname": "",
-              "links": "single-serve-k-cup-coffees"
-            }
-          },
           "mob_link_linklist_y693jR": {
             "type": "mob-link-linklist",
             "settings": {
@@ -239,7 +231,6 @@
           "mob_link_linklist_87gCAz",
           "mob_link_linklist_bjntRX",
           "mob_link_linklist_9CbrQa",
-          "mob_link_linklist_C8nkWU",
           "mob_link_linklist_y693jR",
           "c8fb5cfc-1aa2-487c-817f-0e245294a919",
           "13cb596f-fb44-4cf2-827b-7a1fcec6988b",
