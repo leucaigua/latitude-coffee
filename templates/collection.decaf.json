@@ -34,15 +34,15 @@
         ".section-title p {color: #473014;}"
       ],
       "settings": {
-        "subtitle": "Latitude 23.5 Coffee & Tea",
-        "title": "Get Free Shipping! <p>Spend $35 or more in our store and shipping is on the house.</p>",
+        "subtitle": "Check Our Flavored Decaf",
+        "title": "Flavored Coffee",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_wish": true,
         "show_type": true,
         "show_variants": true,
         "pro_img_widthheight": "600x600",
-        "collection": "flavored-k-cup-coffees"
+        "collection": "flavors"
       }
     }
   },
