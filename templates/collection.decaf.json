@@ -1,0 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "product-grid-banner",
+      "settings": {}
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 12,
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_review": true,
+        "show_variants": true,
+        "show_qty": true,
+        "pro_img_widthheight": "306x203",
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "f19a86a3-c28c-4ed9-9ee4-05e4aa4a5b82": {
+      "type": "category-product",
+      "custom_css": [
+        ".section-title p {color: #473014;}"
+      ],
+      "settings": {
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Get Free Shipping! <p>Spend $35 or more in our store and shipping is on the house.</p>",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "flavored-k-cup-coffees"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "f19a86a3-c28c-4ed9-9ee4-05e4aa4a5b82"
+  ]
+}
