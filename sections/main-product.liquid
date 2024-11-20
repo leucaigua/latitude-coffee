@@ -463,11 +463,19 @@
           </ul>
         </div>
       </div>
+      {% if product.tags contains 'Cold Brew' or product.tags contains 'Cold Brew' %}
       <div class="col-md-6 col-12">
+          <div class="pdp-descrp-img">
+              <img src="https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Cold_Brew_Coffee_Sachets.png?v=1732125392">
+          </div>
+      </div>
+      {%- else -%}
+       <div class="col-md-6 col-12">
           <div class="pdp-descrp-img">
               <img src="{{ section.settings.img | img_url: 'master' }}">
           </div>
       </div>
+      {%  endif %}
     </div>
   </div>
 </div>
