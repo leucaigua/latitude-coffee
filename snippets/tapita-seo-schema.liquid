@@ -74,8 +74,8 @@
                 {%- endif -%}
             {%- elsif variableMapper[i] == "page.meta.description"  -%}
                 {%- if variableValueItem == nil or variableValueItem == ''  -%}
-                    {%- if product.description  -%}
-                    {%- assign variableValueItem = product.description | strip_html -%}
+                    {%- if product.metafields.global.description_tag.value  -%}
+                    {%- assign variableValueItem = product.metafields.global.description_tag.value -%}
                     {%- elsif page_description -%}
                     {%- assign variableValueItem = page_description | strip_html -%}
                     {%- elsif collection.description -%}
