@@ -20,6 +20,9 @@
     },
     "main": {
       "type": "main-article",
+      "custom_css": [
+        "a {color: #c7ab84;}"
+      ],
       "settings": {
         "show_recent_articles": true
       }
