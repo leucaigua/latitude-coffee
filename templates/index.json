@@ -134,20 +134,20 @@
     "cff8a77a-d221-4684-85d0-890713bb77a1": {
       "type": "product-banner",
       "settings": {
-        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Special-Offer-Banner-Latitude-Coffee.jpg?v=1730216973",
+        "video_url": "https://images.unsplash.com/photo-1545608444-f045a6db6133?q=80&w=2946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "subtitle": "Latitude 23.5 Coffee & Tea",
-        "title": "Special Offer!",
-        "desc": "15% Off! Join our monthly subscription service and enjoy the convenience of receiving your coffee regularly. Use the code: LATITUDEX15",
+        "title": "Seasonal Holiday",
+        "desc": "☕ Whether you're treating yourself or gifting joy to a coffee lover, these seasonal blends are the perfect way to celebrate.",
         "btn_url": "shopify://collections/all",
-        "btn": "Show Products",
+        "btn": "See our Seasonal Products",
         "show_secondary_image": false,
         "show_vendor": true,
         "show_wish": true,
         "show_type": true,
         "show_variants": true,
         "pro_img_widthheight": "600x600",
-        "product": "5lbs-90-mile-stretch-espresso-espresso-beans-free-shipping",
-        "product1": "blue-heaven"
+        "product": "peppermint-mocha",
+        "product1": "let-it-snow"
       }
     },
     "43576fc0-7509-439c-8db5-631f65d057cf": {
