@@ -139,7 +139,7 @@
         "title": "Seasonal Holiday",
         "desc": "☕ Whether you're treating yourself or gifting joy to a coffee lover, these seasonal blends are the perfect way to celebrate.",
         "btn_url": "shopify://collections/all",
-        "btn": "See our Seasonal Products",
+        "btn": "",
         "show_secondary_image": false,
         "show_vendor": true,
         "show_wish": true,
