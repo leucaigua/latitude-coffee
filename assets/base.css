@@ -28,10 +28,6 @@ svg,img {
   display: block;
 }
 
-a {
-  color: #c7ab84;
-}
-
 a,.btn,button { 
   text-decoration: none;
   outline: none; 
