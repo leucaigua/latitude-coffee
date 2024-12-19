@@ -118,6 +118,14 @@
               "diffclassname": ""
             }
           },
+          "link_simple_r36g6X": {
+            "type": "link-simple",
+            "settings": {
+              "title": "EQUIPMENT",
+              "link": "shopify://pages/equipment",
+              "diffclassname": ""
+            }
+          },
           "link_simple_JnQwEA": {
             "type": "link-simple",
             "settings": {
@@ -224,6 +232,7 @@
           "ec360094-25b9-4097-b7d6-2a601c7a2249",
           "link_simple_4wDBPD",
           "link_simple_ceLHUV",
+          "link_simple_r36g6X",
           "link_simple_JnQwEA",
           "1f08f376-3ea5-4c95-96cb-d9d9e2b8a3db",
           "38eb011e-e5f4-4b1b-86c3-122726b290ca",
