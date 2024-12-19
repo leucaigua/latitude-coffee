@@ -202,6 +202,14 @@
               "diffclassname": ""
             }
           },
+          "mob_link_simple_axJ4bg": {
+            "type": "mob-link-simple",
+            "settings": {
+              "title": "EQUIPMENT",
+              "link": "shopify://pages/equipment",
+              "diffclassname": ""
+            }
+          },
           "13cb596f-fb44-4cf2-827b-7a1fcec6988b": {
             "type": "mob-link-simple",
             "settings": {
@@ -242,6 +250,7 @@
           "mob_link_linklist_9CbrQa",
           "mob_link_linklist_y693jR",
           "c8fb5cfc-1aa2-487c-817f-0e245294a919",
+          "mob_link_simple_axJ4bg",
           "13cb596f-fb44-4cf2-827b-7a1fcec6988b",
           "mob_link_simple_4xfGYn",
           "mob_link_simple_qHUDDx"
