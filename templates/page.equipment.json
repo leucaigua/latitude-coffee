@@ -15,54 +15,7 @@
         "description": "At Latitude 23.5 Coffee & Tea, we believe that the perfect cup of coffee starts with the right equipment. Whether you're a professional barista or a coffee enthusiast, our carefully selected espresso machines and grinders are designed to help you brew your best cup yet. We are proud to offer premium, high-performance equipment that ensures an exceptional coffee experience every time."
       }
     },
-    "main": {
-      "type": "main-aboutus",
-      "blocks": {
-        "33308ff1-cde0-487e-b237-a505018d7131": {
-          "type": "text",
-          "settings": {
-            "title": "Roasting & Packaging",
-            "desc": "Daily capacity of 5,000 lbs of roasted coffee with a minimum order quantity of 50 lbs for toll roasting"
-          }
-        },
-        "812336c1-da3d-458b-bcf4-c6965552360c": {
-          "type": "text",
-          "settings": {
-            "title": "K-Cup and Nespresso Capsule Packaging",
-            "desc": "Low MOQs and quick turnaround times make our K-Cup and Nespresso options perfect for businesses looking to expand their product lines with minimal upfront investment"
-          }
-        },
-        "text_pJDxKy": {
-          "type": "text",
-          "settings": {
-            "title": "Cold Brew Filter Sachet Packaging",
-            "desc": "Choose our proprietary blend or provide your own to create cold brew coffee that’s simple, delicious, and ready to go"
-          }
-        }
-      },
-      "block_order": [
-        "33308ff1-cde0-487e-b237-a505018d7131",
-        "812336c1-da3d-458b-bcf4-c6965552360c",
-        "text_pJDxKy"
-      ],
-      "custom_css": [],
-      "settings": {
-        "title": "",
-        "desc": "",
-        "desc1": "",
-        "m_title": "Espresso Machines",
-        "title_1": "Sustainable Practices:",
-        "desc_1": "",
-        "desc1_1": "",
-        "img": "shopify://shop_images/IMG_9107.jpg",
-        "title_2": "",
-        "desc_2": "",
-        "desc2_1": "",
-        "img1": "shopify://shop_images/IMG_9106.jpg",
-        "s_title": "",
-        "s_desc": ""
-      }
-    },
+    
     "shop_product_Q8wzjA": {
       "type": "shop-product",
       "settings": {
@@ -82,7 +35,6 @@
   },
   "order": [
     "main-page",
-    "main",
     "shop_product_Q8wzjA"
   ]
 }
