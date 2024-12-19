@@ -205,7 +205,7 @@
           "mob_link_simple_axJ4bg": {
             "type": "mob-link-simple",
             "settings": {
-              "title": "EQUIPMENT",
+              "title": "Equipment",
               "link": "shopify://pages/equipment",
               "diffclassname": ""
             }
