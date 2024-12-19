@@ -45,23 +45,21 @@
         "812336c1-da3d-458b-bcf4-c6965552360c",
         "text_pJDxKy"
       ],
-      "custom_css": [
-        ".abt-shp-column-right img {width: 70%;}"
-      ],
+      "custom_css": [],
       "settings": {
-        "title": "Latitude 23.5° Coffee & Tea",
-        "desc": "Latitude 23.5 Coffee & Tea started in 2003 in Sarasota, Florida. For more than a decade, we have been hand roasting some of the world's finest coffee for those local to the Sarasota area, as well as coffee enthusiasts everywhere. We continue to strive to deliver a consistently excellent cup.\n<br><br>\nThis may be your first time ordering from us, or perhaps you've experience our coffee through one of the many retail locations where Latitude coffee is available.",
-        "desc1": "As we continue to grow, we would love to hear what you think of your Latitude 23.5 experience. Feel free to give us a call, drop us a line, or stop by to tour our roasting facility.\n<br><br>\nFrom all of us at Latitude 23.5, thank you for your continued interest and support.\n<br><br>\nSincerely,\n<br><br>\nDimitry Erez, Founder",
-        "m_title": "What Sets Us Apart",
+        "title": "",
+        "desc": "",
+        "desc1": "",
+        "m_title": "Espresso Machines",
         "title_1": "Sustainable Practices:",
-        "desc_1": "We are proud to operate in a facility that is both Organic and Kosher Certified. Our sustainable practices are at the heart of every decision we make, ensuring that our products are not only good for the soul but also for the planet.\n<br><br>",
-        "desc1_1": "<h3 style=\"color: #c7ab84\">Advanced Roasting Technology</h3>\n<br>\nOur roasting process is perfected with state-of-the-art, computer-controlled profile software across commercial roasters, allowing us to consistently produce coffee that meets our rigorous standards of quality.",
+        "desc_1": "",
+        "desc1_1": "",
         "img": "shopify://shop_images/IMG_9107.jpg",
-        "title_2": "Expertise in Packaging",
-        "desc_2": "With an on-site Nitrogen generator, we ensure that our coffee, whether in bags, K-Cups, or Nespresso capsules, is packaged with the utmost care to preserve freshness and flavor. Our facility boasts rapid packaging capabilities, from fractional coffee packages to whole bean or ground coffee.\n<br><br>",
-        "desc2_1": "<h3 style=\"color: #c7ab84\">Customization and Innovation</h3>\n<br>\nWe offer custom blend development for both drip coffee and espresso, allowing us to cater to a wide array of tastes and preferences. Whether you prefer a bold espresso or a smooth cold brew, our team is skilled in creating blends that are as unique as our customers.",
+        "title_2": "",
+        "desc_2": "",
+        "desc2_1": "",
         "img1": "shopify://shop_images/IMG_9106.jpg",
-        "s_title": "Comprehensive Services Include",
+        "s_title": "",
         "s_desc": ""
       }
     },
