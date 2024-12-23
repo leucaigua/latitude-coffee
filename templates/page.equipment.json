@@ -9,6 +9,15 @@
  */
 {
   "sections": {
+    "custom_html_RGbpb6": {
+      "type": "custom-html",
+      "custom_css": [
+        ".klaviyo-form-S9zRAF {padding: 30px;}"
+      ],
+      "settings": {
+        "custom_html": "<div class=\"klaviyo-form-S9zRAF\"></div>"
+      }
+    },
     "main-page": {
       "type": "main-page",
       "settings": {
@@ -30,20 +39,11 @@
         "pro_img_widthheight": "600x600",
         "collection": "best-sellers"
       }
-    },
-    "custom_html_RGbpb6": {
-      "type": "custom-html",
-      "custom_css": [
-        ".klaviyo-form-S9zRAF {padding: 30px;}"
-      ],
-      "settings": {
-        "custom_html": "<div class=\"klaviyo-form-S9zRAF\"></div>"
-      }
     }
   },
   "order": [
     "main-page",
-    "shop_product_Q8wzjA",
-    "custom_html_RGbpb6"
+    "custom_html_RGbpb6",
+    "shop_product_Q8wzjA"
   ]
 }
