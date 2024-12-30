@@ -12,6 +12,16 @@
     "e97547a6-f33b-44d4-90ef-b8b784f07f21": {
       "type": "homeslider",
       "blocks": {
+        "image_xdrRpa": {
+          "type": "image",
+          "settings": {
+            "subtitle": "Love Latitude 23.5 Coffee & Tea? Share the Love and Save!",
+            "title": "Join Our Referral Program and Earn Rewards!",
+            "desc": "At Latitude 23.5, we believe great coffee tastes even better when shared. With our referral program, you can treat your friends to their first sip of joy and earn rewards while doing it.",
+            "btn": "Learn More",
+            "btn_url": "shopify://pages/referral-program"
+          }
+        },
         "image_zjBTma": {
           "type": "image",
           "settings": {
@@ -44,6 +54,7 @@
         }
       },
       "block_order": [
+        "image_xdrRpa",
         "image_zjBTma",
         "e02d2dbc-2072-4b54-9a8b-d30dc2376e8a",
         "a4a3aa9d-9a83-4316-95a4-4c140d5f402b"
