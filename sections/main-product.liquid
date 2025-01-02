@@ -207,6 +207,14 @@
                 {%- endfor -%}
               
                 <div class="section-title-prod">
+                  {% if product.tags contains 'flavored' or product.tags contains 'Coffee: Flavors' %}
+                    <p 
+                      style="color: #36593C;
+                      font-size: 12px;">
+                      Please note that recurring orders for Flavored Coffee may take up to 2 business days to be processed.
+                    </p>
+                  {%  endif %}
+                  
                     {%- for block in section.blocks -%}
                         {%- case block.type -%}
                         {%- when 'vendor' -%}
