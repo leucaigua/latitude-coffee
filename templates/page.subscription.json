@@ -18,6 +18,32 @@
         "description": "Join the Latitude Coffee Subscription and savor your favorite blends, delivered fresh and on your schedule."
       }
     },
+    "faqs_iniRqN": {
+      "type": "faqs",
+      "blocks": {
+        "text_yBkQVh": {
+          "type": "text",
+          "settings": {
+            "name1": "Can I change my subscription at any time?",
+            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time through your account.</p>",
+            "name2": "Is there a minimum commitment?",
+            "info2": "<p>Nope! Flexibility is key. You can subscribe for as long as you like, hassle-free.</p>",
+            "name3": "When will my coffee ship?",
+            "info3": "<p>Your coffee will be roasted and shipped based on your chosen schedule, ensuring maximum freshness. Flavored Coffee may take up to 2 business days to be processed.</p>",
+            "name4": "How do I manage my subscriptions",
+            "info4": "<p>Access your Subscription Portal through your LatitudeCoffee.com account login. If you do not have an account, you will need to create one using the same email address used at checkout. <br/><br/>Once your account is activated, you can log in and access your Subscription Portal by clicking on the <strong>Manage Subscriptions</strong> button. After logging in, this button will be above your Order History.<br/><br/>You can also access your account using a direct link to the Subscription Portal. This link is normally sent in the <strong>Subscription Confirmation email </strong>when you begin a subscription and the <strong>Upcoming Order email</strong>.</p>",
+            "name5": "",
+            "info5": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_yBkQVh"
+      ],
+      "settings": {
+        "title": "FAQs About Subscriptions"
+      }
+    },
     "shop_product_VyWjfR": {
       "type": "shop-product",
       "custom_css": [
@@ -36,37 +62,11 @@
         "pro_img_widthheight": "600x600",
         "collection": "best-sellers"
       }
-    },
-    "faqs_iniRqN": {
-      "type": "faqs",
-      "blocks": {
-        "text_yBkQVh": {
-          "type": "text",
-          "settings": {
-            "name1": "Can I change my subscription at any time?",
-            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time through your account.</p>",
-            "name2": "Is there a minimum commitment?",
-            "info2": "<p>Nope! Flexibility is key. You can subscribe for as long as you like, hassle-free.</p>",
-            "name3": "When will my coffee ship?",
-            "info3": "<p>Your coffee will be roasted and shipped based on your chosen schedule, ensuring maximum freshness. Flavored Coffee may take up to 2 business days to be processed.</p>",
-            "name4": "",
-            "info4": "",
-            "name5": "",
-            "info5": ""
-          }
-        }
-      },
-      "block_order": [
-        "text_yBkQVh"
-      ],
-      "settings": {
-        "title": "FAQs About Subscriptions"
-      }
     }
   },
   "order": [
     "main",
-    "shop_product_VyWjfR",
-    "faqs_iniRqN"
+    "faqs_iniRqN",
+    "shop_product_VyWjfR"
   ]
 }
