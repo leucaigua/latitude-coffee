@@ -36,10 +36,37 @@
         "pro_img_widthheight": "600x600",
         "collection": "best-sellers"
       }
+    },
+    "faqs_iniRqN": {
+      "type": "faqs",
+      "blocks": {
+        "text_yBkQVh": {
+          "type": "text",
+          "settings": {
+            "name1": "Can I change my subscription at any time?",
+            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time through your account.</p>",
+            "name2": "Is there a minimum commitment?",
+            "info2": "<p>Nope! Flexibility is key. You can subscribe for as long as you like, hassle-free.</p>",
+            "name3": "When will my coffee ship?",
+            "info3": "<p>Your coffee will be roasted and shipped based on your chosen schedule, ensuring maximum freshness. Flavored Coffee may take up to 2 business days to be processed.</p>",
+            "name4": "",
+            "info4": "",
+            "name5": "",
+            "info5": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_yBkQVh"
+      ],
+      "settings": {
+        "title": "FAQs About Subscriptions"
+      }
     }
   },
   "order": [
     "main",
-    "shop_product_VyWjfR"
+    "shop_product_VyWjfR",
+    "faqs_iniRqN"
   ]
 }
