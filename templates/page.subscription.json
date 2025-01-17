@@ -39,8 +39,8 @@
         "text_9J338t": {
           "type": "text",
           "settings": {
-            "name1": "Can I change my subscription at any time?",
-            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time through your account.</p>",
+            "name1": "Can I reschedule or skip my next subscription?",
+            "info1": "<ol><li>Login to your subscription portal.</li><li>Click on the <strong>“See More Details”</strong> option for the subscription you’d like to adjust.</li><li>There, you’ll find options to <strong>Reschedule</strong> or <strong>Skip</strong> your next shipment.</li></ol>",
             "name2": "Is there a minimum commitment?",
             "info2": "<p>Nope! Flexibility is key. You can subscribe for as long as you like, hassle-free.</p>",
             "name3": "When will my coffee ship?",
