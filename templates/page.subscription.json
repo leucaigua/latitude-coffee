@@ -40,15 +40,15 @@
           "type": "text",
           "settings": {
             "name1": "Can I reschedule or skip my next subscription?",
-            "info1": "<ol><li>Login to your subscription portal.</li><li>Click on the <strong>“See More Details”</strong> option for the subscription you’d like to adjust.</li><li>There, you’ll find options to <strong>Reschedule</strong> or <strong>Skip</strong> your next shipment.</li></ol>",
-            "name2": "Is there a minimum commitment?",
-            "info2": "<p>Nope! Flexibility is key. You can subscribe for as long as you like, hassle-free.</p>",
+            "info1": "<ol><li>Login to the subscription portal.</li><li>Click on the <strong>“See More Details”</strong> option for the subscription you’d like to adjust.</li><li>There, you’ll find options to <strong>Reschedule</strong> or <strong>Skip</strong> your next shipment.</li></ol>",
+            "name2": "Can I swap a subscription product for something else?",
+            "info2": "<p>To swap a product:</p><ol><li>Login to the subscription portal.</li><li>Under the subscription you want to edit, select <strong>See more deails</strong>.</li><li>Select Edit option</li><li><strong>Swap this for a different product</strong>. </li><li>Choose a product to swap for the current product and click <strong>Swap</strong>.</li></ol><p>Review the product options and select <strong>Swap product</strong> to confirm. </p>",
             "name3": "When will my coffee ship?",
             "info3": "<p>Your coffee will be roasted and shipped based on your chosen schedule, ensuring maximum freshness. Flavored Coffee may take up to 2 business days to be processed.</p>",
-            "name4": "How do I manage my subscriptions",
-            "info4": "<p>Access your Subscription Portal through your LatitudeCoffee.com account login. If you do not have an account, you will need to create one using the same email address used at checkout. <br/><br/>Once your account is activated, you can log in and access your Subscription Portal by clicking on the <strong>Manage Subscriptions</strong> button. After logging in, this button will be above your Order History.<br/><br/>You can also access your account using a direct link to the Subscription Portal. This link is normally sent in the <strong>Subscription Confirmation email </strong>when you begin a subscription and the <strong>Upcoming Order email</strong>.</p>",
-            "name5": "",
-            "info5": ""
+            "name4": "Can I edit the delivery frecuency for a subscription?",
+            "info4": "<p>To edit the frequency for a subscription: </p><ol><li>Login to the subscription portal.</li><li>Under the subscription you want to edit, select <strong>See more detail</strong>.</li><li>You can change the quantity of products and frequency, then select <strong>Save changes</strong> to confirm.</li></ol>",
+            "name5": "How do I manage addresses or update an existing shipping address?",
+            "info5": "<p>You can update existing shipping addresses from the Shipping tab:</p><ol><li>Login to your subscription portal.</li><li>Click on <strong>See more details</strong> button.</li><li>Click the <strong>Edit</strong> button on the address you want to update.</li></ol>"
           }
         },
         "text_DwQDf6": {
