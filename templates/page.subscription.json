@@ -60,8 +60,8 @@
             "info2": "<ol><li>Login to Subscriptions portal.</li><li>Click on the \"See more details\" button.</li><li>To add a product to your next order, click on your already subscribed product, then click on the \"Add product\" button.</li><li>Use the Search Bar up top to find the product</li><li>Click <strong>Add</strong></li><li>Select Bag Size and Whole Bean or Ground via the drop-down menus.  Use the plus and minus buttons to choose desired quantity.</li><li>Click <strong>Add to order</strong> to confirm.</li></ol>",
             "name3": "How do I remove products from my subscription?",
             "info3": "<ol><li>Login to you Subscription Portal.</li><li>Click <strong>See more Details.</strong></li><li>Select from the list the product you want to delete. </li><li>Look for the <strong>Remove Product </strong>button.</li><li>Then click on <strong>Save.</strong></li></ol>",
-            "name4": "",
-            "info4": "",
+            "name4": "How do I add a discount on my recurring subscription orders?",
+            "info4": "<p>Codes must be entered during the coupon’s advertised eligibility period.  However, your order does NOT need to be charged during the eligibility period to receive this discount. Savings will be applied whenever your order processes next. </p><ol><li>Login to your Subscription Portal.</li><li>Click on <strong>See more details.</strong></li><li>Enter coupon code and click <strong>Apply discount code.</strong></li><li>When your order processes on the date scheduled, you will automatically receive<br/>the coupon’s added savings.</li></ol>",
             "name5": "How do I cancel a subscription",
             "info5": "<ol><li>Login to LatitudeCoffee.com and click the <strong>Manage Subscriptions</strong> button above your Order History</li><li>Select the subscription you wish to cancel.</li><li>Click the <strong>Cancel Subscription </strong>link, located below the subscription information.</li><li>Provide a cancelation reason and click <strong>Next</strong>, then confirm by selecting <strong>Cancel subscription</strong>.</li></ol>"
           }
