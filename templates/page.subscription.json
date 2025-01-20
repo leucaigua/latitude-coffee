@@ -54,14 +54,14 @@
         "text_DwQDf6": {
           "type": "text",
           "settings": {
-            "name1": "Can I change my subscription at any time?",
-            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time through your account.</p>",
-            "name2": "Is there a minimum commitment?",
-            "info2": "<p>Nope! Flexibility is key. You can subscribe for as long as you like, hassle-free.</p>",
-            "name3": "When will my coffee ship?",
-            "info3": "<p>Your coffee will be roasted and shipped based on your chosen schedule, ensuring maximum freshness. Flavored Coffee may take up to 2 business days to be processed.</p>",
-            "name4": "How do I manage my subscriptions",
-            "info4": "<p>Access your Subscription Portal through your LatitudeCoffee.com account login. If you do not have an account, you will need to create one using the same email address used at checkout. <br/><br/>Once your account is activated, you can log in and access your Subscription Portal by clicking on the <strong>Manage Subscriptions</strong> button. After logging in, this button will be above your Order History.<br/><br/>You can also access your account using a direct link to the Subscription Portal. This link is normally sent in the <strong>Subscription Confirmation email </strong>when you begin a subscription and the <strong>Upcoming Order email</strong>.</p>",
+            "name1": "Is shipping free for subscriptions?",
+            "info1": "<p>Yes! If your subscription order totals $35 or more, shipping is completely free. For orders below $35, standard shipping rates will apply.</p>",
+            "name2": "",
+            "info2": "",
+            "name3": "",
+            "info3": "",
+            "name4": "",
+            "info4": "",
             "name5": "How do I cancel a subscription",
             "info5": "<ol><li>Login to LatitudeCoffee.com and click the <strong>Manage Subscriptions</strong> button above your Order History</li><li>Select the subscription you wish to cancel.</li><li>Click the <strong>Cancel Subscription </strong>link, located below the subscription information.</li><li>Provide a cancelation reason and click <strong>Next</strong>, then confirm by selecting <strong>Cancel subscription</strong>.</li></ol>"
           }
