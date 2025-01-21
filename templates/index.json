@@ -145,6 +145,26 @@
     "cff8a77a-d221-4684-85d0-890713bb77a1": {
       "type": "product-banner",
       "settings": {
+        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Special-Offer-Banner-Latitude-Coffee.jpg?v=1730216973",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Subscribe & Save 10%",
+        "desc": "☕ Join the Latitude 23.5 Coffee & Tea Subscription and savor your favorite blends, delivered fresh and on your schedule.",
+        "btn_url": "shopify://pages/subscribe-and-save",
+        "btn": "Learn More",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "monsooned-malabar",
+        "product1": "estate-blend"
+      }
+    },
+    "product_banner_Aa8TcA": {
+      "type": "product-banner",
+      "disabled": true,
+      "settings": {
         "video_url": "https://images.unsplash.com/photo-1545608444-f045a6db6133?q=80&w=2946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "subtitle": "Latitude 23.5 Coffee & Tea",
         "title": "Seasonal Holiday",
@@ -324,6 +344,7 @@
     "b32f6c33-7db4-4824-954f-07054ff1c807",
     "4af06428-932b-4442-ac28-761680c1197f",
     "cff8a77a-d221-4684-85d0-890713bb77a1",
+    "product_banner_Aa8TcA",
     "43576fc0-7509-439c-8db5-631f65d057cf",
     "aa98d079-15fe-428e-b7a2-291819935c1c",
     "84237d7a-6026-481f-a966-f5a23ccf91b3",
