@@ -230,7 +230,7 @@
             "type": "mob-link-simple",
             "settings": {
               "title": "Subscribe & Save",
-              "link": "shopify://collections/all",
+              "link": "shopify://pages/subscribe-and-save",
               "diffclassname": ""
             }
           }
