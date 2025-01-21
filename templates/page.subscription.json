@@ -18,6 +18,25 @@
         "description": "Join the Latitude Coffee Subscription and savor your favorite blends, delivered fresh and on your schedule."
       }
     },
+    "shop_product_VyWjfR": {
+      "type": "shop-product",
+      "custom_css": [
+        "p {color: #473014;}"
+      ],
+      "settings": {
+        "subtitle": "",
+        "title": "Finding your favorite coffee just got easier with our expertly curated coffee subscriptions<br><br><p>Our passionate roasters live and breathe coffee and they're putting that expertise to work for you. With your subscription, they'll handpick the finest coffees to keep you savoring exceptional flavors, cup after cup.</p>",
+        "btn_url": "",
+        "btn": "",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": false,
+        "show_type": false,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "best-sellers"
+      }
+    },
     "faqs_iniRqN": {
       "type": "faqs",
       "blocks": {
@@ -75,30 +94,11 @@
       "settings": {
         "title": "FAQs About Subscriptions"
       }
-    },
-    "shop_product_VyWjfR": {
-      "type": "shop-product",
-      "custom_css": [
-        "p {color: #473014;}"
-      ],
-      "settings": {
-        "subtitle": "Latitude 23.5 Coffee & Tea",
-        "title": "Get Free Shipping! Spend $35 or more in our store and shipping is on the house.",
-        "btn_url": "",
-        "btn": "",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_wish": false,
-        "show_type": false,
-        "show_variants": true,
-        "pro_img_widthheight": "600x600",
-        "collection": "best-sellers"
-      }
     }
   },
   "order": [
     "main",
-    "faqs_iniRqN",
-    "shop_product_VyWjfR"
+    "shop_product_VyWjfR",
+    "faqs_iniRqN"
   ]
 }
