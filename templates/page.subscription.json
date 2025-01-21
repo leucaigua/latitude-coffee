@@ -12,7 +12,8 @@
     "main": {
       "type": "main-page",
       "custom_css": [
-        "h2 {color: #c7ab84;}"
+        "h2 {color: #c7ab84;}",
+        ".container .section-title {display: none;}"
       ],
       "settings": {
         "description": "Join the Latitude Coffee Subscription and savor your favorite blends, delivered fresh and on your schedule."
