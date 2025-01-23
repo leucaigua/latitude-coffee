@@ -94,11 +94,22 @@
       "settings": {
         "title": "FAQs About Subscriptions"
       }
+    },
+    "cms_email_4DnXDy": {
+      "type": "cms-email",
+      "custom_css": [],
+      "settings": {
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "STAY CONNECTED",
+        "desc": "Join our newsletter. Get 10% off your first purchase.",
+        "img": "shopify://shop_images/Newsletter_Latitude_23.5_Coffee_Tea.png"
+      }
     }
   },
   "order": [
     "main",
     "shop_product_VyWjfR",
-    "faqs_iniRqN"
+    "faqs_iniRqN",
+    "cms_email_4DnXDy"
   ]
 }
