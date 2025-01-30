@@ -295,7 +295,7 @@
     "product_banner_3tMUwb": {
       "type": "product-banner",
       "custom_css": [
-        ".banner-with-products {padding-bottom: 80px; padding-top: 0px !important;}",
+        ".banner-with-products {padding-bottom: 80px; padding-top: 80px !important;}",
         ".beans-video-wrp {padding: 80px 20px;}"
       ],
       "settings": {
