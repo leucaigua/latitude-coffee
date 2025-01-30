@@ -148,7 +148,7 @@
         "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Special-Offer-Banner-Latitude-Coffee.jpg?v=1730216973",
         "subtitle": "Latitude 23.5 Coffee & Tea",
         "title": "Subscribe & Save 10%",
-        "desc": "☕ Join the Latitude 23.5 Coffee & Tea Subscription and savor your favorite blends, delivered fresh and on your schedule.",
+        "desc": "☕ Join the Latitude 23.5 Coffee & Tea Subscription and savor your favorite blends, delivered fresh and on your schedule.<br><br>",
         "btn_url": "shopify://pages/subscribe-and-save",
         "btn": "Learn More",
         "show_secondary_image": false,
@@ -292,6 +292,28 @@
         "collection": "signature-blends"
       }
     },
+    "product_banner_3tMUwb": {
+      "type": "product-banner",
+      "custom_css": [
+        ".banner-with-products {padding-bottom: 80px; padding-top: 0px !important;}"
+      ],
+      "settings": {
+        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Wholesale_services_Latitude_23.5_Coffee_and_Tea.png?v=1738245388",
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "Partner with us!",
+        "desc": "We support producers, exporters, and coffee businesses in making each cup an authentic, quality experience.",
+        "btn_url": "shopify://pages/wholesale",
+        "btn": "Learn More",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": false,
+        "show_type": false,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "",
+        "product1": ""
+      }
+    },
     "84237d7a-6026-481f-a966-f5a23ccf91b3": {
       "type": "special-product",
       "custom_css": [
@@ -347,6 +369,7 @@
     "product_banner_Aa8TcA",
     "43576fc0-7509-439c-8db5-631f65d057cf",
     "aa98d079-15fe-428e-b7a2-291819935c1c",
+    "product_banner_3tMUwb",
     "84237d7a-6026-481f-a966-f5a23ccf91b3",
     "cms_email_Q9kdKP",
     "1010d81f-47d6-47cf-9a4d-1903b37e6103"
