@@ -44,7 +44,7 @@
           "type": "text",
           "settings": {
             "name1": "Can I change my subscription at any time?",
-            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time through your account.</p>",
+            "info1": "<p>Yes, you can update your coffee selection, frequency, or cancel at any time by logging into your subscription portal account using this link: <span style=\"text-decoration:underline\">http://portal.subi.co</span>.<br/><br/>Simply use the same email linked to your Shopify account to log in. </p>",
             "name2": "How do I manage my subscriptions",
             "info2": "<p>Access your Subscription Portal through your LatitudeCoffee.com account login. If you do not have an account, you will need to create one using the same email address used at checkout. <br/><br/>Once your account is activated, you can log in and access your Subscription Portal by clicking on the <strong>Manage Subscriptions</strong> button. After logging in, this button will be above your Order History.<br/><br/>You can also access your account using a direct link to the Subscription Portal. This link is normally sent in the <strong>Subscription Confirmation email </strong>when you begin a subscription and the <strong>Upcoming Order email</strong>.<br/><br/>You can also access <a href=\"https://portal.subi.co/login/\" target=\"_blank\" title=\"Subscriptions Portal\">HERE!</a></p>",
             "name3": "Is there a minimum commitment?",
