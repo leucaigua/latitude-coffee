@@ -145,10 +145,30 @@
     "cff8a77a-d221-4684-85d0-890713bb77a1": {
       "type": "product-banner",
       "settings": {
+        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Latitude-Coffee---Valentine_s-Day.jpg?v=1739463700",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Valentine's Latitude Coffee Gift Set",
+        "desc": "Celebrate love with coffee this Valentine’s Day! From romantic brews to thoughtful gifts, make every sip special with Latitude 23.5 Coffee & Tea",
+        "btn_url": "shopify://products/valentines-latitude-coffee-gift-set",
+        "btn": "Buy Now",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "",
+        "product1": "valentines-latitude-coffee-gift-set"
+      }
+    },
+    "product_banner_zUpV4t": {
+      "type": "product-banner",
+      "disabled": true,
+      "settings": {
         "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Special-Offer-Banner-Latitude-Coffee.jpg?v=1730216973",
         "subtitle": "Latitude 23.5 Coffee & Tea",
         "title": "Subscribe & Save 10%",
-        "desc": "☕ Join the Latitude 23.5 Coffee & Tea Subscription and savor your favorite blends, delivered fresh and on your schedule.<br><br>",
+        "desc": "☕ Join the Latitude 23.5 Coffee & Tea Subscription and savor your favorite blends, delivered fresh and on your schedule.",
         "btn_url": "shopify://pages/subscribe-and-save",
         "btn": "Learn More",
         "show_secondary_image": false,
@@ -367,6 +387,7 @@
     "b32f6c33-7db4-4824-954f-07054ff1c807",
     "4af06428-932b-4442-ac28-761680c1197f",
     "cff8a77a-d221-4684-85d0-890713bb77a1",
+    "product_banner_zUpV4t",
     "product_banner_Aa8TcA",
     "43576fc0-7509-439c-8db5-631f65d057cf",
     "aa98d079-15fe-428e-b7a2-291819935c1c",
