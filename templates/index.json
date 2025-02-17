@@ -144,6 +144,7 @@
     },
     "cff8a77a-d221-4684-85d0-890713bb77a1": {
       "type": "product-banner",
+      "disabled": true,
       "settings": {
         "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Latitude-Coffee---Valentine_s-Day.jpg?v=1739463700",
         "subtitle": "Latitude 23.5 Coffee & Tea",
@@ -163,7 +164,6 @@
     },
     "product_banner_zUpV4t": {
       "type": "product-banner",
-      "disabled": true,
       "settings": {
         "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Special-Offer-Banner-Latitude-Coffee.jpg?v=1730216973",
         "subtitle": "Latitude 23.5 Coffee & Tea",
