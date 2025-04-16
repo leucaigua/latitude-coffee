@@ -12,6 +12,16 @@
     "e97547a6-f33b-44d4-90ef-b8b784f07f21": {
       "type": "homeslider",
       "blocks": {
+        "image_dXQyfH": {
+          "type": "image",
+          "settings": {
+            "subtitle": "",
+            "title": "",
+            "desc": "",
+            "btn": "",
+            "btn_url": ""
+          }
+        },
         "image_xdrRpa": {
           "type": "image",
           "settings": {
@@ -54,6 +64,7 @@
         }
       },
       "block_order": [
+        "image_dXQyfH",
         "image_xdrRpa",
         "image_zjBTma",
         "e02d2dbc-2072-4b54-9a8b-d30dc2376e8a",
@@ -164,11 +175,12 @@
     },
     "product_banner_zUpV4t": {
       "type": "product-banner",
+      "disabled": true,
       "settings": {
-        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Special-Offer-Banner-Latitude-Coffee.jpg?v=1730216973",
+        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Spring_Equinox_Sale_Promo.jpg?v=1744837707",
         "subtitle": "Latitude 23.5 Coffee & Tea",
-        "title": "Subscribe & Save 10%",
-        "desc": "☕ Join the Latitude 23.5 Coffee & Tea Subscription and savor your favorite blends, delivered fresh and on your schedule.",
+        "title": "",
+        "desc": "",
         "btn_url": "shopify://pages/subscribe-and-save",
         "btn": "Learn More",
         "show_secondary_image": false,
@@ -179,6 +191,25 @@
         "pro_img_widthheight": "600x600",
         "product": "monsooned-malabar",
         "product1": "estate-blend"
+      }
+    },
+    "product_banner_4GHd7J": {
+      "type": "product-banner",
+      "settings": {
+        "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Spring_Equinox_Sale_Promo.jpg?v=1744837707",
+        "subtitle": "Latitude 23.5 Coffee & Tea",
+        "title": "Spring Equinox Sale  10% OFF",
+        "desc": "🌸  Celebrate the return of sunshine and bloom with 10% off Sulawesi Coffee. Use code SPRING10 at checkout !",
+        "btn_url": "shopify://pages/subscribe-and-save",
+        "btn": "",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "product": "sulawesi-grade-1-arabica",
+        "product1": "sulawesi-semi-washed-robusta"
       }
     },
     "product_banner_Aa8TcA": {
@@ -388,6 +419,7 @@
     "4af06428-932b-4442-ac28-761680c1197f",
     "cff8a77a-d221-4684-85d0-890713bb77a1",
     "product_banner_zUpV4t",
+    "product_banner_4GHd7J",
     "product_banner_Aa8TcA",
     "43576fc0-7509-439c-8db5-631f65d057cf",
     "aa98d079-15fe-428e-b7a2-291819935c1c",
