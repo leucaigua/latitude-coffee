@@ -18,8 +18,8 @@
             "subtitle": "Sulawesi Coffee",
             "title": "Spring Equinox Sale – 10% OFF",
             "desc": "Use code SPRING10 at checkout and sip into the season with bold, hand-roasted Sulawesi coffees—crafted to match the vibrant mood of spring.",
-            "btn": "",
-            "btn_url": ""
+            "btn": "Buy Now",
+            "btn_url": "shopify://products/sulawesi-grade-1-arabica"
           }
         },
         "image_xdrRpa": {
@@ -195,6 +195,7 @@
     },
     "product_banner_4GHd7J": {
       "type": "product-banner",
+      "custom_css": [],
       "settings": {
         "video_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Spring_Equinox_Sale_Promo.jpg?v=1744837707",
         "subtitle": "Latitude 23.5 Coffee & Tea",
