@@ -125,13 +125,6 @@
             "cat_name": "Flavored",
             "collection": "flavors"
           }
-        },
-        "collection_rdhVFD": {
-          "type": "collection",
-          "settings": {
-            "cat_name": "Nespresso Compatible Capsules",
-            "collection": "nespresso"
-          }
         }
       },
       "block_order": [
@@ -139,8 +132,7 @@
         "8d1f9ea4-f915-4b8e-8c32-8aed192b187e",
         "565ddce5-7c8e-4c33-948b-a34b9659aaea",
         "9f12d328-1eb5-4b8e-b975-a929d86b2e4e",
-        "collection_a3myYP",
-        "collection_rdhVFD"
+        "collection_a3myYP"
       ],
       "settings": {
         "btn_url": "shopify://collections/coffee",
