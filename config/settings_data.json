@@ -96,7 +96,7 @@
               "links_1": "coffee-roast",
               "link_title2": "COLD BREW COFFEE",
               "links_2": "cold-brew",
-              "link_title3": "K-CUPS & NESPRESSO COMPATIBLE CAPSULES",
+              "link_title3": "K-CUPS COMPATIBLE CAPSULES",
               "links_3": "single-serve-k-cup-coffees",
               "link_title4": "EXTRAORDINARY COFFEES",
               "links_4": "extraordinary-coffees",
@@ -360,9 +360,7 @@
       "1793219247286972479": {
         "type": "shopify://apps/searchpie-seo-speed/blocks/sb-snippets/29f6c508-9bb9-4e93-9f98-b637b62f3552",
         "disabled": false,
-        "settings": {
-          "review_app": "spr"
-        }
+        "settings": {}
       }
     }
   },
