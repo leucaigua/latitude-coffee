@@ -2232,7 +2232,7 @@ product-form.product-form form .btn[disabled]:hover {
   top: 0;
 }
 /***** COMMON CSS ****/
-body.active-menu,body.no-scroll {
+body.active-menu,body {
   overflow: hidden;
   position: relative;
 }
