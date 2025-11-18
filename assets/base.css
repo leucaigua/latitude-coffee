@@ -109,14 +109,6 @@ body {
 .dark-bg{
   background-color: var(--black);
 }
-/* header fix */
-@media (min-width: 768px) {
-  body.overflow-hidden {
-    overflow: auto !important;
-  }
-}
-
-
 /* !!!!         SITE TYPOGRAPHY CSS         !!!! */
 p,li,ul,ol {
   margin: 0;
@@ -2232,7 +2224,7 @@ product-form.product-form form .btn[disabled]:hover {
   top: 0;
 }
 /***** COMMON CSS ****/
-body.active-menu,body {
+body.active-menu,body.no-scroll {
   overflow: hidden;
   position: relative;
 }
