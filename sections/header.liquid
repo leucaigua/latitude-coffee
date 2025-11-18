@@ -435,6 +435,38 @@
   </script>
 {%- endif -%}
 
+<style>
+  /* === DESKTOP SCROLL FIX === */
+
+  /* 1) Never lock scroll on desktop, even if JS adds `overflow-hidden` */
+  @media (min-width: 1025px) {
+    html,
+    body {
+      overflow-y: auto !important;
+    }
+
+    body.overflow-hidden {
+      overflow-y: auto !important;
+    }
+  }
+
+  /* 2) If mega menu / dropdown is taller than the viewport,
+        let the DROPDOWN scroll instead of freezing the page */
+  @media (min-width: 1025px) {
+    .main-navigationbar .menu-dropdown,
+    .main-navigationbar .mega-menu {
+      max-height: calc(100vh - 80px); /* 80px ≈ header height – adjust if needed */
+      overflow-y: auto;
+    }
+  }
+
+  /* 3) Make sure the hover "bridge" doesn’t block scroll or clicks */
+  .mega-menu__workaround {
+    pointer-events: none;
+  }
+</style>
+
+
 {% schema %}
 {
   "name": "t:settings_schema.header.settings.name",
