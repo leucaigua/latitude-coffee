@@ -32,24 +32,15 @@ class DetailsModal extends HTMLElement {
   }
 
   onBodyClick(event) {
-    if (!this.contains(event.target) || event.target.classList.contains('modal-overlay')) {
-      this.close(false);
-    }
+    if (!this.contains(event.target) || event.target.classList.contains('modal-overlay')) this.close(false);
   }
 
   open(event) {
     this.onBodyClickEvent =
       this.onBodyClickEvent || this.onBodyClick.bind(this);
-
-    const detailsEl = event.target.closest('details');
-    detailsEl.setAttribute('open', true);
-
+    event.target.closest('details').setAttribute('open', true);
     document.body.addEventListener('click', this.onBodyClickEvent);
-
-    // ✅ Only lock body scroll on small screens (e.g. mobile drawers)
-    if (window.innerWidth < 768) {
-      document.body.classList.add('overflow-hidden');
-    }
+    document.body.classList.add('overflow-hidden');
 
     trapFocus(
       this.detailsContainer.querySelector('[tabindex="-1"]'),
@@ -61,8 +52,6 @@ class DetailsModal extends HTMLElement {
     removeTrapFocus(focusToggle ? this.summaryToggle : null);
     this.detailsContainer.removeAttribute('open');
     document.body.removeEventListener('click', this.onBodyClickEvent);
-
-    // Always remove, harmless if it wasn't added
     document.body.classList.remove('overflow-hidden');
   }
 }
