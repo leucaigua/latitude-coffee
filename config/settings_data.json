@@ -257,9 +257,7 @@
           "mob_link_simple_4xfGYn",
           "mob_link_simple_qHUDDx"
         ],
-        "custom_css": [
-          "header-style-one {background: #00000080;}"
-        ],
+        "custom_css": [],
         "settings": {
           "logo": "shopify://shop_images/Latitude_23.5_Coffee_Tea_-_Logo.png"
         }
