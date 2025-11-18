@@ -109,6 +109,14 @@ body {
 .dark-bg{
   background-color: var(--black);
 }
+/* header fix */
+@media (min-width: 768px) {
+  body.overflow-hidden {
+    overflow: auto !important;
+  }
+}
+
+
 /* !!!!         SITE TYPOGRAPHY CSS         !!!! */
 p,li,ul,ol {
   margin: 0;
