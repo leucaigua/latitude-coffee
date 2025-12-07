@@ -160,7 +160,7 @@
                   {%- for option in card_product.options_with_values -%}
                     <div class="swatch-lbl" {% if option.name == "Whole Bean or Ground" or option.name == "Whole Bean or Espresso Ground" or option.name == "Style"%} style="display: block" {% else %} style="display: none" {% endif %}>
                       <p>{{ option.name | escape }}</p>
-                    </div>
+                    </div>TEST
                     <select 
                      {% if option.name == "Whole Bean or Ground" or option.name == "Whole Bean or Espresso Ground" or option.name == "Style"%} style="display: block" {% else %} style="display: none" {% endif %}
                      id="Option-{{ section.id }}-{{ card_product.id }}-{{ forloop.index0 }}"
