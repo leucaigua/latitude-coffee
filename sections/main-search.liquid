@@ -1,0 +1,163 @@
+
+{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+    {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- liquid
+  assign sort_by = search.sort_by | default: search.default_sort_by
+  assign terms = search.terms | escape
+  assign search_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+-%}
+<div class="template-search padding-top padding-bottom {% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %}">
+  <div class="template-search__header container text-center">
+    <div class="template-search__search">
+      {%- if settings.predictive_search_enabled -%}
+        <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
+      {%- endif -%} 
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+          <div class="field">
+            <input class="search__input field__input" id="Search-In-Template" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}"
+              {%- if settings.predictive_search_enabled -%}
+                role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox"
+                aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off"spellcheck="false"
+              {%- endif -%}>
+            <label class="field__label hidden" for="Search-In-Template">{{ 'general.search.search' | t }}</label>
+            <input name="options[prefix]" type="hidden" value="last">
+
+            {%- if settings.predictive_search_enabled -%}
+                <div class="predictive-search predictive-search--search-template" tabindex="-1" data-predictive-search>
+                    <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span> 
+            {%- endif -%}
+            <button type="submit" class="search__button field__button btn" aria-label="{{ 'general.search.search' | t }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+          </div>
+        </form>
+      {%- if settings.predictive_search_enabled -%}
+        </predictive-search>
+      {%- endif -%} 
+    </div>
+    {%- if search.performed -%}
+      {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%} 
+        {%- if search.results_count > 0 -%}        
+          <p class="search-msg" role="status">{{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}</p>
+        {%- endif -%}
+      {%- endunless -%}
+      {%- if search.results_count == 0 and search.filters == empty -%}        
+        <p class="search-msg" role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+  {%- if search.performed -%}
+        {%- if search.results.size == 0 and search.filters != empty -%}
+            <div class="template-search__results collection collection--empty page-width" data-id="{{ section.id }}">
+              <div class="loading-overlay gradient"></div>
+              <div class="title-wrapper center">
+                <h2 class="title title--primary">
+                  {{ 'sections.collection_template.empty' | t }}<br>
+                  {{ 'sections.collection_template.use_fewer_filters_html' | t: link: search_url, class: "underlined-link link" }}
+                </h2>
+              </div>
+            </div>
+        {%- else -%}
+            {% paginate search.results by 8 %}
+                <div class="template-search__results collection container dark-contnt"  data-id="{{ section.id }}">
+                    <div class="loading-overlay gradient"></div>
+                    <div class="row" role="list"> 
+                        {%- for item in search.results -%}
+                               
+                                    {%- case item.object_type -%}
+                      
+                                        {%- when 'product' -%}
+                       <div class="grid__item col-lg-3 col-sm-6 col-12 product-card card">
+                                        {%- capture product_settings -%}{%- if section.settings.product_show_vendor -%}vendor,{%- endif -%}title,price{%- endcapture -%}
+                                        {% render 'card-product',card_product: item, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+                                        show_vendor: section.settings.show_vendor,show_review: section.settings.show_review,show_qty: section.settings.show_qty, show_variants: section.settings.show_variants %}
+                                      </div>
+                                      {%- when 'article' -%}
+                          <div class="grid__item blog-card col-lg-3 col-sm-6 col-12">
+                            {% render 'article-card',
+                              article: item,
+                              show_image: true,
+                              show_date: section.settings.article_show_date,
+                              show_author: section.settings.article_show_author,
+                              show_badge: true,
+                              media_aspect_ratio: 1,
+                              lazy_load: lazy_load
+                            %}
+                          </div>
+                        {%- when 'page' -%}
+                            <div class="grid__item page-card col-lg-3 col-sm-6 col-12">
+                                <div class="page-card-inner">
+                              <h4><a href="{{ item.url }}">{{ item.title | truncate: 50 | escape }}</a></h4>
+                              <p>{{ item.content | strip_html | truncate: 200 }}</p>
+                              <a href="{{ item.url }}" class="btn">Read More</a>
+                                      </div>
+                            </div>
+                            {%- endcase -%}
+                               
+
+                        {%- endfor -%}
+                    </div>
+                    {%- if paginate.pages > 1 -%}
+                        {% render 'pagination', paginate: paginate %}
+                    {%- endif -%}
+                </div>
+            {% endpaginate %}    
+      {%- endif -%}
+  {%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.s_page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:settings_schema.common.settings.pro_hvr_img"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_ven"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_rev"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_var"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qty",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_qty"
+    },
+    {
+      "type": "text",
+      "id": "pro_img_widthheight",
+      "default": "600x600",
+      "label": "t:settings_schema.common.settings.width_height"
+    }
+  ]
+}
+{% endschema %}

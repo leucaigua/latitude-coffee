@@ -1,0 +1,30 @@
+{% assign item_id = "" %}
+{% for item in cart.items %}
+{% capture item_id %}
+{% if item_id != blank %}{{ item_id }}|{% endif %}{{ item.product.id }}
+{% endcapture %}
+{% endfor %}
+{%- assign gift_wrap = all_products[settings.gift_wrap] -%}
+{% assign item_id = item_id | split:'|' | join:',' %}
+{%- if cart != empty -%}
+{% unless item_id contains gift_wrap.id %}
+  <div id="gift-wrap" class="gift-popup">
+    <a class="close-gift">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="black">
+          <path d="M20 1.17838L18.8216 0L10 8.82162L1.17838 0L0 1.17838L8.82162 10L0 18.8216L1.17838 20L10 11.1784L18.8216 20L20 18.8216L11.1784 10L20 1.17838Z" fill="black"></path>
+      </svg>
+    </a>
+    <div class="gift-body">
+      <div class="checkbox-custom">
+          {%- form 'product', gift_wrap, id: product_form_id, class: 'form_gift', novalidate: 'novalidate' -%}
+            <input type="hidden" value="{{ gift_wrap.selected_or_first_available_variant.id }}" name="id">
+            <input type="checkbox" id="subscribecheck" class="gift_wrap_check" >
+            <label for="subscribecheck">
+                  For <strong class="m-gift-wrapping-price">{{ gift_wrap.price | money }}</strong> please wrap the products in this order.
+            </label>
+          {% endform %}
+      </div>
+    </div>
+  </div>
+  {% endunless %}
+{% endif %}

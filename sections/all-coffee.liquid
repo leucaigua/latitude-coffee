@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="section-title"> 
+    <div class="subtitle">{{ section.settings.subtitle }}</div>
+    <h3>{{ section.settings.title }}</h3> 
+  </div>
+  {%- assign collection = collections[section.settings.collection]  -%}
+  <!-- <div class="pro-categorie-slider dark-arrow"> -->
+  {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+<link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<div id="ProductGridContainer">
+   {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if collection.products.size == 0 -%}
+         <div class="collection collection--empty container padding-top text-center" id="product-grid" data-id="{{ section.id }}">
+         <h2>
+            {{ 'sections.collection_template.empty' | t }}<br>
+            {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "btn-secondary" }}
+         </h2>
+         </div>
+      {%- else -%}
+          <div class="product-heading-row">  
+              <div class="container">
+                <div class="filter-select-box d-flex align-items-center justify-content-end">
+                  {% render 'sorting', results: collection, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
+                </div> 
+              </div>
+            </div>
+           <div class="container">
+              <div class="product-list-row row no-gutters">
+                 <div class="product-filter-right-column col-12">
+                    <div id="product-grid" data-id="{{ section.id }}" class="row dark-contnt">
+                       {%- for product in collection.products -%}
+                       {% assign lazy_load = false %}
+                       {%- if forloop.index > 2 -%}
+                        {%- assign lazy_load = true -%}
+                       {%- endif -%}
+                       <div class="grid__item card col-lg-3 col-md-6 col-sm-6 col-12 product-card theme-colored-card">
+                          {% render 'card-product', card_product: product, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+                          show_vendor: section.settings.show_vendor,show_review: section.settings.show_review,show_qty: section.settings.show_qty, show_variants: section.settings.show_variants %}
+                        </div>
+                       {%- endfor -%}
+                    </div>
+                    {%- if paginate.pages > 1 -%}
+                       {% render 'pagination', paginate: paginate, anchor: '' %}
+                    {%- endif -%}
+                 </div>
+              </div>
+           </div>
+      {%- endif -%}
+   {%- endpaginate -%}
+</div> 
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.all_coffee",
+  "tag": "section",
+  "class": "product-categories-section padding-bottom prod-listing-cat",
+    "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:settings_schema.common.settings.pro_hvr_img"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_ven"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wish",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_wish"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_var"
+    },
+    {
+      "type": "text",
+      "id": "pro_img_widthheight",
+      "default": "600x600",
+      "label": "t:settings_schema.common.settings.width_height"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:settings_schema.common.settings.sec_coll"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "t:settings_schema.coll_page.s_product"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_rev"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_qty",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_qty"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.coll_page.f_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:settings_schema.coll_page.d_filter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:settings_schema.coll_page.d_sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_on_larger_devices",
+      "default": false,
+      "label": "t:settings_schema.coll_page.d_mobile_filter"
+    },
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.all_coffee"
+    }
+  ]
+}
+{% endschema %}

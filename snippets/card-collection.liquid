@@ -1,0 +1,13 @@
+<div class="card-wrapper">
+  {%- if collection.featured_image -%}
+    <a href="{{ collection.url }}">
+     <img src="{{ collection.featured_image | img_url: 'master' }}" alt="{{ collection.title | escape }}" loading="lazy">
+    </a>
+  {%- endif -%}
+  {% if collection.featured_image %} 
+    <div class="card-content">
+      <h5 class="card-heading full-unstyled-link">{{- collection.title | escape -}}</h5>
+      <a href="{{ collection.url }}" class="btn">{{ collection.all_products_count }} - {{ 'general.cart.items' | t }}</a>
+    </div>
+  {% endif %}
+</div>

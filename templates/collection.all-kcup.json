@@ -1,0 +1,131 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "product-grid-banner",
+      "custom_css": [
+
+      ],
+      "settings": {
+      }
+    },
+    "all-coffee": {
+      "type": "all-coffee",
+      "custom_css": [
+        ".section-title p {color: #473014;}"
+      ],
+      "settings": {
+        "subtitle": "´",
+        "title": "Naturally Flavored K-cup Coffees",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "flavored-k-cup-coffees",
+        "products_per_page": 12,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_ag4PPt": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Exceptional K-cup Coffees",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "exceptional-k-cups",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_BqMqgX": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "Signature Blend K-cup Coffees",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "signature-blend-k-cup-coffees",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "all_coffee_bp88yk": {
+      "type": "all-coffee",
+      "settings": {
+        "subtitle": "",
+        "title": "K-Cup Coffees",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": true,
+        "show_type": true,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "single-serve-k-cup-coffees",
+        "products_per_page": 24,
+        "show_review": true,
+        "show_qty": true,
+        "enable_filtering": true,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false
+      }
+    },
+    "shop_product_LEdyVp": {
+      "type": "shop-product",
+      "custom_css": [
+        "p {color: #473014;}"
+      ],
+      "settings": {
+        "subtitle": "Latitude 23.5° Coffee & Tea",
+        "title": "Get Free Shipping! <p>Spend $35 or more in our store and shipping is on the house.</p>",
+        "btn_url": "",
+        "btn": "",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_wish": false,
+        "show_type": false,
+        "show_variants": true,
+        "pro_img_widthheight": "600x600",
+        "collection": "best-sellers"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "all-coffee",
+    "all_coffee_ag4PPt",
+    "all_coffee_BqMqgX",
+    "all_coffee_bp88yk",
+    "shop_product_LEdyVp"
+  ]
+}

@@ -1,0 +1,138 @@
+<img src="{{ section.settings.bg_img | img_url: 'master' }}" alt="coffee image" class="bst-midimg">
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-4 col-12">
+            <div class="coffeethree-column-box">
+                <div class="section-title">
+                    <div class="subtitle">{{ section.settings.subtitle }}</div>
+                    <h3>{{ section.settings.title }}</h3>
+                </div>
+                <p>{{ section.settings.desc }}</p>
+                <a href="{{ section.settings.btn_url }}" class="link-btn">{{ section.settings.btn }}</a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <div class="coffee-mug-animation"> 
+                <svg width="80px" height="73px" viewBox="0 0 31 73">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g class="smokes" transform="translate(2.000000, 2.000000)" stroke="#BEBEBE" stroke-width="5">
+                        <g class="smoke-1">
+                          <path id="Shape1" d="M0.5,8.8817842e-16 C0.5,8.8817842e-16 3.5,5.875 3.5,11.75 C3.5,17.625 0.5,17.625 0.5,23.5 C0.5,29.375 3.5,29.375 3.5,35.25 C3.5,41.125 0.5,41.125 0.5,47"></path>
+                        </g>
+                        <g class="smoke-2">
+                          <path id="Shape2" d="M0.5,8.8817842e-16 C0.5,8.8817842e-16 3.5,5.875 3.5,11.75 C3.5,17.625 0.5,17.625 0.5,23.5 C0.5,29.375 3.5,29.375 3.5,35.25 C3.5,41.125 0.5,41.125 0.5,47"></path>
+                        </g>
+                        <g class="smoke-3">
+                          <path id="Shape3" d="M0.5,8.8817842e-16 C0.5,8.8817842e-16 3.5,5.875 3.5,11.75 C3.5,17.625 0.5,17.625 0.5,23.5 C0.5,29.375 3.5,29.375 3.5,35.25 C3.5,41.125 0.5,41.125 0.5,47"></path>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                 <img src="{{ section.settings.img | img_url: 'master' }}">
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            {%- assign product = section.settings.product -%} 
+            {% if section.settings.product != blank %}
+                <div class="grid__item product-card card card-direction-row">
+                    {% render 'card-product', card_product: product, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,show_wish: section.settings.show_wish,show_type: section.settings.show_type, show_variants: section.settings.show_variants %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.spe_pro",
+  "tag": "section",
+  "class": "coffee-three-col-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "t:settings_schema.common.settings.bg_img"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "t:settings_schema.common.settings.desc"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "t:settings_schema.common.settings.btn_url"
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "t:settings_schema.common.settings.btn"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "t:settings_schema.common.settings.img"
+    },
+        {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:settings_schema.common.settings.pro_hvr_img"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_ven"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wish",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_wish"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_var"
+    },
+    {
+      "type": "text",
+      "id": "pro_img_widthheight",
+      "default": "600x600",
+      "label": "t:settings_schema.common.settings.width_height"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:settings_schema.common.settings.sec_pro"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.spe_pro"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,26 @@
+{% if cart.item_count != 0 %}
+    {% assign free_price = settings.free_price | times: 100 %}
+    {% if cart.total_price < free_price and cart.total_price != 0 %}
+    {% assign get_final = free_price | minus: cart.total_price | money %}
+    {% assign free_shipping_txt = settings.free_text | replace: "$$", get_final %}
+    {% elsif cart.total_price >= free_price %}
+      {% assign free_shipping_txt = settings.free_shipping_got_msg %}
+    {% else %}
+      {% assign free_shipping_txt = settings.freeshipping_text %}
+    {% endif %}
+  {% if free_shipping_txt != blank %}
+    <div class="free-shipping-bar">
+      <div class="free-shipping-txt">
+        {{ free_shipping_txt }}
+        <div class="progress-bar-design">
+          <progress max="{{ free_price }}" value="{{ cart.total_price }}" class="">
+            {{ get_final | money }}
+          </progress>
+          <div class="progress-icon">
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+

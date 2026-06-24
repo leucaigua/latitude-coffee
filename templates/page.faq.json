@@ -1,0 +1,81 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "description": "People will always seek help and advice. They are unwilling to pick up the phone, walk into a store, or wait hours (even minutes) for that information or insight to become accessible."
+      }
+    },
+    "faqs": {
+      "type": "faqs",
+      "blocks": {
+        "6f7c65d2-50b2-4303-b33c-f16b3f30d31c": {
+          "type": "text",
+          "settings": {
+            "name1": "How to setup a page with custom fields?",
+            "info1": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name2": "How to setup a page with custom fields?",
+            "info2": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name3": "How to setup a page with custom fields?",
+            "info3": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name4": "How to setup a page with custom fields?",
+            "info4": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name5": "How to setup a page with custom fields?",
+            "info5": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>"
+          }
+        },
+        "782a9497-46a9-430e-9c88-eb14bcab2fef": {
+          "type": "text",
+          "settings": {
+            "name1": "How to setup a page with custom fields?",
+            "info1": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name2": "How to setup a page with custom fields?",
+            "info2": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name3": "How to setup a page with custom fields?",
+            "info3": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name4": "How to setup a page with custom fields?",
+            "info4": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name5": "How to setup a page with custom fields?",
+            "info5": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>"
+          }
+        },
+        "0fcd39b9-8b95-467e-b026-be159b9aad31": {
+          "type": "text",
+          "settings": {
+            "name1": "How to setup a page with custom fields?",
+            "info1": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name2": "How to setup a page with custom fields?",
+            "info2": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name3": "How to setup a page with custom fields?",
+            "info3": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name4": "How to setup a page with custom fields?",
+            "info4": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>",
+            "name5": "How to setup a page with custom fields?",
+            "info5": "<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "6f7c65d2-50b2-4303-b33c-f16b3f30d31c",
+        "782a9497-46a9-430e-9c88-eb14bcab2fef",
+        "0fcd39b9-8b95-467e-b026-be159b9aad31"
+      ],
+      "settings": {
+        "title": "About <b> Shop </b>"
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "faqs"
+  ]
+}

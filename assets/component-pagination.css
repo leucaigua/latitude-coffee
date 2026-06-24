@@ -1,0 +1,41 @@
+.pagination-wrapper {
+  width: 100%;
+  text-align: center;
+}
+.pagination {
+  float: none;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.pagination__list {
+  display: flex;
+  justify-content: center;
+  float: left;
+  width: 100%;
+}
+.pagination__list > li {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  justify-content: center;
+  text-align: center;
+  margin-right:5px;
+}
+.pagination__item {
+  float: left;
+  width: 100%;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+.pagination__item--current, .pagination__item:hover,.pagination__item:focus,.pagination__item:active {
+  border: 1px solid var(--theme-color);
+}
+.pagination__item-arrow {
+    display: flex;
+    height: 40px;
+}
+.pagination__item-arrow svg{
+  margin: auto;
+}

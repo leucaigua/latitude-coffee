@@ -1,0 +1,36 @@
+<div class="articlerightbar blog-grid-section">
+  <div class="section-title">
+      <h3>{{ 'blogs.sidebar.recent_articles' | t }}</h3>
+  </div> 
+  {% for article in blogs[blog.handle].articles limit: 2 %}
+    <div class="blog-itm">
+      <div class="blog-itm-inner">
+        <div class="blog-img">
+          {% assign image_alt = article.title | escape %}
+          <a href="{{ article.url }}">
+            {{ article | img_url: '450x' | img_tag: image_alt }}
+            <span class="blg-lbl">ARTICLES</span>
+          </a>
+        </div>
+        <div class="blog-content">
+          <div class="blog-content-top">
+            <span class="blog-itm-cat">{{ blog.handle }}</span>
+            <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+            {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+              <p>
+                {%- if article.excerpt.size > 0 -%}
+                {{ article.excerpt | strip_html | truncatewords: 20 }}
+                {%- else -%}
+                {{ article.content | strip_html | truncatewords: 20 }}
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+          </div>
+          <div class="blog-contnt-bottom">
+            <a href="{{ article.url }}" class="link-btn">READ MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

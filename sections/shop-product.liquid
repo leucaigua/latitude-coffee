@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="section-title d-flex align-items-center justify-content-between">
+    <div class="section-title-left">
+      <div class="subtitle">{{ section.settings.subtitle }}</div>
+      <h3>{{ section.settings.title }}</h3>
+    </div>
+    <a href="{{ section.settings.btn_url }}" class="link-btn">{{ section.settings.btn }}</a>
+  </div>
+  {%- assign collection = collections[section.settings.collection]  -%}
+  <div class="pro-categorie-slider">
+    {% for product in collection.products %}
+      <div class="pro-cate-itm grid__item product-card card">
+          {% render 'card-product', card_product: product, pro_img_widthheight: section.settings.pro_img_widthheight, show_secondary_image: section.settings.show_secondary_image,
+          show_vendor: section.settings.show_vendor,show_wish: section.settings.show_wish,show_type: section.settings.show_type, show_variants: section.settings.show_variants %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.sh_pro",
+  "tag": "section",
+  "class": "product-categories-section padding-bottom",
+    "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "t:settings_schema.common.settings.btn_url"
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "t:settings_schema.common.settings.btn"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.common.settings.pro_set"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:settings_schema.common.settings.pro_hvr_img"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_ven"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wish",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_wish"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "default": false,
+      "label": "t:settings_schema.common.settings.sh_type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "default": true,
+      "label": "t:settings_schema.common.settings.sh_var"
+    },
+    {
+      "type": "text",
+      "id": "pro_img_widthheight",
+      "default": "600x600",
+      "label": "t:settings_schema.common.settings.width_height"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:settings_schema.common.settings.sec_coll"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.sh_pro"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+{% layout none %}
+<div class="product-page-first-section" id="quick-view-temp">
+  <section class="pdp-page-main-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-md-5 col-12">
+              <div class="qv_slider">
+                  {%- for media in product.media -%}
+                    <div class="qv-pro-slider-img">
+                      <img src="{{ media | img_url: 'master' }}" data-img="{{ media | img_url }}" loading="lazy" alt="{{ media.alt | escape }}">
+                    </div>
+                  {% endfor %}
+              </div>
+            </div>
+            <div class="col-xl-6 col-md-7 col-12">
+                <div id="mainProductInfo-template--19818528932158__main-{{ product.id }}" class="pdp-right-column">
+                    {%- assign product_form_id = 'product-form-shopify-section-quickview' -%}
+                    <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'> 
+              {{ product.metafields.judgeme.badge }} 
+            </div> 
+                    <div class="section-title">
+                        <h2>{{ product.title }}</h2>
+                    <div class="no-js-hidden qv-price" id="price-template--19818528932158__main" role="status" >
+                    {%- render 'price', product: product, use_variant: true, show_badges: true' -%}
+                    </div>
+                        <p>
+                        {% if product.metafields.custom.description %}
+                            {{ product.metafields.custom.description }}
+                        {% else %}
+                            {{ product.description }}
+                        {% endif %}
+                        </p>
+                    </div>
+                   {%- unless product.has_only_default_variant -%}
+                     {%- for option in product.options_with_values -%}
+                      <label>{{ option.name }}: </label>
+                      <select class="nice-select qv_select__select" name="options[{{ option.name | escape }}]" form="{{ product_form_id }}">
+                           {%- for value in option.values -%}
+                              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %} >
+                              {{ value }}
+                              </option>
+                          {%- endfor -%}
+                      </select> 
+                      {% endfor %}
+                     {% for variant in product.variants %}
+                          <input type="hidden" class="variant-qv" data-img="{{ variant.image | img_url }}" data-title="{{ variant.title }}" data-price="{{ variant.price | money | strip_html }}" data-id="{{ variant.id }}" data-avail="{{ variant.available }}">
+                      {% endfor %}
+                     
+                    {% endunless %}
+                            
+
+                    <div class="qnty-btn-wrp">
+                        <product-form class="product-form">
+                            <div class="wbquicksuccess hidden" hidden></div>
+                            <div class="product-form__error-message-wrapper" role="alert" hidden>
+                                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13" width="20" height="20">
+                                    <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                                    <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                                    <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                                    <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                                </svg>
+                                <span class="product-form__error-message"></span>
+                            </div> 
+                            {%- form 'product', product, id: product_form_id, class: 'form cart-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>                                        
+                                <button type="submit" name="add" class="btn cart-btn product-form__submit" aria-label="{{ 'products.product.add_to_cart' | t }}" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+                                    <span>  
+                                        {%- if product.selected_or_first_available_variant.available -%}
+                                            {{ 'products.product.add_to_cart' | t }}
+                                        {%- else -%}
+                                            {{ 'products.product.sold_out' | t }}
+                                        {%- endif -%}
+                                    </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                        <path d="M11.5439 3.85716C11.5439 2.99457 10.8428 2.29348 9.98027 2.29348H8.74469L7.51474 0.227149C7.3942 0.0252924 7.13266 -0.0423731 6.93024 0.0787408C6.72838 0.199286 6.66129 0.460846 6.78184 0.663272L7.75192 2.29291H4.2544L5.23864 0.665545C5.36089 0.464257 5.29604 0.202128 5.09475 0.0798774C4.89176 -0.0423737 4.63082 0.0224512 4.50913 0.223739L3.2576 2.29234H2.01973C1.15715 2.29234 0.456055 2.99344 0.456055 3.85602C0.456055 4.47523 0.82054 5.00688 1.34423 5.25991L1.73654 9.1856C1.86561 10.4775 2.55936 11.1058 3.85807 11.1058H8.16241C9.46112 11.1058 10.1554 10.478 10.2839 9.1856L10.6774 5.24797C11.1891 4.99153 11.5439 4.46727 11.5439 3.85716ZM2.01973 3.14639H9.98027C10.372 3.14639 10.691 3.46538 10.691 3.85716C10.691 4.24893 10.372 4.56792 9.98027 4.56792H2.01973C1.62796 4.56792 1.30897 4.24893 1.30897 3.85716C1.30897 3.46538 1.62796 3.14639 2.01973 3.14639ZM9.43609 9.10201C9.36274 9.83154 9.13131 10.254 8.16297 10.254H3.85862C2.88516 10.254 2.66055 9.84916 2.5855 9.10201L2.21762 5.42083H9.80459L9.43609 9.10201ZM7.4386 6.57455C7.6052 6.74115 7.6052 7.01123 7.4386 7.17783L5.92212 8.69432C5.84195 8.7745 5.73389 8.81942 5.62074 8.81942C5.50759 8.81942 5.39897 8.7745 5.31936 8.69432L4.5614 7.93636C4.3948 7.76976 4.3948 7.49967 4.5614 7.33307C4.728 7.16647 4.99811 7.16704 5.16472 7.33307L5.6213 7.78966L6.83639 6.57511C7.00243 6.40794 7.272 6.40794 7.4386 6.57455Z" fill="#C4996C"/>
+                                    </svg>
+                                    <div class="loading-overlay__spinner hidden">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 511.494 511.494" style="enable-background:new 0 0 511.494 511.494;" xml:space="preserve" width="20" height="20">
+                                        <g>
+                                            <path d="M478.291,255.492c-16.133,0.143-29.689,12.161-31.765,28.16c-15.37,105.014-112.961,177.685-217.975,162.315 S50.866,333.006,66.236,227.992S179.197,50.307,284.211,65.677c35.796,5.239,69.386,20.476,96.907,43.959l-24.107,24.107   c-8.33,8.332-8.328,21.84,0.004,30.17c4.015,4.014,9.465,6.262,15.142,6.246h97.835c11.782,0,21.333-9.551,21.333-21.333V50.991   c-0.003-11.782-9.556-21.331-21.338-21.329c-5.655,0.001-11.079,2.248-15.078,6.246l-28.416,28.416   C320.774-29.34,159.141-19.568,65.476,86.152S-18.415,353.505,87.304,447.17s267.353,83.892,361.017-21.828   c32.972-37.216,54.381-83.237,61.607-132.431c2.828-17.612-9.157-34.183-26.769-37.011   C481.549,255.641,479.922,255.505,478.291,255.492z"/>
+                                        </g>
+                                        </svg>
+                                    </div> 
+                                </button>  
+                            {%- endform -%}
+                        </product-form>
+                        <div class="quantity-select" style="{% if product.selected_or_first_available_variant.available %}display: block;{% else %}display: none;{% endif %}">
+                            <quantity-input class="quantity qty-spinner">
+                            <button class="quantity__button no-js-hidden quantity-decrement " name="minus" type="button">
+                                <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0.251343V1.74871H12V0.251343H0Z" fill="#61AFB3"></path>
+                                </svg>
+                            </button>
+                            <input class="quantity__input" type="number" name="quantity" id="Quantity-{{ section.id }}" min="1" value="1" form="{{ product_form_id }}">
+                            <button class="quantity__button no-js-hidden quantity-increment" name="plus" type="button">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.74868 5.25132V0H5.25132V5.25132H0V6.74868H5.25132V12H6.74868V6.74868H12V5.25132H6.74868Z" fill="#61AFB3"></path>
+                                </svg>
+                            </button>
+                            </quantity-input>
+                        </div>              
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

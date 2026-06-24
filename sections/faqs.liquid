@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="section-title">
+    {% if section.settings.title != blank %}<h2>{{ section.settings.title }}</h2>{% endif %}
+  </div>
+  <div class="faqs-container row"> 
+    {% for block in section.blocks %}
+       <div class="col-md-4 col-sm-6 col-12">
+          <div class="set has-children">
+              <a href="javascript:;" class="acnav-label">
+                  {% if block.settings.name1 != blank %}<span>{{ block.settings.name1 }}</span>{% endif %}
+              </a>
+              <div class="acnav-list">
+                  {{ block.settings.info1 }}
+              </div>
+          </div>   
+          <div class="set has-children">
+              <a href="javascript:;" class="acnav-label">
+                  {% if block.settings.name2 != blank %}<span>{{ block.settings.name2 }}</span>{% endif %}
+              </a>
+              <div class="acnav-list">
+                  {{ block.settings.info2 }}
+              </div>
+          </div>   
+          <div class="set has-children">
+              <a href="javascript:;" class="acnav-label">
+                {% if block.settings.name3 != blank %}<span>{{ block.settings.name3 }}</span>{% endif %}
+              </a>
+              <div class="acnav-list">
+                  {{ block.settings.info3 }}
+              </div>
+          </div>   
+          <div class="set has-children">
+              <a href="javascript:;" class="acnav-label">
+                  {% if block.settings.name4 != blank %}<span>{{ block.settings.name4 }}</span>{% endif %} 
+              </a>
+              <div class="acnav-list">
+                  {{ block.settings.info4 }}
+              </div>
+          </div>   
+          <div class="set has-children">
+              <a href="javascript:;" class="acnav-label">
+                  {% if block.settings.name5 != blank %}<span>{{ block.settings.name5 }}</span>{% endif %} 
+              </a>
+              <div class="acnav-list">
+                  {{ block.settings.info5 }}
+              </div>
+          </div>  
+      </div>   
+      {% endfor %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "faq",
+    "tag": "section",
+    "class": "faq-page padding-bottom padding-top",
+    "settings": [
+      {
+        "type" : "text",
+        "id" : "title",
+        "label" : "t:settings_schema.faqs.settings.title"
+      }
+    ],
+    "blocks": [
+      {
+      "type": "text",
+      "name": "FAQ",
+      "settings": [
+          {
+            "type": "text",
+            "id": "name1",
+            "label": "t:settings_schema.faqs.blocks.name"
+          },
+          {
+            "type": "richtext",
+            "id": "info1",
+            "label": "t:settings_schema.faqs.blocks.info"
+          },
+          {
+            "type": "text",
+            "id": "name2",
+            "label": "t:settings_schema.faqs.blocks.name"
+          },
+          {
+            "type": "richtext",
+            "id": "info2",
+            "label": "t:settings_schema.faqs.blocks.info"
+          },
+          {
+            "type": "text",
+            "id": "name3",
+            "label": "t:settings_schema.faqs.blocks.name"
+          },
+          {
+            "type": "richtext",
+            "id": "info3",
+            "label": "t:settings_schema.faqs.blocks.info"
+          },
+          {
+            "type": "text",
+            "id": "name4",
+            "label": "t:settings_schema.faqs.blocks.name"
+          },
+          {
+            "type": "richtext",
+            "id": "info4",
+            "label": "t:settings_schema.faqs.blocks.info"
+          },          
+          {
+            "type": "text",
+            "id": "name5",
+            "label": "t:settings_schema.faqs.blocks.name"
+          },
+          {
+            "type": "richtext",
+            "id": "info5",
+            "label": "t:settings_schema.faqs.blocks.info"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name": "FAQs"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

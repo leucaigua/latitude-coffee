@@ -1,0 +1,177 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-12">
+            <img src="{{ section.settings.bg_img | img_url: 'master' }}" alt="coffee image" class="blog-left-img">
+            <div class="home-blog-left">
+                <div class="section-title">
+                    <div class="subtitle">{{ section.settings.subtitle }}</div>
+                    <h3>{{ section.settings.title }}</h3>
+                </div>
+                <p>{{ section.settings.desc }}</p>
+                <a href="{{ section.settings.btn_url }}" class="link-btn">{{ section.settings.btn }}</a>
+            </div>
+        </div>
+        <div class="col-md-7 col-12">
+            {%- assign blog = blogs[section.settings.blog] -%}
+            {% unless blog.articles_count == 0 or blog.empty? %}
+                <div class="blog-slider">
+                    {% for article in blog.articles limit: section.settings.post_limit %}
+                        <div class="blog-itm">
+                            <div class="blog-itm-inner">
+                                <div class="blog-img">
+                                    <a href="{{ article.url }}">
+                                        {% if article.image %}
+                                           <img class="lazyload"src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt | escape }}" loading="lazy" class="default-img">
+                                        {% else %}
+                                           <img src="{{ 'no-image.gif' | img_url: '380x240' }}" loading="lazy"/>
+                                        {% endif %} 
+                                        <span class="blg-lbl">ARTICLES</span>
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-content-top">
+                                        <span class="blog-itm-cat">{{ blog.handle }}</span>
+                                        <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+                                        {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+                                            <p>
+                                                {%- if article.excerpt.size > 0 -%}
+                                                {{ article.excerpt | strip_html | truncatewords: 20 }}
+                                                {%- else -%}
+                                                {{ article.content | strip_html | truncatewords: 20 }}
+                                                {%- endif -%}
+                                            </p>
+                                        {%- endif -%}
+                                    </div>
+                                    <div class="blog-contnt-bottom">
+                                        <a href="{{ article.url }}" class="link-btn">READ MORE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="blog-slider">
+                {% for i in (1..section.settings.post_limit) %}
+                    <div class="blog-itm">
+                        <div class="blog-itm-inner">
+                            <div class="blog-img">
+                                <a href="{{ article.url }}">
+                                    {% if article.image %}
+                                    <img class="lazyload"src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt | escape }}" loading="lazy" class="default-img">
+                                    {% else %}
+                                    <img src="{{ 'no-image.gif' | img_url: '380x240' }}" loading="lazy"/>
+                                    {% endif %} 
+                                    <span class="blg-lbl">ARTICLES</span>
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-content-top">
+                                    <span class="blog-itm-cat">{{ blog.handle }}</span>
+                                    <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+                                    {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+                                        <p>
+                                            {%- if article.excerpt.size > 0 -%}
+                                            {{ article.excerpt | strip_html | truncatewords: 20 }}
+                                            {%- else -%}
+                                            {{ article.content | strip_html | truncatewords: 20 }}
+                                            {%- endif -%}
+                                        </p>
+                                    {%- endif -%}
+                                </div>
+                                <div class="blog-contnt-bottom">
+                                    <a href="{{ article.url }}" class="link-btn">READ MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor%}
+                </div>
+            {% endunless %}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.featured-blog.name",
+  "tag": "div",
+  "class": "home-blog-section padding-top",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "t:settings_schema.common.settings.bg_img"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "t:settings_schema.common.settings.desc"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "t:settings_schema.common.settings.btn_url"
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "t:settings_schema.common.settings.btn"
+    },
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": "t:settings_schema.featured-blog.settings.blog"
+    },
+    {
+      "type": "select",
+      "id": "post_limit",
+      "label": "t:settings_schema.featured-blog.settings.blog_limit",
+      "default": "4",
+      "options": [
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": "t:settings_schema.featured-blog.settings.show_date",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.featured-blog.name",
+      "category": "Blog",
+      "settings": {
+        "blog": "News",
+        "post_limit": "3"
+      }
+    }
+  ]
+}
+{% endschema %}

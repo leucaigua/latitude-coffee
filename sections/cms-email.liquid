@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="subscribe-banner">
+        <img src="{{ section.settings.img | img_url: 'master' }}" class="subscribe-bnr">
+        <div class="subscribe-column">  
+            <div class="section-title">
+                <div class="subtitle">{{ section.settings.subtitle }}</div>
+                <h3>{{ section.settings.title }}</h3>
+            </div>
+            <p>{{ section.settings.desc }}</p>
+            {% form 'customer', class: 'newsletter-form subscribe-section-form' %}
+            <div class="input-wrapper">
+               <input type="hidden" name="contact[tags]" value="newsletter">
+               <div class="newsletter-form__field-wrapper">
+                  <div class="field form-inputs input-box">
+                        <input id="NewsletterForm--{{ section.id }}" type="email" name="contact[email]" class="field__input form-control border-radius-50" value="{{ form.email }}" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email"
+                        {% if form.errors %} autofocus aria-invalid="true" aria-describedby="Newsletter-error--{{ section.id }}"
+                        {% elsif form.posted_successfully? %} aria-describedby="Newsletter-success--{{ section.id }}" {% endif %}
+                        placeholder="{{ 'newsletter.label' | t }}" required>
+                        <button type="submit" class="btn-subscibe newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">SUBSCRIBE</button>
+                  </div>
+               </div>
+               {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+               {%- endif -%}
+               {%- if form.posted_successfully? -%}
+                  <small class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</small>
+               {%- endif -%}
+            </div>
+             <div> <p style="font-size: 12px;">By entering your phone number, you agree to receive marketing text messages from our company at the number provided, including messages sent by the autodialer. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel. View our <a href="https://latitudecoffee.com/policies/privacy-policy">Privacy Policy</a> and <a href="https://latitudecoffee.com/policies/terms-of-service">Terms of Service</a>.</div>
+         {% endform %}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.common-section.cms_footer",
+  "tag": "section",
+  "class": "newsletter-section padding-top",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:settings_schema.common.settings.subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings_schema.common.settings.title"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "t:settings_schema.common.settings.desc"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "t:settings_schema.common.settings.img"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:settings_schema.common-section.cms_footer"
+    }
+  ]
+}
+{% endschema %}

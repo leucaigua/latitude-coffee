@@ -1,0 +1,161 @@
+<section class="recentlyview view-product-sec" data-recent-handle="{{ product.handle }}">
+  <div class="container">
+      <div class="section-title">
+          <h2>Recently Viewed Products</h2>
+      </div>
+      <div class="recent-slider">
+      </div>
+  </div>
+</section>
+
+                        
+<script>
+$(document).ready(function () {
+  // Function to set a cookie
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  var productHandle = $('.recentlyview').data('recent-handle');
+
+  // Function to get the array of product handles from the cookie
+  function getProductHandlesArray() {
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)productHandles\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    return cookieValue ? cookieValue.split('+') : [];
+  }
+
+  // Get the current array of product handles from the cookie
+  var currentProductHandlesArray = getProductHandlesArray();
+
+  if (currentProductHandlesArray.indexOf(productHandle) === -1) {
+    // Add the new product handle to the array
+    currentProductHandlesArray.push(productHandle);
+
+    // Limit the array to the last 5 product handles
+    if (currentProductHandlesArray.length > 6) {
+      currentProductHandlesArray = currentProductHandlesArray.slice(-6);
+    }
+
+    // Set the updated array in the cookie, joining with '+'
+    setCookie('productHandles', currentProductHandlesArray.join('+'), 30);
+  }
+
+  // Loop through each product handle in the array
+  currentProductHandlesArray.forEach(function (singleProductHandle) {
+    // Make an AJAX request for each product handle
+    $.ajax({
+      url: '/products/' + singleProductHandle,
+      dataType: 'html',
+      type: 'GET',
+      success: function (data) {
+        // Extract the price from the data
+        if (currentProductHandlesArray.length >= 2) {
+          $('.recentlyview').show();
+        } else {
+          $('.recentlyview').hide();
+        }
+
+        if ($('.recent-slider').hasClass('slick-initialized')) {
+          // Unslick the slider before re-initializing
+          $('.recent-slider').slick('unslick');
+        }
+
+        // Re-initialize the slider with your settings
+        {% if shop.locale == 'ar' or shop.locale == 'he' or shop.locale == 'ur' %}
+        $('.recent-slider').slick({
+          autoplay: false,
+          slidesToShow: 4,
+          speed: 1000,
+          slidesToScroll: 1,
+          prevArrow: '<button class="slide-arrow slick-prev"><svg viewBox="0 0 10 5"><path d="M2.37755e-08 2.57132C-3.38931e-06 2.7911 0.178166 2.96928 0.397953 2.96928L8.17233 2.9694L7.23718 3.87785C7.07954 4.031 7.07589 4.28295 7.22903 4.44059C7.38218 4.59824 7.63413 4.60189 7.79177 4.44874L9.43039 2.85691C9.50753 2.78197 9.55105 2.679 9.55105 2.57146C9.55105 2.46392 9.50753 2.36095 9.43039 2.28602L7.79177 0.69418C7.63413 0.541034 7.38218 0.544682 7.22903 0.702329C7.07589 0.859976 7.07954 1.11192 7.23718 1.26507L8.1723 2.17349L0.397965 2.17336C0.178179 2.17336 3.46059e-06 2.35153 2.37755e-08 2.57132Z"></path></svg></button>',
+            nextArrow: '<button class="slide-arrow slick-next"><svg viewBox="0 0 10 5"><path d="M2.37755e-08 2.57132C-3.38931e-06 2.7911 0.178166 2.96928 0.397953 2.96928L8.17233 2.9694L7.23718 3.87785C7.07954 4.031 7.07589 4.28295 7.22903 4.44059C7.38218 4.59824 7.63413 4.60189 7.79177 4.44874L9.43039 2.85691C9.50753 2.78197 9.55105 2.679 9.55105 2.57146C9.55105 2.46392 9.50753 2.36095 9.43039 2.28602L7.79177 0.69418C7.63413 0.541034 7.38218 0.544682 7.22903 0.702329C7.07589 0.859976 7.07954 1.11192 7.23718 1.26507L8.1723 2.17349L0.397965 2.17336C0.178179 2.17336 3.46059e-06 2.35153 2.37755e-08 2.57132Z"></path></svg></button>',
+          dots: false,
+          buttons: false,
+          rtl:true,
+          responsive: [
+            {
+              breakpoint: 991,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              }
+            },
+            {
+              breakpoint: 575,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              }
+            }
+          ]
+        });
+        {% else %}
+          $('.recent-slider').slick({
+          autoplay: false,
+          slidesToShow: 4,
+          speed: 1000,
+          slidesToScroll: 1,
+          prevArrow: '<button class="slide-arrow slick-prev"><svg viewBox="0 0 10 5"><path d="M2.37755e-08 2.57132C-3.38931e-06 2.7911 0.178166 2.96928 0.397953 2.96928L8.17233 2.9694L7.23718 3.87785C7.07954 4.031 7.07589 4.28295 7.22903 4.44059C7.38218 4.59824 7.63413 4.60189 7.79177 4.44874L9.43039 2.85691C9.50753 2.78197 9.55105 2.679 9.55105 2.57146C9.55105 2.46392 9.50753 2.36095 9.43039 2.28602L7.79177 0.69418C7.63413 0.541034 7.38218 0.544682 7.22903 0.702329C7.07589 0.859976 7.07954 1.11192 7.23718 1.26507L8.1723 2.17349L0.397965 2.17336C0.178179 2.17336 3.46059e-06 2.35153 2.37755e-08 2.57132Z"></path></svg></button>',
+            nextArrow: '<button class="slide-arrow slick-next"><svg viewBox="0 0 10 5"><path d="M2.37755e-08 2.57132C-3.38931e-06 2.7911 0.178166 2.96928 0.397953 2.96928L8.17233 2.9694L7.23718 3.87785C7.07954 4.031 7.07589 4.28295 7.22903 4.44059C7.38218 4.59824 7.63413 4.60189 7.79177 4.44874L9.43039 2.85691C9.50753 2.78197 9.55105 2.679 9.55105 2.57146C9.55105 2.46392 9.50753 2.36095 9.43039 2.28602L7.79177 0.69418C7.63413 0.541034 7.38218 0.544682 7.22903 0.702329C7.07589 0.859976 7.07954 1.11192 7.23718 1.26507L8.1723 2.17349L0.397965 2.17336C0.178179 2.17336 3.46059e-06 2.35153 2.37755e-08 2.57132Z"></path></svg></button>',
+          dots: false,
+          buttons: false,
+          responsive: [
+          {
+              breakpoint: 991,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              }
+            },
+            {
+              breakpoint: 575,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              }
+            }
+          ]
+        });
+        {% endif %}
+        var handletitle = $(data).find('.pdp-summery .section-title h2').text();
+        var handleimg = $(data).find('media-gallery .pdp-main-itm .pdp-main-media img').attr('src');
+        var handleprice = $(data).find('.pdp-summery .price').html();
+
+        // Update the content of the corresponding .recent-slider element
+        if (productHandle != singleProductHandle) {
+          $('.recent-slider').slick('slickAdd', `
+            <div class='pro-cate-itm grid__item product-card card'>
+              <div class='product-card-inner'>
+                <div class='product-img card__media'>
+                  <a href='/products/${singleProductHandle}' class='product__media-item'>
+                    <img src='${handleimg}' alt='product-img' loading='lazy'>
+                  </a>
+                </div>
+                <div class='product-content'>
+                <div class='product-content-top'>
+                <h5 class='product-title'><a href='/products/${singleProductHandle}' tabindex='0'>${handletitle}</a></h5>
+                </div>
+                <div class='product-content-bottom'>
+                  <div class='price'>${handleprice}</div>
+                </div>
+                </div>
+              </div>
+            </div>
+          `);
+        }
+      },
+      error: function (data) {
+        console.log('ajax error');
+      }
+    });
+  });
+});
+
+</script>
+
