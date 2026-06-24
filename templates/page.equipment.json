@@ -1,0 +1,321 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_J88wKR": {
+      "type": "hero",
+      "blocks": {
+        "group_CwB9Y7": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 18,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_KxLjnm": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h1>{{ closest.page.title }}</h1>",
+                "width": "100%",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "h1",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_gAnUXW": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Crafting exceptional, farm-direct coffee with passion, quality, and community at heart</p>",
+                "width": "fit-content",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_KxLjnm",
+            "text_gAnUXW"
+          ]
+        }
+      },
+      "block_order": [
+        "group_CwB9Y7"
+      ],
+      "name": "t:names.hero_bottom_aligned",
+      "settings": {
+        "media_type_1": "video",
+        "video_1": "shopify://files/videos/Latitude Coffee - Equpment hero video (1).mp4",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-5",
+        "toggle_overlay": true,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "page-content"
+      ],
+      "custom_css": [
+        ".page-width-content {--page-content-width: 90%;}"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "section_x8FpXe": {
+      "type": "section",
+      "blocks": {
+        "text_PM74qQ": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Unlock 10% Off Your First Order</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h3",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "custom_liquid_ed4Qdf": {
+          "type": "custom-liquid",
+          "name": "t:names.custom_liquid",
+          "settings": {
+            "custom_liquid": "<button\n  type=\"button\"\n  class=\"button button--primary js-klaviyo-open\"\n  style=\"cursor:pointer;\"\n><b>\n  Join Our Newsletter</b>\n</button>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function () {\n  const btn = document.querySelector('.js-klaviyo-open');\n\n  if (!btn) return;\n\n  btn.addEventListener('click', function (e) {\n    e.preventDefault();\n    window._klOnsite = window._klOnsite || [];\n    window._klOnsite.push(['openForm', 'SJ8rD3']);\n  });\n});\n</script>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_PM74qQ",
+        "custom_liquid_ed4Qdf"
+      ],
+      "custom_css": [
+        ".border-style {border-color: #aa927b; background: #faf7ec;}",
+        ".section--page-width {padding: 100px 0;}"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 25,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-3",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "solid",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 35,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 65,
+        "padding-block-end": 65
+      }
+    },
+    "blocks_XRzwBk": {
+      "type": "_blocks",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_UrqGTj": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "5_star",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "small",
+            "text_size": "small",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1200,
+            "corner_styling": "round",
+            "header_text_color": "#1c0200",
+            "text_color": "#1c0200",
+            "card_color": "#faf4e0",
+            "stars_color": "#dea63d",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "<b>What our customers say about us</b>",
+            "show_average_rating": false
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_UrqGTj"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 100,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "hero_J88wKR",
+    "main",
+    "section_x8FpXe",
+    "blocks_XRzwBk"
+  ]
+}

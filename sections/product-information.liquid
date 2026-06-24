@@ -1,0 +1,749 @@
+
+
+{% liquid
+  if section.settings.desktop_media_position == 'left'
+    assign render_order = 'media,product-details'
+  else
+    assign render_order = 'product-details,media'
+  endif
+
+  assign product_has_media = true
+  if closest.product.media.size == 0
+    assign product_has_media = false
+  endif
+
+  assign product_grid_class = 'product-information__grid'
+
+  if product_has_media == false
+    assign product_grid_class = product_grid_class | append: ' product-information--media-none'
+  elsif section.settings.desktop_media_position == 'right'
+    assign product_grid_class = product_grid_class | append: ' product-information--media-right'
+  else
+    assign product_grid_class = product_grid_class | append: ' product-information--media-left'
+  endif
+
+  if section.settings.equal_columns
+    assign product_grid_class = product_grid_class | append: ' product-information__grid--half'
+
+    if section.settings.limit_details_width
+      assign product_grid_class = product_grid_class | append: ' product-information__grid--limit-details'
+    endif
+  endif
+
+  case section.settings.content_width
+    when 'content-center-aligned'
+      assign content_width = 'page-width'
+    when 'content-full-width'
+      assign content_width = 'full-width'
+  endcase
+%}
+
+<script type="application/ld+json">
+  {{ closest.product | structured_data }}
+</script>
+
+<script>
+  // Script to customize the subify widget layout and styling
+  // Also ensures the product price remains visible and syncs with subscription prices
+  window.addEventListener("load", () => {
+    const subifyWidgetBoxElement = document.querySelector(".pdp-summery");
+    let priceElement = null;
+    let priceContainer = null;
+    
+    // Function to find the theme's price element
+    const findPriceElement = () => {
+      const productPriceElement = document.querySelector('product-price[data-block-id]');
+      if (productPriceElement) {
+        priceContainer = productPriceElement.querySelector('[ref="priceContainer"]');
+        priceElement = productPriceElement;
+        return true;
+      }
+      return false;
+    };
+    
+    // Function to ensure price element is visible
+    const ensurePriceVisible = () => {
+      if (priceElement) {
+        // Force visibility with inline styles to override any hiding
+        priceElement.style.display = '';
+        priceElement.style.visibility = '';
+        priceElement.style.opacity = '';
+        priceElement.removeAttribute('hidden');
+        
+        if (priceContainer) {
+          priceContainer.style.display = '';
+          priceContainer.style.visibility = '';
+          priceContainer.style.opacity = '';
+        }
+      }
+    };
+    
+    // Function to format dropdown button to show only delivery frequency
+    const formatDropdownButton = () => {
+      const dropdownBtn = document.querySelector(".subify-selling-plan-toggle-dropdown-btn");
+      if (!dropdownBtn) return;
+      
+      // Get the current text content
+      const currentText = dropdownBtn.textContent || dropdownBtn.innerText || '';
+      
+      // Extract frequency text (look for patterns like "Every X days", "X days", etc.)
+      let frequencyText = currentText
+        .replace(/\$[\d.,]+/g, '') // Remove price ($16.29, etc.)
+        .replace(/Save\s+\d+%/gi, '') // Remove "Save 10%"
+        .replace(/Save\s+\d+/gi, '') // Remove "Save 10"
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .trim();
+      
+      // If we have frequency text, format it
+      if (frequencyText) {
+        // Add "Deliver" prefix if not present
+        if (!frequencyText.toLowerCase().includes('deliver')) {
+          frequencyText = `Deliver ${frequencyText}`;
+        }
+        
+        // Preserve the icon if it exists
+        const icon = dropdownBtn.querySelector('.subify-selling-plan-dd-icon');
+        const iconHTML = icon ? icon.outerHTML : '';
+        
+        // Update button content
+        dropdownBtn.innerHTML = frequencyText + (iconHTML ? ' ' + iconHTML : '');
+      }
+    };
+    
+    // Function to sync theme price with subi app price
+    const syncPriceWithSubi = () => {
+      if (!priceContainer) return;
+      
+      // Check which option is selected
+      const subscriptionActive = document.querySelector('.subify-choice-box-wrapper:nth-child(2).active');
+      const oneTimeActive = document.querySelector('.subify-choice-box-wrapper:first-child.active');
+      
+      const subiCurrentPrice = document.querySelector('.subify-current-price');
+      const subiOriginalPrice = document.querySelector('.subify-original-price');
+      
+      // Get price elements from theme
+      const priceSpan = priceContainer.querySelector('.price');
+      let comparePriceSpan = priceContainer.querySelector('.compare-at-price');
+      
+      if (subscriptionActive && subiCurrentPrice) {
+        // Subscription is selected - show subscription price and original price
+        const currentPriceText = subiCurrentPrice.innerText.trim();
+        const originalPriceText = subiOriginalPrice ? subiOriginalPrice.innerText.trim() : null;
+        
+        if (priceSpan && currentPriceText) {
+          priceSpan.textContent = currentPriceText;
+        }
+        
+        if (originalPriceText) {
+          if (comparePriceSpan) {
+            comparePriceSpan.textContent = originalPriceText;
+          } else if (priceSpan) {
+            // Add compare price if it doesn't exist
+            comparePriceSpan = document.createElement('span');
+            comparePriceSpan.className = 'compare-at-price';
+            comparePriceSpan.textContent = originalPriceText;
+            priceSpan.parentNode.insertBefore(comparePriceSpan, priceSpan);
+          }
+        }
+      } else if (oneTimeActive) {
+        // One-time purchase is selected - show original/regular price
+        // Try to get the one-time purchase price from subi app
+        const oneTimePriceElement = document.querySelector('.subify-choice-box-wrapper:first-child .subify-choice-price');
+        const oneTimePriceText = oneTimePriceElement ? oneTimePriceElement.innerText.trim() : null;
+        
+        // If we have a one-time price, use it; otherwise try to get from original price element
+        const priceToShow = oneTimePriceText || (subiOriginalPrice ? subiOriginalPrice.innerText.trim() : null);
+        
+        if (priceSpan && priceToShow) {
+          priceSpan.textContent = priceToShow;
+        }
+        
+        // Remove compare price for one-time purchase (no discount)
+        if (comparePriceSpan) {
+          comparePriceSpan.remove();
+        }
+      } else {
+        // Fallback: try to get price from subi app elements
+        const priceText = subiCurrentPrice ? subiCurrentPrice.innerText.trim() : 
+                         (subiOriginalPrice ? subiOriginalPrice.innerText.trim() : null);
+        
+        if (priceSpan && priceText) {
+          priceSpan.textContent = priceText;
+        }
+      }
+    };
+    
+    // Initial price element search
+    findPriceElement();
+    ensurePriceVisible();
+    
+    // Observer for subify widget changes
+    const subifyObserver = new MutationObserver((mutations) => {
+      // Use debouncing to prevent excessive updates
+      clearTimeout(subifyObserver.updateTimeout);
+      subifyObserver.updateTimeout = setTimeout(() => {
+        subifyObserver.disconnect();
+        
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' || mutation.type === 'attributes') {
+            // Ensure price element is found
+            if (!priceElement) {
+              findPriceElement();
+            }
+            
+            // Ensure price remains visible
+            ensurePriceVisible();
+            
+            // Re-watch subi price elements in case they were recreated
+            watchSubiPrices();
+            
+            // Sync price with subi app
+            syncPriceWithSubi();
+            
+            // Format dropdown button
+            formatDropdownButton();
+            
+            // Handle discount badge customization
+            const maxDiscountElement = document.querySelector(".subify-max-discount-badge-percentage");
+            const maxDiscountValue = maxDiscountElement && maxDiscountElement.innerText;
+
+            const subscriptionOptionContainer = document.querySelector(".subify-choice-box-wrapper:nth-child(2) div");
+            if (subscriptionOptionContainer) {
+              let saveDiscountAmountElement = subscriptionOptionContainer.querySelector(".custom-save-discount-amount");
+              if (!saveDiscountAmountElement) {
+                saveDiscountAmountElement = document.createElement("p");
+                saveDiscountAmountElement.classList.add("custom-save-discount-amount");
+                subscriptionOptionContainer.appendChild(saveDiscountAmountElement);
+              }
+              saveDiscountAmountElement.innerText = `Save ${maxDiscountValue}`;
+            }
+          }
+        });
+        
+        subifyObserver.observe(subifyWidgetBoxElement, config);
+      }, 50);
+    });
+    
+    // Observer for price element changes (to detect if it's hidden or removed)
+    const priceObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+          ensurePriceVisible();
+        }
+        if (mutation.type === 'childList') {
+          // Re-find price element if it was removed and re-added
+          if (!priceElement || !document.contains(priceElement)) {
+            findPriceElement();
+            ensurePriceVisible();
+          }
+        }
+      });
+    });
+    
+    // Observer for subscription option changes (clicks on subscription boxes)
+    const subscriptionClickHandler = (event) => {
+      // Only handle clicks on the choice box wrapper itself, not nested elements
+      const target = event.target.closest('.subify-choice-box-wrapper');
+      const isDropdownClick = event.target.closest('.subify-selling-plan-toggle-dropdown-btn');
+      const isCheckboxClick = event.target.closest('.checkbox-label, input[type="checkbox"]');
+      
+      // Don't interfere with dropdown or checkbox clicks - let subi app handle those
+      if (isDropdownClick || isCheckboxClick) {
+        return;
+      }
+      
+      if (target) {
+        // Use requestAnimationFrame to ensure DOM updates are complete
+        requestAnimationFrame(() => {
+          // Wait a bit longer to ensure subi app has updated the DOM
+          setTimeout(() => {
+            syncPriceWithSubi();
+            ensurePriceVisible();
+            formatDropdownButton();
+          }, 200);
+        });
+      }
+    };
+    
+    // Observer for subi app price changes
+    const subiPriceObserver = new MutationObserver(() => {
+      // Debounce price updates
+      clearTimeout(subiPriceObserver.updateTimeout);
+      subiPriceObserver.updateTimeout = setTimeout(() => {
+        syncPriceWithSubi();
+        ensurePriceVisible();
+      }, 100);
+    });
+    
+    // Watch subi app price elements for changes
+    const watchSubiPrices = () => {
+      const subiCurrentPrice = document.querySelector('.subify-current-price');
+      const subiOriginalPrice = document.querySelector('.subify-original-price');
+      const oneTimePriceElement = document.querySelector('.subify-choice-box-wrapper:first-child .subify-choice-price');
+      
+      if (subiCurrentPrice) {
+        subiPriceObserver.observe(subiCurrentPrice, { 
+          childList: true, 
+          subtree: true, 
+          characterData: true 
+        });
+      }
+      if (subiOriginalPrice) {
+        subiPriceObserver.observe(subiOriginalPrice, { 
+          childList: true, 
+          subtree: true, 
+          characterData: true 
+        });
+      }
+      if (oneTimePriceElement) {
+        subiPriceObserver.observe(oneTimePriceElement, { 
+          childList: true, 
+          subtree: true, 
+          characterData: true 
+        });
+      }
+    };
+    
+    // Configuration of the observers:
+    const config = {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class', 'hidden']
+    };
+    
+    // Start observing
+    if (subifyWidgetBoxElement) {
+      subifyObserver.observe(subifyWidgetBoxElement, config);
+      // Also watch for when subi prices appear
+      watchSubiPrices();
+    }
+    
+    if (priceElement) {
+      priceObserver.observe(priceElement, config);
+      if (priceElement.parentNode) {
+        priceObserver.observe(priceElement.parentNode, { childList: true });
+      }
+    }
+    
+    // Listen for clicks on subscription options
+    document.addEventListener('click', subscriptionClickHandler, true);
+    
+    // Watch for subi price elements to appear (they may load after page load)
+    const subiPriceWatcher = setInterval(() => {
+      const subiCurrentPrice = document.querySelector('.subify-current-price');
+      if (subiCurrentPrice) {
+        watchSubiPrices();
+        clearInterval(subiPriceWatcher);
+      }
+    }, 200);
+    
+    // Periodic check to ensure price stays visible and synced (fallback)
+    const visibilityCheck = setInterval(() => {
+      if (!priceElement || !document.contains(priceElement)) {
+        findPriceElement();
+      }
+      ensurePriceVisible();
+      syncPriceWithSubi();
+      formatDropdownButton();
+      // Re-watch prices in case elements were recreated
+      watchSubiPrices();
+    }, 500);
+    
+    // Cleanup on page unload
+    window.addEventListener("beforeunload", () => {
+      subifyObserver.disconnect();
+      priceObserver.disconnect();
+      subiPriceObserver.disconnect();
+      document.removeEventListener('click', subscriptionClickHandler, true);
+      clearInterval(visibilityCheck);
+      clearInterval(subiPriceWatcher);
+    });
+    
+    // Also check when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        findPriceElement();
+        ensurePriceVisible();
+        syncPriceWithSubi();
+      });
+    }
+  });
+</script>
+
+<div
+  class="section-background product-information__bg color-{{ section.settings.color_scheme }}"
+  style="
+    background-image: url('https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Latitude_coffee_global_icon_banner.png?v=1764705778');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+  "
+></div>
+<div
+  class="product-information product-information--background section section--{{ content_width }} spacing-style color-{{ section.settings.color_scheme }} relative"
+  style="{% render 'spacing-style', settings: section.settings %} --gap: {{ section.settings.gap }}px;"
+>
+  {% if section.settings.desktop_media_position == 'left' and product_has_media %}
+    {% assign product_href = '#ProductInformation-' | append: section.id %}
+    {% render 'skip-to-content-link', href: product_href, text: 'accessibility.skip_to_product_info' %}
+  {% endif %}
+  <div
+    class="{{ product_grid_class }}"
+    data-product-grid-content
+  >
+    {% assign render_order_array = render_order | split: ',' %}
+    {% capture media %}
+      <div
+        class="product-information__media"
+        data-testid="product-information-media"
+      >
+        {%- content_for 'block',
+          type: '_product-media-gallery',
+          id: 'media-gallery',
+          closest.product: closest.product
+        -%}
+      </div>
+    {% endcapture %}
+
+    {% capture details %}
+      {% content_for 'block',
+        type: '_product-details',
+        id: 'product-details',
+        closest.product: closest.product
+      %}
+    {% endcapture %}
+
+    {% for block in render_order_array %}
+      {% if block == 'media' and product_has_media %}
+        {{ media }}
+      {% elsif block == 'product-details' %}
+        {{ details }}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .product-information {
+    gap: var(--gap) 0;
+  }
+
+  /* Product template background */
+  .product-information__bg {
+    background-image: url("https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Latitude_coffee_global_icon_banner.png?v=1764705778");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+
+  @media (max-width: 768px) {
+    .product-information__bg {
+      background-size: contain;
+      background-position: top center;
+    }
+  }
+
+  /* Desktop padding for product info section */
+  @media screen and (min-width: 1024px) {
+    .product-information {
+      padding-inline: 100px;
+    }
+  }
+
+  /* Base grid layout */
+  .product-information__grid {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+  }
+
+  /* Default column positions */
+  .product-details {
+    order: 1;
+  }
+
+  .product-information__media {
+    order: 0;
+    width: 0;
+    min-width: 100%;
+  }
+
+  /* Mobile styles */
+  @media screen and (max-width: 749px) {
+    .product-information__media {
+      grid-column: 1 / -1;
+    }
+
+    .product-details {
+      grid-column: 2 / 3;
+    }
+  }
+
+  /* Desktop styles */
+  @media screen and (min-width: 750px) {
+    .product-information__grid {
+      grid-column: 2;
+    }
+
+    /* Position when there is no media */
+    .product-information__grid.product-information--media-none,
+    .product-information__grid:has(.product-information__media:empty) {
+      .product-details {
+        width: var(--narrow-content-width);
+        margin: 0 auto;
+      }
+    }
+
+    /* Position when there is media */
+    .product-information__grid:not(:has(.product-information__media:empty)) {
+      /* Media on the left side */
+      &.product-information--media-left {
+        grid-template-columns: 1fr min(50vw, var(--sidebar-width));
+
+        .product-information__media {
+          padding-right: calc(var(--gap, 0) / 2);
+        }
+
+        .product-details {
+          padding-left: calc(var(--gap, 0) / 2);
+        }
+
+        &:has(.media-gallery--extend) {
+          grid-column: 1 / 3;
+        }
+      }
+
+      /* Media on the right side */
+      &.product-information--media-right {
+        grid-template-columns: min(50vw, var(--sidebar-width)) 1fr;
+
+        .product-information__media {
+          padding-left: calc(var(--gap, 0) / 2);
+          order: 1;
+        }
+
+        .product-details {
+          padding-right: calc(var(--gap, 0) / 2);
+          order: 0;
+        }
+
+        &:has(.media-gallery--extend) {
+          grid-column: 2 / -1;
+        }
+      }
+
+      /* Equal width columns */
+      &.product-information__grid--half,
+      &.product-information__grid--half:has(.media-gallery--extend) {
+        grid-column: 1 / -1;
+        grid-template-columns:
+          var(--full-page-grid-margin) calc(var(--full-page-grid-central-column-width) / 2) calc(
+            var(--full-page-grid-central-column-width) / 2
+          )
+          var(--full-page-grid-margin);
+
+        &.product-information--media-left {
+          .product-information__media {
+            grid-column: 2 / 3;
+
+            &:has(.media-gallery--extend) {
+              grid-column: 1 / 3;
+            }
+          }
+
+          .product-details {
+            grid-column: 3 / 4;
+          }
+        }
+
+        &.product-information--media-right {
+          .product-information__media {
+            grid-column: 3 / 4;
+
+            &:has(.media-gallery--extend) {
+              grid-column: 3 / -1;
+            }
+          }
+
+          .product-details {
+            grid-column: 2 / 3;
+          }
+        }
+      }
+    }
+
+    /* Handle full width section */
+    .section--full-width {
+      .product-information__grid:not(:has(.product-information__media:empty)),
+      .product-information__grid:not(:has(.product-information__media:empty)) {
+        &.product-information--media-left,
+        &.product-information--media-right {
+          grid-column: 1 / -1;
+        }
+
+        &.product-information--media-left .product-details {
+          padding-inline-end: var(--padding-lg);
+        }
+
+        &.product-information--media-right .product-details {
+          padding-inline-start: var(--padding-lg);
+        }
+
+        &.product-information__grid--half.product-information--media-left {
+          .product-information__media {
+            grid-column: 1 / 3;
+          }
+
+          .product-details {
+            grid-column: 3 / -1;
+          }
+        }
+
+        &.product-information__grid--half.product-information--media-right {
+          .product-information__media {
+            grid-column: 3 / -1;
+          }
+
+          .product-details {
+            grid-column: 1 / 3;
+          }
+        }
+      }
+    }
+  }
+
+  /* Wider sidebar for large screens */
+  @media screen and (min-width: 1200px) {
+    .product-information__grid:not(
+        .product-information__grid--half,
+        :has(.product-information__media:empty)
+      ).product-information--media-left {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .product-information__grid:not(
+        .product-information__grid--half,
+        :has(.product-information__media:empty)
+      ).product-information--media-right {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  .product-information__grid--limit-details .product-details > .group-block {
+    max-width: var(--sidebar-width);
+  }
+
+  /* If the header is sticky, make product details content stick underneath the header */
+  body:has(#header-group #header-component[data-sticky-state='active']) .product-details.sticky-content--desktop {
+    --sticky-header-offset: var(--header-height);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.product_information",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "content-center-aligned",
+          "label": "t:options.page"
+        },
+        {
+          "value": "content-full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "content-center-aligned"
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_position",
+      "label": "t:settings.media_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "equal_columns",
+      "label": "t:settings.equal_columns",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "limit_details_width",
+      "label": "t:settings.limit_product_details_width",
+      "default": false,
+      "visible_if": "{{ section.settings.equal_columns }}"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

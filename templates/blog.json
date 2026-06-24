@@ -1,0 +1,195 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_ebjDMm": {
+      "type": "section",
+      "blocks": {
+        "text_NF6kxd": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<p>{{ closest.blog.title }}</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_QdxbQt": {
+          "type": "text",
+          "name": "Description",
+          "settings": {
+            "text": "<p>Join us for a journey into the heart of coffee culture, crafted for enthusiasts by enthusiasts. ☕</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": true,
+            "background_color": "#1c0200b5",
+            "corner_radius": 0,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_NF6kxd",
+        "text_QdxbQt"
+      ],
+      "name": "Collection heading",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "background_media": "image",
+        "video_position": "cover",
+        "background_image": "shopify://shop_images/Coffee-collection-background-latitude-coffee.jpg",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "static-blog-post-card": {
+          "type": "_blog-post-card",
+          "static": true,
+          "settings": {
+            "alignment": "left"
+          },
+          "blocks": {
+            "heading": {
+              "type": "_heading",
+              "name": "t:names.title",
+              "static": true,
+              "settings": {
+                "type_preset": "h4",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "text": "",
+                "read_only": true,
+                "alignment": "left",
+                "show_alignment": false,
+                "padding-block-start": 0,
+                "padding-block-end": 10,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "blog-post-details": {
+              "type": "_blog-post-info-text",
+              "name": "t:names.details",
+              "static": true,
+              "settings": {
+                "show_date": true,
+                "show_author": false,
+                "type_preset": "",
+                "alignment": "left",
+                "show_alignment": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "content": {
+              "type": "_blog-post-description",
+              "static": true,
+              "settings": {
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 16,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "image": {
+              "type": "_blog-post-image",
+              "static": true,
+              "settings": {
+                "height": "large",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 15
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "settings": {
+        "color_scheme": "",
+        "padding-block-start": 100,
+        "padding-block-end": 100
+      }
+    }
+  },
+  "order": [
+    "section_ebjDMm",
+    "main"
+  ]
+}

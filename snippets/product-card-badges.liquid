@@ -1,0 +1,168 @@
+{%- doc -%}
+  Renders product badges for the product card.
+
+  @param {object} product - The product object.
+  @param {object} settings - The theme settings object.
+
+  @example
+  {% render 'product-card-badges', product: product, settings: settings %}
+{%- enddoc -%}
+
+{%- liquid
+  assign coffee_type_raw = product.metafields.shopify['coffee-type'] | default: product.metafields.shopify['coffee_type']
+  assign roast_level_raw = product.metafields.shopify['coffee-roast'] | default: product.metafields.shopify['coffee_roast']
+
+  assign coffee_type = coffee_type_raw | metafield_text: field: 'label' | default: coffee_type_raw
+  assign roast_level = roast_level_raw | metafield_text: field: 'label' | default: roast_level_raw
+-%}
+
+<div class="product-badge-layer">
+  <div
+    class="product-badges product-badges--{{ settings.badge_position }}"
+    style="
+      --badge-border-radius: {{ settings.badge_corner_radius }}px;
+      --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
+    "
+  >
+    {%- if product.available == false or product.compare_at_price > product.price and product.available -%}
+      <div
+        class="
+          product-badges__badge product-badges__badge--rectangle
+          {% if product.available == false %} color-{{ settings.badge_sold_out_color_scheme }}{% elsif product.compare_at_price > product.price %} color-{{ settings.badge_sale_color_scheme }}{% endif %}
+        "
+      >
+        {%- if product.available == false -%}
+          {{ 'content.product_badge_sold_out' | t }}
+        {%- elsif product.compare_at_price > product.price -%}
+          {{ 'content.product_badge_sale' | t }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+{%- if coffee_type != blank or roast_level != blank -%}
+  <div class="product-badges__meta">
+    {%- if coffee_type != blank -%}
+      <span class="product-badges__pill product-badges__pill--type">
+        {{ coffee_type }}
+      </span>
+    {%- endif -%}
+    {%- if roast_level != blank -%}
+      {%- liquid
+        assign roast_level_normalized = roast_level | strip | downcase
+        assign roast_icon_url = ''
+
+        if roast_level_normalized == 'dark'
+          assign roast_icon_url = 'https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Dark_roast_icon_-_latitude_coffee.svg?v=1765156365'
+        elsif roast_level_normalized == 'medium'
+          assign roast_icon_url = 'https://cdn.shopify.com/s/files/1/0458/7051/4326/files/medium_roast_-_latitude_coffee.svg?v=1765156364'
+        elsif roast_level_normalized == 'light'
+          assign roast_icon_url = 'https://cdn.shopify.com/s/files/1/0458/7051/4326/files/coffee_roast_icon_-_latitude_coffee.svg?v=1765145171'
+        endif
+      -%}
+      <span class="product-badges__pill product-badges__pill--roast">
+        {%- if roast_icon_url != blank -%}
+          <img
+            src="{{ roast_icon_url }}"
+            alt="{{ roast_level | strip }} roast icon"
+            class="product-badges__roast-icon"
+            width="56"
+            height="16"
+            decoding="async"
+          >
+        {%- endif -%}
+        {{ roast_level }} Roast
+      </span>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+</div>
+
+{% stylesheet %}
+  .product-badge-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .product-badges {
+    --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
+
+    position: absolute;
+    z-index: var(--layer-flat);
+  }
+
+  .product-badges--bottom-left {
+    bottom: calc(var(--badge-inset) + var(--padding-block-start));
+    left: calc(var(--badge-inset) + var(--padding-inline-start));
+  }
+
+  .product-badges--top-left {
+    top: calc(var(--badge-inset) + var(--padding-block-start));
+    left: calc(var(--badge-inset) + var(--padding-inline-start));
+  }
+
+  .product-badges--top-right {
+    top: calc(var(--badge-inset) + var(--padding-block-start));
+    right: calc(var(--badge-inset) + var(--padding-inline-start));
+  }
+
+  .product-badges__badge {
+    --badge-font-size: var(--font-size--xs);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-foreground);
+    background: var(--color-background);
+    font-size: var(--badge-font-size);
+    font-family: var(--badge-font-family);
+    font-weight: var(--badge-font-weight);
+    text-transform: var(--badge-text-transform);
+    border-radius: var(--badge-border-radius);
+  }
+
+  .product-badges__badge--rectangle {
+    padding-block: var(--badge-rectangle-padding-block);
+    padding-inline: var(--badge-rectangle-padding-inline);
+  }
+
+  .product-badges__meta {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--gap-xs);
+    align-items: center;
+    z-index: var(--layer-toast);
+  }
+
+  .product-badges__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    border-radius: 999px;
+    color: var(--color-foreground);
+    font-size: 0.85rem;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+    text-transform: none;
+    pointer-events: auto;
+  }
+
+  .product-badges__pill--roast {
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-badges__roast-icon {
+    width: 56px;
+    height: 16px;
+    display: block;
+    object-fit: contain;
+  }
+{% endstylesheet %}
