@@ -1,0 +1,112 @@
+{%- comment -%} Farm Direct — hero (image or video, origin chips, CTA to products) {%- endcomment -%}
+{%- style -%}
+  #fh-{{ section.id }} {
+    position: relative; overflow: hidden; color: {{ section.settings.text_color }};
+    min-height: {{ section.settings.height }}vh; display: flex; align-items: {{ section.settings.v_align }};
+    background: {{ section.settings.bg }};
+  }
+  #fh-{{ section.id }} .fh__media, #fh-{{ section.id }} .fh__media img, #fh-{{ section.id }} .fh__media video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  #fh-{{ section.id }} .fh__media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(28,8,4,{{ section.settings.overlay | divided_by: 100.0 }}) 0%, rgba(28,8,4,{{ section.settings.overlay | divided_by: 200.0 }}) 60%, rgba(28,8,4,0) 100%);
+  }
+  #fh-{{ section.id }} .fh__img--mobile { display: none; }
+  #fh-{{ section.id }} .fh__content {
+    position: relative; z-index: 1; width: 100%; max-width: 1200px; margin: 0 auto;
+    padding: 64px 24px; text-align: {{ section.settings.align }};
+  }
+  #fh-{{ section.id }} .fh__inner { max-width: 680px; {% if section.settings.align == 'center' %}margin: 0 auto;{% endif %} }
+  #fh-{{ section.id }} .fh__eyebrow { display: inline-block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; margin: 0 0 12px; color: {{ section.settings.accent }}; }
+  #fh-{{ section.id }} h1 { font-size: clamp(34px, 5.2vw, 64px); line-height: 1.05; margin: 0 0 16px; color: inherit; }
+  #fh-{{ section.id }} .fh__text { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; margin: 0 0 22px; opacity: .95; }
+  #fh-{{ section.id }} .fh__text p { margin: 0; }
+  #fh-{{ section.id }} .fh__chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; {% if section.settings.align == 'center' %}justify-content: center;{% endif %} }
+  #fh-{{ section.id }} .fh__chips li {
+    padding: 7px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 600;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); backdrop-filter: blur(4px);
+  }
+  #fh-{{ section.id }} .fh__btn {
+    display: inline-block; padding: 14px 28px; border-radius: 999px; text-decoration: none;
+    background: {{ section.settings.btn_bg }}; color: {{ section.settings.btn_text }};
+    font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
+  }
+  @media (max-width: 749px) {
+    #fh-{{ section.id }} { min-height: {{ section.settings.height_mobile }}vh; }
+    {%- if section.settings.image_mobile != blank -%}
+      #fh-{{ section.id }} .fh__img--desktop { display: none; }
+      #fh-{{ section.id }} .fh__img--mobile { display: block; }
+    {%- endif -%}
+    #fh-{{ section.id }} .fh__content { padding: 40px 18px; }
+  }
+{%- endstyle -%}
+
+<section id="fh-{{ section.id }}" class="farm-hero">
+  <div class="fh__media" aria-hidden="true">
+    {%- if section.settings.video != blank -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, image_size: '1600x' }}
+    {%- elsif section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'fh__img--desktop', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1920, 2400', alt: '' }}
+      {%- if section.settings.image_mobile != blank -%}
+        {{ section.settings.image_mobile | image_url: width: 1200 | image_tag: class: 'fh__img--mobile', loading: 'eager', sizes: '100vw', widths: '450, 750, 1000, 1200', alt: '' }}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+  <div class="fh__content">
+    <div class="fh__inner">
+      {%- if section.settings.eyebrow != blank -%}<p class="fh__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1>{{ section.settings.heading | default: page.title }}</h1>
+      {%- if section.settings.text != blank -%}<div class="fh__text">{{ section.settings.text }}</div>{%- endif -%}
+      {%- assign chip_count = 0 -%}
+      {%- for block in section.blocks -%}{%- if block.settings.text != blank -%}{%- assign chip_count = chip_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+      {%- if chip_count > 0 -%}
+        <ul class="fh__chips">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.text != blank -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.btn_label != blank -%}
+        <a class="fh__btn" href="{{ section.settings.btn_link | default: '#farm-products' }}">{{ section.settings.btn_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Farm hero",
+  "tag": "div",
+  "class": "section-farm-hero",
+  "settings": [
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Background image (landscape)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (portrait, optional)" },
+    { "type": "video", "id": "video", "label": "Background video (optional, overrides image)", "info": "Upload a short, silent loop (under 15 s)." },
+    { "type": "range", "id": "overlay", "label": "Dark overlay", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 55 },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Farm Direct" },
+    { "type": "text", "id": "heading", "label": "Heading (defaults to page title)" },
+    { "type": "richtext", "id": "text", "label": "Intro text" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Shop this farm's coffee" },
+    { "type": "url", "id": "btn_link", "label": "Button link", "info": "Leave empty to jump to the 'From this farm' products section." },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "align", "label": "Text alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "select", "id": "v_align", "label": "Vertical position", "default": "flex-end", "options": [ { "value": "flex-start", "label": "Top" }, { "value": "center", "label": "Middle" }, { "value": "flex-end", "label": "Bottom" } ] },
+    { "type": "range", "id": "height", "label": "Height (desktop)", "min": 40, "max": 100, "step": 5, "unit": "vh", "default": 80 },
+    { "type": "range", "id": "height_mobile", "label": "Height (mobile)", "min": 40, "max": 100, "step": 5, "unit": "vh", "default": 75 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Fallback background", "default": "#2B1208" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent", "label": "Eyebrow", "default": "#E0A43B" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#E0A43B" },
+    { "type": "color", "id": "btn_text", "label": "Button text", "default": "#2B1208" }
+  ],
+  "blocks": [
+    { "type": "chip", "name": "Origin chip", "limit": 6,
+      "settings": [ { "type": "text", "id": "text", "label": "Text (empty = hidden)", "info": "e.g. 1,800 m · Washed · SL28" } ] }
+  ],
+  "presets": [ { "name": "Farm hero", "blocks": [ { "type": "chip" }, { "type": "chip" }, { "type": "chip" } ] } ]
+}
+{% endschema %}

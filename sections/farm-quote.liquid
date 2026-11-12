@@ -1,0 +1,46 @@
+{%- comment -%} Farm Direct — producer quote. Hidden on live site until a quote is entered. {%- endcomment -%}
+{%- style -%}
+  #fq-{{ section.id }} { background: {{ section.settings.bg }}; color: {{ section.settings.text }}; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; }
+  #fq-{{ section.id }} .fq__wrap { max-width: 860px; margin: 0 auto; text-align: center; }
+  #fq-{{ section.id }} .fq__mark { font-size: 72px; line-height: .6; color: {{ section.settings.accent }}; font-family: Georgia, serif; display: block; margin-bottom: 8px; }
+  #fq-{{ section.id }} blockquote { margin: 0 0 24px; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.45; font-weight: 500; }
+  #fq-{{ section.id }} .fq__who { display: inline-flex; align-items: center; gap: 14px; text-align: left; }
+  #fq-{{ section.id }} .fq__who img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+  #fq-{{ section.id }} .fq__name { display: block; font-weight: 700; font-size: 16px; }
+  #fq-{{ section.id }} .fq__role { display: block; font-size: 14px; opacity: .8; }
+{%- endstyle -%}
+
+{%- if section.settings.quote != blank or request.design_mode -%}
+<section id="fq-{{ section.id }}" class="farm-quote">
+  <figure class="fq__wrap" style="margin:0 auto">
+    <span class="fq__mark" aria-hidden="true">“</span>
+    <blockquote>{{ section.settings.quote | default: 'Add a quote from the producer. This section is hidden on the live site until you do.' | escape }}</blockquote>
+    {%- if section.settings.name != blank -%}
+      <figcaption class="fq__who">
+        {%- if section.settings.photo != blank -%}{{ section.settings.photo | image_url: width: 160 | image_tag: loading: 'lazy', alt: section.settings.name }}{%- endif -%}
+        <span><span class="fq__name">{{ section.settings.name }}</span>{%- if section.settings.role != blank -%}<span class="fq__role">{{ section.settings.role }}</span>{%- endif -%}</span>
+      </figcaption>
+    {%- endif -%}
+  </figure>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Farm quote",
+  "tag": "div",
+  "class": "section-farm-quote",
+  "settings": [
+    { "type": "textarea", "id": "quote", "label": "Quote", "info": "Use the producer's real words only." },
+    { "type": "image_picker", "id": "photo", "label": "Producer photo" },
+    { "type": "text", "id": "name", "label": "Name" },
+    { "type": "text", "id": "role", "label": "Role", "info": "e.g. Owner, [farm name]" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#2F5D3A" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent", "label": "Quote mark", "default": "#E0A43B" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [ { "name": "Farm quote" } ]
+}
+{% endschema %}

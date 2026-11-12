@@ -1,0 +1,247 @@
+{
+  "sections": {
+    "hero": {
+      "type": "farm-hero",
+      "blocks": {
+        "c1": {
+          "type": "chip",
+          "settings": {
+            "text": ""
+          }
+        },
+        "c2": {
+          "type": "chip",
+          "settings": {
+            "text": ""
+          }
+        },
+        "c3": {
+          "type": "chip",
+          "settings": {
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "Farm Direct · Nicaragua",
+        "heading": "",
+        "btn_label": "Shop this farm's coffee",
+        "overlay": 55,
+        "height": 80
+      }
+    },
+    "facts": {
+      "type": "farm-facts",
+      "blocks": {
+        "f0": {
+          "type": "fact",
+          "settings": {
+            "icon": "pin",
+            "label": "Region",
+            "value": ""
+          }
+        },
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "icon": "mountain",
+            "label": "Altitude",
+            "value": ""
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "icon": "leaf",
+            "label": "Varietals",
+            "value": ""
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "icon": "drop",
+            "label": "Process",
+            "value": ""
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "icon": "calendar",
+            "label": "Harvest",
+            "value": ""
+          }
+        },
+        "f5": {
+          "type": "fact",
+          "settings": {
+            "icon": "person",
+            "label": "Producer",
+            "value": ""
+          }
+        }
+      },
+      "block_order": [
+        "f0",
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "settings": {
+        "heading": "At a glance"
+      }
+    },
+    "story_farm": {
+      "type": "farm-story",
+      "settings": {
+        "eyebrow": "The farm",
+        "heading": "",
+        "image_side": "left"
+      }
+    },
+    "products": {
+      "type": "farm-products",
+      "settings": {
+        "eyebrow": "From this farm",
+        "heading": "Taste Nicaragua",
+        "limit": 6,
+        "columns": 3,
+        "show_notes": true,
+        "all_label": "Shop all farm-direct coffee"
+      }
+    },
+    "story_people": {
+      "type": "farm-story",
+      "settings": {
+        "eyebrow": "The people",
+        "heading": "",
+        "image_side": "right",
+        "bg": "#F8F5EC"
+      }
+    },
+    "gallery": {
+      "type": "farm-gallery",
+      "blocks": {
+        "g0": {
+          "type": "photo",
+          "settings": {
+            "caption": "",
+            "wide": true
+          }
+        },
+        "g1": {
+          "type": "photo",
+          "settings": {
+            "caption": "",
+            "wide": false
+          }
+        },
+        "g2": {
+          "type": "photo",
+          "settings": {
+            "caption": "",
+            "wide": false
+          }
+        },
+        "g3": {
+          "type": "photo",
+          "settings": {
+            "caption": "",
+            "wide": false
+          }
+        },
+        "g4": {
+          "type": "photo",
+          "settings": {
+            "caption": "",
+            "wide": false
+          }
+        }
+      },
+      "block_order": [
+        "g0",
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
+      "settings": {
+        "heading": "Life on the farm",
+        "columns": 3,
+        "bg": "#FFFFFF"
+      }
+    },
+    "quote": {
+      "type": "farm-quote",
+      "settings": {
+        "quote": "",
+        "name": "",
+        "role": ""
+      }
+    },
+    "journey": {
+      "type": "farm-journey",
+      "blocks": {
+        "j1": {
+          "type": "step",
+          "settings": {
+            "icon": "cherry",
+            "title": "Grown & picked",
+            "text": ""
+          }
+        },
+        "j2": {
+          "type": "step",
+          "settings": {
+            "icon": "sun",
+            "title": "Processed & dried",
+            "text": ""
+          }
+        },
+        "j3": {
+          "type": "step",
+          "settings": {
+            "icon": "ship",
+            "title": "Shipped to Sarasota",
+            "text": ""
+          }
+        },
+        "j4": {
+          "type": "step",
+          "settings": {
+            "icon": "flame",
+            "title": "Roasted in Sarasota, FL",
+            "text": "Roasted by Latitude 23.5 and shipped to you."
+          }
+        }
+      },
+      "block_order": [
+        "j1",
+        "j2",
+        "j3",
+        "j4"
+      ],
+      "settings": {
+        "heading": "From the farm to your cup"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "facts",
+    "story_farm",
+    "products",
+    "story_people",
+    "gallery",
+    "quote",
+    "journey"
+  ]
+}
