@@ -1,0 +1,443 @@
+{%- comment -%}
+  Equipment catalog — tabs (one per collection block) + brand filter chips (from product vendor)
+  + product cards. Built for multi-brand equipment listings.
+
+  Product setup:
+  - Vendor = brand (Rancilio, …) → brand chips are generated automatically.
+  - Product metafield custom.equipment_highlight (single line text) → short spec line on the card,
+    e.g. "3 groups · 17 L boiler". Hidden when empty.
+  - Tag "quote-only" (or price $0) → card shows "Price on request" instead of a price.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign tabs = section.blocks | where: 'type', 'tab' -%}
+{%- assign listings = section.blocks | where: 'type', 'listing' -%}
+{%- style -%}
+  #eqc-{{ section.id }} { background: {{ s.bg }}; color: {{ s.text }}; padding: {{ s.pad_top }}px 20px {{ s.pad_bottom }}px; scroll-margin-top: 90px; }
+  #eqc-{{ section.id }} [hidden] { display: none !important; }
+  #eqc-{{ section.id }} :is(button, a):focus-visible { outline: 2px solid {{ s.accent }}; outline-offset: 3px; }
+  #eqc-{{ section.id }} .eqc__in { max-width: 1200px; margin: 0 auto; }
+  #eqc-{{ section.id }} .eqc__head { text-align: center; margin-bottom: 26px; }
+  #eqc-{{ section.id }} h2 { font-size: clamp(28px, 3.2vw, 42px); margin: 0 0 10px; color: inherit; }
+  #eqc-{{ section.id }} .eqc__sub { max-width: 640px; margin: 0 auto; font-size: 16px; line-height: 1.6; opacity: .8; }
+  #eqc-{{ section.id }} .eqc__tabs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 0 0 18px; padding: 0; list-style: none; }
+  #eqc-{{ section.id }} .eqc__tabs button { border: 1.5px solid {{ s.dark }}; background: transparent; color: inherit; padding: 11px 22px; border-radius: 999px; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
+  #eqc-{{ section.id }} .eqc__tabs button[aria-selected="true"] { background: {{ s.dark }}; color: #fff; }
+  #eqc-{{ section.id }} .eqc__brands { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 0 0 30px; }
+  #eqc-{{ section.id }} .eqc__brands button { border: 1px solid {{ s.line }}; background: #fff; color: inherit; padding: 7px 14px; border-radius: 999px; font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+  #eqc-{{ section.id }} .eqc__brands button[aria-pressed="true"] { background: {{ s.gold }}; border-color: {{ s.gold }}; color: #2B1208; }
+  #eqc-{{ section.id }} .eqc__grid { display: grid; gap: 22px; grid-template-columns: repeat({{ s.columns }}, minmax(0, 1fr)); }
+  #eqc-{{ section.id }} .eqc__card { position: relative; background: #fff; border: 1px solid {{ s.line }}; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .3s ease, transform .3s ease; }
+  #eqc-{{ section.id }} .eqc__card:hover { box-shadow: 0 14px 34px rgba(43,18,8,.12); transform: translateY(-3px); }
+  #eqc-{{ section.id }} .eqc__card[hidden] { display: none; }
+  #eqc-{{ section.id }} .eqc__img { display: block; aspect-ratio: 1 / 1; background: {{ s.img_bg }}; padding: 18px; }
+  #eqc-{{ section.id }} .eqc__img img { width: 100%; height: 100%; object-fit: contain; display: block; mix-blend-mode: multiply; }
+  #eqc-{{ section.id }} .eqc__b { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  #eqc-{{ section.id }} .eqc__brand { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: {{ s.accent }}; }
+  #eqc-{{ section.id }} .eqc__t { font-size: 18px; font-weight: 700; line-height: 1.25; text-decoration: none; color: inherit; }
+  #eqc-{{ section.id }} .eqc__t::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  #eqc-{{ section.id }} .eqc__spec { font-size: 14px; opacity: .78; line-height: 1.4; }
+  #eqc-{{ section.id }} .eqc__price { font-size: 15px; font-weight: 600; margin-top: 4px; }
+  #eqc-{{ section.id }} .eqc__acts { margin-top: auto; padding-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  #eqc-{{ section.id }} .eqc__acts a { position: relative; z-index: 2; display: block; text-align: center; padding: 10px 8px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; }
+  #eqc-{{ section.id }} .eqc__view { background: {{ s.dark }}; color: #fff; }
+  #eqc-{{ section.id }} .eqc__quote { border: 1.5px solid {{ s.dark }}; color: inherit; }
+  #eqc-{{ section.id }} .eqc__more { text-align: center; margin-top: 28px; }
+  #eqc-{{ section.id }} .eqc__more a { font-weight: 700; color: inherit; text-underline-offset: 4px; }
+  #eqc-{{ section.id }} .eqc__empty { text-align: center; padding: 40px; background: {{ s.img_bg }}; border-radius: 16px; }
+  @media (max-width: 989px) { #eqc-{{ section.id }} .eqc__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+  @media (max-width: 749px) {
+    #eqc-{{ section.id }} .eqc__tabs, #eqc-{{ section.id }} .eqc__brands { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; margin-left: -20px; margin-right: -20px; padding: 0 20px; }
+    #eqc-{{ section.id }} .eqc__tabs button, #eqc-{{ section.id }} .eqc__brands button { white-space: nowrap; }
+    #eqc-{{ section.id }} .eqc__acts { grid-template-columns: 1fr; }
+    #eqc-{{ section.id }} .eqc__t { font-size: 16px; }
+    #eqc-{{ section.id }} .eqc__b { padding: 12px 12px 14px; }
+  }
+{%- endstyle -%}
+
+<section id="eqc-{{ section.id }}" class="eq-catalog" data-eqc>
+  <span id="{{ s.anchor | default: 'equipment' | escape }}" style="position:relative;top:-90px;display:block"></span>
+  <div class="eqc__in">
+    <div class="eqc__head">
+      {%- if s.heading != blank -%}<h2>{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.subheading != blank -%}<p class="eqc__sub">{{ s.subheading }}</p>{%- endif -%}
+    </div>
+
+    {%- if tabs.size > 1 -%}
+      <div class="eqc__tabs" role="tablist" aria-label="Equipment categories">
+        {%- for block in tabs -%}
+          <button type="button" role="tab" id="eqc-tab-{{ block.id }}" aria-controls="eqc-panel-{{ block.id }}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
+            {{ block.settings.label | default: block.settings.collection.title | default: 'Equipment' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- for block in tabs -%}
+      {%- liquid
+        assign coll = block.settings.collection
+        assign items = block.settings.products
+        assign use_collection = false
+        if items == blank
+          assign items = coll.products
+          assign use_collection = true
+        endif
+        assign vendors = items | map: 'vendor' | uniq | sort
+      -%}
+      <div class="eqc__panel" role="tabpanel" id="eqc-panel-{{ block.id }}" {% if tabs.size > 1 %}aria-labelledby="eqc-tab-{{ block.id }}"{% else %}aria-label="{{ block.settings.label | default: coll.title | default: 'Equipment' | escape }}"{% endif %} tabindex="0"{% unless forloop.first %} hidden{% endunless %}>
+        {%- if items != blank -%}
+          {%- if s.show_brands and vendors.size > 1 -%}
+            <div class="eqc__brands" aria-label="Filter by brand">
+              <button type="button" data-brand="" aria-pressed="true">All brands</button>
+              {%- for v in vendors -%}
+                <button type="button" data-brand="{{ v | escape }}" aria-pressed="false">{{ v | escape }}</button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <div class="eqc__grid">
+            {%- for p in items limit: s.limit -%}
+              {%- liquid
+                assign quote_only = false
+                if p.tags contains 'quote-only' or p.price == 0
+                  assign quote_only = true
+                endif
+              -%}
+              <div class="eqc__card" data-brand="{{ p.vendor | escape }}">
+                <span class="eqc__img" aria-hidden="true">
+                  {%- if p.featured_image -%}
+                    {{ p.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 500, 700', sizes: '(min-width: 990px) 25vw, 50vw', alt: '' }}
+                  {%- endif -%}
+                </span>
+                <div class="eqc__b">
+                  {%- if p.vendor != blank -%}<span class="eqc__brand">{{ p.vendor }}</span>{%- endif -%}
+                  <a class="eqc__t" href="{{ p.url }}">{{ p.title }}</a>
+                  {%- assign hl = p.metafields.custom.equipment_highlight.value -%}
+                  {%- if hl != blank -%}<span class="eqc__spec">{{ hl }}</span>{%- endif -%}
+                  <span class="eqc__price">
+                    {%- if quote_only -%}{{ s.quote_text }}
+                    {%- elsif p.price_varies -%}From {{ p.price_min | money }}
+                    {%- else -%}{{ p.price | money }}{%- endif -%}
+                  </span>
+                  <div class="eqc__acts">
+                    <a class="eqc__view" href="{{ p.url }}">{{ s.view_label }}</a>
+                    <a class="eqc__quote" href="{{ s.quote_link | default: '#lead-form' }}">{{ s.quote_label }}</a>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+          <p class="eqc__empty" data-eqc-empty role="status" hidden>No equipment from this brand in this selection.</p>
+          {%- if s.show_view_all and use_collection and coll.products_count > s.limit -%}
+            <p class="eqc__more"><a href="{{ coll.url }}">View all {{ coll.products_count }} in {{ coll.title }} →</a></p>
+          {%- endif -%}
+        {%- else -%}
+          {%- assign listing_count = 0 -%}
+          {%- capture listing_cards -%}
+            {%- for listing in listings -%}
+              {%- if listing.settings.category != block.settings.category -%}{%- continue -%}{%- endif -%}
+              {%- assign listing_count = listing_count | plus: 1 -%}
+              <div class="eqc__card" {{ listing.shopify_attributes }}>
+                <span class="eqc__img" aria-hidden="true">
+                  {%- if listing.settings.image != blank -%}
+                    {{ listing.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 500, 700', sizes: '(min-width: 990px) 25vw, 50vw', alt: '' }}
+                  {%- elsif listing.settings.image_url != blank -%}
+                    <img src="{{ listing.settings.image_url | escape }}" width="768" height="768" alt="" loading="lazy">
+                  {%- endif -%}
+                </span>
+                <div class="eqc__b">
+                  {%- if listing.settings.brand != blank -%}<span class="eqc__brand">{{ listing.settings.brand | escape }}</span>{%- endif -%}
+                  <a class="eqc__t" href="{{ listing.settings.link | default: s.quote_link | default: '#lead-form' }}">{{ listing.settings.title | escape }}</a>
+                  {%- if listing.settings.highlight != blank -%}<span class="eqc__spec">{{ listing.settings.highlight | escape }}</span>{%- endif -%}
+                  <span class="eqc__price">{{ s.quote_text }}</span>
+                  <div class="eqc__acts" style="grid-template-columns: 1fr">
+                    <a class="eqc__quote" href="{{ s.quote_link | default: '#lead-form' }}">{{ s.quote_label }}</a>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if listing_count > 0 -%}
+            <div class="eqc__grid">{{ listing_cards }}</div>
+          {%- elsif request.design_mode -%}
+          <div class="eqc__empty">Choose products, a collection, or add quote listings for the “{{ block.settings.label }}” tab.</div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('eqc-{{ section.id }}');
+    if (!root || root.dataset.bound) return; root.dataset.bound = '1';
+    root.addEventListener('click', function (e) {
+      var tab = e.target.closest('[role="tab"]');
+      if (tab) {
+        root.querySelectorAll('[role="tab"]').forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); t.tabIndex = t === tab ? 0 : -1; });
+        root.querySelectorAll('[role="tabpanel"]').forEach(function (p) { p.hidden = p.id !== tab.getAttribute('aria-controls'); });
+        return;
+      }
+      var chip = e.target.closest('[data-brand]');
+      if (chip && chip.tagName === 'BUTTON') {
+        var panel = chip.closest('[role="tabpanel"]'), brand = chip.getAttribute('data-brand');
+        panel.querySelectorAll('.eqc__brands button').forEach(function (b) { b.setAttribute('aria-pressed', b === chip ? 'true' : 'false'); });
+        panel.querySelectorAll('.eqc__card').forEach(function (c) { c.hidden = !!brand && c.getAttribute('data-brand') !== brand; });
+        panel.querySelector('[data-eqc-empty]').hidden = !!panel.querySelector('.eqc__card:not([hidden])');
+      }
+    });
+    root.addEventListener('keydown', function (e) {
+      var tab = e.target.closest('[role="tab"]'); if (!tab || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]')), i = tabs.indexOf(tab);
+      var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; next.focus(); next.click();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Equipment catalog",
+  "tag": "div",
+  "class": "section-eq-catalog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop Equipment"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Commercial espresso machines and grinders for caf\u00e9s, restaurants and offices."
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor id",
+      "default": "equipment",
+      "info": "Buttons can link to #equipment to scroll here."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brands",
+      "label": "Brand filter chips (from product vendor)",
+      "default": true,
+      "info": "Only shows when a tab has 2+ brands."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products per tab",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' link when a tab has more products",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_label",
+      "label": "Primary button",
+      "default": "View details"
+    },
+    {
+      "type": "text",
+      "id": "quote_label",
+      "label": "Quote button",
+      "default": "Request quote"
+    },
+    {
+      "type": "url",
+      "id": "quote_link",
+      "label": "Quote button link",
+      "info": "Leave empty to use the lead form on this page."
+    },
+    {
+      "type": "text",
+      "id": "quote_text",
+      "label": "Text when no price",
+      "default": "Price on request"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FBF8EF"
+    },
+    {
+      "type": "color",
+      "id": "img_bg",
+      "label": "Image background",
+      "default": "#F1EEE8"
+    },
+    {
+      "type": "color",
+      "id": "text",
+      "label": "Text",
+      "default": "#2B1208"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Brand label",
+      "default": "#1F5C3A"
+    },
+    {
+      "type": "color",
+      "id": "gold",
+      "label": "Active brand chip",
+      "default": "#E0A43B"
+    },
+    {
+      "type": "color",
+      "id": "dark",
+      "label": "Buttons / active tab",
+      "default": "#2B1208"
+    },
+    {
+      "type": "color",
+      "id": "line",
+      "label": "Borders",
+      "default": "#E6DCC6"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Category tab",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label",
+          "default": "Espresso Machines"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Or choose products",
+          "limit": 48,
+          "info": "Selected products take priority over the collection."
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Quote listing category key",
+          "default": "machines",
+          "info": "Match this key on quote listing blocks. Used only when no products or collection are selected."
+        }
+      ]
+    },
+    {
+      "type": "listing",
+      "name": "Quote listing",
+      "limit": 32,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Model name",
+          "default": "Equipment model"
+        },
+        {
+          "type": "text",
+          "id": "brand",
+          "label": "Brand",
+          "default": "Rancilio"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category key",
+          "default": "machines",
+          "info": "Match the category key on a category tab."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Existing image URL",
+          "info": "Used if no image is selected."
+        },
+        {
+          "type": "text",
+          "id": "highlight",
+          "label": "Short specification"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Details link",
+          "info": "Leave blank to link the model name to the quote form."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Equipment catalog",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Espresso Machines",
+            "category": "machines"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Grinders",
+            "category": "grinders"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

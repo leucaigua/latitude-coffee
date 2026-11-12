@@ -1,0 +1,206 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ws-hero",
+      "settings": {
+        "heading": "Commercial Espresso Equipment",
+        "text": "<p>Espresso machines and grinders for caf\u00e9s, restaurants and offices, paired with coffee roasted in Sarasota, Florida.</p>",
+        "btn_label": "Request a Quote",
+        "media_width": 65,
+        "height": 460,
+        "btn_link": "#lead-form"
+      }
+    },
+    "catalog": {
+      "type": "eq-catalog",
+      "settings": {
+        "heading": "Shop Equipment",
+        "limit": 24,
+        "columns": 4
+      },
+      "blocks": {
+        "tab1": {
+          "type": "tab",
+          "settings": {
+            "label": "Espresso Machines",
+            "collection": "",
+            "category": "machines"
+          }
+        },
+        "tab2": {
+          "type": "tab",
+          "settings": {
+            "label": "Coffee Grinders",
+            "collection": "",
+            "category": "grinders"
+          }
+        },
+        "listing_1": {
+          "type": "listing",
+          "settings": {
+            "title": "Classe 11",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/10/classe11-4-768x768.png"
+          }
+        },
+        "listing_2": {
+          "type": "listing",
+          "settings": {
+            "title": "Classe 20",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/10/classe20-4-768x768.png"
+          }
+        },
+        "listing_3": {
+          "type": "listing",
+          "settings": {
+            "title": "Classe 9",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/classe9-2-768x768.png"
+          }
+        },
+        "listing_4": {
+          "type": "listing",
+          "settings": {
+            "title": "Classe 7",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/classe7-3-768x768.png"
+          }
+        },
+        "listing_5": {
+          "type": "listing",
+          "settings": {
+            "title": "Classe 5 Eco",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2023/05/Classe5_ECO-featurImage-1-768x768.png"
+          }
+        },
+        "listing_6": {
+          "type": "listing",
+          "settings": {
+            "title": "Classe 5",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/Classe5-product-1-768x768.png"
+          }
+        },
+        "listing_7": {
+          "type": "listing",
+          "settings": {
+            "title": "Baby 9",
+            "brand": "Rancilio",
+            "category": "machines",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2021/03/baby9-768x768.png"
+          }
+        },
+        "listing_8": {
+          "type": "listing",
+          "settings": {
+            "title": "Kryo",
+            "brand": "Rancilio",
+            "category": "grinders",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/Kryo-1-768x768.png"
+          }
+        },
+        "listing_9": {
+          "type": "listing",
+          "settings": {
+            "title": "MD",
+            "brand": "Rancilio",
+            "category": "grinders",
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/MD-1-768x768.png"
+          }
+        }
+      },
+      "block_order": [
+        "tab1",
+        "tab2",
+        "listing_1",
+        "listing_2",
+        "listing_3",
+        "listing_4",
+        "listing_5",
+        "listing_6",
+        "listing_7",
+        "listing_8",
+        "listing_9"
+      ]
+    },
+    "why": {
+      "type": "ws-cards",
+      "settings": {
+        "heading": "Why Buy Equipment From Latitude?",
+        "subheading": "One partner for your machine and the coffee that goes in it",
+        "pad_top": 48
+      },
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "icon": "handshake",
+            "title": "Help choosing the right setup",
+            "text": "Tell us your volume, menu and space. We'll recommend the machine and grinder that fit, not the most expensive one."
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "icon": "bean",
+            "title": "Coffee and equipment, together",
+            "text": "Pair your equipment with a Latitude wholesale coffee program and dial it in from day one."
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "icon": "tag",
+            "title": "Quotes for your exact setup",
+            "text": "Commercial setups vary. Request a quote and we'll put together pricing for your configuration."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    "form": {
+      "type": "ws-form",
+      "settings": {
+        "heading": "Request a Quote",
+        "subheading": "Tell us about your business and the equipment you're interested in",
+        "klaviyo_id": "S9zRAF"
+      }
+    },
+    "proof": {
+      "type": "ws-proof",
+      "settings": {
+        "pad_top": 40,
+        "pad_bottom": 40
+      }
+    },
+    "cta": {
+      "type": "ws-cta",
+      "settings": {
+        "heading": "Need Coffee for Your New Machine?",
+        "text": "Explore our wholesale program for caf\u00e9s, restaurants, offices and retailers.",
+        "btn_label": "Explore Wholesale",
+        "btn_link": "/pages/wholesale"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "catalog",
+    "why",
+    "form",
+    "proof",
+    "cta"
+  ]
+}
