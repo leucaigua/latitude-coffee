@@ -1,0 +1,312 @@
+{%- comment -%}
+  Latitude 23.5 · Blog "Explore" layout
+  Hero + search + topic chips (article tags) · featured post · paginated card grid
+  · newsletter band and shop band inserted inside the grid.
+  Lives on its own template (blog.explore.json), so the current blog template is untouched.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign per_page = s.per_page
+  assign topic_list = s.topics | split: ','
+  assign on_first_page = true
+  if current_page != 1
+    assign on_first_page = false
+  endif
+  assign show_featured = false
+  if s.show_featured and on_first_page and current_tags == blank
+    assign show_featured = true
+  endif
+-%}
+
+{%- style -%}
+  #bx-{{ section.id }} { --bx-bg: {{ s.bg }}; --bx-card: {{ s.card_bg }}; --bx-text: {{ s.text }}; --bx-accent: {{ s.accent }}; --bx-gold: {{ s.gold }}; --bx-dark: {{ s.dark }};
+    background: var(--bx-bg); color: var(--bx-text); }
+  #bx-{{ section.id }} .bx-wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+  #bx-{{ section.id }} a { color: inherit; }
+  #bx-{{ section.id }} :is(h2, h3) { color: inherit; }
+  #bx-{{ section.id }} .bx-search:focus-within { outline: 2px solid var(--bx-gold); outline-offset: 3px; }
+
+  /* Hero */
+  #bx-{{ section.id }} .bx-hero { background: var(--bx-dark); color: #F8F5EC; padding: 56px 0 30px; }
+  #bx-{{ section.id }} .bx-hero__top { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: end; }
+  #bx-{{ section.id }} .bx-eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--bx-gold); margin: 0 0 10px; }
+  #bx-{{ section.id }} .bx-hero h1 { font-size: clamp(32px, 4.4vw, 54px); line-height: 1.05; margin: 0; color: inherit; }
+  #bx-{{ section.id }} .bx-hero__intro { font-size: 16px; line-height: 1.6; opacity: .9; margin: 0 0 14px; }
+  #bx-{{ section.id }} .bx-search { display: flex; background: #fff; border-radius: 999px; overflow: hidden; }
+  #bx-{{ section.id }} .bx-search input { flex: 1; border: 0; padding: 13px 18px; font: inherit; font-size: 15px; color: #2B1208; min-width: 0; outline: none; }
+  #bx-{{ section.id }} .bx-search button { border: 0; background: var(--bx-gold); color: #2B1208; font-weight: 700; padding: 0 20px; cursor: pointer; font: inherit; font-size: 14px; }
+  #bx-{{ section.id }} .bx-chips { display: flex; gap: 8px; margin: 28px 0 0; padding: 0 0 4px; list-style: none; overflow-x: auto; scrollbar-width: none; }
+  #bx-{{ section.id }} .bx-chips::-webkit-scrollbar { display: none; }
+  #bx-{{ section.id }} .bx-chips a { display: block; white-space: nowrap; padding: 9px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; border: 1px solid rgba(248,245,236,.35); color: #F8F5EC; }
+  #bx-{{ section.id }} .bx-chips a[aria-current="page"] { background: var(--bx-gold); border-color: var(--bx-gold); color: #2B1208; }
+
+  /* Featured */
+  #bx-{{ section.id }} .bx-feat { display: grid; grid-template-columns: 1.35fr 1fr; gap: 36px; align-items: center; padding: 48px 0 12px; position: relative; }
+  #bx-{{ section.id }} .bx-feat__img { border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--bx-card); }
+  #bx-{{ section.id }} .bx-feat__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+  #bx-{{ section.id }} .bx-feat:hover .bx-feat__img img { transform: scale(1.03); }
+  #bx-{{ section.id }} .bx-feat h2 { font-size: clamp(26px, 3vw, 40px); line-height: 1.12; margin: 8px 0 14px; }
+  #bx-{{ section.id }} .bx-feat p { font-size: 16.5px; line-height: 1.6; margin: 0 0 18px; opacity: .88; }
+  #bx-{{ section.id }} .bx-btn { display: inline-block; padding: 13px 24px; border-radius: 999px; background: var(--bx-dark); color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* Section heading row */
+  #bx-{{ section.id }} .bx-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 40px 0 18px; border-bottom: 1px solid {{ s.line }}; margin-bottom: 26px; }
+  #bx-{{ section.id }} .bx-row-head h2 { font-size: 22px; margin: 0; }
+  #bx-{{ section.id }} .bx-row-head span { font-size: 14px; opacity: .7; }
+
+  /* Cards */
+  #bx-{{ section.id }} .bx-grid { display: grid; gap: 34px 26px; grid-template-columns: repeat({{ s.columns }}, minmax(0, 1fr)); }
+  #bx-{{ section.id }} .bx-card { position: relative; display: flex; flex-direction: column; }
+  #bx-{{ section.id }} .bx-card__img { border-radius: 14px; overflow: hidden; aspect-ratio: 3 / 2; background: var(--bx-card); margin-bottom: 14px; }
+  #bx-{{ section.id }} .bx-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; }
+  #bx-{{ section.id }} .bx-card:hover .bx-card__img img { transform: scale(1.04); }
+  #bx-{{ section.id }} .bx-tag { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--bx-accent); }
+  #bx-{{ section.id }} .bx-card h3 { font-size: 19px; line-height: 1.3; margin: 6px 0 8px; }
+  #bx-{{ section.id }} .bx-card h3 a, #bx-{{ section.id }} .bx-feat h2 a { text-decoration: none; }
+  #bx-{{ section.id }} .bx-card h3 a::after, #bx-{{ section.id }} .bx-feat h2 a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  #bx-{{ section.id }} .bx-card h3 a:focus-visible, #bx-{{ section.id }} .bx-feat h2 a:focus-visible { outline: 2px solid var(--bx-gold); outline-offset: 3px; }
+  #bx-{{ section.id }} .bx-card p { font-size: 15px; line-height: 1.55; margin: 0 0 10px; opacity: .82; }
+  #bx-{{ section.id }} .bx-meta { font-size: 13px; opacity: .65; margin-top: auto; }
+
+  /* Inserted bands */
+  #bx-{{ section.id }} .bx-band { grid-column: 1 / -1; border-radius: 20px; padding: 34px 36px; display: grid; gap: 24px; align-items: center; grid-template-columns: 1fr auto; }
+  #bx-{{ section.id }} .bx-band h3 { font-size: clamp(22px, 2.4vw, 30px); margin: 0 0 6px; }
+  #bx-{{ section.id }} .bx-band p { margin: 0; font-size: 15.5px; line-height: 1.55; opacity: .9; }
+  #bx-{{ section.id }} .bx-band--news { background: var(--bx-card); border: 1.5px solid var(--bx-dark); }
+  #bx-{{ section.id }} .bx-band--news button { border: 0; cursor: pointer; padding: 14px 26px; border-radius: 999px; background: var(--bx-gold); color: #2B1208; font: inherit; font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+  #bx-{{ section.id }} .bx-band--shop { background: var(--bx-accent); color: #fff; grid-template-columns: 220px 1fr auto; }
+  #bx-{{ section.id }} .bx-band--shop img { width: 100%; height: 160px; object-fit: cover; border-radius: 14px; display: block; }
+  #bx-{{ section.id }} .bx-band--shop .bx-btn { background: var(--bx-gold); color: #2B1208; }
+
+  /* Pagination */
+  #bx-{{ section.id }} .bx-pag { display: flex; justify-content: center; gap: 6px; padding: 48px 0 72px; flex-wrap: wrap; }
+  #bx-{{ section.id }} .bx-pag a, #bx-{{ section.id }} .bx-pag span { min-width: 42px; height: 42px; padding: 0 12px; border-radius: 999px; display: grid; place-items: center; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid {{ s.line }}; }
+  #bx-{{ section.id }} .bx-pag .is-current { background: var(--bx-dark); color: #fff; border-color: var(--bx-dark); }
+  #bx-{{ section.id }} .bx-empty { padding: 60px 0; text-align: center; }
+
+  @media (max-width: 989px) {
+    #bx-{{ section.id }} .bx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; }
+    #bx-{{ section.id }} .bx-band--shop { grid-template-columns: 1fr auto; }
+    #bx-{{ section.id }} .bx-band--shop img { display: none; }
+  }
+  @media (max-width: 749px) {
+    #bx-{{ section.id }} .bx-hero { padding: 36px 0 22px; }
+    #bx-{{ section.id }} .bx-hero__top { grid-template-columns: 1fr; gap: 18px; }
+    #bx-{{ section.id }} .bx-chips { margin-right: -20px; padding-right: 20px; }
+    #bx-{{ section.id }} .bx-feat { grid-template-columns: 1fr; gap: 18px; padding-top: 28px; }
+    #bx-{{ section.id }} .bx-grid { grid-template-columns: 1fr; gap: 30px; }
+    #bx-{{ section.id }} .bx-band, #bx-{{ section.id }} .bx-band--shop { grid-template-columns: 1fr; padding: 26px 22px; }
+  }
+{%- endstyle -%}
+
+<div id="bx-{{ section.id }}" class="bx">
+  {%- comment -%} ───── Hero ───── {%- endcomment -%}
+  <header class="bx-hero">
+    <div class="bx-wrap">
+      <div class="bx-hero__top">
+        <div>
+          {%- if s.eyebrow != blank -%}<p class="bx-eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+          <h1>{%- if current_tags -%}{{ current_tags.first }}{%- else -%}{{ s.heading | default: blog.title }}{%- endif -%}</h1>
+        </div>
+        <div>
+          {%- if s.intro != blank -%}<p class="bx-hero__intro">{{ s.intro }}</p>{%- endif -%}
+          {%- if s.show_search -%}
+            <form class="bx-search" action="{{ routes.search_url }}" method="get" role="search">
+              <input type="hidden" name="type" value="article">
+              <input type="hidden" name="options[prefix]" value="last">
+              <label class="visually-hidden" for="bx-q-{{ section.id }}">Search the journal</label>
+              <input id="bx-q-{{ section.id }}" type="search" name="q" placeholder="{{ s.search_placeholder }}">
+              <button type="submit">Search</button>
+            </form>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if topic_list.size > 0 -%}
+        <ul class="bx-chips">
+          <li><a href="{{ blog.url }}"{% unless current_tags %} aria-current="page"{% endunless %}>All</a></li>
+          {%- for raw in topic_list -%}
+            {%- assign t = raw | strip -%}
+            {%- if t != blank and blog.all_tags contains t -%}
+              <li><a href="{{ blog.url }}/tagged/{{ t | handleize }}"{% if current_tags contains t %} aria-current="page"{% endif %}>{{ t }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <div class="bx-wrap">
+    {%- paginate blog.articles by per_page -%}
+
+      {%- comment -%} ───── Featured (page 1, no filter) ───── {%- endcomment -%}
+      {%- assign featured = blank -%}
+      {%- if show_featured -%}
+        {%- assign featured = s.featured_article | default: blog.articles.first -%}
+        {%- if featured != blank -%}
+          {%- liquid
+            assign f_tag = ''
+            for raw in topic_list
+              assign t = raw | strip
+              if featured.tags contains t
+                assign f_tag = t
+                break
+              endif
+            endfor
+            assign f_words = featured.content | strip_html | split: ' ' | size
+            assign f_min = f_words | divided_by: 220 | at_least: 1
+          -%}
+          <article class="bx-feat">
+            <div class="bx-feat__img">
+              {%- if featured.image -%}
+                {% assign featured_alt = featured.image.alt | default: featured.title %}
+                {{ featured.image | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 58vw, 100vw', widths: '600, 900, 1200, 1400', alt: featured_alt }}
+              {%- endif -%}
+            </div>
+            <div>
+              <span class="bx-tag">{{ s.featured_label }}{% if f_tag != '' %} · {{ f_tag }}{% endif %}</span>
+              <h2><a href="{{ featured.url }}">{{ featured.title }}</a></h2>
+              <p>{{ featured.excerpt_or_content | strip_html | truncatewords: 34 }}</p>
+              <div class="bx-meta" style="margin-bottom:16px">{{ featured.published_at | date: '%B %-d, %Y' }} · {{ f_min }} min read</div>
+              <span class="bx-btn" aria-hidden="true">Read the story</span>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="bx-row-head">
+        <h2>{%- if current_tags -%}{{ current_tags.first }}{%- else -%}{{ s.latest_heading }}{%- endif -%}</h2>
+        <span>{{ paginate.items }} articles{% if paginate.pages > 1 %} · page {{ paginate.current_page }} of {{ paginate.pages }}{% endif %}</span>
+      </div>
+
+      {%- if blog.articles.size == 0 -%}
+        <div class="bx-empty"><p>No articles here yet.</p><a class="bx-btn" href="{{ blog.url }}">See all articles</a></div>
+      {%- else -%}
+        <div class="bx-grid">
+          {%- assign n = 0 -%}
+          {%- for article in blog.articles -%}
+            {%- if featured != blank and article.id == featured.id -%}{%- continue -%}{%- endif -%}
+            {%- assign n = n | plus: 1 -%}
+            {%- liquid
+              assign a_tag = ''
+              for raw in topic_list
+                assign t = raw | strip
+                if article.tags contains t
+                  assign a_tag = t
+                  break
+                endif
+              endfor
+              assign words = article.content | strip_html | split: ' ' | size
+              assign mins = words | divided_by: 220 | at_least: 1
+            -%}
+            <article class="bx-card">
+              <div class="bx-card__img">
+                {%- if article.image -%}
+                  {% assign article_alt = article.image.alt | default: article.title %}
+                  {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw', widths: '400, 600, 800', alt: article_alt }}
+                {%- endif -%}
+              </div>
+              {%- if a_tag != '' -%}<span class="bx-tag">{{ a_tag }}</span>{%- endif -%}
+              <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+              {%- if s.show_excerpt -%}<p>{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>{%- endif -%}
+              <div class="bx-meta">{{ article.published_at | date: '%b %-d, %Y' }} · {{ mins }} min read</div>
+            </article>
+
+            {%- comment -%} Inserted bands (page 1 and every page) {%- endcomment -%}
+            {%- if s.news_show and n == s.news_after -%}
+              <div class="bx-band bx-band--news">
+                <div><h3>{{ s.news_heading }}</h3>{%- if s.news_text != blank -%}<p>{{ s.news_text }}</p>{%- endif -%}</div>
+                <button type="button" data-bx-klaviyo="{{ s.klaviyo_form_id }}">{{ s.news_button }}</button>
+              </div>
+            {%- endif -%}
+            {%- if s.shop_show and n == s.shop_after -%}
+              <div class="bx-band bx-band--shop">
+                {%- if s.shop_image != blank -%}{{ s.shop_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<span></span>{%- endif -%}
+                <div><h3>{{ s.shop_heading }}</h3>{%- if s.shop_text != blank -%}<p>{{ s.shop_text }}</p>{%- endif -%}</div>
+                <a class="bx-btn" href="{{ s.shop_link | default: routes.all_products_collection_url }}">{{ s.shop_button }}</a>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="bx-pag" aria-label="Pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" aria-label="Previous page">←</a>{%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>
+            {%- elsif part.title == paginate.current_page -%}<span class="is-current" aria-current="page">{{ part.title }}</span>
+            {%- else -%}<span>{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" aria-label="Next page">→</a>{%- endif -%}
+        </nav>
+      {%- else -%}
+        <div style="height:72px"></div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('bx-{{ section.id }}');
+    if (!root) return;
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-bx-klaviyo]');
+      if (!b) return;
+      if (!b.getAttribute('data-bx-klaviyo')) return;
+      window._klOnsite = window._klOnsite || [];
+      window._klOnsite.push(['openForm', b.getAttribute('data-bx-klaviyo')]);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Blog: Explore layout",
+  "tag": "section",
+  "class": "section-blog-explore",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Latitude Journal" },
+    { "type": "text", "id": "heading", "label": "Heading (defaults to blog title)", "default": "Brew better. Know your coffee." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Brewing guides, origin stories and coffee rituals from our roastery in Sarasota, Florida." },
+    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search cold brew, Kenya, gifts…" },
+    { "type": "textarea", "id": "topics", "label": "Topic chips (article tags, comma-separated, in order)", "default": "Brewing Guides, Origins, Coffee Rituals, Gift Guides, Seasonal, Subscriptions, Coffee 101",
+      "info": "Each chip links to /tagged/… A chip only shows once at least one article has that exact tag." },
+    { "type": "header", "content": "Featured post" },
+    { "type": "checkbox", "id": "show_featured", "label": "Show featured post on page 1", "default": true },
+    { "type": "article", "id": "featured_article", "label": "Featured article (defaults to newest)" },
+    { "type": "text", "id": "featured_label", "label": "Featured label", "default": "Featured" },
+    { "type": "header", "content": "Grid" },
+    { "type": "text", "id": "latest_heading", "label": "Grid heading", "default": "Latest articles" },
+    { "type": "range", "id": "per_page", "label": "Articles per page", "min": 6, "max": 24, "step": 3, "default": 12 },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+    { "type": "header", "content": "Newsletter band" },
+    { "type": "checkbox", "id": "news_show", "label": "Show newsletter band", "default": true },
+    { "type": "range", "id": "news_after", "label": "Insert after article #", "min": 1, "max": 12, "step": 1, "default": 3 },
+    { "type": "text", "id": "news_heading", "label": "Heading", "default": "Unlock 10% off your first order" },
+    { "type": "textarea", "id": "news_text", "label": "Text", "default": "New guides, seasonal roasts and subscriber-only offers, straight to your inbox." },
+    { "type": "text", "id": "news_button", "label": "Button", "default": "Join our newsletter" },
+    { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo form ID", "default": "SJ8rD3", "info": "Same popup form as the product pages." },
+    { "type": "header", "content": "Shop band" },
+    { "type": "checkbox", "id": "shop_show", "label": "Show shop band", "default": true },
+    { "type": "range", "id": "shop_after", "label": "Insert after article #", "min": 2, "max": 18, "step": 1, "default": 9 },
+    { "type": "image_picker", "id": "shop_image", "label": "Image" },
+    { "type": "text", "id": "shop_heading", "label": "Heading", "default": "Read about it. Now taste it." },
+    { "type": "textarea", "id": "shop_text", "label": "Text", "default": "Specialty coffee roasted in Sarasota, Florida." },
+    { "type": "text", "id": "shop_button", "label": "Button", "default": "Shop coffee" },
+    { "type": "url", "id": "shop_link", "label": "Link" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
+    { "type": "color", "id": "card_bg", "label": "Card / image background", "default": "#F3E7CF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "accent", "label": "Accent (tags, shop band)", "default": "#2F5D3A" },
+    { "type": "color", "id": "gold", "label": "Gold", "default": "#E0A43B" },
+    { "type": "color", "id": "dark", "label": "Dark (hero, buttons)", "default": "#2B1208" },
+    { "type": "color", "id": "line", "label": "Divider", "default": "#E6DCC6" }
+  ]
+}
+{% endschema %}

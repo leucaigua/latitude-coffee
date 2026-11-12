@@ -1,0 +1,11 @@
+{%- comment -%} Related-article card. Usage: {% render 'article-explore-card', a: article %} {%- endcomment -%}
+{%- assign image_alt = a.image.alt | default: a.title -%}
+{%- assign w = a.content | strip_html | split: ' ' | size -%}
+{%- assign m = w | divided_by: 220 | at_least: 1 -%}
+<div class="ax-r">
+  <div class="ax-r__img">
+    {%- if a.image -%}{{ a.image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '400, 700', sizes: '(min-width: 990px) 33vw, 100vw', alt: image_alt }}{%- endif -%}
+  </div>
+  <h3><a href="{{ a.url }}">{{ a.title }}</a></h3>
+  <div class="m">{{ a.published_at | date: '%b %-d, %Y' }} · {{ m }} min read</div>
+</div>

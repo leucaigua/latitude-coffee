@@ -1,0 +1,413 @@
+{%- comment -%}
+  Latitude 23.5 · Article "Explore" layout
+  Header (topic · date · read time) → hero image → 2-column body:
+  readable article + sticky sidebar (table of contents + "Coffees in this story").
+  Then: shop-this-story grid, share row, related articles, comments (optional).
+  Products come from the article metafield custom.related_products
+  (list of products) with a section-level fallback.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign topic_list = s.topics | split: ','
+  assign a_tag = ''
+  for raw in topic_list
+    assign t = raw | strip
+    if article.tags contains t
+      assign a_tag = t
+      break
+    endif
+  endfor
+  assign words = article.content | strip_html | split: ' ' | size
+  assign mins = words | divided_by: 220 | at_least: 1
+
+  assign products = article.metafields.custom.related_products.value
+  if products == blank and s.fallback_products != blank
+    assign products = s.fallback_products
+  endif
+-%}
+
+{%- style -%}
+  #ax-{{ section.id }} { --ax-bg: {{ s.bg }}; --ax-card: {{ s.card_bg }}; --ax-text: {{ s.text }}; --ax-accent: {{ s.accent }}; --ax-gold: {{ s.gold }}; --ax-dark: {{ s.dark }}; --ax-line: {{ s.line }};
+    background: var(--ax-bg); color: var(--ax-text); }
+  #ax-{{ section.id }} a { color: inherit; }
+  #ax-{{ section.id }} :is(h2, h3, h4) { color: inherit; }
+  #ax-{{ section.id }} [hidden] { display: none !important; }
+  #ax-{{ section.id }} .ax-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  #ax-{{ section.id }} .ax-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--ax-gold); z-index: 1000; }
+
+  /* Header */
+  #ax-{{ section.id }} .ax-head { max-width: 860px; margin: 0 auto; text-align: center; padding: 44px 20px 28px; }
+  #ax-{{ section.id }} .ax-crumbs { font-size: 13px; opacity: .7; margin: 0 0 18px; }
+  #ax-{{ section.id }} .ax-crumbs a { text-decoration: none; }
+  #ax-{{ section.id }} .ax-tag { display: inline-block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--ax-accent); text-decoration: none; }
+  #ax-{{ section.id }} h1.ax-title { font-size: clamp(30px, 4.4vw, 52px); line-height: 1.1; margin: 10px 0 16px; color: inherit; }
+  #ax-{{ section.id }} .ax-dek { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.55; opacity: .85; margin: 0 auto 18px; max-width: 700px; }
+  #ax-{{ section.id }} .ax-meta { font-size: 14px; opacity: .7; }
+  #ax-{{ section.id }} .ax-hero { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  #ax-{{ section.id }} .ax-hero img { width: 100%; height: auto; max-height: 640px; object-fit: cover; border-radius: 20px; display: block; }
+
+  /* Layout */
+  #ax-{{ section.id }} .ax-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 64px; padding: 48px 20px 24px; max-width: 1200px; margin: 0 auto; }
+  #ax-{{ section.id }} .ax-side { position: relative; }
+  #ax-{{ section.id }} .ax-sticky { position: sticky; top: 110px; display: grid; gap: 22px; }
+  #ax-{{ section.id }} .ax-box { background: var(--ax-card); border-radius: 16px; padding: 20px; }
+  #ax-{{ section.id }} .ax-box h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+
+  /* TOC */
+  #ax-{{ section.id }} .ax-toc { display: block; }
+  #ax-{{ section.id }} .ax-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; max-height: 46vh; overflow: auto; }
+  #ax-{{ section.id }} .ax-toc a { display: block; padding: 7px 10px; border-radius: 8px; font-size: 14px; line-height: 1.35; text-decoration: none; border-left: 3px solid transparent; }
+  #ax-{{ section.id }} .ax-toc a:hover { background: rgba(255,255,255,.6); }
+  #ax-{{ section.id }} .ax-toc a.is-active { border-left-color: var(--ax-accent); background: #fff; font-weight: 700; }
+  #ax-{{ section.id }} .ax-toc-mobile { display: none; }
+
+  /* Mini product list in sidebar */
+  #ax-{{ section.id }} .ax-mini { display: grid; gap: 12px; }
+  #ax-{{ section.id }} .ax-mini a { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; text-decoration: none; }
+  #ax-{{ section.id }} .ax-mini img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; background: #fff; }
+  #ax-{{ section.id }} .ax-mini b { display: block; font-size: 14px; line-height: 1.3; }
+  #ax-{{ section.id }} .ax-mini span { font-size: 13px; opacity: .75; }
+
+  /* Article body typography (scoped) */
+  #ax-{{ section.id }} .ax-body { font-size: {{ s.body_size }}px; line-height: 1.75; max-width: 720px; }
+  #ax-{{ section.id }} .ax-body > *:first-child { margin-top: 0; }
+  #ax-{{ section.id }} .ax-body p, #ax-{{ section.id }} .ax-body ul, #ax-{{ section.id }} .ax-body ol { margin: 0 0 1.1em; }
+  #ax-{{ section.id }} .ax-body h2 { font-size: clamp(24px, 2.4vw, 31px); line-height: 1.2; margin: 2.2em 0 .6em; padding-top: .9em; border-top: 1px solid var(--ax-line); scroll-margin-top: 110px; }
+  #ax-{{ section.id }} .ax-body h3 { font-size: clamp(19px, 1.8vw, 22px); line-height: 1.3; margin: 1.7em 0 .5em; scroll-margin-top: 110px; }
+  #ax-{{ section.id }} .ax-body h4 { font-size: 18px; margin: 1.4em 0 .4em; }
+  #ax-{{ section.id }} .ax-body li { margin: 0 0 .45em; }
+  #ax-{{ section.id }} .ax-body ul, #ax-{{ section.id }} .ax-body ol { padding-left: 1.3em; }
+  #ax-{{ section.id }} .ax-body a { color: var(--ax-accent); font-weight: 600; text-underline-offset: 3px; }
+  #ax-{{ section.id }} .ax-body strong { font-weight: 700; }
+  #ax-{{ section.id }} .ax-body img { max-width: 100%; height: auto; border-radius: 14px; }
+  #ax-{{ section.id }} .ax-body blockquote { margin: 1.6em 0; padding: 16px 22px; border-left: 4px solid var(--ax-gold); background: var(--ax-card); border-radius: 0 12px 12px 0; }
+  #ax-{{ section.id }} .ax-body table { width: 100%; border-collapse: collapse; font-size: .9em; margin: 0 0 1.4em; display: block; overflow-x: auto; }
+  #ax-{{ section.id }} .ax-body th, #ax-{{ section.id }} .ax-body td { border-bottom: 1px solid var(--ax-line); padding: 10px 12px; text-align: left; }
+
+  /* Shop this story */
+  #ax-{{ section.id }} .ax-shop { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+  #ax-{{ section.id }} .ax-shop__inner { background: var(--ax-card); border-radius: 22px; padding: 34px; }
+  #ax-{{ section.id }} .ax-shop h2, #ax-{{ section.id }} .ax-related h2 { font-size: clamp(22px, 2.4vw, 30px); margin: 0 0 22px; }
+  #ax-{{ section.id }} .ax-pgrid { position: relative; display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  #ax-{{ section.id }} .ax-p { position: relative; background: #fff; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  #ax-{{ section.id }} .ax-p__img { aspect-ratio: 1 / 1; background: #DFF5E6; display: block; }
+  #ax-{{ section.id }} .ax-p__img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  #ax-{{ section.id }} .ax-p__b { padding: 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  #ax-{{ section.id }} .ax-p__t { font-weight: 700; font-size: 15.5px; text-decoration: none; }
+  #ax-{{ section.id }} .ax-p select { width: 100%; padding: 9px; border-radius: 8px; border: 1px solid #D9CFBA; background: #fff; font: inherit; font-size: 14px; color: inherit; }
+  #ax-{{ section.id }} .ax-p form { margin-top: auto; display: grid; gap: 8px; }
+  #ax-{{ section.id }} .ax-btn { width: 100%; padding: 11px; border: 0; border-radius: 999px; cursor: pointer; background: var(--ax-dark); color: #fff; font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-align: center; text-decoration: none; display: block; }
+
+  /* Share */
+  #ax-{{ section.id }} .ax-share { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 34px 0 0; padding-top: 22px; border-top: 1px solid var(--ax-line); font-size: 14px; }
+  #ax-{{ section.id }} .ax-share a, #ax-{{ section.id }} .ax-share button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--ax-line); background: #fff; font: inherit; font-size: 13.5px; font-weight: 600; text-decoration: none; cursor: pointer; color: inherit; }
+  #ax-{{ section.id }} .ax-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  #ax-{{ section.id }} .ax-tags a { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--ax-card); text-decoration: none; }
+
+  /* Related */
+  #ax-{{ section.id }} .ax-related { max-width: 1200px; margin: 0 auto; padding: 24px 20px 56px; }
+  #ax-{{ section.id }} .ax-rgrid { display: grid; gap: 26px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #ax-{{ section.id }} .ax-r { position: relative; }
+  #ax-{{ section.id }} .ax-r__img { aspect-ratio: 3 / 2; border-radius: 14px; overflow: hidden; background: var(--ax-card); margin-bottom: 12px; }
+  #ax-{{ section.id }} .ax-r__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #ax-{{ section.id }} .ax-r h3 { font-size: 18px; line-height: 1.3; margin: 6px 0 6px; }
+  #ax-{{ section.id }} .ax-r h3 a { text-decoration: none; }
+  #ax-{{ section.id }} .ax-r h3 a::after { content: ''; position: absolute; inset: 0; }
+  #ax-{{ section.id }} .ax-r .m { font-size: 13px; opacity: .65; }
+
+  /* Comments */
+  #ax-{{ section.id }} .ax-comments { max-width: 760px; margin: 0 auto; padding: 0 20px 64px; }
+  #ax-{{ section.id }} .ax-comments h2 { font-size: 22px; }
+  #ax-{{ section.id }} .ax-comment { padding: 16px 0; border-bottom: 1px solid var(--ax-line); }
+  #ax-{{ section.id }} .ax-comments input, #ax-{{ section.id }} .ax-comments textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #D9CFBA; font: inherit; margin-bottom: 10px; background: #fff; }
+  #ax-{{ section.id }} .ax-comments .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  @media (max-width: 989px) {
+    #ax-{{ section.id }} .ax-layout { grid-template-columns: 1fr; gap: 0; padding-top: 28px; }
+    #ax-{{ section.id }} .ax-side { display: none; }
+    #ax-{{ section.id }} .ax-toc-mobile { display: block; margin: 0 0 28px; background: var(--ax-card); border-radius: 14px; }
+    #ax-{{ section.id }} .ax-toc-mobile summary { padding: 14px 18px; font-weight: 700; cursor: pointer; }
+    #ax-{{ section.id }} .ax-toc-mobile ol { padding: 0 18px 14px 36px; margin: 0; }
+    #ax-{{ section.id }} .ax-toc-mobile li { margin: 0 0 8px; font-size: 15px; }
+    #ax-{{ section.id }} .ax-pgrid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; scroll-snap-type: x mandatory; }
+    #ax-{{ section.id }} .ax-p { scroll-snap-align: start; }
+    #ax-{{ section.id }} .ax-rgrid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 749px) {
+    #ax-{{ section.id }} .ax-head { padding-top: 28px; }
+    #ax-{{ section.id }} .ax-hero { padding: 0; }
+    #ax-{{ section.id }} .ax-hero img { border-radius: 0; }
+    #ax-{{ section.id }} .ax-shop__inner { padding: 24px 18px; }
+    #ax-{{ section.id }} .ax-comments .row { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+<div id="ax-{{ section.id }}" class="ax">
+  {%- if s.show_progress -%}<div class="ax-progress" aria-hidden="true"></div>{%- endif -%}
+
+  <header class="ax-head">
+    <p class="ax-crumbs"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ blog.url }}">{{ blog.title }}</a>{% if a_tag != '' %} / <a href="{{ blog.url }}/tagged/{{ a_tag | handleize }}">{{ a_tag }}</a>{% endif %}</p>
+    {%- if a_tag != '' -%}<a class="ax-tag" href="{{ blog.url }}/tagged/{{ a_tag | handleize }}">{{ a_tag }}</a>{%- endif -%}
+    <h1 class="ax-title">{{ article.title }}</h1>
+    {%- if s.show_dek and article.excerpt != blank -%}<p class="ax-dek">{{ article.excerpt | strip_html | truncatewords: 40 }}</p>{%- endif -%}
+    <div class="ax-meta">
+      {{- article.published_at | date: '%B %-d, %Y' -}}
+      {%- if s.show_author %} · By {{ article.author }}{% endif %} · {{ mins }} min read
+    </div>
+  </header>
+
+  {%- if article.image -%}
+    <div class="ax-hero">
+      {% assign hero_alt = article.image.alt | default: article.title %}
+      {{ article.image | image_url: width: 2000 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 1240px) 1200px, 100vw', widths: '600, 900, 1200, 1600, 2000', alt: hero_alt }}
+    </div>
+  {%- endif -%}
+
+  <div class="ax-layout">
+    <div>
+      {%- if s.show_toc -%}
+        <details class="ax-toc-mobile" data-ax-toc-mobile hidden>
+          <summary>In this article</summary>
+          <ol></ol>
+        </details>
+      {%- endif -%}
+      <div class="ax-body rte" data-ax-body>{{ article.content }}</div>
+
+      <div class="ax-share">
+        <span style="font-weight:700">Share:</span>
+        <button type="button" data-ax-copy="{{ shop.url }}{{ article.url }}">Copy link</button>
+        <a href="https://www.pinterest.com/pin/create/button/?url={{ shop.url | append: article.url | url_encode }}&description={{ article.title | url_encode }}{% if article.image %}&media={{ article.image | image_url: width: 1200 | prepend: 'https:' | url_encode }}{% endif %}" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url | append: article.url | url_encode }}" target="_blank" rel="noopener">Facebook</a>
+        <a href="mailto:?subject={{ article.title | url_encode }}&body={{ shop.url | append: article.url | url_encode }}">Email</a>
+      </div>
+      {%- if article.tags.size > 0 -%}
+        <div class="ax-tags">
+          {%- for t in article.tags -%}<a href="{{ blog.url }}/tagged/{{ t | handleize }}">#{{ t }}</a>{%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <aside class="ax-side" aria-label="Article tools">
+      <div class="ax-sticky">
+        {%- if s.show_toc -%}
+          <nav class="ax-box ax-toc" data-ax-toc hidden aria-label="Table of contents">
+            <h2>In this article</h2>
+            <ol></ol>
+          </nav>
+        {%- endif -%}
+        {%- if products != blank -%}
+          <div class="ax-box">
+            <h2>{{ s.side_products_heading }}</h2>
+            <div class="ax-mini">
+              {%- for p in products limit: 4 -%}
+                <a href="{{ p.url }}">
+                  {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+                  <span><b>{{ p.title }}</b>{{ p.price | money }}</span>
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </aside>
+  </div>
+
+  {%- if products != blank -%}
+    <section class="ax-shop">
+      <div class="ax-shop__inner">
+        <h2>{{ s.shop_heading }}</h2>
+        <div class="ax-pgrid">
+          {%- for p in products limit: 8 -%}
+            {%- assign v = p.selected_or_first_available_variant -%}
+            <div class="ax-p">
+              <a class="ax-p__img" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+                {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 990px) 25vw, 62vw', alt: '' }}{%- endif -%}
+              </a>
+              <div class="ax-p__b">
+                <a class="ax-p__t" href="{{ p.url }}">{{ p.title }}</a>
+                <span>{{ v.price | money }}</span>
+                {%- if p.available -%}
+                  <product-form-component id="ax-form-{{ section.id }}-{{ p.id }}" data-section-id="{{ section.id }}" data-product-id="{{ p.id }}" on:submit="/handleSubmit">
+                    <div class="visually-hidden" ref="liveRegion" role="status" aria-live="polite"></div>
+                  <form method="post" action="{{ routes.cart_add_url }}" data-type="add-to-cart-form">
+                    {%- if p.has_only_default_variant -%}
+                      <input type="hidden" name="id" ref="variantId" value="{{ v.id }}">
+                    {%- else -%}
+                      <label class="visually-hidden" for="ax-v-{{ section.id }}-{{ p.id }}">Options for {{ p.title }}</label>
+                      <select id="ax-v-{{ section.id }}-{{ p.id }}" name="id" ref="variantId">
+                        {%- for variant in p.variants -%}
+                          <option value="{{ variant.id }}"{% if variant.id == v.id %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title }}</option>
+                        {%- endfor -%}
+                      </select>
+                    {%- endif -%}
+                    <input type="hidden" name="quantity" value="1">
+                    {% assign add_label = 'actions.add_to_cart' | t %}
+                    {% render 'add-to-cart-button', add_to_cart_text: add_label, product: p, can_add_to_cart: true, class: 'ax-btn', show_icon: false %}
+                    <span class="hidden" ref="addToCartTextError" role="alert"></span>
+                  </form>
+                  </product-form-component>
+                {%- else -%}
+                  <a class="ax-btn" href="{{ p.url }}">Sold out · View</a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if s.show_related -%}
+    {%- liquid
+      assign rel_count = 0
+      assign rel_ids = ''
+    -%}
+    {%- capture rel_html -%}
+      {%- for a in blog.articles -%}
+        {%- if rel_count >= 3 -%}{%- break -%}{%- endif -%}
+        {%- if a.id == article.id -%}{%- continue -%}{%- endif -%}
+        {%- if a_tag != '' -%}{%- unless a.tags contains a_tag -%}{%- continue -%}{%- endunless -%}{%- endif -%}
+        {%- assign rel_count = rel_count | plus: 1 -%}
+        {%- assign rel_ids = rel_ids | append: a.id | append: ',' -%}
+        {%- render 'article-explore-card', a: a -%}
+      {%- endfor -%}
+      {%- if rel_count < 3 -%}
+        {%- for a in blog.articles -%}
+          {%- if rel_count >= 3 -%}{%- break -%}{%- endif -%}
+          {%- assign aid = a.id | append: ',' -%}
+          {%- if a.id == article.id or rel_ids contains aid -%}{%- continue -%}{%- endif -%}
+          {%- assign rel_count = rel_count | plus: 1 -%}
+          {%- render 'article-explore-card', a: a -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if rel_count > 0 -%}
+      <section class="ax-related">
+        <h2>{{ s.related_heading }}</h2>
+        <div class="ax-rgrid">{{ rel_html }}</div>
+      </section>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if blog.comments_enabled? and s.show_comments -%}
+    {%- if article.comments_count > 0 or s.show_comment_form -%}
+      <section class="ax-comments" id="comments">
+        {%- if article.comments_count > 0 -%}
+          <h2>{{ article.comments_count }} {{ article.comments_count | pluralize: 'comment', 'comments' }}</h2>
+          {%- for c in article.comments -%}
+            <div class="ax-comment"><strong>{{ c.author }}</strong> · <small>{{ c.created_at | date: '%b %-d, %Y' }}</small>{{ c.content }}</div>
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if s.show_comment_form -%}
+          {%- form 'new_comment', article -%}
+            <h2>Leave a comment</h2>
+            {%- if form.posted_successfully? -%}<p>Thanks! Your comment will appear once approved.</p>{%- endif -%}
+            {%- if form.errors -%}<p>{{ form.errors | default_errors }}</p>{%- endif -%}
+            <div class="row">
+              <input type="text" name="comment[author]" placeholder="Name" value="{{ form.author }}" required aria-label="Name">
+              <input type="email" name="comment[email]" placeholder="Email" value="{{ form.email }}" required aria-label="Email">
+            </div>
+            <textarea name="comment[body]" rows="5" placeholder="Message" required aria-label="Message">{{ form.body }}</textarea>
+            <button type="submit" class="ax-btn" style="width:auto;padding:12px 26px">Post comment</button>
+          {%- endform -%}
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('ax-{{ section.id }}');
+    if (!root) return;
+    var body = root.querySelector('[data-ax-body]');
+
+    /* Table of contents from H2s */
+    var heads = body ? Array.prototype.slice.call(body.querySelectorAll('h2')) : [];
+    var slug = function (t) { return t.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60) || 'section'; };
+    var clean = function (t) { return t.replace(/^[^\p{L}\p{N}]+/u, '').trim(); }; /* drop leading emoji */
+    if (heads.length >= {{ s.toc_min }}) {
+      var used = {};
+      heads.forEach(function (h) {
+        if (!h.id) { var id = slug(clean(h.textContent)); while (used[id]) id += '-2'; used[id] = 1; h.id = id; }
+      });
+      ['[data-ax-toc]', '[data-ax-toc-mobile]'].forEach(function (sel) {
+        var box = root.querySelector(sel); if (!box) return;
+        var ol = box.querySelector('ol');
+        heads.forEach(function (h) {
+          var li = document.createElement('li'), a = document.createElement('a');
+          a.href = '#' + h.id; a.textContent = clean(h.textContent); li.appendChild(a); ol.appendChild(li);
+        });
+        box.hidden = false;
+      });
+      var links = root.querySelectorAll('[data-ax-toc] a');
+      if ('IntersectionObserver' in window && links.length) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              links.forEach(function (l) { l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id); });
+            }
+          });
+        }, { rootMargin: '-15% 0px -70% 0px' });
+        heads.forEach(function (h) { io.observe(h); });
+      }
+    }
+
+    /* Reading progress */
+    var bar = root.querySelector('.ax-progress');
+    if (bar && body) {
+      var onScroll = function () {
+        var r = body.getBoundingClientRect(), total = r.height - window.innerHeight * 0.6;
+        var p = Math.min(1, Math.max(0, -r.top / (total > 0 ? total : 1)));
+        bar.style.width = (p * 100) + '%';
+      };
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    }
+
+    /* Copy link */
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-ax-copy]'); if (!b) return;
+      navigator.clipboard && navigator.clipboard.writeText(b.getAttribute('data-ax-copy')).then(function () {
+        var t = b.textContent; b.textContent = 'Copied ✓'; setTimeout(function () { b.textContent = t; }, 1600);
+      }).catch(function () { b.textContent = 'Unable to copy link'; });
+    });
+
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Article: Explore layout",
+  "tag": "article",
+  "class": "section-article-explore",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "textarea", "id": "topics", "label": "Topic tags (same list as the blog page)", "default": "Brewing Guides, Origins, Coffee Rituals, Gift Guides, Seasonal, Subscriptions, Coffee 101" },
+    { "type": "checkbox", "id": "show_dek", "label": "Show excerpt under title", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false },
+    { "type": "checkbox", "id": "show_progress", "label": "Reading progress bar", "default": true },
+    { "type": "header", "content": "Body" },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 15, "max": 20, "step": 1, "unit": "px", "default": 18 },
+    { "type": "checkbox", "id": "show_toc", "label": "Table of contents (from H2 headings)", "default": true },
+    { "type": "range", "id": "toc_min", "label": "Show contents when article has at least … H2s", "min": 2, "max": 8, "step": 1, "default": 3 },
+    { "type": "header", "content": "Products" },
+    { "type": "paragraph", "content": "Per article: Settings → Custom data → Blog posts → add definition custom.related_products (Product, list of products), then pick products on each post. The list below is only a fallback." },
+    { "type": "product_list", "id": "fallback_products", "label": "Fallback products", "limit": 8 },
+    { "type": "text", "id": "side_products_heading", "label": "Sidebar heading", "default": "Coffees in this story" },
+    { "type": "text", "id": "shop_heading", "label": "Shop grid heading", "default": "Shop this story" },
+    { "type": "header", "content": "After the article" },
+    { "type": "checkbox", "id": "show_related", "label": "Related articles (same topic)", "default": true },
+    { "type": "text", "id": "related_heading", "label": "Related heading", "default": "Keep reading" },
+    { "type": "checkbox", "id": "show_comments", "label": "Show comments", "default": true },
+    { "type": "checkbox", "id": "show_comment_form", "label": "Show comment form", "default": false, "info": "Off = only approved comments show; no empty '0 comments' block." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
+    { "type": "color", "id": "card_bg", "label": "Box background", "default": "#F3E7CF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "accent", "label": "Accent (links, topic)", "default": "#2F5D3A" },
+    { "type": "color", "id": "gold", "label": "Gold", "default": "#E0A43B" },
+    { "type": "color", "id": "dark", "label": "Buttons", "default": "#2B1208" },
+    { "type": "color", "id": "line", "label": "Dividers", "default": "#E6DCC6" }
+  ]
+}
+{% endschema %}
