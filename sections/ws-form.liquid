@@ -1,0 +1,63 @@
+{%- comment -%}
+  Wholesale lead form — embeds the existing Klaviyo form (default QTFY8a, the live wholesale form),
+  so submissions keep feeding the current Klaviyo list + lead-notification flow.
+  The card around it matches the design; input styling is controlled in Klaviyo's form editor
+  (plus light overrides below, scoped to this section).
+{%- endcomment -%}
+{%- style -%}
+  #wsf-{{ section.id }} { background: {{ section.settings.bg }}; color: {{ section.settings.text }}; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; scroll-margin-top: 90px; }
+  #wsf-{{ section.id }} .wsf__in { max-width: 820px; margin: 0 auto; text-align: center; }
+  #wsf-{{ section.id }} h2 { font-size: clamp(26px, 3vw, 36px); margin: 0 0 10px; color: inherit; }
+  #wsf-{{ section.id }} .wsf__sub { margin: 0 0 30px; font-size: 16px; opacity: .8; }
+  #wsf-{{ section.id }} .wsf__card { background: {{ section.settings.card_bg }}; border: 1.5px solid {{ section.settings.border }}; border-radius: 24px; padding: 36px 40px; text-align: left; min-height: 200px; }
+  #wsf-{{ section.id }} .wsf__alt { margin: 18px 0 0; font-size: 14.5px; opacity: .8; }
+  #wsf-{{ section.id }} .wsf__alt a { color: inherit; font-weight: 700; }
+  {%- if section.settings.style_inputs -%}
+  /* Light, scoped overrides so the Klaviyo embed matches the pill inputs in the design */
+  #wsf-{{ section.id }} .klaviyo-form input[type="text"],
+  #wsf-{{ section.id }} .klaviyo-form input[type="email"],
+  #wsf-{{ section.id }} .klaviyo-form input[type="tel"],
+  #wsf-{{ section.id }} .klaviyo-form textarea { border-radius: 999px !important; border-color: {{ section.settings.border }} !important; background: #fff !important; }
+  #wsf-{{ section.id }} .klaviyo-form button[type="button"], #wsf-{{ section.id }} .klaviyo-form button[type="submit"] { border-radius: 999px !important; background: {{ section.settings.btn_bg }} !important; color: #2B1208 !important; }
+  {%- endif -%}
+  @media (max-width: 749px) { #wsf-{{ section.id }} .wsf__card { padding: 24px 18px; border-radius: 18px; } }
+{%- endstyle -%}
+<section id="wsf-{{ section.id }}" class="ws-form">
+  <span id="lead-form" style="position:relative;top:-90px;display:block" aria-hidden="true"></span>
+  <span id="wholesale-form" style="position:relative;top:-90px;display:block"></span>
+  <div class="wsf__in">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.subheading != blank -%}<p class="wsf__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    <div class="wsf__card">
+      {%- if section.settings.klaviyo_id != blank -%}
+        <div class="klaviyo-form-{{ section.settings.klaviyo_id | strip | escape }}"></div>
+      {%- endif -%}
+      {%- if request.design_mode -%}
+        <p style="font-size:13px;opacity:.6;margin:12px 0 0">Klaviyo form {{ section.settings.klaviyo_id }} renders here on the live site (the editor preview may not load it).</p>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.alt_text != blank -%}<div class="wsf__alt">{{ section.settings.alt_text }}</div>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Wholesale form (Klaviyo)",
+  "tag": "div",
+  "class": "section-ws-form",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Let's Start Your Journey" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Fill out the form below and our team will be in touch within 24 hours" },
+    { "type": "text", "id": "klaviyo_id", "label": "Klaviyo embed form ID", "default": "QTFY8a", "info": "QTFY8a = the current wholesale form. Requires Klaviyo onsite JS (already active on the store)." },
+    { "type": "checkbox", "id": "style_inputs", "label": "Round inputs to match design", "default": true },
+    { "type": "richtext", "id": "alt_text", "label": "Below the form", "default": "<p>Prefer to talk? Call <a href=\"tel:+19415562600\">941.556.2600</a></p>" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FBF8EF" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#F3E7CF" },
+    { "type": "color", "id": "border", "label": "Card / input border", "default": "#5A3A22" },
+    { "type": "color", "id": "btn_bg", "label": "Submit button", "default": "#E0A43B" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "presets": [ { "name": "Wholesale form (Klaviyo)" } ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+{%- comment -%} Wholesale review proof row: Judge.me app blocks (stars, badges) and/or badge images. {%- endcomment -%}
+{%- style -%}
+  #wsp-{{ section.id }} { background: {{ section.settings.bg }}; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; }
+  #wsp-{{ section.id }} .wsp__in { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; justify-content: center; }
+  #wsp-{{ section.id }} .wsp__img img { height: {{ section.settings.badge_h }}px; width: auto; display: block; }
+  #wsp-{{ section.id }} .wsp__sep { width: 1px; height: 44px; background: rgba(43,18,8,.2); }
+{%- endstyle -%}
+{%- if section.blocks.size > 0 -%}
+<section id="wsp-{{ section.id }}" class="ws-proof">
+  <div class="wsp__in">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when '@app' -%}{%- render block -%}
+        {%- when 'badge' -%}
+          {%- if block.settings.image != blank -%}<div class="wsp__img" {{ block.shopify_attributes }}>{{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.alt }}</div>{%- endif -%}
+        {%- when 'divider' -%}<span class="wsp__sep" aria-hidden="true" {{ block.shopify_attributes }}></span>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Wholesale review proof",
+  "tag": "div",
+  "class": "section-ws-proof",
+  "settings": [
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FBF8EF" },
+    { "type": "range", "id": "badge_h", "label": "Badge image height", "min": 40, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "badge", "name": "Badge image", "settings": [ { "type": "image_picker", "id": "image", "label": "Image" }, { "type": "text", "id": "alt", "label": "Alt text", "default": "Judge.me badge" } ] },
+    { "type": "divider", "name": "Divider", "settings": [] }
+  ],
+  "presets": [ { "name": "Wholesale review proof" } ]
+}
+{% endschema %}

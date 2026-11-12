@@ -1,0 +1,253 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ws-hero",
+      "settings": {
+        "heading": "Elevate Your Coffee Business",
+        "text": "<p>Partner with a recognized Florida coffee brand for over 20 years. World-class quality, reliable supply and exceptional support for your business growth.</p>",
+        "btn_label": "Start Your Partnership Today",
+        "focal": "center",
+        "media_width": 65
+      }
+    },
+    "trust": {
+      "type": "ws-trust-strip",
+      "settings": {
+        "heading": "More Than Roasters,\nWe Are Your Partners."
+      },
+      "blocks": {
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "handshake",
+            "text": "100% Quality\nGuarantee"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "bean",
+            "text": "20+ Years of\nExpertise"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "text": "48h\nDelivery Time"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
+    },
+    "why": {
+      "type": "ws-cards",
+      "settings": {
+        "heading": "Why Partner With Us?",
+        "subheading": "We're committed to your success with premium products and unmatched support"
+      },
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "title": "Premium Quality",
+            "text": "Specialty-grade beans sourced from the finest farms, roasted to perfection with our state-of-the-art equipment and expertise."
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "title": "Flexible Pricing",
+            "text": "Competitive wholesale rates with volume discounts. Scale your business without compromising on quality."
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "title": "Dedicated Support",
+            "text": "Your personal account manager ensures seamless operations, from ordering to delivery. We're here when you need us."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    "brand": {
+      "type": "ws-split",
+      "settings": {
+        "image_side": "right",
+        "heading": "Your Brand, Our Craftsmanship.",
+        "body": "<p>We help you create a shelf-ready coffee product in just weeks. We offer custom flavor profiles, house blends, and toll roasting services with the flexibility your business demands.</p>",
+        "pad_top": 56
+      }
+    },
+    "tailored": {
+      "type": "ws-split",
+      "settings": {
+        "image_side": "left",
+        "heading": "Tailored Solutions.",
+        "pad_bottom": 24
+      },
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "bean",
+            "label": "Packaging",
+            "text": "From 1.5oz fractional packs to 5lb bulk bags."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "kcup",
+            "label": "Single-Serve",
+            "text": "Premium K-Cups for hospitality and office use."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "grind",
+            "label": "Customization",
+            "text": "Precise grinding and exclusive profile development."
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "handshake",
+            "label": "Guidance",
+            "text": "Hands-on consulting for startups and new ventures."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ]
+    },
+    "promo": {
+      "type": "ws-split",
+      "disabled": true,
+      "settings": {
+        "image_side": "right",
+        "heading": "Custom Promotional Coffee & Tea Packaging",
+        "body": "<p>Branded packaging for events, client gifts, retail shelves and promotions.</p>",
+        "btn_label": "Request Custom Packaging Info"
+      },
+      "blocks": {
+        "p1": {
+          "type": "feature",
+          "settings": {
+            "icon": "tag",
+            "label": "",
+            "text": "Custom branded bags and labels"
+          }
+        },
+        "p2": {
+          "type": "feature",
+          "settings": {
+            "icon": "bean",
+            "label": "",
+            "text": "Coffee, tea, cold brew, K-Cups and more"
+          }
+        },
+        "p3": {
+          "type": "feature",
+          "settings": {
+            "icon": "gift",
+            "label": "",
+            "text": "Gifting, events and retail promotions"
+          }
+        },
+        "p4": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "label": "",
+            "text": "Flexible packaging solutions"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    "proof": {
+      "type": "ws-proof",
+      "settings": {}
+    },
+    "downloads": {
+      "type": "ws-downloads",
+      "settings": {
+        "heading": "Ready to Elevate Your Coffee Standard?"
+      },
+      "blocks": {
+        "d1": {
+          "type": "file",
+          "settings": {
+            "label": "Download Packaging Capabilities and Custom Services",
+            "file_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Latitude-23.5-Coffee-_-Tea---Flyer-1.4.png?v=1748962591"
+          }
+        },
+        "d2": {
+          "type": "file",
+          "settings": {
+            "label": "Download K-Cup",
+            "file_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/K-Cup_-_Latitude_23.5_Coffee_Tea_-_Updated_Vs-100.jpg?v=1774882658"
+          }
+        },
+        "d3": {
+          "type": "file",
+          "settings": {
+            "label": "Download Cold Brew",
+            "file_url": "https://cdn.shopify.com/s/files/1/0458/7051/4326/files/Cold-Brew---Latitude-23.5-Coffee-_-Tea----1.2-100.jpg?v=1726691774"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3"
+      ]
+    },
+    "form": {
+      "type": "ws-form",
+      "settings": {
+        "klaviyo_id": "QTFY8a"
+      }
+    },
+    "cta": {
+      "type": "ws-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "why",
+    "brand",
+    "tailored",
+    "promo",
+    "proof",
+    "downloads",
+    "form",
+    "cta"
+  ]
+}

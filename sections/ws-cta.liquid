@@ -1,0 +1,33 @@
+{%- comment -%} Wholesale closing CTA band. {%- endcomment -%}
+{%- style -%}
+  #wsx-{{ section.id }} { background: {{ section.settings.bg }}; color: #fff; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; text-align: center; }
+  #wsx-{{ section.id }} .wsx__in { max-width: 760px; margin: 0 auto; }
+  #wsx-{{ section.id }} h2 { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.15; margin: 0 0 14px; color: inherit; }
+  #wsx-{{ section.id }} p { font-size: 16.5px; line-height: 1.6; margin: 0 0 28px; opacity: .92; }
+  #wsx-{{ section.id }} a { display: inline-block; padding: 15px 30px; border-radius: 999px; background: {{ section.settings.gold }}; color: #2B1208; font-weight: 700; font-size: 15px; text-decoration: none; }
+{%- endstyle -%}
+<section id="wsx-{{ section.id }}" class="ws-cta">
+  <div class="wsx__in">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.btn_label != blank -%}<a href="{{ section.settings.btn_link | default: '#wholesale-form' }}">{{ section.settings.btn_label }}</a>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Wholesale CTA band",
+  "tag": "div",
+  "class": "section-ws-cta",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready to Transform Your Coffee Program?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Join the cafés, restaurants, hotels and retailers who trust Latitude 23.5 for their coffee supply." },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Start Your Partnership Today" },
+    { "type": "url", "id": "btn_link", "label": "Button link", "info": "Empty = scroll to the form." },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#0F5132" },
+    { "type": "color", "id": "gold", "label": "Button", "default": "#E0A43B" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [ { "name": "Wholesale CTA band" } ]
+}
+{% endschema %}

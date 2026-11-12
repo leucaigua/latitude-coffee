@@ -1,0 +1,62 @@
+{%- comment -%} Wholesale hero: photo (or video) on the right, green panel with gradient on the left. {%- endcomment -%}
+{%- style -%}
+  #wsh-{{ section.id }} { position: relative; overflow: hidden; background: {{ section.settings.green }}; color: #fff; min-height: {{ section.settings.height }}px; display: flex; align-items: center; }
+  #wsh-{{ section.id }} .wsh__media { position: absolute; top: 0; right: 0; bottom: 0; width: {{ section.settings.media_width }}%; }
+  #wsh-{{ section.id }} .wsh__media img, #wsh-{{ section.id }} .wsh__media video { width: 100%; height: 100%; object-fit: cover; object-position: {{ section.settings.focal }}; display: block; }
+  #wsh-{{ section.id }} .wsh__media::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, {{ section.settings.green }} 0%, {{ section.settings.green | color_modify: 'alpha', 0.75 }} 22%, {{ section.settings.green | color_modify: 'alpha', 0 }} 60%); }
+  #wsh-{{ section.id }} .wsh__deco { position: absolute; left: -120px; bottom: -160px; width: 520px; height: 520px; opacity: .08; color: #fff; pointer-events: none; }
+  #wsh-{{ section.id }} .wsh__in { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: 72px 24px; }
+  #wsh-{{ section.id }} .wsh__copy { max-width: 560px; }
+  #wsh-{{ section.id }} h1 { font-size: clamp(34px, 4.6vw, 58px); line-height: 1.06; margin: 0 0 18px; color: inherit; }
+  #wsh-{{ section.id }} .wsh__text { font-size: 17px; line-height: 1.6; margin: 0 0 28px; opacity: .95; }
+  #wsh-{{ section.id }} .wsh__text p { margin: 0; }
+  #wsh-{{ section.id }} .wsh__btn { display: inline-block; padding: 15px 30px; border-radius: 999px; background: {{ section.settings.gold }}; color: #2B1208; font-weight: 700; font-size: 15px; text-decoration: none; }
+  @media (max-width: 749px) {
+    #wsh-{{ section.id }} { flex-direction: column; align-items: stretch; min-height: 0; }
+    #wsh-{{ section.id }} .wsh__media { position: relative; width: 100%; height: 300px; order: -1; }
+    #wsh-{{ section.id }} .wsh__media::before { background: linear-gradient(0deg, {{ section.settings.green }} 0%, {{ section.settings.green | color_modify: 'alpha', 0 }} 55%); }
+    #wsh-{{ section.id }} .wsh__in { padding: 8px 20px 44px; margin-top: -40px; }
+  }
+{%- endstyle -%}
+
+<section id="wsh-{{ section.id }}" class="ws-hero">
+  <div class="wsh__media" aria-hidden="true">
+    {%- if section.settings.video != blank -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, image_size: '1400x' }}
+    {%- elsif section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 750px) 65vw, 100vw', widths: '600, 900, 1200, 1500, 1800', alt: '' }}
+    {%- endif -%}
+  </div>
+  <svg class="wsh__deco" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="50" cy="50" r="46"/><path d="M4 50h92M50 4c18 14 18 78 0 92M50 4c-18 14-18 78 0 92M12 28h76M12 72h76"/></svg>
+  <div class="wsh__in">
+    <div class="wsh__copy">
+      <h1>{{ section.settings.heading }}</h1>
+      {%- if section.settings.text != blank -%}<div class="wsh__text">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.btn_label != blank -%}
+        <a class="wsh__btn" href="{{ section.settings.btn_link | default: '#wholesale-form' }}">{{ section.settings.btn_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wholesale hero",
+  "tag": "div",
+  "class": "section-ws-hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo (shown on the right)" },
+    { "type": "video", "id": "video", "label": "Video (optional, overrides photo)" },
+    { "type": "select", "id": "focal", "label": "Photo focus", "default": "center", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" } ] },
+    { "type": "range", "id": "media_width", "label": "Photo width (desktop)", "min": 40, "max": 100, "step": 5, "unit": "%", "default": 65 },
+    { "type": "range", "id": "height", "label": "Min height (desktop)", "min": 360, "max": 800, "step": 20, "unit": "px", "default": 520 },
+    { "type": "text", "id": "heading", "label": "Heading (H1)", "default": "Elevate Your Coffee Business" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Partner with a recognized Florida coffee brand for over 20 years. Quality coffee, reliable supply and real support for your business.</p>" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Start Your Partnership Today" },
+    { "type": "url", "id": "btn_link", "label": "Button link", "info": "Empty = scroll to the form." },
+    { "type": "color", "id": "green", "label": "Green", "default": "#1F5C3A" },
+    { "type": "color", "id": "gold", "label": "Button", "default": "#E0A43B" }
+  ],
+  "presets": [ { "name": "Wholesale hero" } ]
+}
+{% endschema %}

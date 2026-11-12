@@ -1,0 +1,57 @@
+{%- comment -%} Wholesale "Why partner with us" outlined cards. {%- endcomment -%}
+{%- style -%}
+  #wsc-{{ section.id }} { background: {{ section.settings.bg }}; color: {{ section.settings.text }}; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; }
+  #wsc-{{ section.id }} .wsc__in { max-width: 1100px; margin: 0 auto; text-align: center; }
+  #wsc-{{ section.id }} h2 { font-size: clamp(26px, 3vw, 36px); margin: 0 0 10px; color: inherit; }
+  #wsc-{{ section.id }} .wsc__sub { margin: 0 auto 36px; max-width: 640px; font-size: 16px; opacity: .8; }
+  #wsc-{{ section.id }} .wsc__grid { display: grid; gap: 22px; grid-template-columns: repeat({{ section.blocks.size | at_least: 1 | at_most: 4 }}, minmax(0, 1fr)); text-align: left; }
+  #wsc-{{ section.id }} .wsc__card { border: 1.5px solid {{ section.settings.border }}; border-radius: 20px; padding: 34px 28px; background: {{ section.settings.card_bg }}; }
+  #wsc-{{ section.id }} .wsc__ic { width: 40px; height: 40px; color: {{ section.settings.accent }}; margin-bottom: 14px; }
+  #wsc-{{ section.id }} .wsc__ic svg { width: 100%; height: 100%; }
+  #wsc-{{ section.id }} h3 { font-size: 20px; margin: 0 0 12px; color: inherit; }
+  #wsc-{{ section.id }} .wsc__card p { margin: 0; font-size: 15.5px; line-height: 1.65; opacity: .82; }
+  @media (max-width: 749px) { #wsc-{{ section.id }} .wsc__grid { grid-template-columns: 1fr; gap: 14px; } #wsc-{{ section.id }} .wsc__card { padding: 26px 22px; } }
+{%- endstyle -%}
+<section id="wsc-{{ section.id }}" class="ws-cards">
+  <div class="wsc__in">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.subheading != blank -%}<p class="wsc__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    <div class="wsc__grid">
+      {%- for block in section.blocks -%}
+        <div class="wsc__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}<div class="wsc__ic" aria-hidden="true">{%- render 'ws-icon', name: block.settings.icon -%}</div>{%- endif -%}
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Wholesale cards",
+  "tag": "div",
+  "class": "section-ws-cards",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Partner With Us?" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "We're committed to your success with premium products and unmatched support" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FBF8EF" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FBF8EF" },
+    { "type": "color", "id": "border", "label": "Card border", "default": "#5A3A22" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "accent", "label": "Icon", "default": "#1F5C3A" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    { "type": "card", "name": "Card", "limit": 4,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "none",
+          "options": [ { "value": "none", "label": "None (as in design)" }, { "value": "award", "label": "Award" }, { "value": "tag", "label": "Price tag" }, { "value": "handshake", "label": "Handshake" }, { "value": "bean", "label": "Bean" }, { "value": "truck", "label": "Truck" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ] }
+  ],
+  "presets": [ { "name": "Wholesale cards" } ]
+}
+{% endschema %}

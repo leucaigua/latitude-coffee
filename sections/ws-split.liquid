@@ -1,0 +1,83 @@
+{%- comment -%} Wholesale image + text split. Optional feature list (icon · bold label · text). Use several times, alternating sides. {%- endcomment -%}
+{%- style -%}
+  #wss-{{ section.id }} { position: relative; overflow: hidden; background: {{ section.settings.bg }}; color: {{ section.settings.text }}; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; }
+  #wss-{{ section.id }} .wss__in { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  {%- if section.settings.image_side == 'right' -%}#wss-{{ section.id }} .wss__media { order: 2; }{%- endif -%}
+  #wss-{{ section.id }} .wss__media img { width: 100%; max-width: {{ section.settings.image_max }}px; height: auto; display: block; border-radius: 10px; box-shadow: 0 10px 30px rgba(43,18,8,.12); {% if section.settings.image_side == 'right' %}margin-left: auto;{% endif %} }
+  #wss-{{ section.id }} h2 { font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 18px; color: inherit; }
+  #wss-{{ section.id }} .wss__text { font-size: 16px; line-height: 1.7; opacity: .82; }
+  #wss-{{ section.id }} .wss__text p { margin: 0 0 12px; }
+  #wss-{{ section.id }} ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 18px; }
+  #wss-{{ section.id }} li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; font-size: 15.5px; line-height: 1.55; }
+  #wss-{{ section.id }} li .ic { width: 22px; height: 22px; margin-top: 2px; color: {{ section.settings.accent }}; }
+  #wss-{{ section.id }} li .ic svg { width: 100%; height: 100%; }
+  #wss-{{ section.id }} li b { color: inherit; }
+  #wss-{{ section.id }} li span.t { opacity: .85; }
+  #wss-{{ section.id }} .wss__btn { display: inline-block; margin-top: 20px; padding: 13px 26px; border-radius: 999px; background: {{ section.settings.btn_bg }}; color: {{ section.settings.btn_text }}; text-decoration: none; font-weight: 700; font-size: 14.5px; }
+  @media (max-width: 749px) {
+    #wss-{{ section.id }} .wss__in { grid-template-columns: 1fr; gap: 28px; }
+    #wss-{{ section.id }} .wss__media { order: 0; }
+    #wss-{{ section.id }} .wss__media img { max-width: 100%; margin: 0; }
+  }
+{%- endstyle -%}
+<section id="wss-{{ section.id }}" class="ws-split">
+  <div class="wss__in">
+    <div class="wss__media">
+      {%- if section.settings.image != blank -%}
+        {% assign image_alt = section.settings.image.alt | default: section.settings.heading %}
+        {{ section.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 45vw, 100vw', widths: '400, 700, 900, 1100', alt: image_alt }}
+      {%- elsif request.design_mode -%}
+        <div style="aspect-ratio:4/5;background:#E9DEC6;border-radius:10px;display:grid;place-items:center;font-size:13px;opacity:.7">Pick an image</div>
+      {%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<div class="wss__text">{{ section.settings.body }}</div>{%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ul>
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="ic" aria-hidden="true">{%- render 'ws-icon', name: block.settings.icon -%}</span>
+              <span>{%- if block.settings.label != blank -%}<b>{{ block.settings.label }}:</b> {% endif -%}<span class="t">{{ block.settings.text }}</span></span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.btn_label != blank -%}<a class="wss__btn" href="{{ section.settings.btn_link | default: '#wholesale-form' }}">{{ section.settings.btn_label }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Wholesale image + text",
+  "tag": "div",
+  "class": "section-ws-split",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "image_side", "label": "Image side (desktop)", "default": "right", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "range", "id": "image_max", "label": "Image max width", "min": 280, "max": 600, "step": 20, "unit": "px", "default": 440 },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Text" },
+    { "type": "text", "id": "btn_label", "label": "Button label" },
+    { "type": "url", "id": "btn_link", "label": "Button link", "info": "Empty = scroll to the form." },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FBF8EF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "accent", "label": "Icon", "default": "#5A3A22" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#E0A43B" },
+    { "type": "color", "id": "btn_text", "label": "Button text", "default": "#2B1208" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    { "type": "feature", "name": "Feature", "limit": 8,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "bean",
+          "options": [ { "value": "bean", "label": "Bean" }, { "value": "kcup", "label": "K-Cup" }, { "value": "grind", "label": "Grind / profile" }, { "value": "handshake", "label": "Handshake" },
+                       { "value": "box", "label": "Box" }, { "value": "gift", "label": "Gift" }, { "value": "tag", "label": "Label" }, { "value": "flame", "label": "Roasting" }, { "value": "check", "label": "Check" } ] },
+        { "type": "text", "id": "label", "label": "Bold label" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ] }
+  ],
+  "presets": [ { "name": "Wholesale image + text" } ]
+}
+{% endschema %}
