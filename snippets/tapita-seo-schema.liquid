@@ -106,7 +106,7 @@
 {%- endif -%}
 {%- comment -%} Start of AI Custom Meta Data {%- endcomment -%}
 {%- if shop.metafields.tapita-seo-schema and shop.metafields.tapita-seo-schema.tapita-ai-meta-object-1 -%}
-    {%- assign aicustom_tcontents = [] -%}
+    {%- assign aicustom_tcontents = nil -%}
     {%- for i in (1..100) -%}
       {%- assign key = "tapita-ai-meta-object-" | append: i -%}
       {%- assign mf = shop.metafields['tapita-seo-schema'][key] -%}
@@ -166,3 +166,13 @@
 {%- comment -%} Start of assets preloading {%- endcomment -%}
 
 {%- comment -%} End of of assets preloading {%- endcomment -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- assign aicustom_tcontents = [] -%}"
+  to: "{%- assign aicustom_tcontents = nil -%}"
+  position: 7802..7841
+{% endcomment %}

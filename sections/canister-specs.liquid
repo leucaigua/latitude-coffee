@@ -1,0 +1,96 @@
+{%- comment -%}
+  Canister specs table. Each row value is a text setting, so in the theme editor
+  you can click the "Connect dynamic source" icon and bind it to a product metafield
+  (e.g. custom.capacity). Rows with an empty value are hidden automatically,
+  so unverified specs never show up as blanks.
+{%- endcomment -%}
+{%- style -%}
+  #cn-spec-{{ section.id }} {
+    background: {{ section.settings.bg }};
+    color: {{ section.settings.text }};
+    padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px;
+  }
+  #cn-spec-{{ section.id }} .cn-wrap { max-width: 820px; margin: 0 auto; }
+  #cn-spec-{{ section.id }} h2 { font-size: clamp(22px, 2.4vw, 30px); margin: 0 0 22px; text-align: center; color: inherit; }
+  #cn-spec-{{ section.id }} table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  #cn-spec-{{ section.id }} th, #cn-spec-{{ section.id }} td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid {{ section.settings.line }}; }
+  #cn-spec-{{ section.id }} th { width: 38%; font-weight: 600; }
+  #cn-spec-{{ section.id }} td { opacity: .9; }
+  @media (max-width: 749px) {
+    #cn-spec-{{ section.id }} th, #cn-spec-{{ section.id }} td { padding: 12px 8px; font-size: 14px; }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign has_rows = false
+  for block in section.blocks
+    if block.settings.value != blank
+      assign has_rows = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_rows or request.design_mode -%}
+  <section id="cn-spec-{{ section.id }}" class="cn-spec">
+    <div class="cn-wrap">
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      <table>
+        <tbody>
+          {%- for block in section.blocks -%}
+            {%- if block.settings.value != blank -%}
+              <tr {{ block.shopify_attributes }}>
+                <th scope="row">{{ block.settings.label }}</th>
+                <td>{{ block.settings.value }}</td>
+              </tr>
+            {%- elsif request.design_mode -%}
+              <tr {{ block.shopify_attributes }} style="opacity:.4">
+                <th scope="row">{{ block.settings.label }}</th>
+                <td><em>Empty, hidden on live site</em></td>
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Canister specs",
+  "tag": "div",
+  "class": "section-canister-specs",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Specifications" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "line", "label": "Divider", "default": "#E6DCC6" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "row", "name": "Spec row", "limit": 14,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Capacity" },
+        { "type": "text", "id": "value", "label": "Value (leave empty to hide)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Canister specs",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Capacity", "value": "1200 ml (40 fl oz), about 1 lb of whole beans" } },
+        { "type": "row", "settings": { "label": "Material", "value": "Stainless steel, corrosion-resistant" } },
+        { "type": "row", "settings": { "label": "Lid", "value": "Press-type vacuum lid with one-touch release button" } },
+        { "type": "row", "settings": { "label": "Dimensions" } },
+        { "type": "row", "settings": { "label": "Finish", "value": "Matte black, laser-engraved Latitude 23.5° logo" } },
+        { "type": "row", "settings": { "label": "Care" } },
+        { "type": "row", "settings": { "label": "Use for", "value": "Whole beans, ground coffee, loose-leaf tea" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

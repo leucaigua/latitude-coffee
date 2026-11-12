@@ -1,0 +1,96 @@
+{%- comment -%}
+  Canister FAQ — accordion + FAQPage JSON-LD built from the same blocks,
+  so visible answers and structured data never drift apart.
+  Remove the JSON-LD (checkbox) if an app already outputs FAQ schema on this page.
+{%- endcomment -%}
+{%- style -%}
+  #cn-faq-{{ section.id }} {
+    background: {{ section.settings.bg }};
+    color: {{ section.settings.text }};
+    padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px;
+  }
+  #cn-faq-{{ section.id }} .cn-wrap { max-width: 820px; margin: 0 auto; }
+  #cn-faq-{{ section.id }} h2 { font-size: clamp(22px, 2.4vw, 30px); margin: 0 0 22px; text-align: center; color: inherit; }
+  #cn-faq-{{ section.id }} details { border-bottom: 1px solid {{ section.settings.line }}; }
+  #cn-faq-{{ section.id }} summary {
+    list-style: none; cursor: pointer; padding: 18px 36px 18px 0; position: relative;
+    font-size: 16.5px; font-weight: 600;
+  }
+  #cn-faq-{{ section.id }} summary::-webkit-details-marker { display: none; }
+  #cn-faq-{{ section.id }} summary::after {
+    content: '+'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    font-size: 22px; font-weight: 400; color: {{ section.settings.accent }};
+  }
+  #cn-faq-{{ section.id }} details[open] summary::after { content: '–'; }
+  #cn-faq-{{ section.id }} .cn-faq__a { padding: 0 0 18px; font-size: 15px; line-height: 1.6; opacity: .9; }
+  #cn-faq-{{ section.id }} .cn-faq__a p { margin: 0 0 8px; }
+{%- endstyle -%}
+
+<section id="cn-faq-{{ section.id }}" class="cn-faq">
+  <div class="cn-wrap">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- for block in section.blocks -%}
+      {%- comment -%} Answers still holding a [placeholder] are hidden on the live site {%- endcomment -%}
+      {%- if block.settings.answer contains '[' and request.design_mode == false -%}{%- continue -%}{%- endif -%}
+      <details {{ block.shopify_attributes }}{% if forloop.first and section.settings.open_first %} open{% endif %}>
+        <summary>{{ block.settings.question }}</summary>
+        <div class="cn-faq__a">{{ block.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- if section.settings.schema -%}
+  {%- capture faq_items -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.answer contains '[' -%}{%- continue -%}{%- endif -%}
+      {"@type":"Question","name":{{ block.settings.question | strip_html | strip | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.answer | strip_html | strip | json }}}}|||
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- assign faq_list = faq_items | split: '|||' -%}
+  {%- if faq_list.size > 0 -%}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{{ faq_list | join: ',' }}]}
+</script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Canister FAQ",
+  "tag": "div",
+  "class": "section-canister-faq",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered" },
+    { "type": "checkbox", "id": "open_first", "label": "Open first question", "default": true },
+    { "type": "checkbox", "id": "schema", "label": "Output FAQPage structured data", "default": true },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#2F5D3A" },
+    { "type": "color", "id": "line", "label": "Divider", "default": "#E6DCC6" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "qa", "name": "Question", "limit": 12,
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Canister FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "Is a vacuum canister better than an airtight one?", "answer": "<p>An airtight lid only stops new air from getting in. A vacuum lid also pushes out the air that is already inside, so your beans sit with less oxygen.</p>" } },
+        { "type": "qa", "settings": { "question": "Can I store ground coffee in it?", "answer": "<p>Yes. Ground coffee goes stale faster than whole beans, so it benefits even more from a sealed, light-blocking container.</p>" } },
+        { "type": "qa", "settings": { "question": "Why won't the lid hold the vacuum with fresh beans?", "answer": "<p>Freshly roasted coffee releases CO₂ for a few days, which can push back against the vacuum. Let new beans rest 2–3 days before sealing, or press the lid again after the first day.</p>" } },
+        { "type": "qa", "settings": { "question": "How much coffee does it hold?", "answer": "<p>1200 ml (about 40 fl oz). That's roughly a full 1 lb bag of whole beans.</p>" } },
+        { "type": "qa", "settings": { "question": "Is it dishwasher safe?", "answer": "<p>[Fill in verified care instructions.]</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

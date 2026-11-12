@@ -1,0 +1,24 @@
+{%- comment -%}
+  Usage: {% render 'canister-icon', name: 'seal' %}
+  Line icons, inherit currentColor.
+{%- endcomment -%}
+{%- case name -%}
+  {%- when 'seal' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="16" width="24" height="26" rx="5"/><path d="M10 16h28"/><path d="M24 4v8M19 8l5 5 5-5"/></svg>
+  {%- when 'light' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="7"/><path d="M24 6v4M24 38v4M6 24h4M38 24h4M11 11l3 3M34 34l3 3M11 37l3-3M34 14l3-3"/><path d="M8 40L40 8"/></svg>
+  {%- when 'release' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="30" rx="16" ry="7"/><circle cx="24" cy="28" r="4"/><path d="M24 6v12M19 13l5 5 5-5"/></svg>
+  {%- when 'beans' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="18" cy="26" rx="9" ry="13" transform="rotate(-25 18 26)"/><path d="M13 16c6 4 4 14 10 20"/><ellipse cx="33" cy="22" rx="7" ry="10" transform="rotate(20 33 22)"/><path d="M30 14c4 3 2 11 6 16"/></svg>
+  {%- when 'leaf' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38C10 20 22 10 40 8c-1 18-12 30-30 30z"/><path d="M10 38L28 20"/></svg>
+  {%- when 'globe' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c6 6 6 28 0 34M24 7c-6 6-6 28 0 34"/></svg>
+  {%- when 'steel' -%}
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h20l4 8v22a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V16z"/><path d="M10 16h28M18 24v10M24 22v14M30 24v10"/></svg>
+  {%- when 'check' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>
+  {%- when 'truck' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+{%- endcase -%}

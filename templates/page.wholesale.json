@@ -1116,7 +1116,7 @@
       ],
       "name": "t:names.custom_liquid",
       "settings": {
-        "custom_liquid": "<h2 id=\"lp-click-target\" style=\"text-align: center;\" class=\"h3\"><span>Request Whosale Info</span></h2>\n<p style=\"text-align: center;\"><span>Please complete and submit the form below:</span></p>\n<div class=\"klaviyo-form-QTFY8a\"><br></div>",
+        "custom_liquid": "<h2 id=\"lp-click-target\" style=\"text-align: center;\" class=\"h3\"><span>Request Wholesale Info</span></h2>\n<p style=\"text-align: center;\"><span>Please complete and submit the form below:</span></p>\n<div class=\"klaviyo-form-QTFY8a\"><br></div>",
         "color_scheme": "scheme-1",
         "section_width": "page-width",
         "padding-block-start": 50,

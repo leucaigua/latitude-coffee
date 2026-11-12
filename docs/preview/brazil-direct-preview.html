@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brazil Direct — PDP preview</title>
+<!--
+  Static design preview of the dynamic coffee PDP (content area only).
+  Sample data = "Brazil Direct". This mirrors the structure & CSS of the
+  theme blocks (coffee-badges, size-cards, coffee-profile, coffee-faq, etc.)
+  so you can see the layout BEFORE creating metaobjects/metafields.
+  Nothing here is wired to Shopify — it's a visual mock.
+-->
+<style>
+  :root {
+    --bg: #f6f2e9;
+    --surface: #ffffff;
+    --fg: #2b1d14;
+    --fg-soft: #6f6356;
+    --border: #e3deca;
+    --green: #2f6b3a;
+    --green-soft: #def0df;
+    --amber: #e0a63d;
+    --amber-dark: #c8902c;
+    --shoppay: #5a31f4;
+    --radius: 16px;
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 24px 80px; }
+  a { color: inherit; }
+  h1, h2, h3 { margin: 0; }
+  .note {
+    max-width: 1180px; margin: 16px auto 0; padding: 10px 16px;
+    font-size: 13px; color: var(--fg-soft); background: #fffaf0;
+    border: 1px dashed var(--border); border-radius: 10px;
+  }
+
+  /* ---------- breadcrumbs ---------- */
+  .breadcrumbs { font-size: 13px; color: var(--fg-soft); margin-bottom: 16px; }
+  .breadcrumbs a { text-decoration: none; }
+  .breadcrumbs span.sep { opacity: .5; margin: 0 6px; }
+
+  /* ---------- top grid ---------- */
+  .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+  /* gallery */
+  .gallery { position: sticky; top: 24px; }
+  .media-main {
+    position: relative;
+    aspect-ratio: 1/1;
+    border: .75px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(233deg, #ffffff 2%, #ecfdec 40%, #ddffdd 94%);
+    display: grid; place-items: center;
+  }
+  .ribbon {
+    position: absolute; top: 16px; left: 16px; z-index: 3;
+    padding: 6px 12px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    background: var(--fg); color: #fff;
+  }
+  .zoom {
+    position: absolute; top: 16px; right: 16px; z-index: 3;
+    width: 34px; height: 34px; border-radius: 50%; background: #fff;
+    display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  }
+  .bag { width: 58%; filter: drop-shadow(0 12px 24px rgba(0,0,0,.15)); }
+  .thumbs { display: flex; gap: 10px; margin-top: 12px; }
+  .thumb {
+    width: 64px; height: 64px; border-radius: 12px; border: 1.5px solid var(--border);
+    background: linear-gradient(233deg,#fff,#eafaea); display: grid; place-items: center; cursor: pointer;
+  }
+  .thumb.is-active { border-color: var(--green); }
+  .thumb svg { width: 60%; }
+  .thumb.coffee { background: #5a3a22; }
+  .thumb.cup { background: #efe7da; }
+
+  /* details */
+  .details { display: flex; flex-direction: column; gap: 14px; }
+  h1.title { font-size: 30px; font-weight: 600; letter-spacing: -.01em; }
+  .rating { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--fg-soft); }
+  .stars { color: var(--amber); letter-spacing: 2px; }
+  .price { font-size: 20px; font-weight: 600; }
+  .short { color: var(--fg-soft); font-size: 15px; max-width: 46ch; }
+
+  /* pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; margin: 4px 0 0; padding: 0; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+  .pill .ic { width: 18px; height: 18px; color: var(--green); }
+
+  /* trust strip */
+  .trust { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; list-style: none;
+    margin: 4px 0; padding: 12px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .trust li { display: flex; align-items: center; gap: 8px; }
+  .trust .ic { width: 22px; height: 22px; color: var(--green); flex: none; }
+  .trust b { font-size: 13px; font-weight: 600; display: block; }
+  .trust small { font-size: 11px; color: var(--fg-soft); }
+
+  /* size cards */
+  .label-sm { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-soft); margin: 6px 0 8px; }
+  .size-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .size-card {
+    display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; min-height: 70px;
+    text-align: left; cursor: pointer; background: var(--surface); color: var(--fg);
+    border: 1.5px solid var(--border); border-radius: 12px; font: inherit;
+  }
+  .size-card:hover { border-color: var(--fg); }
+  .size-card.is-selected { border-color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg); }
+  .size-card .nm { font-weight: 600; font-size: 15px; }
+  .size-card .sv { font-size: 11px; font-weight: 700; color: var(--green); }
+  .size-card .pr { font-size: 13px; color: var(--fg-soft); }
+
+  /* purchase options (subscription mock) */
+  .purchase { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .purchase .opt { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; }
+  .purchase .opt + .opt { border-top: 1px solid var(--border); }
+  .purchase .opt.is-selected { background: var(--green-soft); }
+  .radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--fg-soft); flex: none; position: relative; }
+  .opt.is-selected .radio { border-color: var(--green); }
+  .opt.is-selected .radio::after { content:""; position:absolute; inset:3px; border-radius:50%; background: var(--green); }
+  .opt .ot { flex: 1; font-size: 14px; }
+  .opt .op { font-weight: 600; }
+  .freq { padding: 0 16px 14px 44px; }
+  .freq select, .grind select {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+    background: #fff; font: inherit; color: var(--fg);
+  }
+
+  .grind { margin-top: 4px; }
+
+  /* qty + atc */
+  .qtyrow { display: flex; align-items: center; gap: 12px; }
+  .qty { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 8px; height: 44px; }
+  .qty button { width: 40px; height: 100%; background: none; border: none; font-size: 18px; cursor: pointer; color: var(--fg); }
+  .qty input { width: 40px; text-align: center; border: none; font: inherit; background: none; }
+  .qtylabel { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-soft); }
+  .btn { width: 100%; height: 50px; border: none; border-radius: 10px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+  .btn-atc { background: var(--amber); color: #2b1605; }
+  .btn-atc:hover { background: var(--amber-dark); }
+  .btn-shoppay { background: var(--shoppay); color: #fff; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .morepay { text-align: center; font-size: 13px; color: var(--fg-soft); text-decoration: underline; }
+  .ships { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 13px; color: var(--fg-soft); }
+  .ships .ic { width: 22px; color: var(--green); flex: none; }
+
+  /* ---------- profile band ---------- */
+  .band { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); }
+  .profile { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
+  .col-title { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-soft); margin-bottom: 14px; }
+  .love { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .love li { position: relative; padding-left: 28px; font-size: 15px; }
+  .love li::before {
+    content: ""; position: absolute; left: 0; top: 1px; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat;
+  }
+  .bars { display: flex; flex-direction: column; gap: 10px; }
+  .bar { display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 10px; }
+  .bar span { font-size: 14px; }
+  .dots { display: inline-flex; gap: 5px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(47,107,58,.2); }
+  .dot.on { background: var(--green); }
+  .notes { margin-top: 14px; font-size: 13px; color: var(--fg-soft); }
+  .notes b { display: block; color: var(--fg); }
+  .origin-name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .origin-name small { display: block; font-weight: 400; font-size: 13px; color: var(--fg-soft); }
+  .sourcing { font-size: 14px; }
+  .origin-link { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--green); text-decoration: none; }
+  .map { margin-top: 12px; opacity: .85; }
+  .brews { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px 8px; list-style: none; margin: 0; padding: 0; }
+  .brew { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; text-align: center; }
+  .brew .ic { width: 32px; height: 32px; color: var(--fg); }
+
+  /* feature strip */
+  .features { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 40px; padding: 20px; background: #efe9da; border-radius: var(--radius); }
+  .feature { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .feature .ic { width: 24px; color: var(--green); flex: none; }
+  .feature b { display: block; }
+  .feature small { color: var(--fg-soft); }
+
+  /* reviews */
+  .reviews { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--border); }
+  .rev-score { font-size: 52px; font-weight: 700; line-height: 1; }
+  .rev-bars { margin-top: 12px; display: flex; flex-direction: column; gap: 5px; }
+  .rev-bar { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .rev-bar .track { flex: 1; height: 7px; background: #e3deca; border-radius: 4px; overflow: hidden; }
+  .rev-bar .fill { height: 100%; background: var(--green); }
+  .write { margin-top: 14px; padding: 10px 16px; border: 1px solid var(--fg); background: none; border-radius: 8px; font: inherit; cursor: pointer; }
+  .rev-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: var(--surface); }
+  .verified { display: inline-block; font-size: 11px; color: var(--green); border: 1px solid var(--green); border-radius: 100px; padding: 2px 8px; margin-top: 8px; }
+
+  /* faq */
+  .faq { margin-top: 48px; }
+  .faq h2 { font-size: 20px; margin-bottom: 16px; }
+  details.faq-item { border-bottom: 1px solid var(--border); }
+  details.faq-item:first-of-type { border-top: 1px solid var(--border); }
+  .faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 4px; cursor: pointer; font-weight: 600; font-size: 15px; list-style: none; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item .ans { padding: 0 4px 16px; font-size: 15px; color: var(--fg-soft); }
+  .plus { position: relative; width: 16px; height: 16px; flex: none; }
+  .plus::before, .plus::after { content:""; position:absolute; top:50%; left:50%; width:12px; height:2px; background: var(--fg); transform: translate(-50%,-50%); }
+  .plus::after { transform: translate(-50%,-50%) rotate(90deg); transition: transform .2s; }
+  details[open] .plus::after { transform: translate(-50%,-50%) rotate(0); }
+
+  /* cross-sell */
+  .xsell { margin-top: 56px; }
+  .xsell h3 { font-size: 18px; margin-bottom: 18px; }
+  .xgrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .xcard { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); }
+  .xcard .ph { aspect-ratio: 1/1; background: linear-gradient(233deg,#fff,#eafaea); display: grid; place-items: center; }
+  .xcard .ph svg { width: 50%; }
+  .xcard .body { padding: 12px 14px 16px; }
+  .xcard .nm { font-size: 14px; font-weight: 600; }
+  .xcard .pr { font-size: 14px; margin: 4px 0 6px; }
+  .xcard .roast { font-size: 12px; color: var(--fg-soft); }
+  .xcard .add { margin-top: 10px; width: 100%; height: 38px; border: none; border-radius: 8px; background: var(--amber); font: inherit; font-weight: 600; cursor: pointer; }
+
+  /* responsive */
+  @media (max-width: 990px) {
+    .pdp { grid-template-columns: 1fr; gap: 28px; }
+    .gallery { position: static; }
+    .profile { grid-template-columns: repeat(2,1fr); gap: 28px; }
+    .features { grid-template-columns: repeat(2,1fr); }
+    .reviews { grid-template-columns: 1fr; }
+    .xgrid { grid-template-columns: repeat(2,1fr); }
+    .trust { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .profile { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    .xgrid { grid-template-columns: 1fr 1fr; }
+    /* sticky atc */
+    .sticky { display: flex !important; }
+  }
+
+  /* mobile sticky atc */
+  .sticky {
+    display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    align-items: center; gap: 10px; padding: 8px 12px;
+    background: #fff; border-top: 1px solid var(--border); box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+  }
+  .sticky img, .sticky .ph { width: 44px; height: 44px; border-radius: 8px; background: linear-gradient(233deg,#fff,#eafaea); flex: none; }
+  .sticky .si { flex: 1; min-width: 0; }
+  .sticky .st { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sticky .sp { font-size: 13px; color: var(--fg-soft); }
+  .sticky .sb { flex: none; height: 42px; padding: 0 18px; border: none; border-radius: 8px; background: var(--amber); font: inherit; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="note">
+  📄 <strong>Static design preview</strong> — sample “Brazil Direct” data, not connected to Shopify.
+  This shows the layout the theme blocks produce once you create the metaobjects/metafields.
+  Resize the window narrow to see the mobile layout + sticky add-to-cart.
+</div>
+
+<div class="wrap">
+
+  <!-- breadcrumbs -->
+  <nav class="breadcrumbs">
+    <a href="#">Home</a><span class="sep">/</span><a href="#">Coffee</a><span class="sep">/</span><a href="#">Single Origin</a><span class="sep">/</span>Brazil Direct
+  </nav>
+
+  <div class="pdp">
+
+    <!-- GALLERY -->
+    <div class="gallery">
+      <div class="media-main">
+        <span class="ribbon">Roasted to order</span>
+        <span class="zoom">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#2b1d14" stroke-width="1.6"><circle cx="9" cy="9" r="6"/><path d="M14 14l4 4"/></svg>
+        </span>
+        <!-- coffee bag illustration -->
+        <svg class="bag" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#bfe3ef"/><stop offset="1" stop-color="#cfe8d6"/></linearGradient></defs>
+          <path d="M40 40 Q40 28 52 28 L148 28 Q160 28 160 40 L168 260 Q168 272 156 272 L44 272 Q32 272 32 260 Z" fill="url(#bg)" stroke="#9bbfb0" stroke-width="2"/>
+          <rect x="58" y="20" width="84" height="16" rx="4" fill="#8aa99b"/>
+          <circle cx="100" cy="92" r="26" fill="#2f6b3a" opacity=".85"/>
+          <text x="100" y="98" font-size="11" fill="#fff" text-anchor="middle" font-family="sans-serif">23.5°</text>
+          <text x="100" y="180" font-size="17" fill="#2b1d14" text-anchor="middle" font-family="sans-serif" font-weight="700">BRAZIL DIRECT</text>
+          <text x="100" y="202" font-size="9" fill="#3a4a40" text-anchor="middle" font-family="sans-serif">Milk Chocolate · Toasted Nuts · Caramel</text>
+        </svg>
+      </div>
+      <div class="thumbs">
+        <div class="thumb is-active"><svg viewBox="0 0 40 56"><rect width="40" height="56" rx="5" fill="#bfe3ef"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 40 56"><rect width="40" height="56" rx="5" fill="#cfe8d6"/></svg></div>
+        <div class="thumb coffee"></div>
+        <div class="thumb cup"></div>
+      </div>
+    </div>
+
+    <!-- DETAILS -->
+    <div class="details">
+      <h1 class="title">Brazil Direct</h1>
+      <div class="rating"><span class="stars">★★★★★</span> 5.0 <a href="#reviews">(1 review)</a></div>
+      <div class="price">$19.80</div>
+      <p class="short">Smooth and balanced with notes of milk chocolate, toasted nuts, and a hint of caramel. A classic Brazilian profile, farm direct.</p>
+
+      <!-- coffee-badges: pills -->
+      <ul class="pills">
+        <li class="pill"><svg class="ic" viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="8" opacity=".25"/><circle cx="10" cy="10" r="4"/></svg> Medium Roast</li>
+        <li class="pill"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2C6 2 3 5 3 9c0 5 7 9 7 9s7-4 7-9c0-4-3-7-7-7z"/><circle cx="10" cy="9" r="2.2"/></svg> Origin: Brazil</li>
+        <li class="pill"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l5 5 9-10"/></svg> Farm Direct</li>
+      </ul>
+
+      <!-- coffee-badges: trust strip -->
+      <ul class="trust">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6m0 0c-2 0-4 2-4 5a4 4 0 008 0c0-3-2-5-4-5z"/></svg><span><b>Fresh Roasted</b><small>Roasted to order</small></span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-4 7-10V5l-7-2-7 2v6c0 6 7 10 7 10z"/></svg><span><b>Farm Direct</b><small>Ethical &amp; sustainable</small></span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg><span><b>Free Shipping</b><small>On orders over $35</small></span></li>
+      </ul>
+
+      <!-- size-cards -->
+      <div>
+        <div class="label-sm">Choose size</div>
+        <div class="size-grid">
+          <button class="size-card is-selected"><span class="nm">1 LB</span><span class="pr">$19.80</span></button>
+          <button class="size-card"><span class="nm">2 × 1 LB</span><span class="sv">SAVE 10%</span><span class="pr">$35.64</span></button>
+          <button class="size-card"><span class="nm">3 × 1 LB</span><span class="sv">SAVE 15%</span><span class="pr">$50.49</span></button>
+        </div>
+      </div>
+
+      <!-- purchase options (Subify mock) -->
+      <div>
+        <div class="label-sm">Purchase type</div>
+        <div class="purchase">
+          <label class="opt is-selected"><span class="radio"></span><span class="ot">One-time purchase</span><span class="op">$19.80</span></label>
+          <label class="opt"><span class="radio"></span><span class="ot">Subscribe &amp; Save 10%</span><span class="op">$17.82</span></label>
+          <div class="freq">
+            <select><option>Deliver every 15 days</option><option>Deliver every 30 days</option><option>Deliver every 45 days</option><option>Deliver every 60 days</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- grind (native variant) -->
+      <div class="grind">
+        <div class="label-sm">Grind</div>
+        <select><option>Whole Bean</option><option>Drip</option><option>Pour Over</option><option>French Press</option><option>Espresso</option></select>
+      </div>
+
+      <!-- qty -->
+      <div>
+        <div class="label-sm qtylabel">Quantity</div>
+        <div class="qtyrow">
+          <div class="qty"><button>−</button><input value="1"><button>+</button></div>
+        </div>
+      </div>
+
+      <!-- buy buttons -->
+      <button class="btn btn-atc">Add to cart</button>
+      <button class="btn btn-shoppay">Buy with <strong>shop</strong> Pay</button>
+      <a class="morepay" href="#">More payment options</a>
+
+      <!-- ships box -->
+      <div class="ships">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
+        <span>Roasted to order in Sarasota, FL · Ships within 1–2 business days</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PROFILE BAND (coffee-profile) ============ -->
+  <div class="band">
+    <div class="profile">
+      <section>
+        <h3 class="col-title">Why you'll love it</h3>
+        <ul class="love">
+          <li>Smooth, clean, and easy to love</li>
+          <li>Perfect daily sipper</li>
+          <li>Ethically sourced &amp; farm direct</li>
+          <li>Roasted fresh to order</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3 class="col-title">Flavor profile</h3>
+        <div class="bars">
+          <div class="bar"><span>Body</span><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="bar"><span>Acidity</span><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></span></div>
+          <div class="bar"><span>Sweetness</span><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></span></div>
+          <div class="bar"><span>Roast</span><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></div>
+        </div>
+        <p class="notes"><b>Tasting Notes:</b> Milk Chocolate, Toasted Nuts, Caramel</p>
+      </section>
+
+      <section>
+        <h3 class="col-title">Origin</h3>
+        <p class="origin-name">Brazil<small>Minas Gerais</small></p>
+        <p class="sourcing">Sourced from small farms across Minas Gerais. Direct relationships ensure quality, transparency, and better outcomes for farmers.</p>
+        <a class="origin-link" href="#">Learn more about our sourcing →</a>
+        <div class="map">
+          <svg width="120" height="100" viewBox="0 0 120 100"><path d="M30 15 L70 10 L95 35 L88 70 L60 90 L35 75 L20 45 Z" fill="none" stroke="#9aa590" stroke-width="1.5"/><circle cx="58" cy="48" r="3" fill="#2f6b3a"/></svg>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="col-title">Brewing recommendations</h3>
+        <ul class="brews">
+          <li class="brew"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 4h10l-1 5H8z"/><path d="M9 9l1 9h4l1-9"/></svg>Drip</li>
+          <li class="brew"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 5h12l-2 6H8z"/><path d="M10 11v6h4v-6"/></svg>Pour Over</li>
+          <li class="brew"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M8 8h8"/></svg>French Press</li>
+          <li class="brew"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 4h8v6l-2 4h-4l-2-4z"/><path d="M9 18h6"/></svg>AeroPress</li>
+          <li class="brew"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 10h9a3 3 0 010 6H6z"/><path d="M6 16h9"/><path d="M9 4v3M12 4v3"/></svg>Espresso</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- feature strip -->
+    <div class="features">
+      <div class="feature"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12a8 8 0 1016 0 8 8 0 00-16 0z"/><path d="M12 8v4l3 2"/></svg><span><b>Freshness Guaranteed</b><small>Roasted to order for peak flavor</small></span></div>
+      <div class="feature"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/></svg><span><b>Fast, Reliable Shipping</b><small>Free over $35</small></span></div>
+      <div class="feature"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"/></svg><span><b>Store It Right</b><small>Keep in a cool, dry place</small></span></div>
+      <div class="feature"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h14v10H8l-3 3z"/></svg><span><b>Questions?</b><small>We're here to help</small></span></div>
+    </div>
+  </div>
+
+  <!-- ============ REVIEWS ============ -->
+  <div class="reviews" id="reviews">
+    <div>
+      <h3 class="col-title">Customer reviews</h3>
+      <div class="rev-score">5.0</div>
+      <div class="stars" style="font-size:20px">★★★★★</div>
+      <div style="font-size:13px;color:var(--fg-soft);margin-top:4px">Based on 1 review</div>
+      <div class="rev-bars">
+        <div class="rev-bar">5★ <div class="track"><div class="fill" style="width:100%"></div></div> 1</div>
+        <div class="rev-bar">4★ <div class="track"><div class="fill" style="width:0"></div></div> 0</div>
+        <div class="rev-bar">3★ <div class="track"><div class="fill" style="width:0"></div></div> 0</div>
+        <div class="rev-bar">2★ <div class="track"><div class="fill" style="width:0"></div></div> 0</div>
+        <div class="rev-bar">1★ <div class="track"><div class="fill" style="width:0"></div></div> 0</div>
+      </div>
+      <button class="write">Write a review</button>
+    </div>
+    <div class="rev-card">
+      <div class="stars">★★★★★</div>
+      <p style="font-weight:600;margin:8px 0">Smooth. Not bitter at all. Good stuff as always!</p>
+      <div>Michael</div>
+      <span class="verified">✓ Verified Buyer</span>
+      <div style="font-size:12px;color:var(--fg-soft);margin-top:10px">03/07/2024</div>
+    </div>
+  </div>
+
+  <!-- ============ FAQ (coffee-faq) ============ -->
+  <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <details class="faq-item" open><summary>When will my coffee ship? <span class="plus"></span></summary><div class="ans">We roast to order and ship within 1–2 business days. You'll get a tracking email as soon as it's on the way.</div></details>
+    <details class="faq-item"><summary>How should I store my coffee? <span class="plus"></span></summary><div class="ans">Keep it in a cool, dry place in an airtight container, away from light and heat. Avoid the fridge or freezer.</div></details>
+    <details class="faq-item"><summary>Is your coffee organic? <span class="plus"></span></summary><div class="ans">Many of our coffees are grown using organic practices. Look for the Organic badge on the product, or filter our Organic collection.</div></details>
+    <details class="faq-item"><summary>Do you offer subscriptions? <span class="plus"></span></summary><div class="ans">Yes — choose “Subscribe &amp; Save 10%” above and pick your delivery frequency. Skip, pause, or cancel anytime.</div></details>
+  </div>
+
+  <!-- ============ CROSS-SELL ============ -->
+  <div class="xsell">
+    <h3>You may also like</h3>
+    <div class="xgrid">
+      <div class="xcard"><div class="ph"><svg viewBox="0 0 40 56"><rect width="40" height="56" rx="5" fill="#cfe8d6"/></svg></div><div class="body"><div class="nm">Guatemala French</div><div class="pr">$19.40</div><div class="roast">● Medium Roast</div><button class="add">Add to cart</button></div></div>
+      <div class="xcard"><div class="ph"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#5a3a22"/></svg></div><div class="body"><div class="nm">K-Cup Farm Direct</div><div class="pr">$12.95</div><div class="roast">● Medium Roast</div><button class="add">Add to cart</button></div></div>
+      <div class="xcard"><div class="ph"><svg viewBox="0 0 40 56"><rect width="40" height="56" rx="5" fill="#bfe3ef"/></svg></div><div class="body"><div class="nm">Panama Margay</div><div class="pr">$20.10</div><div class="roast">● Medium Roast</div><button class="add">Add to cart</button></div></div>
+      <div class="xcard"><div class="ph"><svg viewBox="0 0 40 56"><rect width="40" height="56" rx="5" fill="#f0d9bf"/></svg></div><div class="body"><div class="nm">Ethiopia Yirgacheffe</div><div class="pr">$21.50</div><div class="roast">● Light Roast</div><button class="add">Add to cart</button></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- mobile sticky atc -->
+<div class="sticky">
+  <div class="ph"></div>
+  <div class="si"><div class="st">Brazil Direct</div><div class="sp">$19.80</div></div>
+  <button class="sb">Add to cart</button>
+</div>
+
+<script>
+  // tiny interactivity so the preview feels real (not part of the theme)
+  document.querySelectorAll('.size-card').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.size-card').forEach(x => x.classList.remove('is-selected'));
+    c.classList.add('is-selected');
+    document.querySelector('.price').textContent = c.querySelector('.pr').textContent;
+  }));
+  document.querySelectorAll('.purchase .opt').forEach(o => o.addEventListener('click', () => {
+    document.querySelectorAll('.purchase .opt').forEach(x => x.classList.remove('is-selected'));
+    o.classList.add('is-selected');
+  }));
+</script>
+</body>
+</html>

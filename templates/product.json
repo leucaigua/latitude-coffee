@@ -44,7 +44,7 @@
           "type": "_product-details",
           "static": true,
           "settings": {
-            "width": "fill",
+            "width": "custom",
             "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
@@ -158,7 +158,7 @@
                 "ai_gen_block_3049504_LQ7VKU": {
                   "type": "ai_gen_block_3049504",
                   "settings": {
-                    "badge_text": "Spring Special Promo",
+                    "badge_text": "Fall Special Promo",
                     "badge_background": "#dea63d",
                     "badge_text_color": "#371c11",
                     "font_size": 12,
@@ -338,70 +338,31 @@
                 "group_teRhCa"
               ]
             },
-            "accordion_BmRLNy": {
-              "type": "accordion",
-              "name": "t:names.accordion",
+            "text_HbgPiT": {
+              "type": "text",
+              "name": "Product description",
               "settings": {
-                "icon": "caret",
-                "dividers": true,
-                "type_preset": "h5",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {
-                "accordion_row_zHUxHD": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "Coffee Information",
-                    "open_by_default": false,
-                    "icon": "none",
-                    "image_upload": "shopify://shop_images/Coffee_roast_level_-_light.svg",
-                    "width": 16
-                  },
-                  "blocks": {
-                    "text_76d4ar": {
-                      "type": "text",
-                      "name": "Product description",
-                      "settings": {
-                        "text": "{{ closest.product.description }}",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-primary--family)",
-                        "font_size": "",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "text_76d4ar"
-                  ]
-                }
-              },
-              "block_order": [
-                "accordion_row_zHUxHD"
-              ]
+              "blocks": {}
             },
             "subi_subscriptions_app_block_TQnF6Q": {
               "type": "shopify://apps/subi-subscriptions/blocks/app-block/bc0dba25-cd46-4841-bea4-6bdfe9ac815f",
@@ -485,7 +446,7 @@
           "block_order": [
             "group_icgrde",
             "group_xwEhD4",
-            "accordion_BmRLNy",
+            "text_HbgPiT",
             "subi_subscriptions_app_block_TQnF6Q",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi"
