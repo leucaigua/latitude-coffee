@@ -1,7 +1,13 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
 
-
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<div class="section page-width-content color-{{ section.settings.color_scheme }}">
+<div
+  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+></div>
+<div class="section page-width-content{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
   <div
     class="
       spacing-style
@@ -19,6 +25,8 @@
   </div>
 </div>
 
+{% render 'legacy-section-colors', scheme_id: section.settings.color_scheme, section_id: section.id %}
+
 {% schema %}
 {
   "name": "t:names.page",
@@ -35,7 +43,9 @@
     }
   ],
   "disabled_on": {
-    "groups": ["header"]
+    "groups": [
+      "header"
+    ]
   },
   "settings": [
     {
@@ -62,10 +72,10 @@
       "default": 12
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
@@ -90,6 +100,18 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "Inherit color scheme",
+      "default": true
     }
   ]
 }

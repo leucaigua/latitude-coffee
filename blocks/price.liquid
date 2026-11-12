@@ -1,4 +1,4 @@
-
+{% render 'text-block-styles' %}
 
 {%- liquid
   assign block_settings = block.settings
@@ -43,10 +43,30 @@
   style="
     {% render 'typography-style', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
+    {% if block_settings.text_color != blank %}
+      --color: {{ block_settings.text_color }};
+      --color-rgb: {{ block_settings.text_color.rgb }};
+    {% endif %}
     --width: {{ block_settings.width }};
   "
   {{ block.shopify_attributes }}
 >
+  {% if product_resource.selling_plan_groups.size > 0 %}
+    <script type="application/json" data-selling-plan-prices>
+      {
+        {% for variant in product_resource.variants %}
+          "{{ variant.id }}": {
+            "regular": {{ variant.price | money | json }},
+            "plans": {
+              {% for allocation in variant.selling_plan_allocations %}
+                "{{ allocation.selling_plan.id }}": {{ allocation.price | money | json }}{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      }
+    </script>
+  {% endif %}
   {% render 'price',
     show_unit_price: true,
     product_resource: product_resource,
@@ -84,23 +104,7 @@
   {%- endif -%}
 </product-price>
 
-{% # theme-check-disable %}
-{% stylesheet %}
-  .tax-note:empty {
-    display: none;
-  }
-
-  form.payment-terms {
-    padding-top: 0.5em;
-    font-size: min(0.85em, var(--font-paragraph--size));
-    font-weight: var(--font-paragraph--weight);
-    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
-  }
-
-  .installments:not(:has(shopify-payment-terms)) {
-    display: none;
-  }
-{% endstylesheet %}
+{% render 'payment-terms-styles' %}
 
 {% schema %}
 {
@@ -124,7 +128,8 @@
     {
       "type": "checkbox",
       "id": "show_installments",
-      "label": "t:settings.installments",
+      "label": "t:settings.shop_pay_payment_options",
+      "info": "t:info.shop_pay_payment_options",
       "default": false
     },
     {
@@ -366,25 +371,14 @@
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
     },
     {
-      "type": "select",
-      "id": "color",
-      "label": "t:settings.color",
-      "options": [
-        {
-          "value": "var(--color-foreground)",
-          "label": "t:options.text"
-        },
-        {
-          "value": "var(--color-foreground-heading)",
-          "label": "t:options.heading"
-        },
-        {
-          "value": "var(--color-primary)",
-          "label": "t:options.link"
-        }
-      ],
-      "default": "var(--color-foreground)",
-      "visible_if": "{{ block.settings.type_preset != 'rte' }}"
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
@@ -439,4 +433,3 @@
   ]
 }
 {% endschema %}
-{% # theme-check-enable %}

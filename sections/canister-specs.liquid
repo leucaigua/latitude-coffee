@@ -62,19 +62,68 @@
   "tag": "div",
   "class": "section-canister-specs",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Specifications" },
-    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
-    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
-    { "type": "color", "id": "line", "label": "Divider", "default": "#E6DCC6" },
-    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
-    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Specifications"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F8F5EC"
+    },
+    {
+      "type": "color",
+      "id": "text",
+      "label": "Text",
+      "default": "#2B1208"
+    },
+    {
+      "type": "color",
+      "id": "line",
+      "label": "Divider",
+      "default": "#E6DCC6"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
   ],
   "blocks": [
     {
-      "type": "row", "name": "Spec row", "limit": 14,
+      "type": "row",
+      "name": "Spec row",
+      "limit": 14,
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Capacity" },
-        { "type": "text", "id": "value", "label": "Value (leave empty to hide)" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Capacity"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value (leave empty to hide)"
+        }
       ]
     }
   ],
@@ -82,13 +131,53 @@
     {
       "name": "Canister specs",
       "blocks": [
-        { "type": "row", "settings": { "label": "Capacity", "value": "1200 ml (40 fl oz), about 1 lb of whole beans" } },
-        { "type": "row", "settings": { "label": "Material", "value": "Stainless steel, corrosion-resistant" } },
-        { "type": "row", "settings": { "label": "Lid", "value": "Press-type vacuum lid with one-touch release button" } },
-        { "type": "row", "settings": { "label": "Dimensions" } },
-        { "type": "row", "settings": { "label": "Finish", "value": "Matte black, laser-engraved Latitude 23.5° logo" } },
-        { "type": "row", "settings": { "label": "Care" } },
-        { "type": "row", "settings": { "label": "Use for", "value": "Whole beans, ground coffee, loose-leaf tea" } }
+        {
+          "type": "row",
+          "settings": {
+            "label": "Capacity",
+            "value": "1200 ml (40 fl oz), about 1 lb of whole beans"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Material",
+            "value": "Stainless steel, corrosion-resistant"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Lid",
+            "value": "Press-type vacuum lid with one-touch release button"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Dimensions"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Finish",
+            "value": "Matte black, laser-engraved Latitude 23.5° logo"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Care"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Use for",
+            "value": "Whole beans, ground coffee, loose-leaf tea"
+          }
+        }
       ]
     }
   ]

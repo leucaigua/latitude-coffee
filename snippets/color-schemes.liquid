@@ -18,7 +18,13 @@
       {% assign opacity_40_60 = 0.40 %}
       {% assign opacity_30_60 = 0.30 %}
     {% endif %}
-    .color-{{ scheme.id }} {
+    {% if settings.drawer_color_scheme.id == scheme.id or settings.drawer_color_scheme == scheme.id %}
+      .color-custom-drawer.color-custom-drawer,
+    {% endif %}
+    {% if settings.popover_color_scheme.id == scheme.id or settings.popover_color_scheme == scheme.id %}
+      .color-custom-popover.color-custom-popover,
+    {% endif %}
+    .color-{{ scheme.id }}.color-{{ scheme.id }} {
         --color-background: rgb({{ scheme.settings.background.rgba }});
         /* RGB values only to apply different opacities - Relative color values are not supported in iOS < 16.4 */
         --color-background-rgb: {{ scheme.settings.background.rgb }};

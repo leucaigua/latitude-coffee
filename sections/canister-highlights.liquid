@@ -56,13 +56,56 @@
   "tag": "div",
   "class": "section-canister-highlights",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Built to keep coffee tasting like coffee" },
-    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
-    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#F3E7CF" },
-    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
-    { "type": "color", "id": "accent", "label": "Icon color", "default": "#2F5D3A" },
-    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 },
-    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built to keep coffee tasting like coffee"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F8F5EC"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#F3E7CF"
+    },
+    {
+      "type": "color",
+      "id": "text",
+      "label": "Text",
+      "default": "#2B1208"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Icon color",
+      "default": "#2F5D3A"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
@@ -70,19 +113,59 @@
       "name": "Benefit",
       "limit": 8,
       "settings": [
-        { "type": "select", "id": "icon", "label": "Icon", "default": "seal",
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "seal",
           "options": [
-            { "value": "seal", "label": "Vacuum seal" },
-            { "value": "light", "label": "Blocks light" },
-            { "value": "release", "label": "One-touch release" },
-            { "value": "beans", "label": "Coffee beans" },
-            { "value": "leaf", "label": "Leaf / tea" },
-            { "value": "globe", "label": "Globe" },
-            { "value": "steel", "label": "Stainless steel" }
-          ] },
-        { "type": "image_picker", "id": "custom_icon", "label": "Custom icon (overrides)" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Press to seal" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "One press of the lid pushes air out." }
+            {
+              "value": "seal",
+              "label": "Vacuum seal"
+            },
+            {
+              "value": "light",
+              "label": "Blocks light"
+            },
+            {
+              "value": "release",
+              "label": "One-touch release"
+            },
+            {
+              "value": "beans",
+              "label": "Coffee beans"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf / tea"
+            },
+            {
+              "value": "globe",
+              "label": "Globe"
+            },
+            {
+              "value": "steel",
+              "label": "Stainless steel"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon (overrides)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Press to seal"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "One press of the lid pushes air out."
+        }
       ]
     }
   ],
@@ -90,10 +173,38 @@
     {
       "name": "Canister highlights",
       "blocks": [
-        { "type": "benefit", "settings": { "icon": "seal", "title": "Press to seal", "text": "One press of the lid pushes air out of the canister." } },
-        { "type": "benefit", "settings": { "icon": "light", "title": "Blocks light", "text": "Opaque stainless steel keeps light away from your beans." } },
-        { "type": "benefit", "settings": { "icon": "release", "title": "One-touch release", "text": "Tap the small button to release the vacuum and open." } },
-        { "type": "benefit", "settings": { "icon": "beans", "title": "Beans, grounds or tea", "text": "Works for whole beans, ground coffee and loose-leaf tea." } }
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "seal",
+            "title": "Press to seal",
+            "text": "One press of the lid pushes air out of the canister."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "light",
+            "title": "Blocks light",
+            "text": "Opaque stainless steel keeps light away from your beans."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "release",
+            "title": "One-touch release",
+            "text": "Tap the small button to release the vacuum and open."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "beans",
+            "title": "Beans, grounds or tea",
+            "text": "Works for whole beans, ground coffee and loose-leaf tea."
+          }
+        }
       ]
     }
   ]

@@ -1,7 +1,8 @@
-
-
 {%- assign block_settings = block.settings -%}
-
+{%- if block_settings.height == 'fill' -%}
+  {% # `.full-height--desktop` consumes `--header-group-height` at first paint (stylesheet below) %}
+  {% render 'measure-header-heights', only_on_desktop: true %}
+{%- endif -%}
 <div
   id="ProductInformation-{{ section.id }}"
   class="
@@ -15,16 +16,14 @@
     data-view-transition-type="product-details"
   {% endif %}
 >
-{% capture children %}
-  <div class="view-product-title">
-    <a
-      href="{{ product.selected_or_first_available_variant.url }}"
-      class="link"
-    >
-      {{- product.title }}
-    </a>
-  </div>
-
+  {% capture children %}
+    <div class="view-product-title">
+      <a
+        href="{{ closest.product.selected_or_first_available_variant.url }}"
+      >
+        {{- closest.product.title }}
+      </a>
+    </div>
   {%- comment -%}
     Custom SIZE quantity picker – shown above product title block
   {%- endcomment -%}
@@ -106,11 +105,17 @@
     {% endfor %}
   {% endunless %}
 
-  {% content_for 'blocks' %}
-{% endcapture %}
 
+    {% content_for 'blocks' %}
+  {% endcapture %}
 
-  {% render 'group', children: children, settings: block_settings, shopify_attributes: block.shopify_attributes %}
+  {% render 'group',
+    children: children,
+    settings: block_settings,
+    shopify_attributes: block.shopify_attributes,
+    background_color: block_settings.background_color,
+    block_id: block.id
+  %}
 </div>
 
 {% javascript %}
@@ -213,8 +218,11 @@
   }
 
   @media screen and (min-width: 750px) {
+    /* A zero minimum width lets a fit-content details group shrink to its column, so unbreakable text,
+       such as words joined with non-breaking spaces, wraps instead of overflowing both sides of the column */
     .product-details > .group-block {
       height: min-content;
+      min-width: 0;
     }
 
     .full-height--desktop {
@@ -424,19 +432,6 @@
       "content": "t:content.appearance"
     },
     {
-      "type": "checkbox",
-      "id": "inherit_color_scheme",
-      "label": "t:settings.inherit_color_scheme",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1",
-      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
-    },
-    {
       "type": "select",
       "id": "background_media",
       "label": "t:settings.background_media",
@@ -455,6 +450,13 @@
         }
       ],
       "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.background_media == 'none' }}"
     },
     {
       "type": "video",
@@ -503,9 +505,13 @@
       "visible_if": "{{ block.settings.background_media == 'image' }}"
     },
     {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
       "type": "select",
       "id": "border",
-      "label": "t:settings.borders",
+      "label": "t:settings.style",
       "options": [
         {
           "value": "none",
@@ -522,10 +528,10 @@
       "type": "range",
       "id": "border_width",
       "min": 0,
-      "max": 10,
-      "step": 0.5,
+      "max": 100,
+      "step": 1,
       "unit": "px",
-      "label": "t:settings.border_width",
+      "label": "t:settings.thickness",
       "default": 1,
       "visible_if": "{{ block.settings.border != 'none' }}"
     },
@@ -536,8 +542,15 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "label": "t:settings.border_opacity",
+      "label": "t:settings.opacity",
       "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
       "visible_if": "{{ block.settings.border != 'none' }}"
     },
     {
@@ -593,6 +606,18 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "Inherit color scheme",
+      "default": true
     }
   ],
   "presets": [
@@ -606,8 +631,6 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0,
         "gap": 12,
-        "inherit_color_scheme": true,
-        "color_scheme": "",
         "video_position": "cover",
         "background_image_position": "cover",
         "border": "none",
@@ -697,8 +720,6 @@
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
@@ -721,8 +742,6 @@
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "border": "none",
@@ -749,7 +768,10 @@
                   }
                 }
               },
-              "block_order": ["icon_bBpnME", "text_83R7CQ"]
+              "block_order": [
+                "icon_bBpnME",
+                "text_83R7CQ"
+              ]
             },
             "group_WbpVdV": {
               "type": "group",
@@ -766,8 +788,6 @@
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "border": "none",
@@ -794,10 +814,16 @@
                   }
                 }
               },
-              "block_order": ["icon_FVd3C4", "text_EmGGUV"]
+              "block_order": [
+                "icon_FVd3C4",
+                "text_EmGGUV"
+              ]
             }
           },
-          "block_order": ["group_Hrq6NU", "group_WbpVdV"]
+          "block_order": [
+            "group_Hrq6NU",
+            "group_WbpVdV"
+          ]
         },
         "accordion": {
           "type": "accordion",
@@ -813,7 +839,9 @@
                   "type": "text"
                 }
               },
-              "block_order": ["text"]
+              "block_order": [
+                "text"
+              ]
             },
             "accordion-row-2": {
               "type": "_accordion-row",
@@ -825,7 +853,9 @@
                   "type": "text"
                 }
               },
-              "block_order": ["text"]
+              "block_order": [
+                "text"
+              ]
             },
             "accordion-row-3": {
               "type": "_accordion-row",
@@ -837,10 +867,16 @@
                   "type": "text"
                 }
               },
-              "block_order": ["text"]
+              "block_order": [
+                "text"
+              ]
             }
           },
-          "block_order": ["accordion-row-1", "accordion-row-2", "accordion-row-3"]
+          "block_order": [
+            "accordion-row-1",
+            "accordion-row-2",
+            "accordion-row-3"
+          ]
         },
         "complementary_products": {
           "type": "product-recommendations",
@@ -856,7 +892,9 @@
               }
             }
           },
-          "block_order": ["recommendations-header"]
+          "block_order": [
+            "recommendations-header"
+          ]
         }
       },
       "block_order": [

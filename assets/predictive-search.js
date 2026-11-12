@@ -1,9 +1,16 @@
 import { Component } from '@theme/component';
-import { debounce, onAnimationEnd, prefersReducedMotion, onDocumentLoaded } from '@theme/utilities';
-import { sectionRenderer } from '@theme/section-renderer';
+import { debounce, onAnimationEnd, prefersReducedMotion } from '@theme/utilities';
+import { sectionRenderer, normalizeSectionId } from '@theme/section-renderer';
 import { morph } from '@theme/morph';
 import { RecentlyViewed } from '@theme/recently-viewed-products';
-import { DialogCloseEvent, DialogComponent } from '@theme/dialog';
+import { DialogCloseEvent, DialogOpenEvent, DialogComponent } from '@theme/dialog';
+import { SearchUpdateEvent } from '@shopify/events';
+
+/**
+ * Storefront answers `/search/suggest` with 417 and a plain-text body when predictive search
+ * does not support the buyer's language (for example Arabic or Hebrew).
+ */
+const UNSUPPORTED_LOCALE_STATUS = 417;
 
 /**
  * A custom element that allows the user to search for resources available on the store.
@@ -28,6 +35,14 @@ class PredictiveSearchComponent extends Component {
    */
   #activeFetch = null;
 
+  #emptyStateLoaded = false;
+
+  /**
+   * False after `/search/suggest` rejects the buyer's language. The modal then keeps its empty
+   * state, and Enter still opens full search.
+   */
+  #predictiveSearchSupported = true;
+
   /**
    * Get the dialog component.
    * @returns {DialogComponent | null} The dialog component.
@@ -49,13 +64,16 @@ class PredictiveSearchComponent extends Component {
     if (dialog) {
       document.addEventListener('keydown', this.#handleKeyboardShortcut, { signal });
       dialog.addEventListener(DialogCloseEvent.eventName, this.#handleDialogClose, { signal });
+      dialog.addEventListener(DialogOpenEvent.eventName, this.#handleDialogOpen, { signal, once: true });
 
       this.addEventListener('click', this.#handleModalClick, { signal });
     }
 
-    onDocumentLoaded(() => {
-      this.resetSearch(false); // Pass false to avoid focusing the input
-    });
+    if (RecentlyViewed.getProducts().length > 0) {
+      requestIdleCallback(() => {
+        this.#loadEmptyState();
+      });
+    }
   }
 
   /**
@@ -99,6 +117,18 @@ class PredictiveSearchComponent extends Component {
     this.#resetSearch();
   };
 
+  #handleDialogOpen = () => {
+    if (!this.#emptyStateLoaded && RecentlyViewed.getProducts().length > 0) {
+      this.#loadEmptyState();
+    }
+  };
+
+  #loadEmptyState() {
+    if (this.#emptyStateLoaded) return;
+    this.#emptyStateLoaded = true;
+    this.resetSearch(false);
+  }
+
   get #allResultsItems() {
     const containers = Array.from(
       this.querySelectorAll(
@@ -133,6 +163,8 @@ class PredictiveSearchComponent extends Component {
   set #currentIndex(index) {
     if (!this.#allResultsItems?.length) return;
 
+    let activeItem = null;
+
     this.#allResultsItems.forEach((item) => {
       item.classList.remove('keyboard-focus');
     });
@@ -140,15 +172,16 @@ class PredictiveSearchComponent extends Component {
     for (const [itemIndex, item] of this.#allResultsItems.entries()) {
       if (itemIndex === index) {
         item.setAttribute('aria-selected', 'true');
-
         if (this.#isKeyboardNavigation) {
           item.classList.add('keyboard-focus');
         }
-        item.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'nearest' });
+        activeItem = item;
       } else {
         item.removeAttribute('aria-selected');
       }
     }
+
+    activeItem?.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'nearest' });
     this.refs.searchInput.focus();
   }
 
@@ -166,6 +199,8 @@ class PredictiveSearchComponent extends Component {
       return;
     }
 
+    // Horizontal arrows fall through to native text-caret movement, which the
+    // browser already mirrors in RTL.
     if (!this.#allResultsItems?.length || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       return;
     }
@@ -281,45 +316,71 @@ class PredictiveSearchComponent extends Component {
    */
   #resetScrollPositions() {
     requestAnimationFrame(() => {
-      const resultsInner = this.refs.predictiveSearchResults.querySelector('.predictive-search-results__inner');
-      if (resultsInner instanceof HTMLElement) {
-        resultsInner.scrollTop = 0;
-      }
-
-      const formContent = this.querySelector('.predictive-search-form__content');
-      if (formContent instanceof HTMLElement) {
-        formContent.scrollTop = 0;
-      }
+      this.refs.predictiveSearchResults.querySelector('.predictive-search-results__inner')?.scrollTo(0, 0);
+      this.querySelector('.predictive-search-form__content')?.scrollTo(0, 0);
     });
   }
 
   /**
-   * Fetch search results using the section renderer and update the results container.
+   * Fetch predictive search results and update the results container.
    * @param {string} searchTerm - The term to search for
    */
   async #getSearchResults(searchTerm) {
-    if (!this.dataset.sectionId) return;
+    if (!this.dataset.sectionId || !this.#predictiveSearchSupported) return;
 
     const url = new URL(Theme.routes.predictive_search_url, location.origin);
     url.searchParams.set('q', searchTerm);
     url.searchParams.set('resources[limit_scope]', 'each');
+    url.searchParams.set('section_id', normalizeSectionId(this.dataset.sectionId));
+    url.searchParams.sort();
 
     const { predictiveSearchResults } = this.refs;
 
     const abortController = this.#createAbortController();
 
-    sectionRenderer
-      .getSectionHTML(this.dataset.sectionId, false, url)
-      .then((resultsMarkup) => {
-        if (!resultsMarkup) return;
+    const deferredPromise = SearchUpdateEvent.createPromise();
 
-        if (abortController.signal.aborted) return;
+    this.dispatchEvent(
+      new SearchUpdateEvent({
+        search: {
+          query: searchTerm,
+        },
+        promise: deferredPromise.promise,
+      })
+    );
+
+    fetch(url)
+      .then((response) => {
+        if (response.status === UNSUPPORTED_LOCALE_STATUS) {
+          this.#predictiveSearchSupported = false;
+          return '';
+        }
+
+        if (!response.ok) throw new Error(`Predictive search failed with status ${response.status}`);
+
+        return response.text();
+      })
+      .then((resultsMarkup) => {
+        if (!resultsMarkup) {
+          deferredPromise.resolve({ totalCount: 0 });
+          return;
+        }
+
+        if (abortController.signal.aborted) {
+          deferredPromise.reject(new Error('Fetch aborted by user'));
+          return;
+        }
 
         morph(predictiveSearchResults, resultsMarkup);
 
         this.#resetScrollPositions();
+
+        // Count all result items (products, collections, pages, articles, queries)
+        const resultCount = predictiveSearchResults.querySelectorAll('[ref="resultsItems[]"]').length;
+        deferredPromise.resolve({ totalCount: resultCount });
       })
       .catch((error) => {
+        deferredPromise.reject(error);
         if (abortController.signal.aborted) return;
         throw error;
       });

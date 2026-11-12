@@ -61,22 +61,87 @@
   "tag": "div",
   "class": "section-canister-faq",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered" },
-    { "type": "checkbox", "id": "open_first", "label": "Open first question", "default": true },
-    { "type": "checkbox", "id": "schema", "label": "Output FAQPage structured data", "default": true },
-    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
-    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
-    { "type": "color", "id": "accent", "label": "Accent", "default": "#2F5D3A" },
-    { "type": "color", "id": "line", "label": "Divider", "default": "#E6DCC6" },
-    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
-    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Questions, answered"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first question",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "schema",
+      "label": "Output FAQPage structured data",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text",
+      "label": "Text",
+      "default": "#2B1208"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent",
+      "default": "#2F5D3A"
+    },
+    {
+      "type": "color",
+      "id": "line",
+      "label": "Divider",
+      "default": "#E6DCC6"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
   ],
   "blocks": [
     {
-      "type": "qa", "name": "Question", "limit": 12,
+      "type": "qa",
+      "name": "Question",
+      "limit": 12,
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
-        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer</p>" }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Answer</p>"
+        }
       ]
     }
   ],
@@ -84,11 +149,41 @@
     {
       "name": "Canister FAQ",
       "blocks": [
-        { "type": "qa", "settings": { "question": "Is a vacuum canister better than an airtight one?", "answer": "<p>An airtight lid only stops new air from getting in. A vacuum lid also pushes out the air that is already inside, so your beans sit with less oxygen.</p>" } },
-        { "type": "qa", "settings": { "question": "Can I store ground coffee in it?", "answer": "<p>Yes. Ground coffee goes stale faster than whole beans, so it benefits even more from a sealed, light-blocking container.</p>" } },
-        { "type": "qa", "settings": { "question": "Why won't the lid hold the vacuum with fresh beans?", "answer": "<p>Freshly roasted coffee releases CO₂ for a few days, which can push back against the vacuum. Let new beans rest 2–3 days before sealing, or press the lid again after the first day.</p>" } },
-        { "type": "qa", "settings": { "question": "How much coffee does it hold?", "answer": "<p>1200 ml (about 40 fl oz). That's roughly a full 1 lb bag of whole beans.</p>" } },
-        { "type": "qa", "settings": { "question": "Is it dishwasher safe?", "answer": "<p>[Fill in verified care instructions.]</p>" } }
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Is a vacuum canister better than an airtight one?",
+            "answer": "<p>An airtight lid only stops new air from getting in. A vacuum lid also pushes out the air that is already inside, so your beans sit with less oxygen.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Can I store ground coffee in it?",
+            "answer": "<p>Yes. Ground coffee goes stale faster than whole beans, so it benefits even more from a sealed, light-blocking container.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Why won't the lid hold the vacuum with fresh beans?",
+            "answer": "<p>Freshly roasted coffee releases CO₂ for a few days, which can push back against the vacuum. Let new beans rest 2–3 days before sealing, or press the lid again after the first day.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "How much coffee does it hold?",
+            "answer": "<p>1200 ml (about 40 fl oz). That's roughly a full 1 lb bag of whole beans.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Is it dishwasher safe?",
+            "answer": "<p>[Fill in verified care instructions.]</p>"
+          }
+        }
       ]
     }
   ]

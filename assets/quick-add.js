@@ -1,33 +1,31 @@
-import { morph } from '@theme/morph';
 import { Component } from '@theme/component';
-import { CartUpdateEvent, ThemeEvents } from '@theme/events';
+import { morph } from '@theme/morph';
 import { DialogComponent, DialogCloseEvent } from '@theme/dialog';
 import { mediaQueryLarge, isMobileBreakpoint, getIOSVersion } from '@theme/utilities';
+import VariantPicker from '@theme/variant-picker';
+import { StandardEvents, ProductSelectEvent, CartLinesUpdateEvent } from '@shopify/events';
+
+/** The section that quick add renders when the product page cannot fill the modal. */
+const QUICK_ADD_SECTION_ID = 'section-rendering-quick-add';
 
 export class QuickAddComponent extends Component {
   /** @type {AbortController | null} */
   #abortController = null;
   /** @type {Map<string, Element>} */
   #cachedContent = new Map();
+  /** @type {AbortController} */
+  #cartUpdateAbortController = new AbortController();
 
   get productPageUrl() {
     const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
-    const productLink = productCard?.getProductCardLink();
+    if (productCard) return productCard.productPageUrl;
 
-    if (!productLink?.href) return '';
+    const hotspotProduct = /** @type {import('./product-hotspot').ProductHotspotComponent | null} */ (
+      this.closest('product-hotspot-component')
+    );
+    const productLink = hotspotProduct?.getHotspotProductLink();
 
-    const url = new URL(productLink.href);
-
-    if (url.searchParams.has('variant')) {
-      return url.toString();
-    }
-
-    const selectedVariantId = this.#getSelectedVariantId();
-    if (selectedVariantId) {
-      url.searchParams.set('variant', selectedVariantId);
-    }
-
-    return url.toString();
+    return productLink?.href || '';
   }
 
   /**
@@ -36,13 +34,17 @@ export class QuickAddComponent extends Component {
    */
   #getSelectedVariantId() {
     const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
-    return productCard?.getSelectedVariantId() || null;
+    return productCard?.getSelectedVariantId() ?? null;
   }
 
   connectedCallback() {
     super.connectedCallback();
 
     mediaQueryLarge.addEventListener('change', this.#closeQuickAddModal);
+    document.addEventListener(StandardEvents.cartLinesUpdate, this.#handleCartUpdate, {
+      signal: this.#cartUpdateAbortController.signal,
+    });
+    document.addEventListener(StandardEvents.productSelect, this.#handleProductSelectUpdate);
   }
 
   disconnectedCallback() {
@@ -50,6 +52,64 @@ export class QuickAddComponent extends Component {
 
     mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController?.abort();
+    this.#cartUpdateAbortController.abort();
+    document.removeEventListener(StandardEvents.productSelect, this.#handleProductSelectUpdate);
+  }
+
+  /**
+   * Updates quick-add button state when product variant is selected
+   * @param {ProductSelectEvent} event - The product select event
+   */
+  #handleProductSelectUpdate = (event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+    if (event.target.closest('product-card') !== this.closest('product-card')) return;
+    if (this.dataset.usesSellingPlans === 'true') return;
+
+    // Only flip choose <-> add when both buttons were rendered.
+    // Otherwise the flip would hide the sole rendered button and reveal nothing.
+    if (this.dataset.rendersBothButtons !== 'true') return;
+
+    const productOptionsCount = this.dataset.productOptionsCount;
+    let quickAddButton = productOptionsCount === '1' ? 'add' : 'choose';
+
+    // A single-option card can resolve to an unavailable variant (e.g. re-selecting a
+    // sold-out swatch). Keep "Choose" so shoppers reach the picker, not a dead-end disabled "Add".
+    if (quickAddButton === 'add' && this.#isSelectedVariantUnavailable()) {
+      quickAddButton = 'choose';
+    }
+
+    this.setAttribute('data-quick-add-button', quickAddButton);
+  };
+
+  /**
+   * Whether the card's currently selected swatch maps to an unavailable variant.
+   * Reads `data-option-available` off the variant picker's selected option - the same
+   * signal the product card uses. Only reports true on an explicit `false`, so an
+   * unknown/absent signal leaves the caller's default ("add") untouched.
+   * @returns {boolean}
+   */
+  #isSelectedVariantUnavailable() {
+    const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
+    return productCard?.variantPicker?.selectedOption?.dataset.optionAvailable === 'false';
+  }
+
+  /**
+   * Clears the cached content when cart is updated
+   */
+  #handleCartUpdate = () => {
+    this.#cachedContent.clear();
+  };
+
+  /**
+   * Re-renders the variant picker in the quick-add modal.
+   * @param {Element} newHtml - The element to re-render.
+   */
+  #updateVariantPicker(newHtml) {
+    const modalContent = document.getElementById('quick-add-modal-content');
+    if (!modalContent) return;
+    const variantPicker = /** @type {VariantPicker | null} */ (modalContent.querySelector('variant-picker'));
+    if (!variantPicker) return;
+    variantPicker.updateVariantPicker(newHtml);
   }
 
   /**
@@ -61,30 +121,78 @@ export class QuickAddComponent extends Component {
 
     const currentUrl = this.productPageUrl;
 
+    if (this.dataset.usesSellingPlans === 'true') {
+      if (currentUrl) window.location.href = currentUrl;
+      return;
+    }
+
     // Check if we have cached content for this URL
     let productGrid = this.#cachedContent.get(currentUrl);
 
     if (!productGrid) {
-      // Fetch and cache the content
-      const html = await this.fetchProductPage(currentUrl);
-      if (html) {
-        const gridElement = html.querySelector('[data-product-grid-content]');
-        if (gridElement) {
-          // Cache the cloned element to avoid modifying the original
-          productGrid = /** @type {Element} */ (gridElement.cloneNode(true));
-          this.#cachedContent.set(currentUrl, productGrid);
-        }
-      }
+      productGrid = (await this.#fetchProductGrid(currentUrl)) ?? undefined;
+      if (productGrid) this.#cachedContent.set(currentUrl, productGrid);
     }
 
     if (productGrid) {
       // Use a fresh clone from the cache
       const freshContent = /** @type {Element} */ (productGrid.cloneNode(true));
       await this.updateQuickAddModal(freshContent);
+      this.#updateVariantPicker(productGrid);
     }
 
     this.#openQuickAddModal();
   };
+
+  /**
+   * Fetches the product grid that fills the quick add modal.
+   * The product page's own product information is used when it has every part the modal needs. A product template
+   * can hide that section or its blocks, so otherwise the theme's quick add section is rendered for the product.
+   * @param {string} productPageUrl - The URL of the product page
+   * @returns {Promise<Element | null>} A copy of the product grid, or null when a newer request aborted this one
+   */
+  async #fetchProductGrid(productPageUrl) {
+    const html = await this.fetchProductPage(productPageUrl);
+    if (!html) return null;
+
+    const pageGrid = html.querySelector('[data-product-grid-content]');
+    if (pageGrid && this.#canFillModal(pageGrid)) return /** @type {Element} */ (pageGrid.cloneNode(true));
+
+    const sectionUrl = new URL(productPageUrl, window.location.href);
+    sectionUrl.searchParams.set('section_id', QUICK_ADD_SECTION_ID);
+
+    const sectionHtml = await this.fetchProductPage(sectionUrl.toString());
+    if (!sectionHtml) return null;
+
+    const grid = sectionHtml.querySelector('[data-product-grid-content]') ?? pageGrid;
+    return grid ? /** @type {Element} */ (grid.cloneNode(true)) : null;
+  }
+
+  /**
+   * Whether a product grid has the price, the buy buttons, and the variant picker that the product needs.
+   * Product cards inside the grid, such as product recommendations, do not count.
+   * @param {Element} productGrid - The product grid element
+   * @returns {boolean}
+   */
+  #canFillModal(productGrid) {
+    /** @param {string} selector */
+    const hasPart = (selector) =>
+      Array.from(productGrid.querySelectorAll(selector)).some((element) => !element.closest('product-card'));
+
+    if (!hasPart('product-price') || !hasPart('product-form-component')) return false;
+
+    return Number(this.dataset.productVariantsCount) <= 1 || hasPart('variant-picker');
+  }
+
+  #resetScroll() {
+    const dialogComponent = document.getElementById('quick-add-dialog');
+    if (!(dialogComponent instanceof QuickAddDialog)) return;
+
+    const productDetails = dialogComponent.querySelector('.product-details');
+    const productMedia = dialogComponent.querySelector('.product-information__media');
+    productDetails?.scrollTo({ top: 0, behavior: 'instant' });
+    productMedia?.scrollTo({ top: 0, behavior: 'instant' });
+  }
 
   /** @param {QuickAddDialog} dialogComponent */
   #stayVisibleUntilDialogCloses(dialogComponent) {
@@ -100,9 +208,34 @@ export class QuickAddComponent extends Component {
     if (!(dialogComponent instanceof QuickAddDialog)) return;
 
     this.#stayVisibleUntilDialogCloses(dialogComponent);
+    this.#syncHeaderState(dialogComponent);
 
     dialogComponent.showDialog();
+
+    // is nondeterministic when the open attribute is set on the dialog element after .showDialog() is called.
+    // Waiting until the open animation starts seemed to be the most reliable metric here.
+    const dialog = dialogComponent.refs?.dialog;
+    if (!dialog) return;
+    dialog.addEventListener('animationstart', this.#resetScroll.bind(this), { once: true });
   };
+
+  /**
+   * Mirrors the header states that product media and details styles depend on. Those rules reach page
+   * content from `#header-group` with a sibling combinator, which can't reach this body-level dialog.
+   * Scroll is locked while the dialog is open, so the header can't change state until it closes.
+   *
+   * @param {QuickAddDialog} dialogComponent
+   */
+  #syncHeaderState(dialogComponent) {
+    dialogComponent.toggleAttribute(
+      'header-transparent',
+      document.querySelector('header-component[transparent]') !== null
+    );
+    dialogComponent.toggleAttribute(
+      'header-sticky-active',
+      document.querySelector("#header-group #header-component[data-sticky-state='active']") !== null
+    );
+  }
 
   #closeQuickAddModal = () => {
     const dialogComponent = document.getElementById('quick-add-dialog');
@@ -186,6 +319,18 @@ export class QuickAddComponent extends Component {
       productDetails?.remove();
     }
 
+    // Sync the view-event-payload attribute and morph children into the modal's product-component
+    const payload = productGrid.getAttribute('view-event-payload') || '';
+    modalContent.setAttribute('view-event-payload', payload);
+
+    // Variant changes in the modal render the same section that filled it
+    const quickAddSectionId = productGrid.getAttribute('data-quick-add-section-id');
+    if (quickAddSectionId) {
+      modalContent.setAttribute('data-quick-add-section-id', quickAddSectionId);
+    } else {
+      modalContent.removeAttribute('data-quick-add-section-id');
+    }
+
     morph(modalContent, productGrid);
 
     this.#syncVariantSelection(modalContent);
@@ -221,8 +366,10 @@ class QuickAddDialog extends DialogComponent {
   connectedCallback() {
     super.connectedCallback();
 
-    this.addEventListener(ThemeEvents.cartUpdate, this.handleCartUpdate, { signal: this.#abortController.signal });
-    this.addEventListener(ThemeEvents.variantUpdate, this.#updateProductTitleLink);
+    this.addEventListener(StandardEvents.cartLinesUpdate, this.handleCartUpdate, {
+      signal: this.#abortController.signal,
+    });
+    this.addEventListener(StandardEvents.productSelect, this.#handleProductSelect);
 
     this.addEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
   }
@@ -235,25 +382,40 @@ class QuickAddDialog extends DialogComponent {
   }
 
   /**
-   * Closes the dialog
-   * @param {CartUpdateEvent} event - The cart update event
+   * Closes the dialog on successful cart update
+   * @param {CartLinesUpdateEvent} event - The cart lines update event
    */
   handleCartUpdate = (event) => {
-    if (event.detail.data.didError) return;
-    this.closeDialog();
+    event.promise
+      ?.then(({ detail }) => {
+        if (detail?.didError) return;
+        this.closeDialog();
+      })
+      .catch((error) => {
+        if (error?.name !== 'AbortError') console.warn('[quick-add] Event promise rejected:', error);
+      });
   };
 
-  #updateProductTitleLink = (/** @type {CustomEvent} */ event) => {
-    const anchorElement = /** @type {HTMLAnchorElement} */ (
-      event.detail.data.html?.querySelector('.view-product-title a')
-    );
-    const viewMoreDetailsLink = /** @type {HTMLAnchorElement} */ (this.querySelector('.view-product-title a'));
-    const mobileProductTitle = /** @type {HTMLAnchorElement} */ (this.querySelector('.product-header a'));
+  /** @param {ProductSelectEvent} event - The product select event */
+  #handleProductSelect = (event) => {
+    // Wait for variant update data
+    event.promise
+      .then(({ detail }) => {
+        if (!detail?.html) return;
 
-    if (!anchorElement) return;
+        const { html } = detail;
+        const anchorElement = /** @type {HTMLAnchorElement} */ (html.querySelector('.view-product-title a'));
+        const viewMoreDetailsLink = /** @type {HTMLAnchorElement} */ (this.querySelector('.view-product-title a'));
+        const mobileProductTitle = /** @type {HTMLAnchorElement} */ (this.querySelector('.product-header a'));
 
-    if (viewMoreDetailsLink) viewMoreDetailsLink.href = anchorElement.href;
-    if (mobileProductTitle) mobileProductTitle.href = anchorElement.href;
+        if (!anchorElement) return;
+
+        if (viewMoreDetailsLink) viewMoreDetailsLink.href = anchorElement.href;
+        if (mobileProductTitle) mobileProductTitle.href = anchorElement.href;
+      })
+      .catch((error) => {
+        if (error?.name !== 'AbortError') console.warn('[quick-add] Event promise rejected:', error);
+      });
   };
 
   #handleDialogClose = () => {

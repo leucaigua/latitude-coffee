@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin language editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "blocks": {
     "load_video": "Lataa video: {{ description }}",
@@ -25,7 +16,8 @@
       "comment": "Kommentti",
       "post_success": "Kiitos yhteydenotostasi. Vastaamme sinulle mahdollisimman pian.",
       "error_heading": "Muokkaa seuraavia:"
-    }
+    },
+    "slider_label": "Liukusäädin"
   },
   "accessibility": {
     "play_model": "Toista 3D-malli",
@@ -69,13 +61,36 @@
     "increase_quantity": "Suurenna määrää",
     "quantity": "Määrä",
     "rating": "Tämän tuoteen tuotearvio on {{ rating }}/5",
-    "nested_product": "{{ product_title }} – {{ parent_title }}"
+    "nested_product": "{{ product_title }} – {{ parent_title }}",
+    "remove": "Poista",
+    "view_pricing_info": "Näytä hinnoittelutiedot",
+    "slideshow": "Diaesitys",
+    "header_navigation_label": "Ensisijainen",
+    "home_logo_alt": "{{ store_name }} - Koti",
+    "active_filters": "AKtiiviset suodattimet:",
+    "product_details": "Tuotetiedot",
+    "show_product_details": "Näytä tuotteen {{ product_name }} tuotetiedot",
+    "featured_product": "Esittelyssä oleva tuote",
+    "search_suggestions_available": "Hakuehdotuksia saatavilla haulle {{ query }}",
+    "price_filter_low": "Halpa hinta",
+    "price_filter_high": "Kallis hinta",
+    "view_disclosure_information_for_product": "Näytä tuotteen {{ product_title }} ilmoitustiedot",
+    "show_submenu": "Näytä kohteen {{ title }} alivalikko",
+    "link_to_product": "Tuote: {{ title }}",
+    "link_to_blog": "Blogi: {{ title }}",
+    "link_to_page": "Sivu: {{ title }}",
+    "link_to_article": "Artikkeli: {{ title }}",
+    "link_to_policy": "Käytäntö: {{ title }}",
+    "link_to_home": "Etusivu",
+    "link_to_catalog": "Kaikki tuotteet",
+    "link_to_collections": "Kaikki kokoelmat",
+    "link_to_collection": "Kokoelma: {{ title }}"
   },
   "actions": {
     "add_to_cart": "Lisää ostoskoriin",
     "clear_all": "Tyhjennä kaikki",
     "remove": "Poista",
-    "view_in_your_space": "Näytä omassa tilassasi",
+    "view_in_your_space": "Tarkastele tilassasi",
     "show_filters": "Suodata",
     "clear": "Tyhjennä",
     "continue_shopping": "Jatka ostoksia",
@@ -109,7 +124,10 @@
     "open_image_in_full_screen": "Avaa kuva koko näytön tilassa",
     "sort": "Lajittele",
     "show_all_options": "Näytä kaikki vaihtoehdot",
-    "open": "Avaa"
+    "open": "Avaa",
+    "back_to": "Takaisin kohteeseen {{ title }}",
+    "zoom_media": "Lähennä mediasisältö: {{ index }}",
+    "back_to_main_menu": "Takaisin päävalikkoon"
   },
   "content": {
     "reviews": "arvostelua",
@@ -207,7 +225,7 @@
     "taxes_included_shipping_at_checkout_with_policy_without_discounts_html": "Sisältää verot. Toimituskulut lasketaan kassalla.",
     "taxes_included_shipping_at_checkout_without_policy_without_discounts": "Sisältää verot. Toimituskulut lasketaan kassalla.",
     "wrong_password": "Väärä salasana",
-    "view_more_details": "Katso lisätietoja",
+    "view_more_details": "Näytä lisätiedot",
     "inventory_low_stock": "Varasto vähissä",
     "inventory_in_stock": "Varastossa",
     "inventory_out_of_stock": "Loppunut varastosta",
@@ -223,7 +241,7 @@
     "shipping_discount_error": "Toimitusalennukset näytetään kassalla osoitteen lisäämisen jälkeen",
     "discount_code_error": "Alennuskoodin lisääminen ostoskoriisi ei onnistu",
     "shipping_policy": "Toimituskulut lasketaan kassalla.",
-    "recipient_form_send_to": "Lähetä:",
+    "recipient_form_send_to": "Vastaanottaja",
     "recipient_form_email_label": "Vastaanottajan sähköpostiosoite",
     "recipient_form_email_label_my_email": "Oma sähköpostiosoite",
     "recipient_form_email_address": "Vastaanottajan sähköpostiosoite",
@@ -237,12 +255,55 @@
     "recipient_form_error": "Lomakkeen lähettämisessä tapahtui virhe",
     "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} merkkiä käytetty",
     "terms_and_policies": "Ehdot ja käytännöt",
+    "item_count_cutoff": "Yli {{ count }} tuotetta",
     "pagination": {
-      "nav_label": "Sivunumerointinavigointi",
+      "nav_label": "Sivunumerointi",
       "previous": "Edellinen",
       "next": "Seuraava",
       "page": "Sivu {{ page }}"
-    }
+    },
+    "volume_pricing_available": "Volyymihinnoittelu saatavilla",
+    "volume_pricing": "Volyymihinnoittelu",
+    "at_price_each": "{{ price }}/kpl",
+    "each": "{{ price }}/kpl",
+    "each_abbreviation": "kpl",
+    "price_at": "hintaan",
+    "price_range": "Hintahaarukka",
+    "cancel": "Peruuta",
+    "product_subtotal": "Tuotteen välisumma",
+    "quantity_per_item": "/kpl",
+    "remove_all": "Poista kaikki",
+    "remove_all_items_confirmation": "Poistetaanko kaikki {{ count }} tuotetta ostoskorista?",
+    "remove_one_item_confirmation": "Poistetaanko 1 tuote ostoskorista?",
+    "total_items": "Tuotteita yhteensä",
+    "variant": "Versio",
+    "variant_total": "Versioiden summa",
+    "view_cart": "Näytä ostoskori",
+    "your_cart": "Ostoskorisi",
+    "items_added_to_cart": {
+      "one": "Yksi tuote lisätty ostoskoriin",
+      "other": "{{ count }} tuotetta lisätty ostoskoriin"
+    },
+    "quick_order_list": "Pikatilausluettelo",
+    "product_disclosures": "Tuoteilmoitukset",
+    "duties_and_taxes_included_shipping_at_checkout_with_policy_with_fees_html": "Sisältää tullit ja verot. Alennukset, maksut ja <a href=\"{{ link }}\">toimitus</a> lasketaan kassalla.",
+    "duties_and_taxes_included_shipping_at_checkout_with_policy_without_discounts_with_fees_html": "Sisältää tullit ja verot. Maksut ja toimitus lasketaan kassalla.",
+    "duties_and_taxes_included_shipping_at_checkout_without_policy_with_fees": "Sisältää tullit ja verot. Alennukset, maksut ja toimitus lasketaan kassalla.",
+    "duties_and_taxes_included_shipping_at_checkout_without_policy_without_discounts_with_fees": "Sisältää tullit ja verot. Maksut ja toimitus lasketaan kassalla.",
+    "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_with_fees_html": "Sisältää tullit. Verot, alennukset, maksut ja <a href=\"{{ link }}\">toimitus</a> lasketaan kassalla.",
+    "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_with_fees_html": "Sisältää tullit. Maksut ja toimitus lasketaan kassalla.",
+    "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy_with_fees": "Sisältää tullit. Verot, alennukset, maksut ja toimitus lasketaan kassalla.",
+    "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts_with_fees": "Sisältää tullit. Maksut ja toimitus lasketaan kassalla.",
+    "taxes_at_checkout_shipping_at_checkout_with_policy_with_fees_html": "Verot, alennukset, maksut ja <a href=\"{{ link }}\">toimitus</a> lasketaan kassalla.",
+    "taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_with_fees_html": "Verot, maksut ja <a href=\"{{ link }}\">toimitus</a> lasketaan kassalla.",
+    "taxes_at_checkout_shipping_at_checkout_without_policy_with_fees": "Verot, alennukset, maksut ja toimitus lasketaan kassalla.",
+    "taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts_with_fees": "Verot, maksut ja toimitus lasketaan kassalla.",
+    "taxes_included_shipping_at_checkout_with_policy_with_fees_html": "Sisältää verot. Alennukset, maksut ja <a href=\"{{ link }}\">toimitus</a> lasketaan kassalla.",
+    "taxes_included_shipping_at_checkout_without_policy_with_fees": "Sisältää verot. Alennukset, maksut ja toimitus lasketaan kassalla.",
+    "in_store_available": "Varastossa kaupassa",
+    "in_store_also_available": "Myynnissä myös kaupassa – voit ostaa tämän täältä paikan päältä",
+    "in_store_only": "Osta paikan päältä tästä kaupasta. Nouto ei ole saatavilla täällä.",
+    "in_store_available_at_html": "Varastossa sijainnissa <b>{{ location }}</b>"
   },
   "gift_cards": {
     "issued": {
@@ -253,9 +314,10 @@
       "add_to_apple_wallet": "Lisää Apple Walletiin",
       "qr_image_alt": "QR-koodi – lunasta lahjakortti skannaamalla",
       "copy_code": "Kopioi lahjakortin koodi",
-      "expiration_date": "Voimassa {{ expires_on }} asti",
       "copy_code_success": "Koodin kopioiminen onnistui",
-      "expired": "Vanhentunut"
+      "expired": "Vanhentunut",
+      "expiration_date_html": "Vanhenee <bdi>{{ expires_on }}</bdi>",
+      "expiration_date": "Voimassa {{ expires_on }} asti"
     }
   },
   "placeholders": {
@@ -282,11 +344,13 @@
       "quantity_increments": "Lisäysten koko: {{ increment }}",
       "quantity_minimum": "Vähimmäismäärä {{ minimum }}",
       "quantity_maximum": "Enimmäismäärä {{ maximum }}",
-      "in_cart": "ostoskorissa"
+      "in_cart": "ostoskorissa",
+      "default_title": "Oletusotsikko",
+      "sticky_add_to_cart": "Pikalisäys ostoskoririville"
     }
   },
   "fields": {
-    "separator": "-"
+    "separator": "–"
   },
   "blogs": {
     "article": {

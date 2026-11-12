@@ -1,11 +1,17 @@
-
-
 {%- doc -%}
   Renders the blog article image block for use within featured blog posts cards.
 
   @param {object} image - The image object
   @param {string} parent_block_id - The block.id of the parent blog post card
 {%- enddoc -%}
+
+{% liquid
+  # Images in the first three sections can be above the fold. The Section Rendering API gives no section.index.
+  assign loading = 'eager'
+  if section.index > 3
+    assign loading = 'lazy'
+  endif
+%}
 
 {% comment %} Render using unified resource image component {% endcomment %}
 {% render 'resource-image',
@@ -14,6 +20,7 @@
   parent_block_id: parent_block_id,
   block_settings: block.settings,
   section_settings: section.settings,
+  loading: loading,
   block_attributes: block.shopify_attributes
 %}
 
@@ -99,6 +106,13 @@
       "unit": "%",
       "label": "t:settings.opacity",
       "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
       "visible_if": "{{ block.settings.border != 'none' }}"
     },
     {

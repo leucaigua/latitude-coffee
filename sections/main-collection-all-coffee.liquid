@@ -186,11 +186,15 @@
   }
 {% endstylesheet %}
 
+{% render 'legacy-section-colors', scheme_id: section.settings.color_scheme, section_id: section.id %}
+
 {% schema %}
 {
   "name": "t:names.collection_container",
   "enabled_on": {
-    "templates": ["collection"]
+    "templates": [
+      "collection"
+    ]
   },
   "settings": [
     {
@@ -362,6 +366,12 @@
       "step": 1,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "Inherit color scheme",
+      "default": true
     }
   ],
   "presets": []

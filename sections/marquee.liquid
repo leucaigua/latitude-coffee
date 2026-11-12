@@ -1,16 +1,21 @@
-
-
 <script
   src="{{ 'marquee.js' | asset_url }}"
   type="module"
   fetchpriority="low"
 ></script>
 
-{% assign gap_between_elements = section.settings.gap_between_elements %}
+{% liquid
+  assign gap_between_elements = section.settings.gap_between_elements
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+></div>
 <marquee-component
-  class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+  class="section spacing-style gap-style{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
   style="
     {%- render 'spacing-style', settings: section.settings %};
     {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
@@ -90,11 +95,16 @@
   }
 {% endstylesheet %}
 
+{% render 'legacy-section-colors', scheme_id: section.settings.color_scheme, section_id: section.id %}
+
 {% schema %}
 {
   "name": "t:names.marquee",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "blocks": [
     {
@@ -128,10 +138,10 @@
       "default": "normal"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
@@ -166,6 +176,18 @@
       "step": 1,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "Inherit color scheme",
+      "default": true
     }
   ],
   "presets": [
@@ -188,7 +210,9 @@
           }
         }
       },
-      "block_order": ["text"]
+      "block_order": [
+        "text"
+      ]
     }
   ]
 }

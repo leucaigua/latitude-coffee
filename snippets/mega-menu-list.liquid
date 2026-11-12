@@ -73,7 +73,7 @@
 %}
 <ul
   data-menu-list-id="{{ id }}"
-  class="mega-menu__list list-unstyled"
+  class="mega-menu__list{% if menu_content_type == 'text' %} mega-menu__list--text{% endif %} list-unstyled"
   style="--menu-image-border-radius: {{ image_border_radius }}px;"
 >
   {% for link in parent_link.links %}
@@ -91,14 +91,13 @@
         assign column_span = link.links.size | divided_by: break_after_float | ceil | at_least: 1
         assign column_count = column_count | plus: column_span
         assign should_break_columns = true
+        assign span_class = ''
 
         if menu_content_type == 'collection_images'
           assign should_break_columns = false
           # For collection image mode, we have an 8-column grid when 4 or fewer parent links are used. Set column span to 2 in that case, otherwise use 1 column
           if parent_link.links.size <= 4
             assign span_class = 'mega-menu__column--wide-collection-image'
-          else
-            assign span_class = 'mega-menu__column--span-1'
           endif
         else
           # For all other modes, column span is determined by the number of links in the parent link
@@ -132,31 +131,29 @@
 
           {% render 'link-featured-image', link: link, class: 'mega-menu__link-image', sizes: collection_image_sizes %}
         {% endif %}
-        <span
-          class="mega-menu__link-title wrap-text"
-        >
+        <span class="wrap-text">
           {{- link.title -}}
         </span>
       </a>
       {% if link.links != blank %}
         <ul
-          class="list-unstyled"
+          class="list-unstyled{% if should_break_columns %} mega-menu__nested-list{% endif %}"
           {% if should_break_columns %}
-            style="column-count: {{ column_span }};"
+            style="--menu-nested-columns: {{ column_span }};"
           {% endif %}
         >
           {% for childLink in link.links %}
             {% assign break_after_modulo = forloop.index | modulo: links_before_wrap %}
             <li
               {% if break_after_modulo == 0 and should_break_columns %}
-                style="break-after: column;"
+                class="mega-menu__nested-break"
               {% endif %}
             >
               <a
                 href="{{ childLink.url }}"
                 class="mega-menu__link"
               >
-                <span class="mega-menu__link-title wrap-text">{{- childLink.title -}}</span>
+                <span class="wrap-text">{{- childLink.title -}}</span>
               </a>
             </li>
           {% endfor %}
@@ -298,7 +295,8 @@
                   resource_type: 'product',
                   image_hover: true,
                   image_aspect_ratio: content_aspect_ratio,
-                  image_sizes: image_sizes
+                  image_sizes: image_sizes,
+                  product_view_context: 'dialog'
                 %}
               </li>
             {% endfor %}

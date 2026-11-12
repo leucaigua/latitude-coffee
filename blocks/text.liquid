@@ -1,5 +1,3 @@
-
-
 {% render 'text', block: block %}
 
 {% schema %}
@@ -290,6 +288,10 @@
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
     },
     {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
       "type": "select",
       "id": "color",
       "label": "t:settings.color",
@@ -311,8 +313,10 @@
       "visible_if": "{{ block.settings.type_preset != 'rte' }}"
     },
     {
-      "type": "header",
-      "content": "t:content.appearance"
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "checkbox",

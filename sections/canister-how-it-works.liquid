@@ -84,31 +84,116 @@
   "tag": "div",
   "class": "section-canister-how",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image (lifestyle or lid close-up)" },
-    { "type": "checkbox", "id": "image_first_mobile", "label": "Show image first on mobile", "default": true },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Seal it in three seconds" },
-    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
-    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
-    { "type": "color", "id": "accent", "label": "Accent", "default": "#2F5D3A" },
-    { "type": "color", "id": "tip_bg", "label": "Tip background", "default": "#F3E7CF" },
-    { "type": "color", "id": "tip_border", "label": "Tip border", "default": "#E0A43B" },
-    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
-    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (lifestyle or lid close-up)"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_first_mobile",
+      "label": "Show image first on mobile",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "How it works"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Seal it in three seconds"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text",
+      "label": "Text",
+      "default": "#2B1208"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent",
+      "default": "#2F5D3A"
+    },
+    {
+      "type": "color",
+      "id": "tip_bg",
+      "label": "Tip background",
+      "default": "#F3E7CF"
+    },
+    {
+      "type": "color",
+      "id": "tip_border",
+      "label": "Tip border",
+      "default": "#E0A43B"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
   ],
   "blocks": [
     {
-      "type": "step", "name": "Step", "limit": 6,
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Fill" },
-        { "type": "textarea", "id": "text", "label": "Text" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Fill"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
       ]
     },
     {
-      "type": "tip", "name": "Freshness tip", "limit": 1,
+      "type": "tip",
+      "name": "Freshness tip",
+      "limit": 1,
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Using fresh-roasted beans?" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Freshly roasted coffee keeps releasing CO₂ for a few days. Let new beans rest 2–3 days before vacuum sealing, or press the lid again after the first day.</p>" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Using fresh-roasted beans?"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Freshly roasted coffee keeps releasing CO₂ for a few days. Let new beans rest 2–3 days before vacuum sealing, or press the lid again after the first day.</p>"
+        }
       ]
     }
   ],
@@ -116,10 +201,30 @@
     {
       "name": "Canister how it works",
       "blocks": [
-        { "type": "step", "settings": { "title": "Fill", "text": "Pour in your whole beans, grounds or loose-leaf tea." } },
-        { "type": "step", "settings": { "title": "Press to seal", "text": "Close the lid and press the large button to push the air out." } },
-        { "type": "step", "settings": { "title": "Tap to open", "text": "Press the small release button and the lid lifts right off." } },
-        { "type": "tip" }
+        {
+          "type": "step",
+          "settings": {
+            "title": "Fill",
+            "text": "Pour in your whole beans, grounds or loose-leaf tea."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Press to seal",
+            "text": "Close the lid and press the large button to push the air out."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Tap to open",
+            "text": "Press the small release button and the lid lifts right off."
+          }
+        },
+        {
+          "type": "tip"
+        }
       ]
     }
   ]
