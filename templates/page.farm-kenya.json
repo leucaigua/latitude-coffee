@@ -90,20 +90,20 @@
             "value": "Wet-washed and Natural coffees"
           }
         },
-        "f4": {
-          "type": "fact",
-          "settings": {
-            "icon": "calendar",
-            "label": "Harvest",
-            "value": ""
-          }
-        },
         "f5": {
           "type": "fact",
           "settings": {
             "icon": "person",
             "label": "Producer",
             "value": "Liwani Coffee Estate"
+          }
+        },
+        "f4": {
+          "type": "fact",
+          "settings": {
+            "icon": "calendar",
+            "label": "Harvest",
+            "value": ""
           }
         }
       },
@@ -112,8 +112,8 @@
         "f1",
         "f2",
         "f3",
-        "f4",
-        "f5"
+        "f5",
+        "f4"
       ],
       "settings": {
         "heading": "At a glance",
@@ -128,12 +128,13 @@
     "story_farm": {
       "type": "farm-story",
       "settings": {
+        "image": "shopify://shop_images/kenyan-coffee-from-our-family-to-your-roastery-2-1793551055-ZM5du.webp",
         "caption": "",
         "image_side": "left",
         "ratio": "4 / 5",
         "eyebrow": "The farm",
-        "heading": "",
-        "text": "",
+        "heading": "Liwani Coffee Estate",
+        "text": "<p>Our coffee story begins at Liwani Coffee Estate in Solai, Kenya, where our founder Peter Kuria’s parents grow coffee. From our Florida base, we connect their harvest with US roasters. When demand and our capacity allow, we also source from fellow Kenyan farmers, keeping each coffee connected to its origin</p>",
         "btn_label": "",
         "btn_link": "",
         "bg": "#ffffff",
@@ -148,7 +149,10 @@
     "products": {
       "type": "farm-products",
       "settings": {
-        "products": [],
+        "products": [
+          "kenya-direct",
+          "kenya-rift-valley"
+        ],
         "collection": "",
         "limit": 6,
         "columns": 3,
