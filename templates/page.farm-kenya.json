@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -28,11 +37,22 @@
         "c3"
       ],
       "settings": {
+        "image": "shopify://shop_images/Kenya-Farm-Direct-LatitudeCoffe.com.jpg",
+        "overlay": 90,
         "eyebrow": "Farm Direct · Kenya",
         "heading": "",
+        "text": "",
         "btn_label": "Shop this farm's coffee",
-        "overlay": 55,
-        "height": 80
+        "btn_link": "",
+        "align": "left",
+        "v_align": "flex-end",
+        "height": 80,
+        "height_mobile": 75,
+        "bg": "#2b1208",
+        "text_color": "#ffffff",
+        "accent": "#e0a43b",
+        "btn_bg": "#e0a43b",
+        "btn_text": "#2b1208"
       }
     },
     "facts": {
@@ -43,7 +63,7 @@
           "settings": {
             "icon": "pin",
             "label": "Region",
-            "value": ""
+            "value": "Solai, Kenya’s Great Rift Valley"
           }
         },
         "f1": {
@@ -51,7 +71,7 @@
           "settings": {
             "icon": "mountain",
             "label": "Altitude",
-            "value": ""
+            "value": "1,700–1,900 meters above sea level"
           }
         },
         "f2": {
@@ -59,7 +79,7 @@
           "settings": {
             "icon": "leaf",
             "label": "Varietals",
-            "value": ""
+            "value": "SL28, SL34, Ruiru 11, Batian"
           }
         },
         "f3": {
@@ -67,7 +87,7 @@
           "settings": {
             "icon": "drop",
             "label": "Process",
-            "value": ""
+            "value": "Wet-washed and Natural coffees"
           }
         },
         "f4": {
@@ -83,7 +103,7 @@
           "settings": {
             "icon": "person",
             "label": "Producer",
-            "value": ""
+            "value": "Liwani Coffee Estate"
           }
         }
       },
@@ -96,35 +116,77 @@
         "f5"
       ],
       "settings": {
-        "heading": "At a glance"
+        "heading": "At a glance",
+        "bg": "#f8f5ec",
+        "card_bg": "#f3e7cf",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "pad_top": 56,
+        "pad_bottom": 56
       }
     },
     "story_farm": {
       "type": "farm-story",
       "settings": {
+        "caption": "",
+        "image_side": "left",
+        "ratio": "4 / 5",
         "eyebrow": "The farm",
         "heading": "",
-        "image_side": "left"
+        "text": "",
+        "btn_label": "",
+        "btn_link": "",
+        "bg": "#ffffff",
+        "text_color": "#2b1208",
+        "accent": "#2f5d3a",
+        "btn_bg": "#3a1a0e",
+        "btn_text": "#ffffff",
+        "pad_top": 72,
+        "pad_bottom": 72
       }
     },
     "products": {
       "type": "farm-products",
       "settings": {
-        "eyebrow": "From this farm",
-        "heading": "Taste Kenya",
+        "products": [],
+        "collection": "",
         "limit": 6,
         "columns": 3,
         "show_notes": true,
-        "all_label": "Shop all farm-direct coffee"
+        "eyebrow": "From this farm",
+        "heading": "Taste Kenya",
+        "subheading": "",
+        "all_label": "Shop all farm-direct coffee",
+        "all_link": "",
+        "bg": "#ffffff",
+        "card_bg": "#f3e7cf",
+        "img_bg": "#dff5e6",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "btn_bg": "#3a1a0e",
+        "btn_text": "#ffffff",
+        "pad_top": 72,
+        "pad_bottom": 72
       }
     },
     "story_people": {
       "type": "farm-story",
       "settings": {
+        "caption": "",
+        "image_side": "right",
+        "ratio": "4 / 5",
         "eyebrow": "The people",
         "heading": "",
-        "image_side": "right",
-        "bg": "#F8F5EC"
+        "text": "",
+        "btn_label": "",
+        "btn_link": "",
+        "bg": "#f8f5ec",
+        "text_color": "#2b1208",
+        "accent": "#2f5d3a",
+        "btn_bg": "#3a1a0e",
+        "btn_text": "#ffffff",
+        "pad_top": 72,
+        "pad_bottom": 72
       }
     },
     "gallery": {
@@ -176,7 +238,10 @@
       "settings": {
         "heading": "Life on the farm",
         "columns": 3,
-        "bg": "#FFFFFF"
+        "bg": "#ffffff",
+        "text": "#2b1208",
+        "pad_top": 56,
+        "pad_bottom": 56
       }
     },
     "quote": {
@@ -184,7 +249,12 @@
       "settings": {
         "quote": "",
         "name": "",
-        "role": ""
+        "role": "",
+        "bg": "#2f5d3a",
+        "text": "#ffffff",
+        "accent": "#e0a43b",
+        "pad_top": 72,
+        "pad_bottom": 72
       }
     },
     "journey": {
@@ -230,7 +300,14 @@
         "j4"
       ],
       "settings": {
-        "heading": "From the farm to your cup"
+        "heading": "From the farm to your cup",
+        "subheading": "",
+        "bg": "#f8f5ec",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "line": "#e0a43b",
+        "pad_top": 64,
+        "pad_bottom": 64
       }
     }
   },
