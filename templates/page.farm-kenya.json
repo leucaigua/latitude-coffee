@@ -102,8 +102,8 @@
           "type": "fact",
           "settings": {
             "icon": "calendar",
-            "label": "Harvest",
-            "value": ""
+            "label": "Established",
+            "value": "1983"
           }
         }
       },
