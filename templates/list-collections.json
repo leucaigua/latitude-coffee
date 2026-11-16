@@ -30,26 +30,26 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 48,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "color_scheme": "",
+            "inherit_color_scheme": true
           },
           "blocks": {
             "text_fRMQMR": {
@@ -92,12 +92,12 @@
             "horizontal_alignment": "center",
             "vertical_alignment": "flex-start",
             "collection_card_gap": 15,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-dec69693-b89c-4e8d-b584-fdd70186a70b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 10,
-            "border_radius": 15
+            "border_radius": 15,
+            "color_scheme": "scheme-dec69693-b89c-4e8d-b584-fdd70186a70b",
+            "inherit_color_scheme": false
           },
           "blocks": {
             "collection_title_7YgBPU": {
@@ -114,7 +114,6 @@
                 "letter_spacing": "loose",
                 "case": "uppercase",
                 "wrap": "pretty",
-                "color": "var(--color-foreground-heading)",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -165,9 +164,9 @@
         "icons_shape": "none",
         "section_width": "page-width",
         "gap": 12,
-        "color_scheme": "",
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "color_scheme": ""
       }
     },
     "marquee_JAjXaC": {
@@ -205,10 +204,10 @@
       "name": "t:names.marquee_section",
       "settings": {
         "movement_direction": "normal",
-        "color_scheme": "scheme-2",
         "padding-block-start": 35,
         "padding-block-end": 35,
-        "gap_between_elements": 24
+        "gap_between_elements": 24,
+        "color_scheme": "scheme-2"
       }
     }
   },

@@ -95,21 +95,21 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
         "background_media": "image",
         "video_position": "cover",
         "background_image": "shopify://shop_images/Coffee-collection-background-latitude-coffee.jpg",
         "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7"
       }
     },
     "main": {
@@ -127,14 +127,14 @@
             "show_filter_label": true,
             "enable_sorting": true,
             "enable_grid_density": true,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "padding-block-start": 8,
             "padding-block-end": 8,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "facets_margin_bottom": 8,
-            "facets_margin_right": 20
+            "facets_margin_right": 20,
+            "color_scheme": "",
+            "inherit_color_scheme": true
           },
           "blocks": {}
         },
@@ -143,8 +143,6 @@
           "static": true,
           "settings": {
             "product_card_gap": 4,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-4",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -152,7 +150,9 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "color_scheme": "scheme-4",
+            "inherit_color_scheme": false
           },
           "blocks": {
             "card-gallery": {
@@ -184,7 +184,6 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "var(--color-foreground)",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -213,25 +212,25 @@
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
                 "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 16,
-                "padding-inline-end": 16
+                "padding-inline-end": 16,
+                "color_scheme": "",
+                "inherit_color_scheme": true
               },
               "blocks": {
                 "price_wyGHKn": {
@@ -248,7 +247,6 @@
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "color": "var(--color-foreground)",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -262,7 +260,6 @@
                   "settings": {
                     "stars_style": "single",
                     "show_number": false,
-                    "rating_color": "foreground",
                     "type_preset": "paragraph",
                     "alignment": "left"
                   },
@@ -333,9 +330,9 @@
         "columns_gap_vertical": 24,
         "padding-inline-start": 0,
         "padding-inline-end": 0,
-        "color_scheme": "scheme-1",
         "padding-block-start": 0,
-        "padding-block-end": 32
+        "padding-block-end": 32,
+        "color_scheme": "scheme-1"
       }
     }
   },
