@@ -134,7 +134,7 @@
         "ratio": "4 / 5",
         "eyebrow": "The farm",
         "heading": "Liwani Coffee Estate",
-        "text": "<p>Our coffee story begins at Liwani Coffee Estate in Solai, Kenya, where our founder Peter Kuria’s parents grow coffee. From our Florida base, we connect their harvest with US roasters. When demand and our capacity allow, we also source from fellow Kenyan farmers, keeping each coffee connected to its origin</p>",
+        "text": "<p>Their coffee story begins at Liwani Coffee Estate in Solai, Kenya, where their founder Peter Kuria’s parents grow coffee. From our Florida base, they connect their harvest with US roasters. When demand and our capacity allow, we also source from fellow Kenyan farmers, keeping each coffee connected to its origin</p>",
         "btn_label": "",
         "btn_link": "",
         "bg": "#ffffff",
@@ -176,12 +176,13 @@
     "story_people": {
       "type": "farm-story",
       "settings": {
+        "image": "shopify://shop_images/family-tree-2-1793501413-D57L0.webp",
         "caption": "",
         "image_side": "right",
         "ratio": "4 / 5",
         "eyebrow": "The people",
         "heading": "",
-        "text": "",
+        "text": "<p>At Liwani Coffee Estate, growing coffee is part of the family’s daily life. This recognition belongs to the people who care for the trees, pick the cherries, and work hard each season. Through Solai, they connect that work with roasters and hear how the coffee performs in their hands. Those conversations help us understand what’s working and where we can improve.</p>",
         "btn_label": "",
         "btn_link": "",
         "bg": "#f8f5ec",
@@ -199,6 +200,7 @@
         "g0": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/dsc09299-1793499934-fkk3g.webp",
             "caption": "",
             "wide": true
           }
@@ -206,6 +208,7 @@
         "g1": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Solai_Coffee_Farm_Portrait_Man_By_Coffee_Tree_Closeup.jpg",
             "caption": "",
             "wide": false
           }
@@ -213,6 +216,7 @@
         "g2": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/IMG-20221103-WA0070.jpg",
             "caption": "",
             "wide": false
           }
@@ -220,6 +224,7 @@
         "g3": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/DJI_0046.jpg",
             "caption": "",
             "wide": false
           }
@@ -227,6 +232,7 @@
         "g4": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/PXL_20260718_063603623.jpg",
             "caption": "",
             "wide": false
           }
@@ -251,9 +257,9 @@
     "quote": {
       "type": "farm-quote",
       "settings": {
-        "quote": "",
-        "name": "",
-        "role": "",
+        "quote": "Growing up in a coffee-farming family, I saw the work behind every harvest. Today, I get to share that coffee with roasters and bring their feedback home.",
+        "name": "Peter Kuria",
+        "role": "Founder, Solai Coffee",
         "bg": "#2f5d3a",
         "text": "#ffffff",
         "accent": "#e0a43b",
@@ -293,7 +299,7 @@
           "settings": {
             "icon": "flame",
             "title": "Roasted in Sarasota, FL",
-            "text": "Roasted by Latitude 23.5 and shipped to you."
+            "text": "Roasted by Latitude Coffee and shipped to you."
           }
         }
       },
