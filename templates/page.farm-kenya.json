@@ -37,10 +37,10 @@
         "c3"
       ],
       "settings": {
-        "image": "shopify://shop_images/Kenya-Farm-Direct-LatitudeCoffe.com.jpg",
+        "video": "shopify://files/videos/Farm Direct Kenya LatitudeCoffee.com.mp4",
         "overlay": 90,
         "eyebrow": "Farm Direct · Kenya",
-        "heading": "",
+        "heading": "About Our Coffee Farm in Kenya",
         "text": "",
         "btn_label": "Shop this farm's coffee",
         "btn_link": "",
