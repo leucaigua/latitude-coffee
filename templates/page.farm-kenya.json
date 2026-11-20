@@ -15,19 +15,19 @@
         "c1": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "Solai, Great Rift Valley"
           }
         },
         "c2": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "1,700–1,900 meters"
           }
         },
         "c3": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "Established in 1983"
           }
         }
       },
@@ -37,10 +37,11 @@
         "c3"
       ],
       "settings": {
+        "image_asset": "",
         "video": "shopify://files/videos/Farm Direct Kenya LatitudeCoffee.com.mp4",
         "overlay": 90,
         "eyebrow": "Farm Direct · Kenya",
-        "heading": "About Our Coffee Farm in Kenya",
+        "heading": "Liwani Coffee Estate: A Family Story from Kenya’s Rift Valley",
         "text": "",
         "btn_label": "Shop this farm's coffee",
         "btn_link": "",
@@ -129,6 +130,7 @@
       "type": "farm-story",
       "settings": {
         "image": "shopify://shop_images/kenyan-coffee-from-our-family-to-your-roastery-2-1793551055-ZM5du.webp",
+        "image_asset": "",
         "caption": "",
         "image_side": "left",
         "ratio": "4 / 5",
@@ -177,6 +179,7 @@
       "type": "farm-story",
       "settings": {
         "image": "shopify://shop_images/family-tree-2-1793501413-D57L0.webp",
+        "image_asset": "",
         "caption": "",
         "image_side": "right",
         "ratio": "4 / 5",
@@ -201,6 +204,7 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/dsc09299-1793499934-fkk3g.webp",
+            "image_asset": "",
             "caption": "",
             "wide": true
           }
@@ -209,6 +213,7 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/Solai_Coffee_Farm_Portrait_Man_By_Coffee_Tree_Closeup.jpg",
+            "image_asset": "",
             "caption": "",
             "wide": false
           }
@@ -217,6 +222,7 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/IMG-20221103-WA0070.jpg",
+            "image_asset": "",
             "caption": "",
             "wide": false
           }
@@ -225,6 +231,7 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/DJI_0046.jpg",
+            "image_asset": "",
             "caption": "",
             "wide": false
           }
@@ -233,6 +240,7 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/PXL_20260718_063603623.jpg",
+            "image_asset": "",
             "caption": "",
             "wide": false
           }
