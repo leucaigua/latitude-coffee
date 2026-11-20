@@ -37,7 +37,8 @@
         "c3"
       ],
       "settings": {
-        "overlay": 55,
+        "image_asset": "nicaragua-shade-grown.jpg",
+        "overlay": 90,
         "eyebrow": "Farm Direct · Nicaragua",
         "heading": "Finca Las Nubes: Four Generations of Nicaraguan Coffee",
         "text": "<p>Meet the family behind Don Nicho Coffee in La Dalia, Matagalpa.</p>",
@@ -51,8 +52,7 @@
         "text_color": "#ffffff",
         "accent": "#e0a43b",
         "btn_bg": "#e0a43b",
-        "btn_text": "#2b1208",
-        "image_asset": "nicaragua-shade-grown.jpg"
+        "btn_text": "#2b1208"
       }
     },
     "facts": {
@@ -128,6 +128,7 @@
     "story_farm": {
       "type": "farm-story",
       "settings": {
+        "image_asset": "nicaragua-coffee-tree.jpg",
         "caption": "Coffee cherries growing among the shade trees at Finca Las Nubes.",
         "image_side": "left",
         "ratio": "4 / 5",
@@ -142,8 +143,7 @@
         "btn_bg": "#3a1a0e",
         "btn_text": "#ffffff",
         "pad_top": 72,
-        "pad_bottom": 72,
-        "image_asset": "nicaragua-coffee-tree.jpg"
+        "pad_bottom": 72
       }
     },
     "products": {
@@ -175,6 +175,7 @@
     "story_people": {
       "type": "farm-story",
       "settings": {
+        "image_asset": "nicaragua-don-nicho-family.jpg",
         "caption": "Dionisio Pineda Montenegro with his son, Christian Pineda.",
         "image_side": "right",
         "ratio": "4 / 3",
@@ -183,14 +184,13 @@
         "text": "<p>The family’s coffee story began around 1930 at Hacienda El Destino. Four generations have helped carry it forward. Dionisio Pineda Montenegro took responsibility for the estate, overseeing shared property belonging to a family of 14 siblings. The name Don Nicho Coffee honors his legacy.</p><p>Today, family members remain involved in farm operations, administration, marketing, and international sales. Around 30 workers care for the farm year-round, with approximately 70 to 80 participating during harvest. For the family, the farm is both a shared inheritance and a source of employment for the surrounding community.</p>",
         "btn_label": "",
         "btn_link": "",
-        "bg": "#F8F5EC",
+        "bg": "#f8f5ec",
         "text_color": "#2b1208",
         "accent": "#2f5d3a",
         "btn_bg": "#3a1a0e",
         "btn_text": "#ffffff",
         "pad_top": 72,
-        "pad_bottom": 72,
-        "image_asset": "nicaragua-don-nicho-family.jpg"
+        "pad_bottom": 72
       }
     },
     "gallery": {
@@ -202,14 +202,6 @@
             "image_asset": "nicaragua-shade-grown.jpg",
             "caption": "Coffee growing beneath the canopy at Finca Las Nubes.",
             "wide": true
-          }
-        },
-        "g1": {
-          "type": "photo",
-          "settings": {
-            "image_asset": "nicaragua-coffee-branches.jpg",
-            "caption": "Green coffee cherries developing along the branches.",
-            "wide": false
           }
         },
         "g2": {
@@ -247,7 +239,6 @@
       },
       "block_order": [
         "g0",
-        "g1",
         "g2",
         "g3",
         "g4",
@@ -256,7 +247,7 @@
       "settings": {
         "heading": "Life on the farm",
         "columns": 3,
-        "bg": "#FFFFFF",
+        "bg": "#ffffff",
         "text": "#2b1208",
         "pad_top": 56,
         "pad_bottom": 56
@@ -264,6 +255,7 @@
     },
     "quote": {
       "type": "farm-quote",
+      "disabled": true,
       "settings": {
         "quote": "",
         "name": "",
@@ -273,8 +265,7 @@
         "accent": "#e0a43b",
         "pad_top": 72,
         "pad_bottom": 72
-      },
-      "disabled": true
+      }
     },
     "journey": {
       "type": "farm-journey",
