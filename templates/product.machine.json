@@ -251,6 +251,7 @@
     },
     "callback": {
       "type": "ws-form",
+      "disabled": true,
       "settings": {
         "heading": "Request a Callback",
         "subheading": "Leave your details and our team will call you about this machine.",
@@ -265,6 +266,20 @@
         "pad_top": 64,
         "pad_bottom": 72
       }
+    },
+    "ws_cta_jwtbyf": {
+      "type": "ws-cta",
+      "name": "Wholesale CTA band",
+      "settings": {
+        "heading": "Ready to Transform Your Coffee Program?",
+        "text": "Join the cafés, restaurants, hotels and retailers who trust Latitude 23.5 for their coffee supply.",
+        "btn_label": "Start Your Partnership Today",
+        "btn_link": "shopify://pages/wholesale",
+        "bg": "#0F5132",
+        "gold": "#E0A43B",
+        "pad_top": 80,
+        "pad_bottom": 80
+      }
     }
   },
   "order": [
@@ -274,6 +289,7 @@
     "info",
     "reviews",
     "related",
-    "callback"
+    "callback",
+    "ws_cta_jwtbyf"
   ]
 }
