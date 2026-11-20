@@ -102,9 +102,9 @@
         "f4": {
           "type": "fact",
           "settings": {
-            "icon": "calendar",
-            "label": "Established",
-            "value": "1983"
+            "icon": "pin",
+            "label": "Roasted In",
+            "value": "Sarasota, FL"
           }
         }
       },
