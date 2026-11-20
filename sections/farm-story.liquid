@@ -5,12 +5,12 @@
   #fs-{{ section.id }} { background: {{ section.settings.bg }}; color: {{ section.settings.text_color }}; padding: {{ section.settings.pad_top }}px 20px {{ section.settings.pad_bottom }}px; }
   #fs-{{ section.id }} .fs__wrap {
     max-width: 1200px; margin: 0 auto; display: grid; gap: 56px; align-items: center;
-    grid-template-columns: {% if section.settings.image != blank %}1fr 1fr{% else %}1fr{% endif %};
+    grid-template-columns: {% if section.settings.image != blank or section.settings.image_asset != blank %}1fr 1fr{% else %}1fr{% endif %};
   }
   {%- if section.settings.image_side == 'right' -%}#fs-{{ section.id }} .fs__media { order: 2; }{%- endif -%}
   #fs-{{ section.id }} .fs__media img { width: 100%; height: auto; display: block; border-radius: 18px; aspect-ratio: {{ section.settings.ratio }}; object-fit: cover; }
   #fs-{{ section.id }} .fs__cap { font-size: 13px; opacity: .7; margin: 8px 2px 0; }
-  #fs-{{ section.id }} .fs__copy { {% if section.settings.image == blank %}max-width: 760px; margin: 0 auto;{% endif %} }
+  #fs-{{ section.id }} .fs__copy { {% if section.settings.image == blank and section.settings.image_asset == blank %}max-width: 760px; margin: 0 auto;{% endif %} }
   #fs-{{ section.id }} .fs__eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: {{ section.settings.accent }}; font-weight: 700; margin: 0 0 8px; }
   #fs-{{ section.id }} h2 { font-size: clamp(26px, 3vw, 38px); line-height: 1.15; margin: 0 0 18px; color: inherit; }
   #fs-{{ section.id }} .fs__text { font-size: 16.5px; line-height: 1.7; }
@@ -25,9 +25,14 @@
 {%- if has_content or request.design_mode -%}
 <section id="fs-{{ section.id }}" class="farm-story">
   <div class="fs__wrap">
-    {%- if section.settings.image != blank -%}
+    {%- if section.settings.image != blank or section.settings.image_asset != blank -%}
       <figure class="fs__media" style="margin:0">
-        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '450, 750, 1000, 1400', alt: section.settings.image.alt | default: section.settings.heading }}
+        {%- if section.settings.image != blank -%}
+        {%- assign story_alt = section.settings.image.alt | default: section.settings.heading -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 50vw, 100vw', widths: '450, 750, 1000, 1400', alt: story_alt }}
+        {%- else -%}
+          <img src="{{ section.settings.image_asset | asset_url }}" width="1200" height="900" loading="lazy" alt="{{ section.settings.caption | default: section.settings.heading | escape }}">
+        {%- endif -%}
         {%- if section.settings.caption != blank -%}<figcaption class="fs__cap">{{ section.settings.caption }}</figcaption>{%- endif -%}
       </figure>
     {%- endif -%}
@@ -49,6 +54,7 @@
   "class": "section-farm-story",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Bundled image filename", "info": "Used when no image is selected above." },
     { "type": "text", "id": "caption", "label": "Image caption" },
     { "type": "select", "id": "image_side", "label": "Image side (desktop)", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
     { "type": "select", "id": "ratio", "label": "Image shape", "default": "4 / 5", "options": [ { "value": "4 / 5", "label": "Portrait" }, { "value": "1 / 1", "label": "Square" }, { "value": "4 / 3", "label": "Landscape" } ] },

@@ -6,19 +6,19 @@
         "c1": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "La Dalia, Matagalpa"
           }
         },
         "c2": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "850–1,000 meters"
           }
         },
         "c3": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "Family roots since around 1930"
           }
         }
       },
@@ -28,11 +28,22 @@
         "c3"
       ],
       "settings": {
-        "eyebrow": "Farm Direct · Nicaragua",
-        "heading": "",
-        "btn_label": "Shop this farm's coffee",
         "overlay": 55,
-        "height": 80
+        "eyebrow": "Farm Direct · Nicaragua",
+        "heading": "Finca Las Nubes: Four Generations of Nicaraguan Coffee",
+        "text": "<p>Meet the family behind Don Nicho Coffee in La Dalia, Matagalpa.</p>",
+        "btn_label": "Shop this farm's coffee",
+        "btn_link": "#farm-products",
+        "align": "left",
+        "v_align": "flex-end",
+        "height": 80,
+        "height_mobile": 75,
+        "bg": "#2b1208",
+        "text_color": "#ffffff",
+        "accent": "#e0a43b",
+        "btn_bg": "#e0a43b",
+        "btn_text": "#2b1208",
+        "image_asset": "nicaragua-shade-grown.jpg"
       }
     },
     "facts": {
@@ -43,7 +54,7 @@
           "settings": {
             "icon": "pin",
             "label": "Region",
-            "value": ""
+            "value": "La Dalia, Matagalpa, Nicaragua"
           }
         },
         "f1": {
@@ -51,7 +62,7 @@
           "settings": {
             "icon": "mountain",
             "label": "Altitude",
-            "value": ""
+            "value": "850–1,000 meters above sea level"
           }
         },
         "f2": {
@@ -59,15 +70,15 @@
           "settings": {
             "icon": "leaf",
             "label": "Varietals",
-            "value": ""
+            "value": "Parainema, Anacafé, Catimor, Catrenic"
           }
         },
         "f3": {
           "type": "fact",
           "settings": {
-            "icon": "drop",
-            "label": "Process",
-            "value": ""
+            "icon": "leaf",
+            "label": "Growing conditions",
+            "value": "Approximately 60–70% shade"
           }
         },
         "f4": {
@@ -75,7 +86,7 @@
           "settings": {
             "icon": "calendar",
             "label": "Harvest",
-            "value": ""
+            "value": "Early October to mid-to-late January"
           }
         },
         "f5": {
@@ -83,7 +94,7 @@
           "settings": {
             "icon": "person",
             "label": "Producer",
-            "value": ""
+            "value": "Don Nicho Coffee · Finca Las Nubes"
           }
         }
       },
@@ -96,35 +107,81 @@
         "f5"
       ],
       "settings": {
-        "heading": "At a glance"
+        "heading": "At a glance",
+        "bg": "#f8f5ec",
+        "card_bg": "#f3e7cf",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "pad_top": 56,
+        "pad_bottom": 56
       }
     },
     "story_farm": {
       "type": "farm-story",
       "settings": {
+        "caption": "Coffee cherries growing among the shade trees at Finca Las Nubes.",
+        "image_side": "left",
+        "ratio": "4 / 5",
         "eyebrow": "The farm",
-        "heading": "",
-        "image_side": "left"
+        "heading": "Finca Las Nubes",
+        "text": "<p>In La Dalia, Matagalpa, Finca Las Nubes covers approximately 82 hectares at elevations of 850 to 1,000 meters. The family grows Parainema, Anacafé, Catimor, and Catrenic, while introducing new varieties through ongoing planting projects.</p><p>Coffee grows under approximately 60–70% shade. The family works to preserve forested areas, trees, wildlife, and natural water sources. Traps made from recycled plastic bottles help manage pests and reduce the use of highly toxic chemicals.</p>",
+        "btn_label": "",
+        "btn_link": "",
+        "bg": "#ffffff",
+        "text_color": "#2b1208",
+        "accent": "#2f5d3a",
+        "btn_bg": "#3a1a0e",
+        "btn_text": "#ffffff",
+        "pad_top": 72,
+        "pad_bottom": 72,
+        "image_asset": "nicaragua-coffee-tree.jpg"
       }
     },
     "products": {
       "type": "farm-products",
       "settings": {
-        "eyebrow": "From this farm",
-        "heading": "Taste Nicaragua",
+        "products": [
+          "nicaragua-direct"
+        ],
+        "collection": "",
         "limit": 6,
         "columns": 3,
         "show_notes": true,
-        "all_label": "Shop all farm-direct coffee"
+        "eyebrow": "From this farm",
+        "heading": "Taste Nicaragua",
+        "subheading": "Coffee from Nicaragua, roasted by Latitude 23.5 in Sarasota, Florida.",
+        "all_label": "",
+        "all_link": "",
+        "bg": "#ffffff",
+        "card_bg": "#f3e7cf",
+        "img_bg": "#dff5e6",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "btn_bg": "#3a1a0e",
+        "btn_text": "#ffffff",
+        "pad_top": 72,
+        "pad_bottom": 72
       }
     },
     "story_people": {
       "type": "farm-story",
       "settings": {
-        "eyebrow": "The people",
-        "heading": "",
+        "caption": "Dionisio Pineda Montenegro with his son, Christian Pineda.",
         "image_side": "right",
-        "bg": "#F8F5EC"
+        "ratio": "4 / 3",
+        "eyebrow": "The people",
+        "heading": "The family behind Don Nicho Coffee",
+        "text": "<p>The family’s coffee story began around 1930 at Hacienda El Destino. Four generations have helped carry it forward. Dionisio Pineda Montenegro took responsibility for the estate, overseeing shared property belonging to a family of 14 siblings. The name Don Nicho Coffee honors his legacy.</p><p>Today, family members remain involved in farm operations, administration, marketing, and international sales. Around 30 workers care for the farm year-round, with approximately 70 to 80 participating during harvest. For the family, the farm is both a shared inheritance and a source of employment for the surrounding community.</p>",
+        "btn_label": "",
+        "btn_link": "",
+        "bg": "#F8F5EC",
+        "text_color": "#2b1208",
+        "accent": "#2f5d3a",
+        "btn_bg": "#3a1a0e",
+        "btn_text": "#ffffff",
+        "pad_top": 72,
+        "pad_bottom": 72,
+        "image_asset": "nicaragua-don-nicho-family.jpg"
       }
     },
     "gallery": {
@@ -133,35 +190,48 @@
         "g0": {
           "type": "photo",
           "settings": {
-            "caption": "",
+            "image_asset": "nicaragua-shade-grown.jpg",
+            "caption": "Coffee growing beneath the canopy at Finca Las Nubes.",
             "wide": true
           }
         },
         "g1": {
           "type": "photo",
           "settings": {
-            "caption": "",
+            "image_asset": "nicaragua-coffee-branches.jpg",
+            "caption": "Green coffee cherries developing along the branches.",
             "wide": false
           }
         },
         "g2": {
           "type": "photo",
           "settings": {
-            "caption": "",
+            "image_asset": "nicaragua-harvest-cherries.jpg",
+            "caption": "Freshly harvested coffee cherries.",
             "wide": false
           }
         },
         "g3": {
           "type": "photo",
           "settings": {
-            "caption": "",
+            "image_asset": "nicaragua-drying-workers.jpg",
+            "caption": "Workers tending coffee on the drying patios.",
             "wide": false
           }
         },
         "g4": {
           "type": "photo",
           "settings": {
-            "caption": "",
+            "image_asset": "nicaragua-drying-landscape.jpg",
+            "caption": "Drying patios set against the surrounding hills.",
+            "wide": false
+          }
+        },
+        "g5": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "nicaragua-drying-patios.jpg",
+            "caption": "Coffee spread across the patios to dry.",
             "wide": false
           }
         }
@@ -171,12 +241,16 @@
         "g1",
         "g2",
         "g3",
-        "g4"
+        "g4",
+        "g5"
       ],
       "settings": {
         "heading": "Life on the farm",
         "columns": 3,
-        "bg": "#FFFFFF"
+        "bg": "#FFFFFF",
+        "text": "#2b1208",
+        "pad_top": 56,
+        "pad_bottom": 56
       }
     },
     "quote": {
@@ -184,8 +258,14 @@
       "settings": {
         "quote": "",
         "name": "",
-        "role": ""
-      }
+        "role": "",
+        "bg": "#2f5d3a",
+        "text": "#ffffff",
+        "accent": "#e0a43b",
+        "pad_top": 72,
+        "pad_bottom": 72
+      },
+      "disabled": true
     },
     "journey": {
       "type": "farm-journey",
@@ -195,7 +275,7 @@
           "settings": {
             "icon": "cherry",
             "title": "Grown & picked",
-            "text": ""
+            "text": "Coffee is handpicked from early October through mid-to-late January."
           }
         },
         "j2": {
@@ -203,15 +283,15 @@
           "settings": {
             "icon": "sun",
             "title": "Processed & dried",
-            "text": ""
+            "text": "The family carefully manages fermentation, drying, and storage. Drying begins at the farm and is completed at dry mills in Matagalpa."
           }
         },
         "j3": {
           "type": "step",
           "settings": {
             "icon": "ship",
-            "title": "Shipped to Sarasota",
-            "text": ""
+            "title": "From Nicaragua to roasters",
+            "text": "Don Nicho Coffee is bringing its family-grown coffee to international buyers."
           }
         },
         "j4": {
@@ -219,7 +299,7 @@
           "settings": {
             "icon": "flame",
             "title": "Roasted in Sarasota, FL",
-            "text": "Roasted by Latitude 23.5 and shipped to you."
+            "text": "Roasted by Latitude 23.5 in Sarasota, Florida, and shipped to you."
           }
         }
       },
@@ -230,7 +310,14 @@
         "j4"
       ],
       "settings": {
-        "heading": "From the farm to your cup"
+        "heading": "From the farm to your cup",
+        "subheading": "",
+        "bg": "#f8f5ec",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "line": "#e0a43b",
+        "pad_top": 64,
+        "pad_bottom": 64
       }
     }
   },

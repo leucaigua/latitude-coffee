@@ -51,6 +51,8 @@
       {%- if section.settings.image_mobile != blank -%}
         {{ section.settings.image_mobile | image_url: width: 1200 | image_tag: class: 'fh__img--mobile', loading: 'eager', sizes: '100vw', widths: '450, 750, 1000, 1200', alt: '' }}
       {%- endif -%}
+    {%- elsif section.settings.image_asset != blank -%}
+      <img src="{{ section.settings.image_asset | asset_url }}" width="1600" height="1200" loading="eager" fetchpriority="high" alt="">
     {%- endif -%}
   </div>
   <div class="fh__content">
@@ -82,6 +84,7 @@
   "settings": [
     { "type": "header", "content": "Media" },
     { "type": "image_picker", "id": "image", "label": "Background image (landscape)" },
+    { "type": "text", "id": "image_asset", "label": "Bundled image filename", "info": "Used when no image is selected above." },
     { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (portrait, optional)" },
     { "type": "video", "id": "video", "label": "Background video (optional, overrides image)", "info": "Upload a short, silent loop (under 15 s)." },
     { "type": "range", "id": "overlay", "label": "Dark overlay", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 55 },
