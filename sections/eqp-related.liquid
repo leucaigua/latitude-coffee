@@ -1,0 +1,120 @@
+{%- comment -%}
+  "Looking for other options?" — machines carousel from a collection (current product excluded).
+  Card: rating · title · brand · price (or "Price on request") · first 3 lines of custom.features · stock · View product.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign coll = s.collection -%}
+{%- style -%}
+  #eqr-{{ section.id }} { background: {{ s.bg }}; color: {{ s.text }}; padding: {{ s.pad_top }}px 20px {{ s.pad_bottom }}px; }
+  #eqr-{{ section.id }} .eqr__in { max-width: 1180px; margin: 0 auto; position: relative; }
+  #eqr-{{ section.id }} h2 { font-size: clamp(22px, 2.4vw, 28px); text-transform: uppercase; letter-spacing: .02em; text-align: center; margin: 0 0 22px; color: inherit; }
+  #eqr-{{ section.id }} .eqr__rail { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 10px; }
+  #eqr-{{ section.id }} .eqr__rail::-webkit-scrollbar { display: none; }
+  #eqr-{{ section.id }} .eqr__nav { position: absolute; top: 46%; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid {{ s.line }}; background: #fff; display: grid; place-items: center; cursor: pointer; color: {{ s.dark }}; }
+  #eqr-{{ section.id }} .eqr__nav svg { width: 18px; height: 18px; }
+  #eqr-{{ section.id }} .eqr__nav--prev { left: -52px; } #eqr-{{ section.id }} .eqr__nav--next { right: -52px; }
+  #eqr-{{ section.id }} .eqr__card { position: relative; scroll-snap-align: start; background: #fff; border: 1px solid {{ s.line }}; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
+  #eqr-{{ section.id }} .eqr__img { display: block; aspect-ratio: 16 / 10; margin-bottom: 8px; }
+  #eqr-{{ section.id }} .eqr__img img { width: 100%; height: 100%; object-fit: contain; }
+  #eqr-{{ section.id }} .eqr__t { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; text-decoration: none; color: inherit; line-height: 1.15; }
+  #eqr-{{ section.id }} .eqr__t::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  #eqr-{{ section.id }} .eqr__brand { font-size: 13.5px; opacity: .7; }
+  #eqr-{{ section.id }} .eqr__price { font-size: 21px; font-weight: 800; margin: 4px 0 2px; }
+  #eqr-{{ section.id }} .eqr__price--q { font-size: 16px; color: {{ s.accent }}; }
+  #eqr-{{ section.id }} ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 14px; }
+  #eqr-{{ section.id }} li { display: flex; gap: 6px; align-items: center; }
+  #eqr-{{ section.id }} li svg { width: 16px; height: 16px; flex: 0 0 16px; color: {{ s.gold }}; }
+  #eqr-{{ section.id }} .eqr__stock { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 5px; align-self: flex-start; margin-top: 6px; }
+  #eqr-{{ section.id }} .eqr__stock--in { background: #E3F1E6; color: #1F5C3A; }
+  #eqr-{{ section.id }} .eqr__stock--out { background: #FBE3E1; color: #A3271B; }
+  #eqr-{{ section.id }} .eqr__stock--q { background: #F3E7CF; color: #6B4A12; }
+  #eqr-{{ section.id }} .eqr__btn { margin-top: auto; position: relative; z-index: 2; display: block; text-align: center; padding: 12px; border-radius: 999px; background: {{ s.dark }}; color: #fff; font-weight: 700; font-size: 13.5px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; }
+  #eqr-{{ section.id }} .eqr__card > .eqr__btn { margin-top: 12px; }
+  .eqp-stars { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; line-height: 1; }
+  .eqp-stars__bg { position: relative; display: inline-block; font-size: var(--s); letter-spacing: 2px; color: #DCCFB8; }
+  .eqp-stars__fg { position: absolute; left: 0; top: 0; overflow: hidden; white-space: nowrap; color: #E0A43B; }
+  .eqp-stars__count { font-size: 12px; opacity: .7; }
+  @media (max-width: 1299px) { #eqr-{{ section.id }} .eqr__nav { display: none; } }
+  @media (max-width: 989px) { #eqr-{{ section.id }} .eqr__rail { grid-auto-columns: 46%; } }
+  @media (max-width: 749px) { #eqr-{{ section.id }} .eqr__rail { grid-auto-columns: 84%; } }
+{%- endstyle -%}
+{%- if coll != blank and coll.products_count > 1 -%}
+<section id="eqr-{{ section.id }}" class="eqp-related">
+  <div class="eqr__in">
+    <h2>{{ s.heading }}</h2>
+    <button type="button" class="eqr__nav eqr__nav--prev" data-d="-1" aria-label="Previous">{%- render 'eqp-icon', name: 'arrow-left' -%}</button>
+    <div class="eqr__rail" data-eqr-rail>
+      {%- assign shown = 0 -%}
+      {%- for p in coll.products -%}
+        {%- if p.id == product.id -%}{%- continue -%}{%- endif -%}
+        {%- if shown >= s.limit -%}{%- break -%}{%- endif -%}
+        {%- assign shown = shown | plus: 1 -%}
+        {%- liquid
+          assign q = false
+          if p.tags contains 'quote-only' or p.price == 0
+            assign q = true
+          endif
+          assign fl = p.metafields.custom.features.value | newline_to_br | split: '<br />'
+        -%}
+        <div class="eqr__card">
+          <a class="eqr__img" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+            {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 990px) 33vw, 84vw', alt: '' }}{%- endif -%}
+          </a>
+          {%- render 'eqp-stars', p: p, size: 14, show_count: true -%}
+          <a class="eqr__t" href="{{ p.url }}">{{ p.title }}</a>
+          {%- if p.vendor != blank -%}<span class="eqr__brand">{{ p.vendor }}</span>{%- endif -%}
+          {%- if q -%}<span class="eqr__price eqr__price--q">Price on request</span>
+          {%- else -%}<span class="eqr__price">{% if p.price_varies %}From {% endif %}{{ p.price_min | money }}</span>{%- endif -%}
+          {%- if fl.size > 0 -%}
+            <ul>
+              {%- assign c = 0 -%}
+              {%- for line in fl -%}
+                {%- assign t = line | split: ' - ' | first | split: ': ' | first | strip -%}
+                {%- if t == blank -%}{%- continue -%}{%- endif -%}
+                {%- if c >= 3 -%}{%- break -%}{%- endif -%}
+                {%- assign c = c | plus: 1 -%}
+                <li>{%- render 'eqp-icon', name: 'check' -%}{{ t }}</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          {%- if q -%}<span class="eqr__stock eqr__stock--q">Available by quote</span>
+          {%- elsif p.available -%}<span class="eqr__stock eqr__stock--in">In Stock</span>
+          {%- else -%}<span class="eqr__stock eqr__stock--out">Out of Stock</span>{%- endif -%}
+          <a class="eqr__btn" href="{{ p.url }}">View product</a>
+        </div>
+      {%- endfor -%}
+    </div>
+    <button type="button" class="eqr__nav eqr__nav--next" data-d="1" aria-label="Next">{%- render 'eqp-icon', name: 'arrow-right' -%}</button>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('eqr-{{ section.id }}'); if (!root) return;
+    var rail = root.querySelector('[data-eqr-rail]');
+    root.querySelectorAll('.eqr__nav').forEach(function (b) { b.addEventListener('click', function () { rail.scrollBy({ left: Number(b.dataset.d) * rail.clientWidth, behavior: 'smooth' }); }); });
+  })();
+</script>
+{%- elsif request.design_mode -%}
+  <div style="padding:40px;text-align:center;background:#F3E7CF">Other options: pick a machines collection.</div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Machine: other options",
+  "tag": "div",
+  "class": "section-eqp-related",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Looking for other options?" },
+    { "type": "collection", "id": "collection", "label": "Collection (e.g. Espresso Machines)" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 3, "max": 12, "step": 1, "default": 8 },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "dark", "label": "Button", "default": "#3A1A0E" },
+    { "type": "color", "id": "gold", "label": "Checks", "default": "#E0A43B" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#2F5D3A" },
+    { "type": "color", "id": "line", "label": "Borders", "default": "#E6DCC6" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "presets": [ { "name": "Machine: other options" } ]
+}
+{% endschema %}

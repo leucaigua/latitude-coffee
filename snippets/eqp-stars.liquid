@@ -1,0 +1,15 @@
+{%- comment -%}
+  Star rating from the product's reviews.rating metafield (Judge.me syncs it).
+  Usage: {% render 'eqp-stars', p: product, size: 16, show_count: true %}
+  Renders nothing when the product has no rating.
+{%- endcomment -%}
+{%- assign r = p.metafields.reviews.rating.value -%}
+{%- if r != blank -%}
+  {%- assign val = r.rating | times: 1.0 -%}
+  {%- assign pct = val | divided_by: 5.0 | times: 100 | round -%}
+  {%- assign cnt = p.metafields.reviews.rating_count.value | default: 0 -%}
+  <span class="eqp-stars" style="--s: {{ size | default: 16 }}px" role="img" aria-label="Rated {{ val | round: 1 }} out of 5{% if cnt > 0 %}, {{ cnt }} reviews{% endif %}">
+    <span class="eqp-stars__bg" aria-hidden="true">★★★★★<span class="eqp-stars__fg" style="width: {{ pct }}%">★★★★★</span></span>
+    {%- if show_count and cnt > 0 -%}<span class="eqp-stars__count">{{ cnt }} {{ cnt | pluralize: 'Review', 'Reviews' }}</span>{%- endif -%}
+  </span>
+{%- endif -%}

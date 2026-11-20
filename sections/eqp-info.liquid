@@ -1,0 +1,164 @@
+{%- comment -%}
+  Machine PDP info grid.
+  Left column: blocks — "Manufacturer" (brand + product metafield custom.manufacturer_about) and
+  policy cards (Warranty / Returns / Cancellations…, same for every machine, long text collapses with "Read more").
+  Right column: Specifications from custom.specifications (multi-line, "Label: Value" per line)
+  and Resources from custom.resources (multi-line, "Label | https://link" per line).
+  Cards with no content are hidden. Policy text containing [brackets] is hidden on the live site.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign spec_lines = product.metafields.custom.specifications.value | newline_to_br | split: '<br />'
+  assign res_lines = product.metafields.custom.resources.value | newline_to_br | split: '<br />'
+  assign has_specs = false
+  for l in spec_lines
+    if l contains ':'
+      assign has_specs = true
+      break
+    endif
+  endfor
+  assign has_res = false
+  for l in res_lines
+    if l contains '|'
+      assign has_res = true
+      break
+    endif
+  endfor
+-%}
+{%- style -%}
+  #eqi-{{ section.id }} { background: {{ s.bg }}; color: {{ s.text }}; padding: {{ s.pad_top }}px 20px {{ s.pad_bottom }}px; }
+  #eqi-{{ section.id }} .eqi__in { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 14px; align-items: start; }
+  #eqi-{{ section.id }} .eqi__col { display: grid; gap: 14px; }
+  #eqi-{{ section.id }} .eqi__card { background: {{ s.card_bg }}; border-radius: 12px; padding: 24px 26px; }
+  #eqi-{{ section.id }} h2 { font-size: 22px; text-transform: uppercase; letter-spacing: .02em; margin: 0 0 10px; color: inherit; }
+  #eqi-{{ section.id }} .eqi__sub { font-size: 14px; margin: -4px 0 10px; opacity: .8; }
+  #eqi-{{ section.id }} .eqi__text { font-size: 14.5px; line-height: 1.62; }
+  #eqi-{{ section.id }} .eqi__text p { margin: 0 0 10px; }
+  #eqi-{{ section.id }} .eqi__clamp { position: relative; max-height: {{ s.clamp_height }}px; overflow: hidden; }
+  #eqi-{{ section.id }} .eqi__clamp::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 48px; background: linear-gradient(rgba(255,255,255,0), {{ s.card_bg }}); }
+  #eqi-{{ section.id }} .eqi__clamp.is-open { max-height: none; }
+  #eqi-{{ section.id }} .eqi__clamp.is-open::after { display: none; }
+  #eqi-{{ section.id }} .eqi__more { background: none; border: 0; padding: 0; margin-top: 8px; font: inherit; font-size: 14px; font-weight: 700; text-decoration: underline; color: inherit; cursor: pointer; }
+  #eqi-{{ section.id }} table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  #eqi-{{ section.id }} th, #eqi-{{ section.id }} td { text-align: left; padding: 9px 4px; border-bottom: 1px solid {{ s.line }}; vertical-align: middle; }
+  #eqi-{{ section.id }} th { font-weight: 600; width: 46%; }
+  #eqi-{{ section.id }} th span { display: inline-flex; align-items: center; gap: 10px; }
+  #eqi-{{ section.id }} th svg { width: 22px; height: 22px; flex: 0 0 22px; color: {{ s.icon }}; }
+  #eqi-{{ section.id }} .eqi__res { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  #eqi-{{ section.id }} .eqi__res a { display: inline-flex; gap: 10px; align-items: center; font-size: 14.5px; font-weight: 600; text-decoration: none; }
+  #eqi-{{ section.id }} .eqi__res a span { text-decoration: underline; text-underline-offset: 3px; }
+  #eqi-{{ section.id }} .eqi__res svg { width: 22px; height: 22px; color: {{ s.icon }}; }
+  @media (max-width: 849px) { #eqi-{{ section.id }} .eqi__in { grid-template-columns: 1fr; } }
+  @media (max-width: 749px) { #eqi-{{ section.id }} .eqi__card { padding: 20px 18px; } }
+{%- endstyle -%}
+<section id="eqi-{{ section.id }}" class="eqp-info">
+  <div class="eqi__in">
+    <div class="eqi__col">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'manufacturer' -%}
+            {%- assign about = product.metafields.custom.manufacturer_about.value -%}
+            {%- if about != blank -%}
+              <div class="eqi__card" {{ block.shopify_attributes }}>
+                <h2>{{ block.settings.heading }}</h2>
+                <div class="eqi__text">{{ about | newline_to_br }}</div>
+              </div>
+            {%- elsif request.design_mode -%}
+              <div class="eqi__card" style="opacity:.5" {{ block.shopify_attributes }}><h2>{{ block.settings.heading }}</h2><p>Fill product metafield custom.manufacturer_about to show this card.</p></div>
+            {%- endif -%}
+          {%- when 'policy' -%}
+            {%- if block.settings.text contains '[' and request.design_mode == false -%}{%- continue -%}{%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="eqi__card" {{ block.shopify_attributes }}>
+                <h2>{{ block.settings.heading }}</h2>
+                {%- if block.settings.sub != blank -%}<p class="eqi__sub">{{ block.settings.sub }}</p>{%- endif -%}
+                <div class="eqi__text{% if block.settings.collapse %} eqi__clamp{% endif %}" data-eqi-clamp>{{ block.settings.text }}</div>
+                {%- if block.settings.collapse -%}<button type="button" class="eqi__more" data-eqi-more aria-expanded="false">Read more</button>{%- endif -%}
+                {%- if block.settings.link_label != blank and block.settings.link != blank -%}<p style="margin:10px 0 0"><a href="{{ block.settings.link }}" style="font-weight:700">{{ block.settings.link_label }}</a></p>{%- endif -%}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="eqi__col">
+      {%- if has_specs or request.design_mode -%}
+        <div class="eqi__card">
+          <h2>{{ s.specs_heading }}</h2>
+          {%- if has_specs -%}
+            <table><tbody>
+              {%- if s.vendor_row and product.vendor != blank -%}
+                <tr><th scope="row"><span>{%- render 'eqp-icon', name: 'factory' -%}Manufacturer</span></th><td>{{ product.vendor }}</td></tr>
+              {%- endif -%}
+              {%- for l in spec_lines -%}
+                {%- unless l contains ':' -%}{%- continue -%}{%- endunless -%}
+                {%- assign label = l | split: ':' | first | strip -%}
+                {%- assign value = l | remove_first: label | remove_first: ':' | strip -%}
+                <tr><th scope="row"><span>{%- render 'eqp-icon', name: 'auto', label: label -%}{{ label }}</span></th><td>{{ value }}</td></tr>
+              {%- endfor -%}
+            </tbody></table>
+          {%- else -%}
+            <p style="opacity:.6;font-size:14px">Fill product metafield custom.specifications, one “Label: Value” per line.</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if has_res -%}
+        <div class="eqi__card">
+          <h2>{{ s.resources_heading }}</h2>
+          <ul class="eqi__res">
+            {%- for l in res_lines -%}
+              {%- unless l contains '|' -%}{%- continue -%}{%- endunless -%}
+              {%- assign rl = l | split: '|' | first | strip -%}
+              {%- assign ru = l | split: '|' | last | strip -%}
+              <li><a href="{{ ru }}" target="_blank" rel="noopener">{%- render 'eqp-icon', name: 'doc' -%}<span>{{ rl }}</span></a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('eqi-{{ section.id }}'); if (!root) return;
+    root.querySelectorAll('[data-eqi-more]').forEach(function (b) {
+      var box = b.previousElementSibling;
+      if (box && box.scrollHeight <= box.clientHeight + 4) { b.remove(); box.classList.add('is-open'); return; }
+      b.addEventListener('click', function () { var open = box.classList.toggle('is-open'); b.textContent = open ? 'Read less' : 'Read more'; b.setAttribute('aria-expanded', open); });
+    });
+  })();
+</script>
+{% schema %}
+{
+  "name": "Machine: info grid",
+  "tag": "div",
+  "class": "section-eqp-info",
+  "settings": [
+    { "type": "text", "id": "specs_heading", "label": "Specifications heading", "default": "Specifications" },
+    { "type": "checkbox", "id": "vendor_row", "label": "Add 'Manufacturer = Vendor' as first spec row", "default": true },
+    { "type": "text", "id": "resources_heading", "label": "Resources heading", "default": "Resources" },
+    { "type": "range", "id": "clamp_height", "label": "Collapsed card height", "min": 100, "max": 400, "step": 20, "unit": "px", "default": 180 },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
+    { "type": "color", "id": "card_bg", "label": "Cards", "default": "#FFFFFF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "icon", "label": "Icons", "default": "#3A1A0E" },
+    { "type": "color", "id": "line", "label": "Dividers", "default": "#EFE7D8" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    { "type": "manufacturer", "name": "Manufacturer (metafield)", "limit": 1,
+      "settings": [ { "type": "text", "id": "heading", "label": "Heading", "default": "Manufacturer" } ] },
+    { "type": "policy", "name": "Policy card", "limit": 6,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Warranty" },
+        { "type": "text", "id": "sub", "label": "Subheading" },
+        { "type": "richtext", "id": "text", "label": "Text", "info": "Text with [brackets] is hidden on the live site until replaced." },
+        { "type": "checkbox", "id": "collapse", "label": "Collapse long text (Read more)", "default": false },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ] }
+  ],
+  "presets": [ { "name": "Machine: info grid" } ]
+}
+{% endschema %}

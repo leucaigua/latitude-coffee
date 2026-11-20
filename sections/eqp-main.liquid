@@ -1,0 +1,372 @@
+{%- comment -%}
+  Latitude 23.5 · Machine product (main section)
+  Gallery (brand logo, arrows, thumbnails) + buy box (brand, title, rating, price, feature chips,
+  stock, add to cart / quote, trust row) + "Have a question?" + Product details & Features accordions.
+
+  Per-product data (Settings → Custom data → Products):
+    custom.brand_logo        File (image)          brand logo above the gallery (falls back to Vendor text)
+    custom.features          Multi-line text       one feature per line: "Title - explanation"
+    Tag "quote-only" or price $0 → hides price/checkout, shows "Request a quote".
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign current_variant = product.selected_or_first_available_variant
+  assign quote_only = false
+  if product.tags contains 'quote-only' or product.price == 0
+    assign quote_only = true
+  endif
+  assign feature_lines = product.metafields.custom.features.value | newline_to_br | split: '<br />'
+  assign logo = product.metafields.custom.brand_logo.value
+  assign form_id = 'eqp-form-' | append: section.id
+-%}
+
+{%- style -%}
+  #eqp-{{ section.id }} { --eqp-bg: {{ s.bg }}; --eqp-card: {{ s.card_bg }}; --eqp-text: {{ s.text }}; --eqp-dark: {{ s.dark }}; --eqp-gold: {{ s.gold }}; --eqp-accent: {{ s.accent }}; --eqp-line: {{ s.line }};
+    background: var(--eqp-bg); color: var(--eqp-text); padding: {{ s.pad_top }}px 20px {{ s.pad_bottom }}px; }
+  #eqp-{{ section.id }} *, #eqp-{{ section.id }} *::before, #eqp-{{ section.id }} *::after { box-sizing: border-box; }
+  #eqp-{{ section.id }} a { color: inherit; }
+  #eqp-{{ section.id }} .eqp-wrap { max-width: 1240px; margin: 0 auto; }
+  #eqp-{{ section.id }} .eqp-crumbs { display: flex; gap: 8px; align-items: center; font-size: 13.5px; margin: 0 0 16px; flex-wrap: wrap; }
+  #eqp-{{ section.id }} .eqp-crumbs a { text-decoration: underline; text-underline-offset: 3px; }
+  #eqp-{{ section.id }} .eqp-crumbs span[aria-current] { color: var(--eqp-accent); font-weight: 600; }
+  #eqp-{{ section.id }} .eqp-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  #eqp-{{ section.id }} .eqp-card { background: var(--eqp-card); border-radius: 14px; padding: 22px; }
+  #eqp-{{ section.id }} .eqp-col { display: grid; gap: 14px; }
+
+  /* Gallery */
+  #eqp-{{ section.id }} .eqp-gal { position: sticky; top: 96px; padding: 20px 20px 18px; }
+  #eqp-{{ section.id }} .eqp-gal__brand { text-align: center; height: 34px; margin-bottom: 8px; display: flex; justify-content: center; align-items: center; }
+  #eqp-{{ section.id }} .eqp-gal__brand img { max-height: 30px; width: auto; }
+  #eqp-{{ section.id }} .eqp-gal__brand span { font-size: 22px; font-weight: 800; letter-spacing: .02em; }
+  #eqp-{{ section.id }} .eqp-gal__stage { position: relative; aspect-ratio: 1 / 1; }
+  #eqp-{{ section.id }} .eqp-gal__slide { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; }
+  #eqp-{{ section.id }} .eqp-gal__slide.is-on { display: flex; }
+  #eqp-{{ section.id }} .eqp-gal__slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+  #eqp-{{ section.id }} .eqp-gal__slide video, #eqp-{{ section.id }} .eqp-gal__slide iframe { width: 100%; height: 100%; border: 0; }
+  #eqp-{{ section.id }} .eqp-gal__nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--eqp-line); background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--eqp-dark); }
+  #eqp-{{ section.id }} .eqp-gal__nav svg { width: 18px; height: 18px; }
+  #eqp-{{ section.id }} .eqp-gal__nav--prev { left: 0; } #eqp-{{ section.id }} .eqp-gal__nav--next { right: 0; }
+  #eqp-{{ section.id }} .eqp-gal__thumbs { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  #eqp-{{ section.id }} .eqp-gal__thumbs button { width: 64px; height: 64px; padding: 4px; border-radius: 8px; border: 1.5px solid var(--eqp-line); background: #fff; cursor: pointer; }
+  #eqp-{{ section.id }} .eqp-gal__thumbs button[aria-current="true"] { border-color: var(--eqp-dark); }
+  #eqp-{{ section.id }} .eqp-gal__thumbs img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* Buy box */
+  #eqp-{{ section.id }} .eqp-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+  #eqp-{{ section.id }} .eqp-vendor { font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+  #eqp-{{ section.id }} h1.eqp-title { font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; margin: 6px 0 10px; color: inherit; }
+  #eqp-{{ section.id }} .eqp-price { font-size: 22px; font-weight: 800; margin: 0; }
+  #eqp-{{ section.id }} .eqp-price s { font-size: 16px; font-weight: 500; opacity: .55; margin-left: 8px; }
+  #eqp-{{ section.id }} .eqp-quote-note { font-size: 15px; font-weight: 700; color: var(--eqp-accent); }
+  #eqp-{{ section.id }} .eqp-chips { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 16px 0 0; padding: 14px 0 0; border-top: 1px solid var(--eqp-line); list-style: none; }
+  #eqp-{{ section.id }} .eqp-chips li { display: flex; gap: 6px; align-items: center; font-size: 13.5px; }
+  #eqp-{{ section.id }} .eqp-chips svg, #eqp-{{ section.id }} .eqp-feat svg { width: 17px; height: 17px; flex: 0 0 17px; color: var(--eqp-gold); }
+  #eqp-{{ section.id }} .eqp-stock { display: inline-block; margin: 16px 0 12px; padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; }
+  #eqp-{{ section.id }} .eqp-stock--in { background: #E3F1E6; color: #1F5C3A; }
+  #eqp-{{ section.id }} .eqp-stock--out { background: #FBE3E1; color: #A3271B; }
+  #eqp-{{ section.id }} .eqp-stock--quote { background: #F3E7CF; color: #6B4A12; }
+  #eqp-{{ section.id }} .eqp-form { display: grid; gap: 10px; }
+  #eqp-{{ section.id }} .eqp-form select, #eqp-{{ section.id }} .eqp-qty input { width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--eqp-line); background: #fff; font: inherit; font-size: 15px; color: inherit; }
+  #eqp-{{ section.id }} .eqp-form label { font-size: 13px; font-weight: 600; }
+  #eqp-{{ section.id }} .eqp-row { display: grid; grid-template-columns: 96px 1fr; gap: 10px; }
+  #eqp-{{ section.id }} .eqp-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px 18px; border: 0; border-radius: 999px; cursor: pointer; background: var(--eqp-dark); color: #fff; font: inherit; font-size: 14px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; text-align: center; }
+  #eqp-{{ section.id }} .eqp-btn[disabled] { opacity: .5; cursor: not-allowed; }
+  #eqp-{{ section.id }} .eqp-btn--gold { background: var(--eqp-gold); color: #2B1208; }
+  #eqp-{{ section.id }} .eqp-btn--ghost { background: transparent; color: var(--eqp-dark); border: 1.5px solid var(--eqp-dark); }
+  #eqp-{{ section.id }} .shopify-payment-button__button { border-radius: 999px !important; }
+  #eqp-{{ section.id }} .eqp-terms { font-size: 13px; opacity: .8; }
+  #eqp-{{ section.id }} .eqp-trust { display: grid; grid-template-columns: repeat({{ section.blocks | where: 'type', 'trust' | size | at_least: 1 | at_most: 3 }}, minmax(0, 1fr)); gap: 8px; margin-top: 18px; text-align: center; }
+  #eqp-{{ section.id }} .eqp-trust svg { width: 26px; height: 26px; color: var(--eqp-dark); display: block; margin: 0 auto 6px; }
+  #eqp-{{ section.id }} .eqp-trust b { display: block; font-size: 13px; }
+  #eqp-{{ section.id }} .eqp-trust span { font-size: 11.5px; opacity: .7; }
+
+  /* Question bar */
+  #eqp-{{ section.id }} .eqp-ask { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 18px; flex-wrap: wrap; }
+  #eqp-{{ section.id }} .eqp-ask b { display: block; font-size: 15px; text-transform: uppercase; letter-spacing: .02em; }
+  #eqp-{{ section.id }} .eqp-ask small { font-size: 12.5px; opacity: .7; }
+  #eqp-{{ section.id }} .eqp-ask__btns { display: flex; gap: 8px; }
+  #eqp-{{ section.id }} .eqp-ask a { display: inline-flex; gap: 6px; align-items: center; padding: 9px 14px; border-radius: 999px; background: var(--eqp-dark); color: #fff; font-size: 12.5px; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: .04em; }
+  #eqp-{{ section.id }} .eqp-ask a svg { width: 15px; height: 15px; }
+
+  /* Accordions */
+  #eqp-{{ section.id }} details.eqp-acc { padding: 0; }
+  #eqp-{{ section.id }} details.eqp-acc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+  #eqp-{{ section.id }} details.eqp-acc summary::-webkit-details-marker { display: none; }
+  #eqp-{{ section.id }} details.eqp-acc summary svg { width: 20px; height: 20px; transition: transform .2s; }
+  #eqp-{{ section.id }} details.eqp-acc[open] summary svg { transform: rotate(180deg); }
+  #eqp-{{ section.id }} .eqp-acc__body { padding: 0 22px 22px; font-size: 14.5px; line-height: 1.65; }
+  #eqp-{{ section.id }} .eqp-acc__body p { margin: 0 0 10px; }
+  #eqp-{{ section.id }} .eqp-feat { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+  #eqp-{{ section.id }} .eqp-feat li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; }
+  #eqp-{{ section.id }} .eqp-feat svg { margin-top: 3px; }
+
+  /* Stars (shared class) */
+  .eqp-stars { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; line-height: 1; }
+  #eqp-{{ section.id }} .eqp-top .eqp-stars { align-items: flex-end; }
+  .eqp-stars__bg { position: relative; display: inline-block; font-size: var(--s); letter-spacing: 2px; color: #DCCFB8; }
+  .eqp-stars__fg { position: absolute; left: 0; top: 0; overflow: hidden; white-space: nowrap; color: #E0A43B; }
+  .eqp-stars__count { font-size: 12px; opacity: .7; }
+
+  @media (max-width: 989px) {
+    #eqp-{{ section.id }} .eqp-grid { grid-template-columns: 1fr; }
+    #eqp-{{ section.id }} .eqp-gal { position: relative; top: 0; }
+  }
+  @media (max-width: 749px) {
+    #eqp-{{ section.id }} { padding-left: 12px; padding-right: 12px; }
+    #eqp-{{ section.id }} .eqp-card { padding: 18px; }
+    #eqp-{{ section.id }} .eqp-ask { flex-direction: column; align-items: stretch; text-align: center; }
+    #eqp-{{ section.id }} .eqp-ask__btns { justify-content: center; }
+  }
+{%- endstyle -%}
+
+<div id="eqp-{{ section.id }}" class="eqp" data-eqp>
+  <div class="eqp-wrap">
+    {%- if s.show_crumbs -%}
+      <nav class="eqp-crumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}" aria-label="Home">Home</a> ›
+        {%- if collection -%}<a href="{{ collection.url }}">{{ collection.title }}</a> ›
+        {%- elsif s.crumb_collection != blank -%}<a href="{{ s.crumb_collection.url }}">{{ s.crumb_collection.title }}</a> ›{%- endif -%}
+        <span aria-current="page">{{ product.title }}</span>
+      </nav>
+    {%- endif -%}
+
+    <div class="eqp-grid">
+      {%- comment -%} ───── Gallery ───── {%- endcomment -%}
+      <div class="eqp-card eqp-gal" data-eqp-gal>
+        <div class="eqp-gal__brand">
+          {%- if logo != blank -%}{{ logo | image_url: height: 60 | image_tag: alt: product.vendor, loading: 'eager' }}
+          {%- elsif s.show_vendor_text -%}<span>{{ product.vendor }}</span>{%- endif -%}
+        </div>
+        <div class="eqp-gal__stage">
+          {%- for media in product.media -%}
+            <div class="eqp-gal__slide{% if forloop.first %} is-on{% endif %}" data-i="{{ forloop.index0 }}">
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  {%- if forloop.first -%}{%- assign ld = 'eager' -%}{%- else -%}{%- assign ld = 'lazy' -%}{%- endif -%}
+                  {%- assign media_alt = media.alt | default: product.title -%}
+                  {{ media | image_url: width: 1200 | image_tag: loading: ld, widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 990px) 50vw, 100vw', alt: media_alt }}
+                {%- when 'video' -%}{{ media | video_tag: controls: true, preload: 'none' }}
+                {%- when 'external_video' -%}{{ media | external_video_tag }}
+                {%- else -%}{{ media | media_tag }}
+              {%- endcase -%}
+            </div>
+          {%- else -%}
+            <div class="eqp-gal__slide is-on">{{ 'product-1' | placeholder_svg_tag }}</div>
+          {%- endfor -%}
+          {%- if product.media.size > 1 -%}
+            <button type="button" class="eqp-gal__nav eqp-gal__nav--prev" data-dir="-1" aria-label="Previous image">{%- render 'eqp-icon', name: 'arrow-left' -%}</button>
+            <button type="button" class="eqp-gal__nav eqp-gal__nav--next" data-dir="1" aria-label="Next image">{%- render 'eqp-icon', name: 'arrow-right' -%}</button>
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="eqp-gal__thumbs">
+            {%- for media in product.media limit: 8 -%}
+              <button type="button" data-go="{{ forloop.index0 }}" aria-label="Show image {{ forloop.index }}"{% if forloop.first %} aria-current="true"{% endif %}>
+                {{ media.preview_image | image_url: width: 140 | image_tag: loading: 'lazy', alt: '' }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ───── Right column ───── {%- endcomment -%}
+      <div class="eqp-col">
+        <div class="eqp-card">
+          <div class="eqp-top">
+            <div>
+              {%- if product.vendor != blank -%}<span class="eqp-vendor">{{ product.vendor }}</span>{%- endif -%}
+              <h1 class="eqp-title">{{ product.title }}</h1>
+            </div>
+            {%- render 'eqp-stars', p: product, size: 16, show_count: true -%}
+          </div>
+
+          {%- if quote_only -%}
+            <p class="eqp-quote-note">{{ s.quote_price_text }}</p>
+          {%- else -%}
+            <p class="eqp-price" data-eqp-price>
+              {{ current_variant.price | money }}
+              {%- if current_variant.compare_at_price > current_variant.price -%}<s>{{ current_variant.compare_at_price | money }}</s>{%- endif -%}
+            </p>
+          {%- endif -%}
+
+          {%- if s.chip_count > 0 and feature_lines.size > 0 -%}
+            <ul class="eqp-chips">
+              {%- for line in feature_lines limit: s.chip_count -%}
+                {%- assign chip = line | split: ' - ' | first | split: ': ' | first | strip -%}
+                {%- if chip != blank -%}<li>{%- render 'eqp-icon', name: 'check' -%}{{ chip }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+          {%- endfor -%}
+
+          {%- if quote_only -%}
+            <span class="eqp-stock eqp-stock--quote">Available by quote</span>
+            <a class="eqp-btn eqp-btn--gold" href="#lead-form">{{ s.quote_btn }}</a>
+          {%- else -%}
+            <span class="eqp-stock {% if current_variant.available %}eqp-stock--in{% else %}eqp-stock--out{% endif %}" data-eqp-stock>
+              {%- if current_variant.available -%}In Stock{%- else -%}Out of Stock{%- endif -%}
+            </span>
+            <product-form-component data-section-id="{{ section.id }}" data-product-id="{{ product.id }}" on:submit="/handleSubmit">
+            <div class="visually-hidden" ref="liveRegion" role="status" aria-live="polite"></div>
+            {%- form 'product', product, id: form_id, class: 'eqp-form', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" ref="variantId" value="{{ current_variant.id }}" data-eqp-id>
+              {%- unless product.has_only_default_variant -%}
+                <label for="eqp-v-{{ section.id }}">{{ product.options | join: ' / ' }}</label>
+                <select id="eqp-v-{{ section.id }}" data-eqp-variant>
+                  {%- for v in product.variants -%}
+                    <option value="{{ v.id }}"{% if v.id == current_variant.id %} selected{% endif %} data-price="{{ v.price | money | escape }}" data-compare="{% if v.compare_at_price > v.price %}{{ v.compare_at_price | money | escape }}{% endif %}" data-available="{{ v.available }}">{{ v.title }}{% unless v.available %} (sold out){% endunless %}</option>
+                  {%- endfor -%}
+                </select>
+              {%- endunless -%}
+              <div class="eqp-row">
+                <div class="eqp-qty"><label class="visually-hidden" for="eqp-q-{{ section.id }}">Quantity</label><input id="eqp-q-{{ section.id }}" type="number" name="quantity" value="1" min="1" inputmode="numeric"></div>
+                {%- assign add_label = 'actions.add_to_cart' | t -%}
+                {%- unless current_variant.available -%}{%- assign add_label = 'Sold out' -%}{%- endunless -%}
+                {% render 'add-to-cart-button', product: product, can_add_to_cart: current_variant.available, add_to_cart_text: add_label, class: 'eqp-btn', show_icon: false %}
+              </div>
+              {%- if s.show_dynamic_checkout -%}{{ form | payment_button }}{%- endif -%}
+              {%- if s.show_installments -%}<div class="eqp-terms">{{ form | payment_terms }}</div>{%- endif -%}
+            <span class="hidden" ref="addToCartTextError" role="alert"></span>
+            {%- endform -%}
+            </product-form-component>
+            {%- unless current_variant.available -%}
+              <a class="eqp-btn eqp-btn--ghost" href="#lead-form" style="margin-top:10px">{{ s.oos_btn }}</a>
+            {%- endunless -%}
+          {%- endif -%}
+
+          {%- assign trust_blocks = section.blocks | where: 'type', 'trust' -%}
+          {%- if trust_blocks.size > 0 -%}
+            <div class="eqp-trust">
+              {%- for block in trust_blocks -%}
+                <div {{ block.shopify_attributes }}>{%- render 'eqp-icon', name: block.settings.icon -%}<b>{{ block.settings.title }}</b><span>{{ block.settings.text }}</span></div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if s.show_ask -%}
+          <div class="eqp-card eqp-ask">
+            <div><b>{{ s.ask_heading }}</b><small>{{ s.ask_text }}</small></div>
+            <div class="eqp-ask__btns">
+              {%- if s.phone != blank -%}<a href="tel:{{ s.phone | remove: '.' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}">{%- render 'eqp-icon', name: 'phone' -%}Call us</a>{%- endif -%}
+              <a href="#lead-form">{%- render 'eqp-icon', name: 'callback' -%}{{ s.callback_label }}</a>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <details class="eqp-card eqp-acc" {% if s.open_details %}open{% endif %}>
+          <summary>{{ s.details_heading }}{%- render 'eqp-icon', name: 'chevron' -%}</summary>
+          <div class="eqp-acc__body rte">{{ product.description }}</div>
+        </details>
+
+        {%- if feature_lines.size > 0 -%}
+          <details class="eqp-card eqp-acc" {% if s.open_features %}open{% endif %}>
+            <summary>{{ s.features_heading }}{%- render 'eqp-icon', name: 'chevron' -%}</summary>
+            <div class="eqp-acc__body">
+              <ul class="eqp-feat">
+                {%- for line in feature_lines -%}
+                  {%- assign l = line | strip -%}
+                  {%- if l == blank -%}{%- continue -%}{%- endif -%}
+                  {%- if l contains ' - ' -%}
+                    {%- assign t = l | split: ' - ' | first -%}
+                    {%- assign d = l | remove_first: t | remove_first: ' - ' -%}
+                    <li>{%- render 'eqp-icon', name: 'check' -%}<span><strong>{{ t }}</strong> - {{ d }}</span></li>
+                  {%- else -%}
+                    <li>{%- render 'eqp-icon', name: 'check' -%}<span>{{ l }}</span></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          </details>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('eqp-{{ section.id }}');
+    if (!root || root.dataset.bound) return; root.dataset.bound = '1';
+    /* Gallery */
+    var slides = root.querySelectorAll('.eqp-gal__slide'), thumbs = root.querySelectorAll('[data-go]'), cur = 0;
+    function go(n) {
+      if (!slides.length) return;
+      slides[cur].classList.remove('is-on'); thumbs[cur] && thumbs[cur].removeAttribute('aria-current');
+      cur = (n + slides.length) % slides.length;
+      slides[cur].classList.add('is-on'); thumbs[cur] && thumbs[cur].setAttribute('aria-current', 'true');
+    }
+    root.querySelectorAll('.eqp-gal__nav').forEach(function (b) { b.addEventListener('click', function () { go(cur + Number(b.dataset.dir)); }); });
+    thumbs.forEach(function (t) { t.addEventListener('click', function () { go(Number(t.dataset.go)); }); });
+    var stage = root.querySelector('.eqp-gal__stage'), x0 = null;
+    if (stage) {
+      stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); x0 = null; });
+    }
+    /* Variant select */
+    var sel = root.querySelector('[data-eqp-variant]');
+    if (sel) sel.addEventListener('change', function () {
+      var o = sel.options[sel.selectedIndex], avail = o.dataset.available === 'true';
+      root.querySelector('[data-eqp-id]').value = sel.value;
+      var price = root.querySelector('[data-eqp-price]');
+      if (price) price.innerHTML = o.dataset.price + (o.dataset.compare ? '<s>' + o.dataset.compare + '</s>' : '');
+      var add = root.querySelector('[ref="addToCartButton"]'); if (add) { add.disabled = !avail; add.textContent = avail ? 'Add to cart' : 'Sold out'; }
+      var st = root.querySelector('[data-eqp-stock]'); if (st) { st.textContent = avail ? 'In Stock' : 'Out of Stock'; st.className = 'eqp-stock ' + (avail ? 'eqp-stock--in' : 'eqp-stock--out'); }
+      var url = new URL(window.location.href); url.searchParams.set('variant', sel.value); history.replaceState({}, '', url);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Machine: product main",
+  "tag": "section",
+  "class": "section-eqp-main",
+  "settings": [
+    { "type": "checkbox", "id": "show_crumbs", "label": "Breadcrumb", "default": true },
+    { "type": "collection", "id": "crumb_collection", "label": "Breadcrumb collection (when not browsing one)" },
+    { "type": "checkbox", "id": "show_vendor_text", "label": "Show brand name when no logo metafield", "default": true },
+    { "type": "range", "id": "chip_count", "label": "Feature chips under price", "min": 0, "max": 4, "step": 1, "default": 3, "info": "First lines of custom.features." },
+    { "type": "header", "content": "Buying" },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Shop Pay / dynamic checkout button", "default": true },
+    { "type": "checkbox", "id": "show_installments", "label": "Installments message (Shop Pay Installments)", "default": true },
+    { "type": "text", "id": "oos_btn", "label": "Button when sold out", "default": "Ask about availability" },
+    { "type": "text", "id": "quote_price_text", "label": "Price text for quote-only", "default": "Price on request" },
+    { "type": "text", "id": "quote_btn", "label": "Quote-only button", "default": "Request a quote" },
+    { "type": "header", "content": "Question bar" },
+    { "type": "checkbox", "id": "show_ask", "label": "Show", "default": true },
+    { "type": "text", "id": "ask_heading", "label": "Heading", "default": "Have a question?" },
+    { "type": "text", "id": "ask_text", "label": "Text", "default": "Our team is here to help." },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "941.556.2600" },
+    { "type": "text", "id": "callback_label", "label": "Callback button", "default": "Request callback", "info": "Scrolls to the form section (#lead-form)." },
+    { "type": "header", "content": "Accordions" },
+    { "type": "text", "id": "details_heading", "label": "Details heading", "default": "Product details" },
+    { "type": "checkbox", "id": "open_details", "label": "Details open by default", "default": true },
+    { "type": "text", "id": "features_heading", "label": "Features heading", "default": "Features" },
+    { "type": "checkbox", "id": "open_features", "label": "Features open by default", "default": true },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#F8F5EC" },
+    { "type": "color", "id": "card_bg", "label": "Cards", "default": "#FFFFFF" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#2B1208" },
+    { "type": "color", "id": "dark", "label": "Buttons", "default": "#3A1A0E" },
+    { "type": "color", "id": "gold", "label": "Gold (checks, quote button)", "default": "#E0A43B" },
+    { "type": "color", "id": "accent", "label": "Accent", "default": "#2F5D3A" },
+    { "type": "color", "id": "line", "label": "Borders", "default": "#E6DCC6" },
+    { "type": "range", "id": "pad_top", "label": "Top padding", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "trust", "name": "Trust item", "limit": 3,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "headset",
+          "options": [ { "value": "headset", "label": "Support" }, { "value": "shield", "label": "Warranty" }, { "value": "medal", "label": "Premium" }, { "value": "card", "label": "Payments" }, { "value": "truck", "label": "Shipping" }, { "value": "bean", "label": "Coffee bean" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ] }
+  ]
+}
+{% endschema %}
