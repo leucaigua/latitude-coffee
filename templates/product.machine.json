@@ -271,9 +271,9 @@
       "type": "ws-cta",
       "name": "Wholesale CTA band",
       "settings": {
-        "heading": "Ready to Transform Your Coffee Program?",
-        "text": "Join the cafés, restaurants, hotels and retailers who trust Latitude 23.5 for their coffee supply.",
-        "btn_label": "Start Your Partnership Today",
+        "heading": "Need Coffee for Your New Machine?",
+        "text": "Explore our wholesale program for cafés, restaurants, offices and retailers.",
+        "btn_label": "Explore Wholesale",
         "btn_link": "shopify://pages/wholesale",
         "bg": "#0F5132",
         "gold": "#E0A43B",
