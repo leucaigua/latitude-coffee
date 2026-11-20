@@ -1,29 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "ws-hero",
       "settings": {
-        "heading": "Commercial Espresso Equipment",
-        "text": "<p>Espresso machines and grinders for caf\u00e9s, restaurants and offices, paired with coffee roasted in Sarasota, Florida.</p>",
-        "btn_label": "Request a Quote",
+        "video": "shopify://files/videos/Latitude Coffee - Equpment hero video (1).mp4",
+        "focal": "center",
         "media_width": 65,
         "height": 460,
-        "btn_link": "#lead-form"
+        "heading": "Commercial Espresso Equipment",
+        "text": "<p>Espresso machines and grinders for cafés, restaurants and offices, paired with coffee roasted in Sarasota, Florida.</p>",
+        "btn_label": "Request a Quote",
+        "btn_link": "#lead-form",
+        "green": "#1f5c3a",
+        "gold": "#e0a43b"
       }
     },
     "catalog": {
       "type": "eq-catalog",
-      "settings": {
-        "heading": "Shop Equipment",
-        "limit": 24,
-        "columns": 4
-      },
       "blocks": {
+        "tab_iWUk9P": {
+          "type": "tab",
+          "settings": {
+            "label": "SAECO Espresso Machines",
+            "collection": "equipment",
+            "products": [],
+            "category": "machines"
+          }
+        },
         "tab1": {
           "type": "tab",
           "settings": {
-            "label": "Espresso Machines",
+            "label": "RANCILIO Espresso Machines",
             "collection": "",
+            "products": [],
             "category": "machines"
           }
         },
@@ -32,6 +50,7 @@
           "settings": {
             "label": "Coffee Grinders",
             "collection": "",
+            "products": [],
             "category": "grinders"
           }
         },
@@ -41,7 +60,9 @@
             "title": "Classe 11",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/10/classe11-4-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/10/classe11-4-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_2": {
@@ -50,7 +71,9 @@
             "title": "Classe 20",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/10/classe20-4-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/10/classe20-4-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_3": {
@@ -59,7 +82,9 @@
             "title": "Classe 9",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/classe9-2-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/classe9-2-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_4": {
@@ -68,7 +93,9 @@
             "title": "Classe 7",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/classe7-3-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/classe7-3-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_5": {
@@ -77,7 +104,9 @@
             "title": "Classe 5 Eco",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2023/05/Classe5_ECO-featurImage-1-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2023/05/Classe5_ECO-featurImage-1-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_6": {
@@ -86,7 +115,9 @@
             "title": "Classe 5",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/Classe5-product-1-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/Classe5-product-1-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_7": {
@@ -95,7 +126,9 @@
             "title": "Baby 9",
             "brand": "Rancilio",
             "category": "machines",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2021/03/baby9-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2021/03/baby9-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_8": {
@@ -104,7 +137,9 @@
             "title": "Kryo",
             "brand": "Rancilio",
             "category": "grinders",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/Kryo-1-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/Kryo-1-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         },
         "listing_9": {
@@ -113,11 +148,14 @@
             "title": "MD",
             "brand": "Rancilio",
             "category": "grinders",
-            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/MD-1-768x768.png"
+            "image_url": "https://www.ranciliogroup.com/app/uploads/2019/09/MD-1-768x768.png",
+            "highlight": "",
+            "link": ""
           }
         }
       },
       "block_order": [
+        "tab_iWUk9P",
         "tab1",
         "tab2",
         "listing_1",
@@ -129,15 +167,32 @@
         "listing_7",
         "listing_8",
         "listing_9"
-      ]
+      ],
+      "settings": {
+        "heading": "Shop Equipment",
+        "subheading": "Commercial espresso machines and grinders for cafés, restaurants and offices.",
+        "anchor": "equipment",
+        "show_brands": true,
+        "limit": 24,
+        "columns": 3,
+        "show_view_all": true,
+        "view_label": "View details",
+        "quote_label": "Request quote",
+        "quote_link": "",
+        "quote_text": "Price on request",
+        "bg": "#fbf8ef",
+        "img_bg": "#f1eee8",
+        "text": "#2b1208",
+        "accent": "#1f5c3a",
+        "gold": "#e0a43b",
+        "dark": "#2b1208",
+        "line": "#e6dcc6",
+        "pad_top": 64,
+        "pad_bottom": 64
+      }
     },
     "why": {
       "type": "ws-cards",
-      "settings": {
-        "heading": "Why Buy Equipment From Latitude?",
-        "subheading": "One partner for your machine and the coffee that goes in it",
-        "pad_top": 48
-      },
       "blocks": {
         "c1": {
           "type": "card",
@@ -168,19 +223,41 @@
         "c1",
         "c2",
         "c3"
-      ]
+      ],
+      "settings": {
+        "heading": "Why Buy Equipment From Latitude?",
+        "subheading": "One partner for your machine and the coffee that goes in it",
+        "bg": "#fbf8ef",
+        "card_bg": "#fbf8ef",
+        "border": "#5a3a22",
+        "text": "#2b1208",
+        "accent": "#1f5c3a",
+        "pad_top": 48,
+        "pad_bottom": 40
+      }
     },
     "form": {
       "type": "ws-form",
       "settings": {
         "heading": "Request a Quote",
         "subheading": "Tell us about your business and the equipment you're interested in",
-        "klaviyo_id": "S9zRAF"
+        "klaviyo_id": "S9zRAF",
+        "style_inputs": true,
+        "alt_text": "<p>Prefer to talk? Call <a href=\"tel:+19415562600\">941.556.2600</a></p>",
+        "bg": "#fbf8ef",
+        "card_bg": "#f3e7cf",
+        "border": "#5a3a22",
+        "btn_bg": "#e0a43b",
+        "text": "#2b1208",
+        "pad_top": 64,
+        "pad_bottom": 72
       }
     },
     "proof": {
       "type": "ws-proof",
       "settings": {
+        "bg": "#fbf8ef",
+        "badge_h": 72,
         "pad_top": 40,
         "pad_bottom": 40
       }
@@ -189,9 +266,13 @@
       "type": "ws-cta",
       "settings": {
         "heading": "Need Coffee for Your New Machine?",
-        "text": "Explore our wholesale program for caf\u00e9s, restaurants, offices and retailers.",
+        "text": "Explore our wholesale program for cafés, restaurants, offices and retailers.",
         "btn_label": "Explore Wholesale",
-        "btn_link": "/pages/wholesale"
+        "btn_link": "/pages/wholesale",
+        "bg": "#0f5132",
+        "gold": "#e0a43b",
+        "pad_top": 80,
+        "pad_bottom": 80
       }
     }
   },

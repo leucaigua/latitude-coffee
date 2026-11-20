@@ -1,20 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "ws-hero",
       "settings": {
+        "video": "shopify://files/videos/Coffee Rosters - Latitude Coffee.mp4",
+        "focal": "center",
+        "media_width": 65,
+        "height": 520,
         "heading": "Elevate Your Coffee Business",
         "text": "<p>Partner with a recognized Florida coffee brand for over 20 years. World-class quality, reliable supply and exceptional support for your business growth.</p>",
         "btn_label": "Start Your Partnership Today",
-        "focal": "center",
-        "media_width": 65
+        "btn_link": "",
+        "green": "#1f5c3a",
+        "gold": "#e0a43b"
       }
     },
     "trust": {
       "type": "ws-trust-strip",
-      "settings": {
-        "heading": "More Than Roasters,\nWe Are Your Partners."
-      },
       "blocks": {
         "t1": {
           "type": "item",
@@ -42,14 +53,15 @@
         "t1",
         "t2",
         "t3"
-      ]
+      ],
+      "settings": {
+        "heading": "More Than Roasters,\nWe Are Your Partners.",
+        "bg": "#f3e7cf",
+        "text": "#2b1208"
+      }
     },
     "why": {
       "type": "ws-cards",
-      "settings": {
-        "heading": "Why Partner With Us?",
-        "subheading": "We're committed to your success with premium products and unmatched support"
-      },
       "blocks": {
         "c1": {
           "type": "card",
@@ -80,24 +92,40 @@
         "c1",
         "c2",
         "c3"
-      ]
+      ],
+      "settings": {
+        "heading": "Why Partner With Us?",
+        "subheading": "We're committed to your success with premium products and unmatched support",
+        "bg": "#fbf8ef",
+        "card_bg": "#fbf8ef",
+        "border": "#5a3a22",
+        "text": "#2b1208",
+        "accent": "#1f5c3a",
+        "pad_top": 64,
+        "pad_bottom": 40
+      }
     },
     "brand": {
       "type": "ws-split",
       "settings": {
+        "image": "shopify://shop_images/Private-label---latitude-coffee_9bf97ecd-8b9c-4e88-92eb-a8ee7546e81c.jpg",
         "image_side": "right",
+        "image_max": 440,
         "heading": "Your Brand, Our Craftsmanship.",
         "body": "<p>We help you create a shelf-ready coffee product in just weeks. We offer custom flavor profiles, house blends, and toll roasting services with the flexibility your business demands.</p>",
-        "pad_top": 56
+        "btn_label": "",
+        "btn_link": "",
+        "bg": "#fbf8ef",
+        "text": "#2b1208",
+        "accent": "#5a3a22",
+        "btn_bg": "#e0a43b",
+        "btn_text": "#2b1208",
+        "pad_top": 56,
+        "pad_bottom": 40
       }
     },
     "tailored": {
       "type": "ws-split",
-      "settings": {
-        "image_side": "left",
-        "heading": "Tailored Solutions.",
-        "pad_bottom": 24
-      },
       "blocks": {
         "f1": {
           "type": "feature",
@@ -112,7 +140,7 @@
           "settings": {
             "icon": "kcup",
             "label": "Single-Serve",
-            "text": "Premium K-Cups for hospitality and office use."
+            "text": "Premium K-Cups for your brand, hospitality or office use."
           }
         },
         "f3": {
@@ -137,17 +165,26 @@
         "f2",
         "f3",
         "f4"
-      ]
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Custom_Promotional_Coffee_Tea_Packaging_-_LatitudeCoffee.com.png",
+        "image_side": "left",
+        "image_max": 440,
+        "heading": "Tailored Solutions.",
+        "body": "",
+        "btn_label": "",
+        "btn_link": "",
+        "bg": "#fbf8ef",
+        "text": "#2b1208",
+        "accent": "#5a3a22",
+        "btn_bg": "#e0a43b",
+        "btn_text": "#2b1208",
+        "pad_top": 40,
+        "pad_bottom": 24
+      }
     },
     "promo": {
       "type": "ws-split",
-      "disabled": true,
-      "settings": {
-        "image_side": "right",
-        "heading": "Custom Promotional Coffee & Tea Packaging",
-        "body": "<p>Branded packaging for events, client gifts, retail shelves and promotions.</p>",
-        "btn_label": "Request Custom Packaging Info"
-      },
       "blocks": {
         "p1": {
           "type": "feature",
@@ -187,17 +224,35 @@
         "p2",
         "p3",
         "p4"
-      ]
+      ],
+      "disabled": true,
+      "settings": {
+        "image_side": "right",
+        "image_max": 440,
+        "heading": "Custom Promotional Coffee & Tea Packaging",
+        "body": "<p>Branded packaging for events, client gifts, retail shelves and promotions.</p>",
+        "btn_label": "Request Custom Packaging Info",
+        "btn_link": "",
+        "bg": "#fbf8ef",
+        "text": "#2b1208",
+        "accent": "#5a3a22",
+        "btn_bg": "#e0a43b",
+        "btn_text": "#2b1208",
+        "pad_top": 40,
+        "pad_bottom": 40
+      }
     },
     "proof": {
       "type": "ws-proof",
-      "settings": {}
+      "settings": {
+        "bg": "#fbf8ef",
+        "badge_h": 72,
+        "pad_top": 24,
+        "pad_bottom": 56
+      }
     },
     "downloads": {
       "type": "ws-downloads",
-      "settings": {
-        "heading": "Ready to Elevate Your Coffee Standard?"
-      },
       "blocks": {
         "d1": {
           "type": "file",
@@ -225,17 +280,45 @@
         "d1",
         "d2",
         "d3"
-      ]
+      ],
+      "settings": {
+        "heading": "Ready to Elevate Your Coffee Standard?",
+        "subheading": "Contact us today and get expert advice from our team. Download our process guides below to learn more about how we work.",
+        "bg": "#f3e7cf",
+        "text": "#2b1208",
+        "pad_top": 64,
+        "pad_bottom": 64
+      }
     },
     "form": {
       "type": "ws-form",
       "settings": {
-        "klaviyo_id": "QTFY8a"
+        "heading": "Let's Start Your Journey",
+        "subheading": "Fill out the form below and our team will be in touch within 24 hours",
+        "klaviyo_id": "QTFY8a",
+        "style_inputs": true,
+        "alt_text": "<p>Prefer to talk? Call <a href=\"tel:+19415562600\">941.556.2600</a></p>",
+        "bg": "#fbf8ef",
+        "card_bg": "#f3e7cf",
+        "border": "#5a3a22",
+        "btn_bg": "#e0a43b",
+        "text": "#2b1208",
+        "pad_top": 64,
+        "pad_bottom": 72
       }
     },
     "cta": {
       "type": "ws-cta",
-      "settings": {}
+      "settings": {
+        "heading": "Ready to Transform Your Coffee Program?",
+        "text": "Join the cafés, restaurants, hotels and retailers who trust Latitude 23.5 for their coffee supply.",
+        "btn_label": "Start Your Partnership Today",
+        "btn_link": "",
+        "bg": "#0f5132",
+        "gold": "#e0a43b",
+        "pad_top": 80,
+        "pad_bottom": 80
+      }
     }
   },
   "order": [
