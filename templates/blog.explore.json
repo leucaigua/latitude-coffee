@@ -1,9 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-blog-explore",
-      "settings": {}
+      "settings": {
+        "eyebrow": "The Latitude Journal",
+        "heading": "Brew better. Know your coffee.",
+        "intro": "Brewing guides, origin stories and coffee rituals from our roastery in Sarasota, Florida.",
+        "show_search": true,
+        "search_placeholder": "Search cold brew, Kenya, gifts…",
+        "topics": "Brewing Guides, Origins, Coffee Rituals, Gift Guides, Seasonal, Subscriptions, Coffee 101",
+        "show_featured": true,
+        "featured_article": "",
+        "featured_label": "Featured",
+        "latest_heading": "Latest articles",
+        "per_page": 12,
+        "columns": 3,
+        "show_excerpt": true,
+        "news_show": true,
+        "news_after": 3,
+        "news_heading": "Unlock 10% off your first order",
+        "news_text": "New guides, seasonal roasts and subscriber-only offers, straight to your inbox.",
+        "news_button": "Join our newsletter",
+        "klaviyo_form_id": "SJ8rD3",
+        "shop_show": true,
+        "shop_after": 9,
+        "shop_image": "shopify://shop_images/latitude-coffee-subscription-hero-banner.jpg",
+        "shop_heading": "Read about it. Now taste it.",
+        "shop_text": "Specialty coffee roasted in Sarasota, Florida.",
+        "shop_button": "Shop coffee",
+        "shop_link": "",
+        "bg": "#f8f5ec",
+        "card_bg": "#f3e7cf",
+        "text": "#2b1208",
+        "accent": "#2f5d3a",
+        "gold": "#e0a43b",
+        "dark": "#2b1208",
+        "line": "#e6dcc6"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
