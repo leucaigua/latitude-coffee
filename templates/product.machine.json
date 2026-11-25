@@ -12,6 +12,17 @@
     "main": {
       "type": "eqp-main",
       "blocks": {
+        "affirm_pay_over_time_messaging_product_block_qTwcJk": {
+          "type": "shopify://apps/affirm-pay-over-time-messaging/blocks/product-block/6dce54be-130d-4d13-9636-1e8f611b3071",
+          "settings": {
+            "logo_align": "left",
+            "font_size": 16,
+            "logo_color": "blue",
+            "logo_type": "logo",
+            "public_api_key": "",
+            "price_selector": ""
+          }
+        },
         "t1": {
           "type": "trust",
           "settings": {
@@ -38,6 +49,7 @@
         }
       },
       "block_order": [
+        "affirm_pay_over_time_messaging_product_block_qTwcJk",
         "t1",
         "t2",
         "t3"
@@ -275,8 +287,8 @@
         "text": "Explore our wholesale program for cafés, restaurants, offices and retailers.",
         "btn_label": "Explore Wholesale",
         "btn_link": "shopify://pages/wholesale",
-        "bg": "#0F5132",
-        "gold": "#E0A43B",
+        "bg": "#0f5132",
+        "gold": "#e0a43b",
         "pad_top": 80,
         "pad_bottom": 80
       }
