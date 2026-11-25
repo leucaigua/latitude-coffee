@@ -189,6 +189,10 @@
             </p>
           {%- endif -%}
 
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
+          {%- endfor -%}
+
           {%- if s.chip_count > 0 and feature_lines.size > 0 -%}
             <ul class="eqp-chips">
               {%- for line in feature_lines limit: s.chip_count -%}
@@ -197,10 +201,6 @@
               {%- endfor -%}
             </ul>
           {%- endif -%}
-
-          {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}{%- render block -%}{%- endif -%}
-          {%- endfor -%}
 
           {%- if quote_only -%}
             <span class="eqp-stock eqp-stock--quote">Available by quote</span>
