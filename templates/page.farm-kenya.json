@@ -15,19 +15,19 @@
         "c1": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "Solai, Great Rift Valley"
           }
         },
         "c2": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "1,700–1,900 meters"
           }
         },
         "c3": {
           "type": "chip",
           "settings": {
-            "text": ""
+            "text": "Established in 1983"
           }
         }
       },
@@ -37,10 +37,11 @@
         "c3"
       ],
       "settings": {
+        "image_asset": "",
         "video": "shopify://files/videos/Farm Direct Kenya LatitudeCoffee.com.mp4",
         "overlay": 90,
         "eyebrow": "Farm Direct · Kenya",
-        "heading": "About Our Coffee Farm in Kenya",
+        "heading": "Liwani Coffee Estate: A Family Story from Kenya’s Rift Valley",
         "text": "",
         "btn_label": "Shop this farm's coffee",
         "btn_link": "",
@@ -101,9 +102,9 @@
         "f4": {
           "type": "fact",
           "settings": {
-            "icon": "calendar",
-            "label": "Established",
-            "value": "1983"
+            "icon": "pin",
+            "label": "Roasted In",
+            "value": "Sarasota, FL"
           }
         }
       },
@@ -129,7 +130,8 @@
       "type": "farm-story",
       "settings": {
         "image": "shopify://shop_images/kenyan-coffee-from-our-family-to-your-roastery-2-1793551055-ZM5du.webp",
-        "caption": "",
+        "image_asset": "liwani-coffee-estate-solai-kenya-coffee-fields",
+        "caption": "Coffee trees at Liwani Coffee Estate in Solai, Kenya’s Great Rift Valley.",
         "image_side": "left",
         "ratio": "4 / 5",
         "eyebrow": "The farm",
@@ -177,11 +179,12 @@
       "type": "farm-story",
       "settings": {
         "image": "shopify://shop_images/family-tree-2-1793501413-D57L0.webp",
-        "caption": "",
+        "image_asset": "liwani-coffee-estate-family-community-kenya",
+        "caption": "Photo collage of family members, coffee growers, and daily life at Liwani Coffee Estate in Kenya",
         "image_side": "right",
         "ratio": "4 / 5",
         "eyebrow": "The people",
-        "heading": "",
+        "heading": "The People Behind Every Harvest",
         "text": "<p>At Liwani Coffee Estate, growing coffee is part of the family’s daily life. This recognition belongs to the people who care for the trees, pick the cherries, and work hard each season. Through Solai, they connect that work with roasters and hear how the coffee performs in their hands. Those conversations help us understand what’s working and where we can improve.</p>",
         "btn_label": "",
         "btn_link": "",
@@ -201,7 +204,8 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/dsc09299-1793499934-fkk3g.webp",
-            "caption": "",
+            "image_asset": "liwani-kenya-harvested-coffee-cherries",
+            "caption": "The harvest, held in the hands that make it possible.",
             "wide": true
           }
         },
@@ -209,7 +213,8 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/Solai_Coffee_Farm_Portrait_Man_By_Coffee_Tree_Closeup.jpg",
-            "caption": "",
+            "image_asset": "liwani-kenya-ripening-coffee-cherries",
+            "caption": "liwani-kenya-harvested-coffee-cherries",
             "wide": false
           }
         },
@@ -217,7 +222,8 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/IMG-20221103-WA0070.jpg",
-            "caption": "",
+            "image_asset": "liwani-kenya-coffee-cherry-closeup",
+            "caption": "A closer look at the fruit behind every cup.",
             "wide": false
           }
         },
@@ -225,7 +231,8 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/DJI_0046.jpg",
-            "caption": "",
+            "image_asset": "liwani-coffee-estate-kenya-aerial-view",
+            "caption": "A view from above of Liwani’s coffee fields and surrounding landscap",
             "wide": false
           }
         },
@@ -233,7 +240,8 @@
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/PXL_20260718_063603623.jpg",
-            "caption": "",
+            "image_asset": "liwani-coffee-estate-kenya-farm-path",
+            "caption": "Between the coffee rows at Liwani Coffee Estate",
             "wide": false
           }
         }
