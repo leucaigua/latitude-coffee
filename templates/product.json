@@ -385,7 +385,7 @@
                 "text": "<p><strong>Black Friday: 20% OFF Your First Subscription Order</strong></p>",
                 "width": "100%",
                 "max_width": "none",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
