@@ -382,9 +382,9 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><strong>20% OFF Your First Subscription Order</strong></p>",
-                "width": "fit-content",
-                "max_width": "normal",
+                "text": "<p><strong>Black Friday: 20% OFF Your First Subscription Order</strong></p>",
+                "width": "100%",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -400,8 +400,8 @@
                 "corner_radius": 10,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 26,
-                "padding-inline-end": 26
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
               },
               "blocks": {}
             },
